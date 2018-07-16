@@ -39,9 +39,7 @@
   <!--  <color name="my_login_border">#FFB3E994</color>
     <color name="my_login_hinttext">#9CD2A5</color>
     <color name="my_login_text">#4CA759</color>-->
-    <color name="divider_color">#f0fbf1</color>
-    <color name="background_f2">#f0fbf1</color>
-    <color name="background_d">#f0fbf1</color>
+    <color name="divider_color">#f2f2f2</color>
     <color name="my_login_border">#FFB3E994</color>
 
     <color name="theme_text1">#0c5e19</color>
@@ -58,7 +56,7 @@
     <color name="orange">#FFC820</color>
     <color name="orange_press">#eaa304</color>
     <color name="blue">#4ed3fd</color>
-    <color name="red">#fc353a</color>
+    <color name="red">#FFC71D1D</color>
     <color name="red_button">#FFAB1E17</color>
     <color name="red_press">#84140f</color>
     <color name="blue_press">#E2419BF3</color>

@@ -25,6 +25,9 @@
         <activity android:name=".module.my.activity.SetNameActivity"/>
         <activity android:name=".module.my.activity.FindPwdActivity"/>
         <activity android:name=".module.my.activity.ResetPwdActivity"/>
+        <activity android:name=".module.auction.activity.AuctionDetailActivity"/>
+        <activity android:name=".module.my.activity.MyBaoZhengJinActivity"/>
+        <activity android:name=".module.my.activity.MyAuctionActivity"/>
     </application>
 
 </manifest>

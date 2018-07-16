@@ -1,14 +1,15 @@
-package com.zhizhong.yujian.module.home.fragment;
+package com.zhizhong.yujian.module.my.activity;
 
 import android.view.View;
 
 import com.zhizhong.yujian.R;
-import com.zhizhong.yujian.base.BaseFragment;
+import com.zhizhong.yujian.base.BaseActivity;
 
-public class AuctionFragment extends BaseFragment {
+public class MyAuctionActivity extends BaseActivity {
     @Override
     protected int getContentView() {
-        return R.layout.auction_frag;
+        setAppTitle("我的拍卖");
+        return R.layout.my_auction_act;
     }
 
     @Override

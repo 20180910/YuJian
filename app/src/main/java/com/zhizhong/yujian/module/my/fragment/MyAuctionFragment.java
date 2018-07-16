@@ -1,14 +1,15 @@
-package com.zhizhong.yujian.module.home.fragment;
+package com.zhizhong.yujian.module.my.fragment;
 
 import android.view.View;
 
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.base.BaseFragment;
 
-public class AuctionFragment extends BaseFragment {
+public class MyAuctionFragment extends BaseFragment {
+
     @Override
     protected int getContentView() {
-        return R.layout.auction_frag;
+        return R.layout.my_auction_frag;
     }
 
     @Override
