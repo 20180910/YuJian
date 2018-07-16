@@ -5,11 +5,11 @@ import android.view.View;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.base.BaseActivity;
 
-public class LoginActivity extends BaseActivity {
+public class LoginForCodeActivity extends BaseActivity {
     @Override
     protected int getContentView() {
-        setAppRightTitle("手机号登录");
-        return R.layout.login_act;
+        setAppRightTitle("密码登录");
+        return R.layout.login_code_act;
     }
 
     @Override

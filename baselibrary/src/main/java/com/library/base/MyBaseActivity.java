@@ -66,8 +66,8 @@ import io.reactivex.annotations.NonNull;
  * Created by Administrator on 2017/6/1.
  */
 
-public abstract class MyBaseActivity extends IBaseActivity implements ProgressLayout.OnAgainInter, View.OnClickListener, LoadMoreAdapter.OnLoadMoreListener,MyLoadMoreAdapter.OnLoadMoreListener {
-    protected final String TAG=this.getClass().getSimpleName();
+public abstract class MyBaseActivity extends IBaseActivity implements ProgressLayout.OnAgainInter, View.OnClickListener, LoadMoreAdapter.OnLoadMoreListener, MyLoadMoreAdapter.OnLoadMoreListener {
+    protected final String TAG = this.getClass().getSimpleName();
     /*************************************************/
     protected NestedScrollView nsv;
     protected Toolbar toolbar;
@@ -82,14 +82,15 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
     //临时变量处理分享
     protected boolean isShareImg;
     private int titleBackgroud = R.color.app_bar;
-//    private int statusBarBackgroud = R.color.app_bar;
+    //    private int statusBarBackgroud = R.color.app_bar;
     protected TextView app_title, app_right_tv;
     protected ImageView app_right_iv;
     private View status_bar, v_bottom_line;
-    private boolean hiddenBottomLine=false;
+    private boolean hiddenBottomLine = false;
     protected PtrClassicFrameLayout pcfl;
     protected boolean noSetTheme;
     protected ProgressLayout pl_load;
+
     /****************************************************/
     protected abstract int getContentView();
 
@@ -101,10 +102,19 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
 
     protected void initRxBus() {
     }
-    protected void getOtherData(){};
+
+    protected void getOtherData() {
+    }
+
+    ;
+
     protected void getData(int page, boolean isLoad) {
     }
-    protected void setClickListener(){};
+
+    protected void setClickListener() {
+    }
+
+    ;
 
     protected void hiddenBottomLine() {
         hiddenBottomLine = true;
@@ -113,34 +123,26 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
         }
     }
 
+    protected void setAppTitle(String title, boolean isShort, int textLength) {
+        if (isShort && !TextUtils.isEmpty(title) && title.length() > textLength) {
+            appTitle = title.substring(0, textLength) + "...";
+        } else {
+            appTitle = title;
+        }
+        if (app_title != null) {
+            if (BuildConfig.DEBUG) {
+                app_title.setText(appTitle == null ? "" : appTitle + "(DeBug)");
+            } else {
+                app_title.setText(appTitle == null ? "" : appTitle);
+            }
+        }
+    }
+    protected void setAppTitle(String title, boolean isShort) {
+        setAppTitle(title, isShort, 9);
+    }
     protected void setAppTitle(String title) {
-        appTitle = title;
-        if (app_title != null) {
-            if(BuildConfig.DEBUG){
-                app_title.setText(appTitle == null ? "" : appTitle+"(DeBug)");
-            }else{
-                app_title.setText(appTitle == null ? "" : appTitle);
-            }
-        }
+        setAppTitle(title, true, 9);
     }
-    protected void setAppShortTitle(String title,int count) {
-        if(!TextUtils.isEmpty(title)&&title.length()>count){
-            appTitle=title.substring(0,count)+"...";
-        }else{
-            appTitle=title;
-        }
-        if (app_title != null) {
-            if(BuildConfig.DEBUG){
-                app_title.setText(appTitle == null ? "" : appTitle+"(DeBug)");
-            }else{
-                app_title.setText(appTitle == null ? "" : appTitle);
-            }
-        }
-    }
-    protected void setAppShortTitle(String title) {
-        setAppShortTitle(title,9);
-    }
-
     public void setAppRightTitle(String appRightTitle) {
         this.appRightTitle = appRightTitle;
         if (app_right_tv != null) {
@@ -148,7 +150,7 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
         }
     }
 
-    public void setAppRightImg(@DrawableRes  int appRightImg) {
+    public void setAppRightImg(@DrawableRes int appRightImg) {
         this.appRightImg = appRightImg;
         if (app_right_iv != null && appRightImg != 0) {
             app_right_iv.setImageResource(appRightImg);
@@ -156,7 +158,7 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
             app_right_tv.setVisibility(View.GONE);
             app_right_iv.setVisibility(View.VISIBLE);
             app_right_iv.setOnClickListener(this);
-            if(isShareImg){
+            if (isShareImg) {
                 app_right_iv.setTag("share");
             }
         }
@@ -169,7 +171,7 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
 
     public void setTitleBackgroud(@ColorRes int titleBackgroud) {
         this.titleBackgroud = titleBackgroud;
-        if(toolbar!=null){
+        if (toolbar != null) {
             toolbar.setBackgroundColor(ContextCompat.getColor(mContext, titleBackgroud));
         }
     }
@@ -181,11 +183,11 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
         }
     }*/
 
-    public void setAppTitleColor(@ColorRes  int appTitleColor) {
+    public void setAppTitleColor(@ColorRes int appTitleColor) {
         this.appTitleColor = appTitleColor;
     }
 
-    public void setAppRightTitleColor(@ColorRes  int appRightTitleColor) {
+    public void setAppRightTitleColor(@ColorRes int appRightTitleColor) {
         this.appRightTitleColor = appRightTitleColor;
     }
 
@@ -197,7 +199,7 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
         mContext = this;
         if (getContentView() != 0) {
             setContentView(getContentView());
-            StatusBarUtils.setColor(this,ContextCompat.getColor(mContext,R.color.app_status));
+            StatusBarUtils.setColor(this, ContextCompat.getColor(mContext, R.color.app_status));
 //            View rootView = ((ViewGroup) this.findViewById(android.R.id.content))
 //                    .getChildAt(0);
 //            int navigationBarHeight = PhoneUtils.getNavigationBarHeight(mContext);
@@ -248,14 +250,14 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
         if (null != findViewById(R.id.app_title)) {
             app_title = (TextView) findViewById(R.id.app_title);
             setAppTitle(appTitle);
-            if(null!=findViewById(R.id.v_bottom_line)){
-                if(TextUtils.isEmpty(appTitle)||hiddenBottomLine){
+            if (null != findViewById(R.id.v_bottom_line)) {
+                if (TextUtils.isEmpty(appTitle) || hiddenBottomLine) {
                     findViewById(R.id.v_bottom_line).setVisibility(View.GONE);
                 }
             }
 
             if (appTitleColor != 0) {
-                app_title.setTextColor(ContextCompat.getColor(mContext,appTitleColor));
+                app_title.setTextColor(ContextCompat.getColor(mContext, appTitleColor));
             }
         }
         if (null != findViewById(R.id.app_right_tv)) {
@@ -264,25 +266,25 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
         if (null != findViewById(R.id.app_right_iv)) {
             app_right_iv = (ImageView) findViewById(R.id.app_right_iv);
         }
-        if (appRightImg != 0&&app_right_iv!=null) {
+        if (appRightImg != 0 && app_right_iv != null) {
             app_right_iv.setImageResource(appRightImg);
-            if(app_right_tv!=null){
+            if (app_right_tv != null) {
                 app_right_tv.setVisibility(View.GONE);
             }
             app_right_iv.setVisibility(View.VISIBLE);
             app_right_iv.setOnClickListener(this);
-            if(isShareImg){
+            if (isShareImg) {
                 app_right_iv.setTag("share");
             }
         }
         if (appRightTitle != null) {
             app_right_tv.setText(appRightTitle);
             app_right_tv.setVisibility(View.VISIBLE);
-            if(app_right_iv!=null){
+            if (app_right_iv != null) {
                 app_right_iv.setVisibility(View.GONE);
             }
             if (appRightTitleColor != 0) {
-                app_right_tv.setTextColor(ContextCompat.getColor(mContext,appRightTitleColor));
+                app_right_tv.setTextColor(ContextCompat.getColor(mContext, appRightTitleColor));
             }
         }
         if (null != findViewById(R.id.pcfl_refresh)) {
@@ -373,14 +375,15 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
             onViewClick(v);
         }
     }
+
     private void setInput() {
         /*if(mContext instanceof ShangJiaActivity){
             return;
         }*/
         final View rootView = ((ViewGroup) this.findViewById(android.R.id.content))
                 .getChildAt(0);
-        if(null==rootView){
-            Log.i("MyBaseActivity","rootView=null");
+        if (null == rootView) {
+            Log.i("MyBaseActivity", "rootView=null");
             return;
         }
         final View decorView = getWindow().getDecorView();
@@ -388,10 +391,10 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
 
             @Override
             public void onGlobalLayout() {
-                Rect rect= new Rect();
+                Rect rect = new Rect();
                 decorView.getWindowVisibleDisplayFrame(rect);
                 int screenHeight = decorView.getRootView().getHeight();
-                int heightDifferent = screenHeight - rect.bottom- PhoneUtils.getNavigationBarHeight(mContext);
+                int heightDifferent = screenHeight - rect.bottom - PhoneUtils.getNavigationBarHeight(mContext);
                 FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) rootView.getLayoutParams();
                 lp.setMargins(0, 0, 0, heightDifferent);
                 rootView.requestLayout();
@@ -425,11 +428,11 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
     }
 
     protected BaseDividerListItem getItemDivider() {
-        return new BaseDividerListItem(mContext,2, R.color.divider_color);
+        return new BaseDividerListItem(mContext, 2, R.color.divider_color);
     }
 
     protected BaseDividerListItem getItemDivider(int height) {
-        return new BaseDividerListItem(mContext,height, R.color.divider_color);
+        return new BaseDividerListItem(mContext, height, R.color.divider_color);
     }
 
     protected BaseDividerListItem getItemDivider(int height, int color) {
@@ -437,27 +440,28 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
     }
 
 
-
     public void deleteCache() {
-        deleteCache(null,false);
+        deleteCache(null, false);
     }
-    public void deleteCache(final TextView textView,final boolean isAllCache) {
+
+    public void deleteCache(final TextView textView, final boolean isAllCache) {
         RXStart(new MyFlowableSubscriber<String>() {
             @Override
             public void subscribe(@NonNull FlowableEmitter<String> emitter) {
                 CacheUtils.clearAllCache(getApplicationContext());
                 try {
-                    String totalCacheSize = isAllCache?CacheUtils.getTotalCacheSize(getApplicationContext()):CacheUtils.getExternalCacheSize(getApplicationContext());
+                    String totalCacheSize = isAllCache ? CacheUtils.getTotalCacheSize(getApplicationContext()) : CacheUtils.getExternalCacheSize(getApplicationContext());
                     emitter.onNext(totalCacheSize);
                     emitter.onComplete();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onNext(String totalCacheSize) {
                 showMsg("清除成功");
-                if(textView!=null){
+                if (textView != null) {
                     textView.setText(totalCacheSize);
                 }
             }
@@ -468,11 +472,12 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
 
 
     private BottomSheetDialog selectPhotoDialog;
-    public final static int result_select_photo =8888;
-    public final static int result_take_photo =8889;
+    public final static int result_select_photo = 8888;
+    public final static int result_take_photo = 8889;
+
     public void showSelectPhotoDialog() {
         if (selectPhotoDialog == null) {
-            View sexView= LayoutInflater.from(mContext).inflate(R.layout.app_popu_select_photo,null);
+            View sexView = LayoutInflater.from(mContext).inflate(R.layout.app_popu_select_photo, null);
             sexView.findViewById(R.id.app_tv_select_photo).setOnClickListener(new MyOnClickListener() {
                 @Override
                 protected void onNoDoubleClick(View view) {
@@ -500,6 +505,7 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
         }
         selectPhotoDialog.show();
     }
+
     //选择相册
     protected void selectPhoto() {
         requestPermission(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, new PermissionCallback() {
@@ -508,43 +514,52 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, result_select_photo);
             }
+
             @Override
             public void onDenied(String s) {
                 showMsg("获取权限失败无法正常获取图片");
             }
         });
     }
-    protected String getSelectPhotoPath(Uri uri){
-        Cursor cursor = getContentResolver().query(uri, null, null, null,null);
+
+    protected String getSelectPhotoPath(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
             takePhotoImgSavePath = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA));
         }
         return takePhotoImgSavePath;
     }
-    protected String getSelectPhotoPath(Intent data){
+
+    protected String getSelectPhotoPath(Intent data) {
         return getSelectPhotoPath(data.getData());
     }
+
     private String path = Environment.getExternalStorageDirectory() +
             File.separator + Environment.DIRECTORY_DCIM + File.separator;
+
     private String getPhotoFileName() {
         Date date = new Date(System.currentTimeMillis());
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
         return "IMG_" + dateFormat.format(date);
     }
-    public String takePhotoImgSavePath ="";
+
+    public String takePhotoImgSavePath = "";
+
     //拍照
     protected void takePhoto() {
-        requestPermission(new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE}, new PermissionCallback() {
+        requestPermission(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, new PermissionCallback() {
             @Override
             public void onGranted() {
                 takePhoto("没有全部授权,无法拍照");
             }
+
             @Override
             public void onDenied(String s) {
                 showMsg("获取权限失败无法正常拍照");
             }
         });
     }
+
     private void takePhoto(final String showStr) {
         /*if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(mContext, new String[]{Manifest.permission.CAMERA}, 1);
@@ -559,16 +574,17 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
             public void noGranted() {
             }
         },Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE);*/
-      requestPermission(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, new PermissionCallback() {
-          @Override
-          public void onGranted() {
-              startTakePhoto();
-          }
-          @Override
-          public void onDenied(String permission) {
-            showMsg("没有全部授权,无法拍照");
-          }
-      });
+        requestPermission(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, new PermissionCallback() {
+            @Override
+            public void onGranted() {
+                startTakePhoto();
+            }
+
+            @Override
+            public void onDenied(String permission) {
+                showMsg("没有全部授权,无法拍照");
+            }
+        });
     }
 
     private void startTakePhoto() {
@@ -586,11 +602,11 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
             **File Uri 与 Content Uri 的区别** - File Uri 对应的是文件本身的存储路径 -
             * Content Uri 对应的是文件在Content Provider的路径 所以在android 7.0 以上，
             * 我们就需要将File Uri转换为 Content Uri。具体转换方法如下：*/
-            if (Build.VERSION.SDK_INT<Build.VERSION_CODES.N){
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
                 Uri photoUri = Uri.fromFile(new File(takePhotoImgSavePath));
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
                 startActivityForResult(intent, result_take_photo);
-            }else {
+            } else {
                 ContentValues contentValues = new ContentValues(1);
                 contentValues.put(MediaStore.Images.Media.DATA, takePhotoImgSavePath);
                 if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -602,23 +618,26 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
             }
         }
     }
+
     private void saveTakePhoto(Intent intent, ContentValues contentValues) {
-        Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,contentValues);
+        Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         startActivityForResult(intent, result_take_photo);
     }
+
     /**
      * 视图是否可见
+     *
      * @param view
      * @return
      */
-    public boolean keJian(View view){
-        Point p=new Point();
+    public boolean keJian(View view) {
+        Point p = new Point();
         getWindowManager().getDefaultDisplay().getSize(p);
-        int screenWidth=p.x;
-        int screenHeight=p.y;
+        int screenWidth = p.x;
+        int screenHeight = p.y;
 
-        Rect rect=new Rect(0,0,screenWidth,screenHeight );
+        Rect rect = new Rect(0, 0, screenWidth, screenHeight);
 
         int[] location = new int[2];
         view.getLocationInWindow(location);
@@ -631,28 +650,32 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
             return false;
         }
     }
-    public int[] getViewLocation(View view){
+
+    public int[] getViewLocation(View view) {
         int[] location = new int[2];
         view.getLocationInWindow(location);
         return location;
     }
-    public interface OnScrollAutoSelectViewInter{
-        void selectViewPosition(int position,View view);
+
+    public interface OnScrollAutoSelectViewInter {
+        void selectViewPosition(int position, View view);
     }
-    protected void scrollCheckViewIsShow(NestedScrollView nsv, final List<View>list){
-        scrollCheckViewIsShow(nsv,list,null);
+
+    protected void scrollCheckViewIsShow(NestedScrollView nsv, final List<View> list) {
+        scrollCheckViewIsShow(nsv, list, null);
     }
-    protected void scrollCheckViewIsShow(NestedScrollView nsv, final List<View>list,final OnScrollAutoSelectViewInter inter){
+
+    protected void scrollCheckViewIsShow(NestedScrollView nsv, final List<View> list, final OnScrollAutoSelectViewInter inter) {
         nsv.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                if(isEmpty(list)){
+                if (isEmpty(list)) {
                     return;
                 }
                 for (int i = 0; i < list.size(); i++) {
-                    if(keJian(list.get(i))){
-                        if(inter!=null){
-                            inter.selectViewPosition(i,list.get(i));
+                    if (keJian(list.get(i))) {
+                        if (inter != null) {
+                            inter.selectViewPosition(i, list.get(i));
                         }
                         break;
                     }
@@ -660,15 +683,17 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
             }
         });
     }
-    protected void scrollAutoSelectView(NestedScrollView nsv,View view){
-        nsv.smoothScrollTo(0,view.getTop());
+
+    protected void scrollAutoSelectView(NestedScrollView nsv, View view) {
+        nsv.smoothScrollTo(0, view.getTop());
         //- PhoneUtils.dip2px(mContext,barHeight)
     }
 
-    protected void scrollChangeBackground(NestedScrollView nsv,final View view){
+    protected void scrollChangeBackground(NestedScrollView nsv, final View view) {
         view.getBackground().mutate().setAlpha(0);
         nsv.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            int screenWidth = PhoneUtils.getScreenWidth(mContext)*2/3;
+            int screenWidth = PhoneUtils.getScreenWidth(mContext) * 2 / 3;
+
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 if (scrollY >= 0 && scrollY <= screenWidth) {
@@ -682,12 +707,13 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
     }
 
 
-    public void requestPermission(String permission,final PermissionCallback callback){
+    public void requestPermission(String permission, final PermissionCallback callback) {
         super.requestPermission(permission, new PermissionCallback() {
             @Override
             public void onGranted() {
                 callback.onGranted();
             }
+
             @Override
             public void onDenied(String s) {
                 callback.onDenied(s);
@@ -695,12 +721,14 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
             }
         });
     }
-    public void requestPermission(String[]permission,final PermissionCallback callback){
+
+    public void requestPermission(String[] permission, final PermissionCallback callback) {
         super.requestPermission(permission, new PermissionCallback() {
             @Override
             public void onGranted() {
                 callback.onGranted();
             }
+
             @Override
             public void onDenied(String s) {
                 callback.onDenied(s);
@@ -708,21 +736,23 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
             }
         });
     }
-    private String permissionStr=",请在手机应用权限管理中开启权限";
-    private void showDialog(String permission){
-        String str="无法获取相关权限,请在手机应用权限管理中开启权限";
-        switch (permission){
+
+    private String permissionStr = ",请在手机应用权限管理中开启权限";
+
+    private void showDialog(String permission) {
+        String str = "无法获取相关权限,请在手机应用权限管理中开启权限";
+        switch (permission) {
             case Manifest.permission.CAMERA:
-                str="摄像头启动失败"+permissionStr;
+                str = "摄像头启动失败" + permissionStr;
                 break;
             case Manifest.permission.READ_EXTERNAL_STORAGE:
-                str="无法获取手机文件"+permissionStr;
+                str = "无法获取手机文件" + permissionStr;
                 break;
             case Manifest.permission.WRITE_EXTERNAL_STORAGE:
-                str="应用无法保存文件"+permissionStr;
+                str = "应用无法保存文件" + permissionStr;
                 break;
         }
-        MyDialog.Builder mDialog=new MyDialog.Builder(mContext);
+        MyDialog.Builder mDialog = new MyDialog.Builder(mContext);
         mDialog.setMessage(str);
 //        mDialog.setNegativeButton(new DialogInterface.OnClickListener() {
 //            @Override
@@ -730,7 +760,7 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
 //                dialog.dismiss();
 //            }
 //        });
-        mDialog.setPositiveButton("确定",new DialogInterface.OnClickListener() {
+        mDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -740,6 +770,7 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
         });
         mDialog.create().show();
     }
+
     protected void openPhoneSetting() {
         Intent localIntent = new Intent();
         localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

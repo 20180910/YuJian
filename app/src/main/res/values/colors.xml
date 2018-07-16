@@ -59,7 +59,8 @@
     <color name="orange_press">#eaa304</color>
     <color name="blue">#4ed3fd</color>
     <color name="red">#fc353a</color>
-    <color name="gray_press">#FFE4E0E0</color>
+    <color name="red_button">#FFAB1E17</color>
+    <color name="red_press">#84140f</color>
     <color name="blue_press">#E2419BF3</color>
     <color name="black_33">#333333</color>
     <color name="home_title">#2ACBE0</color>
