@@ -1,0 +1,29 @@
+*.iml
+.gradle
+/local.properties
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+!build.gradle
+.idea/
+gradle/
+gradle.properties
+*.apk
+.svn
+
+gradlew
+gradlew.bat
+
+
+
+logcat正则表达式
+过滤log
+^(?!.*(System.|CubicBezierInterpolator)).*$
+
+
+        classpath 'com.jakewharton:butterknife-gradle-plugin:8.5.1'
+        classpath 'me.tatarka:gradle-retrolambda:3.2.0'
+
+
+        1个汉字 = 4个&#160; = 4个&#8197; = 1个&#12288; = 2个&#8194;

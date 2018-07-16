@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/background_d"
+    >
+<com.github.fastshape.MyTextView
+    android:id="@+id/app_tv_select_photo"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:text="相册"
+    android:gravity="center"
+    app:pressColor="@color/c_press"
+    app:solidColor="@color/white"
+    android:textSize="17sp"
+    />
+    <com.github.fastshape.MyTextView
+        android:id="@+id/app_tv_take_photo"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="拍照"
+        android:gravity="center"
+        android:layout_marginTop="2px"
+        android:textSize="17sp"
+        app:pressColor="@color/c_press"
+        app:solidColor="@color/white"
+        />
+    <com.github.fastshape.MyTextView
+        android:id="@+id/app_tv_photo_cancle"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="取消"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        app:pressColor="@color/c_press"
+        app:solidColor="@color/white"
+        android:textSize="17sp"
+        />
+</LinearLayout>
