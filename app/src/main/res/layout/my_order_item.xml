@@ -60,7 +60,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="成交价:¥97"
+            android:text="¥97"
             android:textColor="@color/red"
             android:layout_toRightOf="@+id/iv_my_auction"
             android:layout_marginLeft="10dp"
@@ -111,18 +111,41 @@
         android:layout_height="2px"
         android:background="@color/divider_color"
         />
-    <com.github.fastshape.MyTextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="去支付"
+        android:orientation="horizontal"
+        android:gravity="right"
         android:layout_margin="10dp"
-        android:layout_gravity="right"
-        android:paddingRight="15dp"
-        android:paddingLeft="15dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        app:radius="5dp"
-        app:solidColor="@color/red"
-        android:textColor="@color/white"
-        />
+        >
+        <com.github.fastshape.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="取消订单"
+            android:layout_gravity="right"
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            app:radius="5dp"
+            app:solidColor="@color/gray_d7"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp"
+            />
+        <com.github.fastshape.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="去支付"
+            android:layout_gravity="right"
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            app:radius="5dp"
+            app:solidColor="@color/red"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp"
+            />
+    </LinearLayout>
+
 </LinearLayout>

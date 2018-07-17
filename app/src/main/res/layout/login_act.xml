@@ -90,7 +90,7 @@
                 android:gravity="center"
                 android:layout_marginTop="25dp"
                 android:textColor="@color/white"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 app:solidColor="@color/red_button"
                 app:pressColor="@color/red_press"
                 app:radius="4dp"

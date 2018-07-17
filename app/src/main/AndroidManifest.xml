@@ -28,6 +28,16 @@
         <activity android:name=".module.auction.activity.AuctionDetailActivity"/>
         <activity android:name=".module.my.activity.MyBaoZhengJinActivity"/>
         <activity android:name=".module.my.activity.MyAuctionActivity"/>
+        <activity android:name=".module.auction.activity.JiaoNaJinActivity"/>
+        <activity android:name=".module.auction.activity.PaiMaiActivity"/>
+        <activity android:name=".module.my.activity.HelpCenterActivity"/>
+        <activity android:name=".module.my.activity.AccountManageActivity"/>
+        <activity android:name=".module.my.activity.MyMaiHuiActivity"/>
+        <activity android:name=".module.my.activity.MyOrderActivity"/>
+        <activity android:name=".module.my.activity.OrderDetailActivity"/>
+        <activity android:name=".module.my.activity.FaBiaoEvaluationActivity"/>
+        <activity android:name=".module.my.activity.AboutYuJianActivity"/>
+        <activity android:name=".module.my.activity.UpdatePwdActivity"/>
     </application>
 
 </manifest>
