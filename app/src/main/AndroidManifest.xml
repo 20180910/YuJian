@@ -38,6 +38,29 @@
         <activity android:name=".module.my.activity.FaBiaoEvaluationActivity"/>
         <activity android:name=".module.my.activity.AboutYuJianActivity"/>
         <activity android:name=".module.my.activity.UpdatePwdActivity"/>
+        <activity android:name=".module.my.activity.SettingActivity"/>
+        <activity android:name=".module.my.activity.TuiKuanActivity"/>
+        <activity android:name=".module.my.activity.TiXianActivity"/>
+        <activity android:name=".module.my.activity.TiXianResultActivity"/>
+        <activity android:name=".module.my.activity.SelectZhiFuBaoActivity"/>
+        <activity android:name=".module.my.activity.AddBankActivity"/>
+        <activity android:name=".module.my.activity.AddZhiFuBaoActivity"/>
+        <activity android:name=".module.my.activity.MyTuiKuanListActivity"/>
+        <activity android:name=".module.my.activity.KeMaiHuiActivity"/>
+        <activity android:name=".module.my.activity.MyEvaluationActivity"/>
+        <activity android:name=".module.my.activity.MyCollectionActivity"/>
+        <activity android:name=".module.my.activity.MessageActivity"/>
+        <activity android:name=".module.my.activity.MyMoneyActivity"/>
+        <activity android:name=".module.my.activity.MyDataActivity"/>
+        <activity android:name=".module.my.activity.WuLiuActivity"/>
+        <activity android:name=".module.my.activity.SystemMessageActivity"/>
+        <activity android:name=".module.my.activity.UpdatePhoneActivity"/>
+        <activity android:name=".module.my.activity.BankListActivity"/>
+        <activity android:name=".module.my.activity.YiJianFanKuiActivity"/>
+        <activity android:name=".module.my.activity.YouHuiQuanActivity"/>
+        <activity android:name=".module.my.activity.ZhangHuAnQuanActivity"/>
+        <activity android:name=".module.my.activity.ZhangHuChongZhiActivity"/>
+        <activity android:name=".module.my.activity.AgainEvaluationActivity"/>
     </application>
 
 </manifest>

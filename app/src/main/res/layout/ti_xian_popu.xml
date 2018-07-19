@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/bg_color"
+    >
+<RadioGroup
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.github.fastshape.MyRadioButton
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="支付宝"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/divider_color"
+        />
+    <com.github.fastshape.MyRadioButton
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="银行卡"
+        android:checked="true"
+        />
+</RadioGroup>
+</LinearLayout>

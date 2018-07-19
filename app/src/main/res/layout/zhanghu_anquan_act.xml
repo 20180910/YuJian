@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/gray_bg"
+    >
+<include layout="@layout/app_title"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:text="手机号修改"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:background="@color/white"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:text="密码修改"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:background="@color/white"
+        android:layout_marginTop="2px"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:text="第三方登录账户管理"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:background="@color/white"
+        android:layout_marginTop="2px"
+        />
+</LinearLayout>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/bg_color"
+    >
+<include layout="@layout/app_title"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/bg_color"
+            >
+            <!--your view-->
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/qq"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    tools:text="提现申请提交成功\n客服会在三个工作日内\n处理您的申请"
+                    android:lineSpacingExtra="3dp"
+                    />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                >
+                <com.github.fastshape.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:text="提现记录"
+                    android:layout_marginRight="40dp"
+                    android:gravity="center"
+                    android:ems="6"
+                    app:radius="5dp"
+                    app:solidColor="@color/white"
+                    app:borderColor="@color/gray_99"
+                    android:textColor="@color/gray_99"
+                    app:all_line="true"
+                    />
+                <com.github.fastshape.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:text="返回"
+                    android:gravity="center"
+                    android:ems="6"
+                    app:radius="5dp"
+                    app:solidColor="@color/red"
+                    android:textColor="@color/white"
+                    app:all_line="true"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+</LinearLayout>

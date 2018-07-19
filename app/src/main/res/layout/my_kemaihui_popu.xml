@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+    >
+<com.github.fastshape.MyLinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:padding="20dp"
+    app:clipIgnorePadding="true"
+    app:clipRadius="5dp"
+    app:solidColor="@color/bg_color"
+
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="寄出单号"
+        android:textSize="15sp"
+        android:textColor="@color/gray_33"
+        android:layout_gravity="center_horizontal"
+        />
+    <com.zhizhong.yujian.view.MyEditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:textSize="13sp"
+        app:solidColor="@color/white"
+        android:inputType="text"
+        android:imeOptions="actionNext"
+        android:hint="请选择快递公司"
+        app:all_line="true"
+        android:layout_marginTop="15dp"
+        />
+    <com.zhizhong.yujian.view.MyEditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:textSize="13sp"
+        app:solidColor="@color/white"
+        android:inputType="text"
+        android:imeOptions="actionNext"
+        android:hint="请填写退回单号"
+        app:all_line="true"
+        android:layout_marginTop="15dp"
+        />
+    <com.github.fastshape.MyTextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="确定"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:solidColor="@color/red_button"
+        app:pressColor="@color/red_press"
+        app:radius="4dp"
+        android:layout_marginTop="15dp"
+        />
+</com.github.fastshape.MyLinearLayout>
+</LinearLayout>
