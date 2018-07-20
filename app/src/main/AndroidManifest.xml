@@ -71,6 +71,7 @@
         <activity android:name=".module.mall.activity.SearchResultActivity"/>
         <activity android:name=".module.my.activity.AddAddressActivity"/>
         <activity android:name=".module.my.activity.AddressListActivity"/>
+        <activity android:name=".module.mall.activity.PaySuccessActivity"/>
     </application>
 
 </manifest>
