@@ -61,6 +61,16 @@
         <activity android:name=".module.my.activity.ZhangHuAnQuanActivity"/>
         <activity android:name=".module.my.activity.ZhangHuChongZhiActivity"/>
         <activity android:name=".module.my.activity.AgainEvaluationActivity"/>
+        <activity android:name=".module.home.activity.ZiXunDetailActivity"/>
+        <activity android:name=".module.mall.activity.ShoppingCartActivity"/>
+        <activity android:name=".module.mall.activity.LingQuanZhongXinActivity"/>
+        <activity android:name=".module.mall.activity.GoodsEvaluationActivity"/>
+        <activity android:name=".module.mall.activity.SureOrderActivity"/>
+        <activity android:name=".module.mall.activity.ScanActivity"/>
+        <activity android:name=".module.mall.activity.GoodsSearchActivity"/>
+        <activity android:name=".module.mall.activity.SearchResultActivity"/>
+        <activity android:name=".module.my.activity.AddAddressActivity"/>
+        <activity android:name=".module.my.activity.AddressListActivity"/>
     </application>
 
 </manifest>

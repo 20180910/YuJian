@@ -55,6 +55,7 @@
     <color name="home_text_color">#419BF3</color>
     <color name="orange">#FFC820</color>
     <color name="orange_press">#eaa304</color>
+    <color name="home_live">#FFF1924A</color>
     <color name="blue">#4ed3fd</color>
     <color name="red">#FFC71D1D</color>
     <color name="red_button">#FFAB1E17</color>
