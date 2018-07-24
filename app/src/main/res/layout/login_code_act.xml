@@ -4,7 +4,7 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/border_e52"
+              android:background="@drawable/login_bg"
     >
 <include layout="@layout/app_title"/>
     <android.support.v4.widget.NestedScrollView
@@ -51,6 +51,7 @@
                 android:layout_marginBottom="5dp"
                 />
             <com.zhizhong.yujian.view.MyEditText
+                android:id="@+id/et_login_msg_phone"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center_vertical"
@@ -66,7 +67,12 @@
             android:layout_height="2px"
             android:background="@color/white"
             />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
             <com.zhizhong.yujian.view.MyEditText
+                android:id="@+id/et_login_msg_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center_vertical"
@@ -78,15 +84,29 @@
                 android:textColorHint="@color/gray_99"
                 android:paddingLeft="0dp"
                 />
+            <TextView
+                android:id="@+id/tv_login_msg_getcode"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="获取验证码"
+                android:gravity="center"
+                android:textColor="@color/gray_99"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:ems="5"
+                />
+        </RelativeLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="2px"
             android:background="@color/white"
             />
         <com.github.fastshape.MyTextView
+            android:id="@+id/tv_login_msg_commit"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="发送验证码"
+            android:text="登录"
             android:gravity="center"
             android:layout_marginTop="25dp"
             android:textColor="@color/white"
@@ -135,22 +155,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="30dp"
             >
             <ImageView
+                android:id="@+id/iv_login_msg_qq"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/qq"
+                android:src="@drawable/login_qq"
+                android:layout_marginRight="60dp"
+                />
+            <ImageView
+                android:id="@+id/iv_login_msg_wx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/login_wx"
                 />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/qq"
-                />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/qq"
+                android:visibility="gone"
                 />
         </LinearLayout>
     </LinearLayout>

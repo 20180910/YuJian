@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/border_e52"
+              android:background="@drawable/login_bg"
     >
-<include layout="@layout/app_title"/>
+    <include layout="@layout/app_title"/>
     <android.support.v4.widget.NestedScrollView
             android:id="@id/nsv"
             android:layout_width="match_parent"
@@ -51,6 +51,7 @@
                     android:layout_marginBottom="7dp"
                     />
                 <com.zhizhong.yujian.view.MyEditText
+                    android:id="@+id/et_login_phone"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:gravity="center_vertical"
@@ -67,6 +68,7 @@
                 android:background="@color/white"
                 />
             <com.zhizhong.yujian.view.MyEditText
+                android:id="@+id/et_login_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center_vertical"
@@ -84,6 +86,7 @@
                 android:background="@color/white"
                 />
             <com.github.fastshape.MyTextView
+                android:id="@+id/tv_login_commit"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="登录"
@@ -103,6 +106,7 @@
                 android:layout_marginTop="10dp"
                 >
                 <TextView
+                    android:id="@+id/tv_login_register"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="立即注册"
@@ -111,6 +115,7 @@
                     android:textColor="@color/gray_99"
                     />
                 <TextView
+                    android:id="@+id/tv_login_forget"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="忘记密码?"
@@ -150,24 +155,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="30dp"
                 >
                 <ImageView
+                    android:id="@+id/iv_login_qq"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/qq"
+                    android:src="@drawable/login_qq"
+                    android:layout_marginRight="60dp"
+                    />
+                <ImageView
+                    android:id="@+id/iv_login_wx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/login_wx"
                     />
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/qq"
-                    />
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/qq"
+                    android:visibility="gone"
                     />
             </LinearLayout>
         </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
-</LinearLayout>
+</RelativeLayout>
