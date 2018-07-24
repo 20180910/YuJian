@@ -50,6 +50,12 @@
                         android:layout_height="wrap_content"
                         app:sb_checked="true"
                         app:sb_show_indicator="false"
+                        app:sb_checked_color="@color/green"
+                        app:sb_uncheck_color="@color/black"
+                        app:sb_shadow_effect="false"
+                        app:sb_checkline_width="0dp"
+                        app:sb_shadow_offset="3dp"
+                        android:layerType="none"
                         />
                 </LinearLayout>
             <com.github.fastshape.MyTextView

@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 
 import com.github.androidtools.SPUtils;
 import com.github.androidtools.inter.MyOnClickListener;
@@ -27,6 +26,7 @@ import com.zhizhong.yujian.module.home.fragment.LiveFragment;
 import com.zhizhong.yujian.module.home.fragment.MallFragment;
 import com.zhizhong.yujian.module.home.fragment.MyFragment;
 import com.zhizhong.yujian.module.my.activity.LoginActivity;
+import com.zhizhong.yujian.module.my.activity.SettingActivity;
 import com.zhizhong.yujian.network.NetApiRequest;
 import com.zhizhong.yujian.network.response.ImageObj;
 
@@ -65,7 +65,7 @@ public class MainActivity extends BaseActivity {
     MyRadioButton rb_home_tab5;
 
     @BindView(R.id.rb_home_tab3)
-    ImageButton rb_home_tab3;
+    MyRadioButton rb_home_tab3;
     private MyRadioButton selectView;
 
 
@@ -171,6 +171,7 @@ public class MainActivity extends BaseActivity {
                         } else {
                             selectMy();
                         }
+                        STActivity(SettingActivity.class);
                         break;
                 }
             }

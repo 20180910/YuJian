@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/rg_main"
         app:borderColor="@color/gray_33"
-        app:borderWidth="3px"
+        app:borderWidth="2px"
         app:circleRadius="50dp"
         app:circleColor="@color/white"
         />
