@@ -1,14 +1,12 @@
 package com.zhizhong.yujian.module.home.fragment;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.androidtools.SPUtils;
 import com.github.fastshape.MyImageView;
-import com.google.gson.Gson;
 import com.zhizhong.yujian.AppXml;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.base.BaseFragment;
@@ -83,25 +81,42 @@ public class MyFragment extends BaseFragment {
         ApiRequest.getUserInfo(map, new MyCallBack<LoginObj>(mContext) {
             @Override
             public void onSuccess(LoginObj obj, int errorCode, String msg) {
-                String json = new Gson().toJson(obj);
-                SPUtils.setPrefString(mContext, AppXml.loginJson, json);
+                setLoginObj(obj);
 
             }
         });
 
     }
+    private void setLoginObj(LoginObj obj) {
+        SPUtils.setPrefString(mContext,AppXml.userId,obj.getUser_id());
+        SPUtils.setPrefString(mContext,AppXml.mobile,obj.getMobile());
+        SPUtils.setPrefString(mContext,AppXml.avatar,obj.getAvatar());
+        SPUtils.setPrefString(mContext,AppXml.nick_name,obj.getNick_name());
+        SPUtils.setPrefString(mContext,AppXml.sex,obj.getSex());
+        SPUtils.setPrefString(mContext,AppXml.birthday,obj.getBirthday());
+        SPUtils.setPrefString(mContext,AppXml.amount,obj.getAmount()+"");
+
+        SPUtils.setPrefInt(mContext,AppXml.coupons_count,obj.getCoupons_count());
+        SPUtils.setPrefInt(mContext,AppXml.message_sink,obj.getMessage_sink());
+
+        SPUtils.setPrefString(mContext,AppXml.qq_name,obj.getQq_name());
+        SPUtils.setPrefString(mContext,AppXml.wechat_name,obj.getWechat_name());
+    }
+
 
 
     private void setUserInfo() {
-        String json = SPUtils.getString(mContext, AppXml.loginJson, null);
-        if (!TextUtils.isEmpty(json)) {
-            LoginObj loginObj = new Gson().fromJson(json, LoginObj.class);
-            GlideUtils.intoD(mContext,loginObj.getAvatar(),iv_my,R.drawable.default_person);
 
-            tv_my_nickname.setText(loginObj.getNick_name());
-            tv_my_balance.setText("¥"+loginObj.getAmount());
-            tv_my_coupon.setText(loginObj.getCoupons_count()+"");
-        }
+        String avatar = SPUtils.getString(mContext, AppXml.avatar, "");
+        String nick_name =SPUtils.getString(mContext,AppXml.nick_name,"");
+        int coupons_count =SPUtils.getInt(mContext,AppXml.coupons_count,0);
+        String amount =SPUtils.getString(mContext,AppXml.amount,"");
+
+            GlideUtils.intoD(mContext,avatar,iv_my,R.drawable.default_person);
+
+            tv_my_nickname.setText(nick_name);
+            tv_my_balance.setText("¥"+coupons_count);
+            tv_my_coupon.setText(amount+"");
     }
 
 

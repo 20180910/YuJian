@@ -88,11 +88,11 @@ public class LoginForPwdActivity extends BaseActivity {
     }
     private void setLoginObj(LoginObj obj) {
         SPUtils.setPrefString(mContext,AppXml.userId,obj.getUser_id());
-        SPUtils.setPrefString(mContext,AppXml.mobile,obj.getUser_id());
+        SPUtils.setPrefString(mContext,AppXml.mobile,obj.getMobile());
         SPUtils.setPrefString(mContext,AppXml.avatar,obj.getAvatar());
-        SPUtils.setPrefString(mContext,AppXml.nick_name,obj.getUser_id());
-        SPUtils.setPrefString(mContext,AppXml.sex,obj.getUser_id());
-        SPUtils.setPrefString(mContext,AppXml.birthday,obj.getUser_id());
+        SPUtils.setPrefString(mContext,AppXml.nick_name,obj.getNick_name());
+        SPUtils.setPrefString(mContext,AppXml.sex,obj.getSex());
+        SPUtils.setPrefString(mContext,AppXml.birthday,obj.getBirthday());
         SPUtils.setPrefString(mContext,AppXml.amount,obj.getAmount()+"");
 
         SPUtils.setPrefInt(mContext,AppXml.coupons_count,obj.getCoupons_count());
@@ -100,7 +100,6 @@ public class LoginForPwdActivity extends BaseActivity {
 
         SPUtils.setPrefString(mContext,AppXml.qq_name,obj.getQq_name());
         SPUtils.setPrefString(mContext,AppXml.wechat_name,obj.getWechat_name());
-
 
         RxBus.getInstance().post(new LoginSuccessEvent(LoginSuccessEvent.status_1));
 

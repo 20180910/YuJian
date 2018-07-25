@@ -8,6 +8,7 @@
     >
 <include layout="@layout/app_title"/>
     <TextView
+        android:id="@+id/tv_anquan_update_phone"
         android:layout_width="match_parent"
         android:layout_height="47dp"
         android:text="手机号修改"
@@ -16,6 +17,7 @@
         android:background="@color/white"
         />
     <TextView
+        android:id="@+id/tv_anquan_update_pwd"
         android:layout_width="match_parent"
         android:layout_height="47dp"
         android:text="密码修改"
@@ -25,6 +27,7 @@
         android:layout_marginTop="2px"
         />
     <TextView
+        android:id="@+id/tv_anquan_update_account"
         android:layout_width="match_parent"
         android:layout_height="47dp"
         android:text="第三方登录账户管理"

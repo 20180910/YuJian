@@ -50,4 +50,8 @@ public interface IRequest {
     @GET("api/UserBase/GetAbout")
     Call<ResponseObj<AboutObj>> about(@QueryMap Map<String, String> map);
 
+    //修改手机号
+    @GET("api/UserBase/GetBindingMobile")
+    Call<ResponseObj<BaseObj>> updatePhone(@QueryMap Map<String, String> map);
+
 }

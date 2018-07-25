@@ -124,6 +124,7 @@ public class SettingActivity extends BaseActivity {
     public void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.tv_setting_account:
+                STActivity(ZhangHuAnQuanActivity.class);
                 break;
             case R.id.tv_setting_fankui:
                 STActivity(YiJianFanKuiActivity.class);
