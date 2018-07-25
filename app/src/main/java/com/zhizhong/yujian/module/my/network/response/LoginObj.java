@@ -32,7 +32,7 @@ public class LoginObj extends BaseObj {
     private String area;
     private String city;
     private double amount;
-    private double coupons_count;
+    private int coupons_count;
     private String qq_name;
     private String weibo_name;
     private String wechat_name;
@@ -41,6 +41,7 @@ public class LoginObj extends BaseObj {
     public String getMobile() {
         return mobile;
     }
+
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
@@ -118,11 +119,11 @@ public class LoginObj extends BaseObj {
         this.amount = amount;
     }
 
-    public double getCoupons_count() {
+    public int getCoupons_count() {
         return coupons_count;
     }
 
-    public void setCoupons_count(double coupons_count) {
+    public void setCoupons_count(int coupons_count) {
         this.coupons_count = coupons_count;
     }
 

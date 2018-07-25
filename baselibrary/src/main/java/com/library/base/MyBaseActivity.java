@@ -108,7 +108,7 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
 
     ;
 
-    protected void getData(int page, boolean isLoad) {
+    protected void getData(int page,final boolean isLoad) {
     }
 
     protected void setClickListener() {

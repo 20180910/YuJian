@@ -15,10 +15,10 @@ public class AppXml {
     public static final String user_name = "user_name";
     public static final String nick_name = "nick_name";
     public static final String name = "name";
-    public static final String email = "email";
+    public static final String coupons_count = "coupons_count";
     public static final String needLogin = "needLogin";
     public static final String birthday = "birthday";
-    public static final String bi_name = "bi_name";
+    public static final String amount = "amount";
     public static final String signature = "signature";
     public static final String province = "province";
     public static final String area = "area";
@@ -34,8 +34,8 @@ public class AppXml {
     public static final String read_value = "read_value";
     public static final String read_name = "read_name";
     public static final String registrationId="registrationId";
-    public static final String read_fenshu = "read_fenshu";
-    public static final String read_xing_num = "read_xing_num";
+    public static final String qq_name = "qq_name";
+    public static final String wechat_name = "wechat_name";
     public static final String loginJson = "loginJson";
     public static final String is_show_nicheng = "is_show_nicheng";
 

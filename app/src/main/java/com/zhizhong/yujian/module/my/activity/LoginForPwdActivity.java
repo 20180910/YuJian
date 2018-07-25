@@ -5,7 +5,6 @@ import android.view.View;
 
 import com.github.androidtools.SPUtils;
 import com.github.rxbus.RxBus;
-import com.google.gson.Gson;
 import com.library.base.tools.ZhengZeUtils;
 import com.zhizhong.yujian.AppXml;
 import com.zhizhong.yujian.R;
@@ -88,8 +87,20 @@ public class LoginForPwdActivity extends BaseActivity {
         });
     }
     private void setLoginObj(LoginObj obj) {
-        String json = new Gson().toJson(obj);
-        SPUtils.setPrefString(mContext,AppXml.loginJson,json);
+        SPUtils.setPrefString(mContext,AppXml.userId,obj.getUser_id());
+        SPUtils.setPrefString(mContext,AppXml.mobile,obj.getUser_id());
+        SPUtils.setPrefString(mContext,AppXml.avatar,obj.getAvatar());
+        SPUtils.setPrefString(mContext,AppXml.nick_name,obj.getUser_id());
+        SPUtils.setPrefString(mContext,AppXml.sex,obj.getUser_id());
+        SPUtils.setPrefString(mContext,AppXml.birthday,obj.getUser_id());
+        SPUtils.setPrefString(mContext,AppXml.amount,obj.getAmount()+"");
+
+        SPUtils.setPrefInt(mContext,AppXml.coupons_count,obj.getCoupons_count());
+        SPUtils.setPrefInt(mContext,AppXml.message_sink,obj.getMessage_sink());
+
+        SPUtils.setPrefString(mContext,AppXml.qq_name,obj.getQq_name());
+        SPUtils.setPrefString(mContext,AppXml.wechat_name,obj.getWechat_name());
+
 
         RxBus.getInstance().post(new LoginSuccessEvent(LoginSuccessEvent.status_1));
 

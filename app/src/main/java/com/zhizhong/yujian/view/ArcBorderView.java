@@ -81,12 +81,12 @@ public class ArcBorderView extends View {
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
         if(getLayoutParams().height== ViewGroup.LayoutParams.WRAP_CONTENT&&getLayoutParams().width== ViewGroup.LayoutParams.WRAP_CONTENT){
-            float h= circleRadius *scaleRadius +borderWidth/2;
+            float h= circleRadius *scaleRadius +borderWidth/2+0.5f;
             setMeasuredDimension((int)w,(int)h);
         }else if(getLayoutParams().width== ViewGroup.LayoutParams.WRAP_CONTENT){
             setMeasuredDimension((int)w,height);
         }else if(getLayoutParams().height== ViewGroup.LayoutParams.WRAP_CONTENT){
-            float h= circleRadius *scaleRadius +borderWidth/2;
+            float h= circleRadius *scaleRadius +borderWidth/2+0.5f;
             setMeasuredDimension(width,(int)h);
         }
     }

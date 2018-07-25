@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:background="@color/gray_bg"
               android:paddingLeft="10dp"
               android:paddingRight="10dp"
+              android:paddingBottom="10dp"
     >
 <TextView
+    android:id="@+id/tv_message_time"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="2018-01-01 12:00"
+    tools:text="2018-01-01 12:00"
     android:layout_gravity="center_horizontal"
-    android:layout_marginTop="20dp"
+    android:layout_marginTop="10dp"
     android:layout_marginBottom="6dp"
     />
     <com.github.fastshape.MyLinearLayout
@@ -29,12 +32,14 @@
         android:paddingRight="13dp"
         >
         <TextView
+            android:id="@+id/tv_message_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="订单已发货"
             android:textColor="@color/gray_33"
             />
         <TextView
+            android:id="@+id/tv_message_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="你的订单已经发货你的订单已经发货你的订单已经发货你的订单已经发货你的订单已经发货你的订单已经发货"

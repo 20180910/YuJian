@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -19,6 +20,7 @@
             >
             <!--your view-->
             <com.github.fastshape.MyTextView
+                android:id="@+id/tv_setting_account"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
                 android:text="账户安全"
@@ -26,6 +28,7 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:background="@color/white"
+                android:drawableRight="@drawable/arrow_right"
                 android:textSize="14sp"
                 />
                 <LinearLayout
@@ -46,19 +49,21 @@
                         android:textSize="14sp"
                         />
                     <com.suke.widget.SwitchButton
+                        android:id="@+id/sb_setting"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:sb_checked="true"
                         app:sb_show_indicator="false"
                         app:sb_checked_color="@color/green"
-                        app:sb_uncheck_color="@color/black"
-                        app:sb_shadow_effect="false"
+                        app:sb_uncheck_color="@color/gray_bg"
+                        app:sb_shadow_effect="true"
                         app:sb_checkline_width="0dp"
                         app:sb_shadow_offset="3dp"
                         android:layerType="none"
                         />
                 </LinearLayout>
             <com.github.fastshape.MyTextView
+                android:id="@+id/tv_setting_fankui"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
                 android:text="意见反馈"
@@ -68,6 +73,7 @@
                 android:background="@color/white"
                 android:textSize="14sp"
                 android:layout_marginTop="2px"
+                android:drawableRight="@drawable/arrow_right"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -80,6 +86,7 @@
                 android:layout_marginTop="2px"
                 >
                 <com.github.fastshape.MyTextView
+                    android:id="@+id/tv_setting_clear"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="43dp"
@@ -89,12 +96,14 @@
                     android:textSize="14sp"
                     />
                 <TextView
+                    android:id="@+id/tv_setting_cache"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="11.2M"
+                    tools:text="11.2M"
                     />
             </LinearLayout>
             <com.github.fastshape.MyTextView
+                android:id="@+id/tv_setting_about"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
                 android:text="关于御见"
@@ -104,6 +113,7 @@
                 android:background="@color/white"
                 android:textSize="14sp"
                 android:layout_marginTop="2px"
+                android:drawableRight="@drawable/arrow_right"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -125,20 +135,14 @@
                     android:textSize="14sp"
                     />
                 <TextView
+                    android:id="@+id/tv_setting_version"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1.0.1"
+                    tools:text="1.0.1"
                     />
             </LinearLayout>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Copyright © 2018\n 公司版权所有"
-                android:gravity="center"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                />
-            <TextView
+                android:id="@+id/tv_setting_exit"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
                 android:text="退出登录"
@@ -147,6 +151,14 @@
                 android:gravity="center"
                 android:background="@color/white"
                 android:layout_marginTop="10dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Copyright © 2018\n 公司版权所有"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
                 />
         </LinearLayout>
     </com.library.base.ProgressLayout>

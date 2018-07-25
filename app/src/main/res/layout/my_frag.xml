@@ -3,6 +3,7 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              xmlns:tools="http://schemas.android.com/tools"
               android:background="@color/bg_color"
               android:orientation="vertical"
     >
@@ -11,6 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -18,21 +20,45 @@
                 >
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:background="@color/gray_bg"
+                    android:layout_height="160dp"
+                    android:background="@drawable/my_bg"
                     >
                     <ImageView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/iv_my_setting"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/setting"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="20dp"
+                        android:padding="4dp"
+                        />
+                    <ImageView
+                        android:id="@+id/iv_my_message"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/message"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_gravity="right"
+                        android:padding="4dp"
+                        />
+                    <com.github.fastshape.MyImageView
+                        android:id="@+id/iv_my"
+                        android:layout_width="55dp"
                         android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
                         android:layout_gravity="center"
-                        android:src="@drawable/qq"
+                        android:src="@drawable/default_person"
+                        app:clipRadius="27dp"
                         />
                     <TextView
+                        android:id="@+id/tv_my_nickname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="30dp"
-                        android:text="夏季风"
+                        android:layout_marginTop="46dp"
+                        tools:text="夏季风"
+                        android:textColor="@color/white"
                         />
                     <com.github.fastshape.MyTextView
                         android:layout_width="wrap_content"
@@ -65,6 +91,7 @@
                         android:gravity="center"
                         >
                         <TextView
+                            android:id="@+id/tv_my_balance"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="¥21321"
@@ -92,9 +119,10 @@
                         android:gravity="center"
                         >
                         <TextView
+                            android:id="@+id/tv_my_coupon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="23"
+                            tools:text="23"
                             android:textColor="@color/red"
                             />
                         <TextView
@@ -111,11 +139,14 @@
                     android:background="@color/divider_color"
                     />
                 <TextView
+                    android:id="@+id/ll_my_allorder"
                     android:layout_width="match_parent"
                     android:layout_height="43dp"
                     android:text="我的全部订单"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:paddingRight="10dp"
                     />
                 <View
                     android:layout_width="match_parent"
@@ -124,38 +155,96 @@
                     />
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="85dp"
+                    android:layout_height="80dp"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     >
-                    <com.github.fastshape.MyTextView
+                    <LinearLayout
+                        android:id="@+id/ll_my_daifukuan"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
+                        android:orientation="vertical"
                         android:gravity="center"
-                        android:text="待付款"
-                        />
-                    <com.github.fastshape.MyTextView
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/daifukuan"
+                            />
+                        <com.github.fastshape.MyTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="待付款"
+                            android:layout_marginTop="8dp"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_my_daifahuo"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
+                        android:orientation="vertical"
                         android:gravity="center"
-                        android:text="待发货"
-                        />
-                    <com.github.fastshape.MyTextView
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/daifahuo"
+                            />
+                        <com.github.fastshape.MyTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="待发货"
+                            android:layout_marginTop="8dp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ll_my_daishouhuo"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
+                        android:orientation="vertical"
                         android:gravity="center"
-                        android:text="待收货"
-                        />
-                    <com.github.fastshape.MyTextView
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/daishouhuo"
+                            />
+                        <com.github.fastshape.MyTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="待收货"
+                            android:layout_marginTop="8dp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ll_my_daipingjia"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
+                        android:orientation="vertical"
                         android:gravity="center"
-                        android:text="待评价"
-                        />
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/daipingjia"
+                            />
+                        <com.github.fastshape.MyTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="待评价"
+                            android:layout_marginTop="8dp"
+                            />
+                    </LinearLayout>
+
                 </LinearLayout>
                 <View
                     android:layout_width="match_parent"
@@ -163,6 +252,7 @@
                     android:background="@color/divider_color"
                     />
                 <com.github.fastshape.MyTextView
+                    android:id="@+id/tv_my_wodepaimai"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:gravity="center_vertical"
@@ -176,6 +266,7 @@
                     android:background="@color/divider_color"
                     />
                 <com.github.fastshape.MyTextView
+                    android:id="@+id/tv_my_wodetuikuan"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:gravity="center_vertical"
@@ -189,6 +280,7 @@
                     android:background="@color/divider_color"
                     />
                 <com.github.fastshape.MyTextView
+                    android:id="@+id/tv_my_wodekemaihui"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:gravity="center_vertical"
@@ -202,6 +294,7 @@
                     android:background="@color/divider_color"
                     />
                 <com.github.fastshape.MyTextView
+                    android:id="@+id/tv_my_wodeshoucang"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:gravity="center_vertical"
@@ -215,6 +308,7 @@
                     android:background="@color/divider_color"
                     />
                 <com.github.fastshape.MyTextView
+                    android:id="@+id/tv_my_wodedizhi"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:gravity="center_vertical"
@@ -228,6 +322,7 @@
                     android:background="@color/divider_color"
                     />
                 <com.github.fastshape.MyTextView
+                    android:id="@+id/tv_my_wodebaozhengjin"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:gravity="center_vertical"
@@ -241,6 +336,7 @@
                     android:background="@color/divider_color"
                     />
                 <com.github.fastshape.MyTextView
+                    android:id="@+id/tv_my_wodepingjia"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:gravity="center_vertical"
@@ -254,6 +350,7 @@
                     android:background="@color/divider_color"
                     />
                 <com.github.fastshape.MyTextView
+                    android:id="@+id/tv_my_help"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:gravity="center_vertical"
