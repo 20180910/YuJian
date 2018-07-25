@@ -3,55 +3,40 @@ package com.zhizhong.yujian.module.my.network.response;
 import com.library.base.BaseObj;
 
 public class LoginObj extends BaseObj {
+
     /**
      * mobile : 15601772922
-     * userId : 5
-     * bi_name : 03879645
-     * signature :
+     * user_id : 2
+     * nick_name :
+     * avatar :
      * sex :
-     * birthday : 2018-07-11
+     * birthday : 2018-07-25
      * province :
      * area :
      * city :
-     * rongshu_leaf : 0
-     * card_bag : 0
-     * guanzhu : 0
-     * fensi : 0
-     * create_value : 0
-     * create_name : 一代文豪
-     * create_fenshu : 6000
-     * create_xing_num : 1
-     * read_value : 0
-     * read_name : 博览一书
-     * read_fenshu : 6000
-     * read_xing_num : 1
-     * is_show_biaoqian : 1
-     * is_show_nicheng : 1
+     * amount : 0
+     * coupons_count : 0
+     * qq_name :
+     * weibo_name :
+     * wechat_name :
+     * is_set_name : 1
      */
 
     private String mobile;
     private String user_id;
-    private String bi_name;
-    private String signature;
+    private String nick_name;
+    private String avatar;
     private String sex;
     private String birthday;
     private String province;
     private String area;
     private String city;
-    private int rongshu_leaf;
-    private int card_bag;
-    private int guanzhu;
-    private int fensi;
-    private int create_value;
-    private String create_name;
-    private int create_fenshu;
-    private int create_xing_num;
-    private int read_value;
-    private String read_name;
-    private int read_fenshu;
-    private int read_xing_num;
-    private int is_show_biaoqian;
-    private int is_show_nicheng;
+    private double amount;
+    private double coupons_count;
+    private String qq_name;
+    private String weibo_name;
+    private String wechat_name;
+    private int is_set_name;//是否显示设置昵称页(1显示 0不显示)
 
     public String getMobile() {
         return mobile;
@@ -69,20 +54,20 @@ public class LoginObj extends BaseObj {
         this.user_id = user_id;
     }
 
-    public String getBi_name() {
-        return bi_name;
+    public String getNick_name() {
+        return nick_name;
     }
 
-    public void setBi_name(String bi_name) {
-        this.bi_name = bi_name;
+    public void setNick_name(String nick_name) {
+        this.nick_name = nick_name;
     }
 
-    public String getSignature() {
-        return signature;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setSignature(String signature) {
-        this.signature = signature;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getSex() {
@@ -125,115 +110,51 @@ public class LoginObj extends BaseObj {
         this.city = city;
     }
 
-    public int getRongshu_leaf() {
-        return rongshu_leaf;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setRongshu_leaf(int rongshu_leaf) {
-        this.rongshu_leaf = rongshu_leaf;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
-    public int getCard_bag() {
-        return card_bag;
+    public double getCoupons_count() {
+        return coupons_count;
     }
 
-    public void setCard_bag(int card_bag) {
-        this.card_bag = card_bag;
+    public void setCoupons_count(double coupons_count) {
+        this.coupons_count = coupons_count;
     }
 
-    public int getGuanzhu() {
-        return guanzhu;
+    public String getQq_name() {
+        return qq_name;
     }
 
-    public void setGuanzhu(int guanzhu) {
-        this.guanzhu = guanzhu;
+    public void setQq_name(String qq_name) {
+        this.qq_name = qq_name;
     }
 
-    public int getFensi() {
-        return fensi;
+    public String getWeibo_name() {
+        return weibo_name;
     }
 
-    public void setFensi(int fensi) {
-        this.fensi = fensi;
+    public void setWeibo_name(String weibo_name) {
+        this.weibo_name = weibo_name;
     }
 
-    public int getCreate_value() {
-        return create_value;
+    public String getWechat_name() {
+        return wechat_name;
     }
 
-    public void setCreate_value(int create_value) {
-        this.create_value = create_value;
+    public void setWechat_name(String wechat_name) {
+        this.wechat_name = wechat_name;
     }
 
-    public String getCreate_name() {
-        return create_name;
+    public int getIs_set_name() {
+        return is_set_name;
     }
 
-    public void setCreate_name(String create_name) {
-        this.create_name = create_name;
-    }
-
-    public int getCreate_fenshu() {
-        return create_fenshu;
-    }
-
-    public void setCreate_fenshu(int create_fenshu) {
-        this.create_fenshu = create_fenshu;
-    }
-
-    public int getCreate_xing_num() {
-        return create_xing_num;
-    }
-
-    public void setCreate_xing_num(int create_xing_num) {
-        this.create_xing_num = create_xing_num;
-    }
-
-    public int getRead_value() {
-        return read_value;
-    }
-
-    public void setRead_value(int read_value) {
-        this.read_value = read_value;
-    }
-
-    public String getRead_name() {
-        return read_name;
-    }
-
-    public void setRead_name(String read_name) {
-        this.read_name = read_name;
-    }
-
-    public int getRead_fenshu() {
-        return read_fenshu;
-    }
-
-    public void setRead_fenshu(int read_fenshu) {
-        this.read_fenshu = read_fenshu;
-    }
-
-    public int getRead_xing_num() {
-        return read_xing_num;
-    }
-
-    public void setRead_xing_num(int read_xing_num) {
-        this.read_xing_num = read_xing_num;
-    }
-
-    public int getIs_show_biaoqian() {
-        return is_show_biaoqian;
-    }
-
-    public void setIs_show_biaoqian(int is_show_biaoqian) {
-        this.is_show_biaoqian = is_show_biaoqian;
-    }
-
-    public int getIs_show_nicheng() {
-        return is_show_nicheng;
-    }
-
-    public void setIs_show_nicheng(int is_show_nicheng) {
-        this.is_show_nicheng = is_show_nicheng;
+    public void setIs_set_name(int is_set_name) {
+        this.is_set_name = is_set_name;
     }
 }

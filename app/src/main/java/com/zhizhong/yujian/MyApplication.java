@@ -25,10 +25,10 @@ public class MyApplication extends Application {
         super.onCreate();
         if(true&&BuildConfig.DEBUG){
             //测试
-            NetWorkManager.getInstance(getApplicationContext(),"http://121.40.186.118:10010/",BuildConfig.DEBUG).complete();
+            NetWorkManager.getInstance(getApplicationContext(),"http://121.40.186.118:10011/",BuildConfig.DEBUG).complete();
         }else{
             //正式
-            NetWorkManager.getInstance(getApplicationContext(),"http://121.40.186.118:10010/",BuildConfig.DEBUG).complete();
+            NetWorkManager.getInstance(getApplicationContext(),"http://121.40.186.118:10011/",BuildConfig.DEBUG).complete();
         }
         initDownloader();
         Loading.setLoadView(R.layout.app_loading_view);

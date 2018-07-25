@@ -54,8 +54,9 @@ public abstract class BaseActivity extends MyBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setBackIcon(R.drawable.back_icon);
+        setTitleBackgroud(R.color.title_bg);
         super.onCreate(savedInstanceState);
-
     }
 
     protected String getUserId() {

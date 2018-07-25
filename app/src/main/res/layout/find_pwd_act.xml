@@ -45,6 +45,7 @@
                 android:layout_marginBottom="7dp"
                 />
             <com.zhizhong.yujian.view.MyEditText
+                android:id="@+id/et_findpwd_phone"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center_vertical"
@@ -68,6 +69,7 @@
             android:layout_marginTop="10dp"
             >
             <com.zhizhong.yujian.view.MyEditText
+                android:id="@+id/et_findpwd_code"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="40dp"
@@ -78,8 +80,10 @@
                 android:hint="请输入验证码"
                 android:textColorHint="@color/gray_99"
                 android:paddingLeft="0dp"
+                app:hiddenClearIcon="true"
                 />
             <TextView
+                android:id="@+id/tv_findpwd_getcode"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:gravity="center"
@@ -99,6 +103,7 @@
             android:background="@color/gray_99"
             />
         <com.github.fastshape.MyTextView
+            android:id="@+id/tv_findpwd_next"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="下一步"

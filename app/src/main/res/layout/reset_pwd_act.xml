@@ -18,6 +18,7 @@
         android:layout_marginTop="20dp"
         >
         <com.zhizhong.yujian.view.MyEditText
+            android:id="@+id/et_reset_pwd"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:gravity="center_vertical"
@@ -25,7 +26,7 @@
             android:textSize="13sp"
             android:inputType="textWebPassword"
             android:imeOptions="actionNext"
-            android:hint="请输入密码"
+            android:hint="请输入8-20位数字加字母的密码"
             android:textColorHint="@color/gray_99"
             android:paddingLeft="0dp"
             />
@@ -35,6 +36,7 @@
             android:background="@color/gray_99"
             />
             <com.zhizhong.yujian.view.MyEditText
+                android:id="@+id/et_reset_repwd"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center_vertical"
@@ -52,6 +54,7 @@
             android:background="@color/gray_99"
             />
         <com.github.fastshape.MyTextView
+            android:id="@+id/tv_reset_complete"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="完成"

@@ -80,6 +80,7 @@
         <activity android:name=".module.my.activity.AddAddressActivity"/>
         <activity android:name=".module.my.activity.AddressListActivity"/>
         <activity android:name=".module.mall.activity.PaySuccessActivity"/>
+        <activity android:name=".module.my.activity.LoginForPwdActivity"/>
     </application>
 
 </manifest>

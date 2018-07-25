@@ -84,7 +84,7 @@
     <color name="transparent_half_darker_darker_dark">#b0000000</color>
     <color name="border_e52">#e5e5e5</color>
     <color name="border_e5">#B2B2B2</color>
-    <color name="c_F8F8F81">#C0C5CA</color>
+    <color name="title_bg">#FF353535</color>
     <color name="c_F8F8F83">#BEC2C7</color>
     <color name="c_B2B2B2">#B2B2B2</color>
     <color name="c_F8F8F82">#DFE4EA</color>

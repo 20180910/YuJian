@@ -83,6 +83,8 @@
                 android:hint="请输入验证码"
                 android:textColorHint="@color/gray_99"
                 android:paddingLeft="0dp"
+                android:layout_marginRight="110dp"
+                app:hiddenClearIcon="true"
                 />
             <TextView
                 android:id="@+id/tv_login_msg_getcode"

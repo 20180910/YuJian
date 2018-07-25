@@ -26,7 +26,6 @@ import com.zhizhong.yujian.module.home.fragment.LiveFragment;
 import com.zhizhong.yujian.module.home.fragment.MallFragment;
 import com.zhizhong.yujian.module.home.fragment.MyFragment;
 import com.zhizhong.yujian.module.my.activity.LoginActivity;
-import com.zhizhong.yujian.module.my.activity.SettingActivity;
 import com.zhizhong.yujian.network.NetApiRequest;
 import com.zhizhong.yujian.network.response.ImageObj;
 
@@ -171,7 +170,6 @@ public class MainActivity extends BaseActivity {
                         } else {
                             selectMy();
                         }
-                        STActivity(SettingActivity.class);
                         break;
                 }
             }

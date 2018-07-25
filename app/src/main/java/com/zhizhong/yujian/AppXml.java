@@ -36,7 +36,7 @@ public class AppXml {
     public static final String registrationId="registrationId";
     public static final String read_fenshu = "read_fenshu";
     public static final String read_xing_num = "read_xing_num";
-    public static final String is_show_biaoqian = "is_show_biaoqian";
+    public static final String loginJson = "loginJson";
     public static final String is_show_nicheng = "is_show_nicheng";
 
     public static final String jifen = "jifen";
