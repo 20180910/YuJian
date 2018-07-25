@@ -27,15 +27,15 @@ public interface NetIRequest {
     Call<ResponseObj<BaseObj>> getMsgCode(@QueryMap Map<String, String> map);
 
     //base64文件上传
-    @POST("api/MQLib/PostUploadFileBase64")
+    @POST("api/Lib/PostUploadFileBase64")
     Call<ResponseObj<BaseObj>> uploadImg(@QueryMap Map<String, String> map, @Body UploadImgBody body);
 
     //修改用户头像
-    @GET("api/MQUserBase/GetSetUserAvatar")
+    @GET("api/UserBase/GetSetUserAvatar")
     Call<ResponseObj<BaseObj>> setUserImg(@QueryMap Map<String, String> map);
 
     //获取省市区
-    @GET("api/MQLib/GetProvinceCityArea")
+    @GET("api/Lib/GetProvinceCityArea")
     Call<ResponseObj<List<CityObj>>> getAllArea(@QueryMap Map<String, String> map);
 
 

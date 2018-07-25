@@ -12,7 +12,10 @@ import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.base.BaseFragment;
 import com.zhizhong.yujian.base.GlideUtils;
 import com.zhizhong.yujian.base.MyCallBack;
+import com.zhizhong.yujian.module.my.activity.AddressListActivity;
+import com.zhizhong.yujian.module.my.activity.HelpCenterActivity;
 import com.zhizhong.yujian.module.my.activity.MessageActivity;
+import com.zhizhong.yujian.module.my.activity.MyDataActivity;
 import com.zhizhong.yujian.module.my.activity.SettingActivity;
 import com.zhizhong.yujian.module.my.network.ApiRequest;
 import com.zhizhong.yujian.module.my.network.response.LoginObj;
@@ -125,9 +128,12 @@ public class MyFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.iv_my_setting, R.id.iv_my_message, R.id.ll_my_allorder, R.id.ll_my_daifukuan, R.id.ll_my_daifahuo, R.id.ll_my_daipingjia, R.id.tv_my_wodepaimai, R.id.tv_my_wodetuikuan, R.id.tv_my_wodekemaihui, R.id.tv_my_wodeshoucang, R.id.tv_my_wodedizhi, R.id.tv_my_wodebaozhengjin, R.id.tv_my_wodepingjia, R.id.tv_my_help})
+    @OnClick({R.id.iv_my,R.id.iv_my_setting, R.id.iv_my_message, R.id.ll_my_allorder, R.id.ll_my_daifukuan, R.id.ll_my_daifahuo, R.id.ll_my_daipingjia, R.id.tv_my_wodepaimai, R.id.tv_my_wodetuikuan, R.id.tv_my_wodekemaihui, R.id.tv_my_wodeshoucang, R.id.tv_my_wodedizhi, R.id.tv_my_wodebaozhengjin, R.id.tv_my_wodepingjia, R.id.tv_my_help})
     public void onViewClick(View view) {
         switch (view.getId()) {
+            case R.id.iv_my:
+                STActivity(MyDataActivity.class);
+                break;
             case R.id.iv_my_setting:
                 STActivity(SettingActivity.class);
                 break;
@@ -151,12 +157,14 @@ public class MyFragment extends BaseFragment {
             case R.id.tv_my_wodeshoucang:
                 break;
             case R.id.tv_my_wodedizhi:
+                STActivity(AddressListActivity.class);
                 break;
             case R.id.tv_my_wodebaozhengjin:
                 break;
             case R.id.tv_my_wodepingjia:
                 break;
             case R.id.tv_my_help:
+                STActivity(HelpCenterActivity.class);
                 break;
         }
     }

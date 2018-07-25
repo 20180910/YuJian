@@ -7,13 +7,13 @@
 
     <color name="app_status">#ffffff</color>
     <color name="app_bar">#ffffff</color>
+    <color name="bg_color">#ffffff</color>
     <!--<color name="theme_color">#419BF3</color>-->
 
     <color name="app_bar2">#06C1AE</color>
 
     <!--<color name="background_f2">#f0fbf1</color>-->
-    <color name="divider_color">#f0fbf1</color>
-    <color name="background_d">#f0fbf1</color>
+    <color name="divider_color">#f2f2f2</color>
     <color name="colorText">#848484</color>
     <color name="app_transparent">#00000000</color>
     <color name="app_transparent_half">#70000000</color>

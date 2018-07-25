@@ -4,7 +4,7 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:background="@color/background_d"
+              android:background="@color/divider_color"
     >
 <com.github.fastshape.MyTextView
     android:id="@+id/app_tv_select_photo"
@@ -14,7 +14,7 @@
     android:gravity="center"
     app:pressColor="@color/c_press"
     app:solidColor="@color/white"
-    android:textSize="17sp"
+    android:textSize="16sp"
     />
     <com.github.fastshape.MyTextView
         android:id="@+id/app_tv_take_photo"
@@ -23,7 +23,7 @@
         android:text="拍照"
         android:gravity="center"
         android:layout_marginTop="2px"
-        android:textSize="17sp"
+        android:textSize="16sp"
         app:pressColor="@color/c_press"
         app:solidColor="@color/white"
         />
@@ -33,9 +33,9 @@
         android:layout_height="45dp"
         android:text="取消"
         android:gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         app:pressColor="@color/c_press"
         app:solidColor="@color/white"
-        android:textSize="17sp"
+        android:textSize="16sp"
         />
 </LinearLayout>

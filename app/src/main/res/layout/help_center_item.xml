@@ -7,20 +7,29 @@
               android:background="@color/bg_color"
     >
 <com.github.fastshape.MyCheckBox
+    android:id="@+id/cb_help_center_title"
     android:layout_width="match_parent"
     android:layout_height="45dp"
     android:text="拍卖后怎么处理?"
-    android:textColor="@color/gray_33"
+    android:textColor="@color/gray_66"
     android:button="@null"
     android:paddingLeft="10dp"
-    android:textSize="14sp"
+    android:textSize="13sp"
+    app:checked_drawable="@drawable/arrow_top"
+    app:normal_drawable="@drawable/arrow_down"
+    app:drawable_direction="right"
+    android:paddingRight="10dp"
+    android:checked="false"
     />
     <TextView
+        android:id="@+id/tv_help_center_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="我的答案我的答案我的答案我的答案我的答案我的答案我的答案我的答案我的答案我的答案我的答案我的答案我的答案我的答案我的答案我的答案我的答案我的答案"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="12dp"
         android:layout_marginRight="10dp"
+        android:visibility="gone"
+        android:textColor="@color/gray_66"
         />
 </LinearLayout>

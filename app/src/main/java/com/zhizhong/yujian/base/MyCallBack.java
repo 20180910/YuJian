@@ -125,7 +125,7 @@ public abstract class MyCallBack<T> implements Callback<ResponseObj<T>> {
             if (response.code() == 500) {
                 onError(new ServerException("服务器开小差去了,请稍后再试"));
             } else if(response.code() == 404) {
-                onError(new ServerException("url地址错误"));
+                onError(new ServerException("访问路径错误"));
             }else{
                 onError(new ServerException("连接异常"));
             }

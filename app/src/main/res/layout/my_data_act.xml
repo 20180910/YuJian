@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -19,6 +20,7 @@
             >
             <!--your view-->
             <LinearLayout
+                android:id="@+id/ll_mydata_img"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:orientation="horizontal"
@@ -35,14 +37,22 @@
                     android:textSize="14sp"
                     />
                 <com.github.fastshape.MyImageView
+                    android:id="@+id/iv_mydata_img"
                     android:layout_width="44dp"
                     android:layout_height="44dp"
-                    android:src="@drawable/qq"
+                    tools:src="@drawable/qq"
                     app:clipRadius="22dp"
                     android:layout_marginRight="10dp"
+                    android:scaleType="centerCrop"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/arrow_right"
                     />
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/ll_mydata_nickname"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:orientation="horizontal"
@@ -60,13 +70,21 @@
                     android:textSize="14sp"
                     />
                 <TextView
+                    android:id="@+id/tv_mydata_nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="张三"
                     android:textSize="14sp"
                     />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/arrow_right"
+                    android:layout_marginLeft="10dp"
+                    />
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/ll_mydata_birthday"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:orientation="horizontal"
@@ -84,13 +102,21 @@
                     android:textSize="14sp"
                     />
                 <TextView
+                    android:id="@+id/tv_mydata_birthday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1992/07/07"
+                    tools:text="1992-07-07"
                     android:textSize="14sp"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/arrow_right"
+                    android:layout_marginLeft="10dp"
                     />
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/ll_mydata_sex"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:orientation="horizontal"
@@ -108,26 +134,19 @@
                     android:textSize="14sp"
                     />
                 <TextView
+                    android:id="@+id/tv_mydata_sex"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="男"
+                    tools:text="男"
                     android:textSize="14sp"
                     />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/arrow_right"
+                    android:layout_marginLeft="10dp"
+                    />
             </LinearLayout>
-            <com.github.fastshape.MyTextView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:text="保存"
-                android:gravity="center"
-                android:layout_marginTop="35dp"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                app:solidColor="@color/red_button"
-                app:pressColor="@color/red_press"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                app:radius="4dp"
-                />
         </LinearLayout>
     </com.library.base.ProgressLayout>
 </LinearLayout>

@@ -4,6 +4,7 @@ import com.github.retrofitutil.NoNetworkException;
 import com.library.base.BaseApiRequest;
 import com.zhizhong.yujian.Config;
 import com.zhizhong.yujian.base.MyCallBack;
+import com.zhizhong.yujian.module.my.network.request.UpdateInfoBody;
 
 import java.util.Map;
 
@@ -52,6 +53,26 @@ public class ApiRequest extends BaseApiRequest {
     public static void updatePwd(Map map, MyCallBack callBack) {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
         getGeneralClient(IRequest.class).updatePwd(map).enqueue(callBack);
+    }
+    public static void updateUserInfo(Map map, UpdateInfoBody body, MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
+        getGeneralClient(IRequest.class).updateUserInfo(map,body).enqueue(callBack);
+    }
+    public static void helpCenter(Map map, MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
+        getGeneralClient(IRequest.class).helpCenter(map).enqueue(callBack);
+    }
+    public static void getAddressList(Map map, MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
+        getGeneralClient(IRequest.class).getAddressList(map).enqueue(callBack);
+    }
+    public static void addAddress(Map map, MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
+        getGeneralClient(IRequest.class).addAddress(map).enqueue(callBack);
+    }
+    public static void deleteAddress(Map map, MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
+        getGeneralClient(IRequest.class).deleteAddress(map).enqueue(callBack);
     }
 
 }

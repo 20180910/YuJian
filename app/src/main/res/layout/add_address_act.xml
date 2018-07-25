@@ -156,7 +156,6 @@
                         android:maxLength="300"
                         android:minHeight="80dp"
                         android:paddingTop="15dp"
-                        tools:text="afasfdsadf"
                         android:textSize="14sp"
                         app:hiddenClearIcon="true"
                         />

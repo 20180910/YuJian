@@ -2,7 +2,10 @@ package com.zhizhong.yujian.module.my.network;
 
 import com.library.base.BaseObj;
 import com.library.base.ResponseObj;
+import com.zhizhong.yujian.module.my.network.request.UpdateInfoBody;
 import com.zhizhong.yujian.module.my.network.response.AboutObj;
+import com.zhizhong.yujian.module.my.network.response.AddressObj;
+import com.zhizhong.yujian.module.my.network.response.HelpCenterObj;
 import com.zhizhong.yujian.module.my.network.response.LoginObj;
 import com.zhizhong.yujian.module.my.network.response.MessageObj;
 
@@ -10,7 +13,9 @@ import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
 
 /**
@@ -57,5 +62,25 @@ public interface IRequest {
     //修改密码
     @GET("api/UserBase/GetSetNewPassword")
     Call<ResponseObj<BaseObj>> updatePwd(@QueryMap Map<String, String> map);
+
+    //修改用户信息
+    @POST("api/UserBase/PostEditUserInfo")
+    Call<ResponseObj<BaseObj>> updateUserInfo(@QueryMap Map<String, String> map, @Body UpdateInfoBody body);
+
+    //帮助中心
+    @GET("api/UserBase/GetSupposeYouWantAsk")
+    Call<ResponseObj<List<HelpCenterObj>>> helpCenter(@QueryMap Map<String, String> map);
+
+    //地址列表
+    @GET("api/ShippingAddress/GetUserAddress")
+    Call<ResponseObj<List<AddressObj>>> getAddressList(@QueryMap Map<String, String> map);
+
+    //添加地址
+    @GET("api/ShippingAddress/GetSaveUserAddress")
+    Call<ResponseObj<BaseObj>> addAddress(@QueryMap Map<String, String> map);
+
+    //删除地址
+    @GET("api/ShippingAddress/GetUserAddressDel")
+    Call<ResponseObj<BaseObj>> deleteAddress(@QueryMap Map<String, String> map);
 
 }

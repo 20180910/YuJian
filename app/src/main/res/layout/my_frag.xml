@@ -44,12 +44,12 @@
                         />
                     <com.github.fastshape.MyImageView
                         android:id="@+id/iv_my"
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:layout_gravity="center"
                         android:src="@drawable/default_person"
-                        app:clipRadius="27dp"
+                        app:clipRadius="30dp"
+                        android:scaleType="centerCrop"
                         />
                     <TextView
                         android:id="@+id/tv_my_nickname"

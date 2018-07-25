@@ -59,7 +59,7 @@
         android:id="@+id/v_bottom_line"
         android:layout_height="2px"
         android:layout_width="match_parent"
-        android:background="@color/background_d"
+        android:background="@color/divider_color"
         android:visibility="visible"
         />
 </LinearLayout>
