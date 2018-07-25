@@ -36,6 +36,7 @@ public class ZhangHuAnQuanActivity extends BaseActivity {
                 STActivity(UpdatePhoneActivity.class);
                 break;
             case R.id.tv_anquan_update_pwd:
+                STActivity(UpdatePwdActivity.class);
                 break;
             case R.id.tv_anquan_update_account:
                 break;

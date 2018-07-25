@@ -54,4 +54,8 @@ public interface IRequest {
     @GET("api/UserBase/GetBindingMobile")
     Call<ResponseObj<BaseObj>> updatePhone(@QueryMap Map<String, String> map);
 
+    //修改密码
+    @GET("api/UserBase/GetSetNewPassword")
+    Call<ResponseObj<BaseObj>> updatePwd(@QueryMap Map<String, String> map);
+
 }
