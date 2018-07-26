@@ -31,12 +31,18 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class MallFragment extends BaseFragment {
-    @BindView(R.id.tv_mall_shopping_num)
+    /*@BindView(R.id.tv_mall_shopping_num)
     MyTextView tv_mall_shopping_num;
     @BindView(R.id.bn_mall)
     Banner bn_mall;
     @BindView(R.id.rv_mall_goods_type)
+    RecyclerView rv_mall_goods_type;*/
+
+    MyTextView tv_mall_shopping_num;
+    Banner bn_mall;
     RecyclerView rv_mall_goods_type;
+
+
     @BindView(R.id.rv_mall_tuijian)
     RecyclerView rv_mall_tuijian;
 
@@ -52,6 +58,14 @@ public class MallFragment extends BaseFragment {
     @Override
     protected void initView() {
         pcfl.disableWhenHorizontalMove(true);
+
+
+        View mallView = getLayoutInflater().inflate(R.layout.mall_include, null);
+        tv_mall_shopping_num=mallView.findViewById(R.id.tv_mall_shopping_num);
+        bn_mall=mallView.findViewById(R.id.bn_mall);
+        rv_mall_goods_type=mallView.findViewById(R.id.rv_mall_goods_type);
+
+
         goodsTypeAdapter=new MyAdapter<MallGoodsObj.GoodsTypeBean>(mContext,R.layout.mall_goods_type_item,pageSize) {
             @Override
             public void bindData(MyRecyclerViewHolder holder, int position, MallGoodsObj.GoodsTypeBean bean) {
@@ -66,6 +80,8 @@ public class MallFragment extends BaseFragment {
 
         tuiJianAdapter=new GoodsAdapter(mContext,R.layout.tuijian_goods_item,pageSize);
         tuiJianAdapter.setOnLoadMoreListener(this);
+
+        tuiJianAdapter.addHeaderView(mallView);
 
         rv_mall_tuijian.setLayoutManager(new GridLayoutManager(mContext,2));
         rv_mall_tuijian.addItemDecoration(new BaseDividerGridItem(mContext,PhoneUtils.dip2px(mContext,10),R.color.white));

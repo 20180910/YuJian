@@ -96,76 +96,12 @@
             app:ptr_ratio_of_header_height_to_refresh="1.2"
             app:ptr_resistance="2.1"
             >
-
-            <com.zhizhong.yujian.view.MyScrollView
-                android:id="@id/nsv"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_mall_tuijian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/bg_color"
                 >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    >
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        >
-
-                        <com.youth.banner.Banner
-                            android:id="@+id/bn_mall"
-                            android:layout_width="match_parent"
-                            android:layout_height="180dp"
-                            app:delay_time="5000"
-                            app:image_scale_type="center_crop"
-                            app:scroll_time="2000"
-                            >
-                        </com.youth.banner.Banner>
-
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/rv_mall_goods_type"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            >
-                        </android.support.v7.widget.RecyclerView>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="5dp"
-                            android:background="@color/divider_color"
-                            />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:gravity="center"
-                        android:text="为你推荐"
-                        android:textColor="@color/gray_33"
-                        android:textSize="14sp"
-                        />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2px"
-                        android:background="@color/divider_color"
-                        />
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rv_mall_tuijian"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
-                        >
-                    </android.support.v7.widget.RecyclerView>
-
-                </LinearLayout>
-            </com.zhizhong.yujian.view.MyScrollView>
+            </android.support.v7.widget.RecyclerView>
         </in.srain.cube.views.ptr.PtrClassicFrameLayout>
     </com.library.base.ProgressLayout>
 </LinearLayout>
