@@ -33,7 +33,6 @@ public class GoodsVideoFragment extends BaseFragment {
         GlideUtils.intoD(mContext, getArguments().getString(IntentParam.imgUrl), videoplayer.thumbImageView, R.color.c_press);
         videoplayer.setUp(getArguments().getString(IntentParam.videoUrl), JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL,"");
 
-        videoplayer.backButton.setVisibility(View.GONE);
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.library.base.bean.AppVersionObj;
 import com.library.base.bean.PayObj;
 import com.zhizhong.yujian.network.request.UploadImgBody;
 import com.zhizhong.yujian.network.response.CityObj;
+import com.zhizhong.yujian.network.response.CollectObj;
 import com.zhizhong.yujian.network.response.ImageObj;
 import com.zhizhong.yujian.network.response.ShareObj;
 
@@ -63,6 +64,10 @@ public interface NetIRequest {
     //购物车数量
     @GET("api/ShoppingCart/GetShoppingCartCount")
     Call<ResponseObj<BaseObj>> getShoppingNum(@QueryMap Map<String, String> map);
+
+    //收藏商品
+    @GET("api/UserBase/GetCollection")
+    Call<ResponseObj<CollectObj>> collectGoods(@QueryMap Map<String, String> map);
 
  /*   //第三方登录
     @GET("api/MQLib/GetAddWXUser")

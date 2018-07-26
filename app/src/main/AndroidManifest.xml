@@ -82,7 +82,7 @@
         <activity android:name=".module.my.activity.AddressListActivity"/>
         <activity android:name=".module.mall.activity.PaySuccessActivity"/>
         <activity android:name=".module.my.activity.LoginForPwdActivity"/>
-        <activity android:name=".module.mall.activity.GoodsDetailActivity"/>
+        <activity android:name=".module.mall.activity.GoodsDetailActivity" android:configChanges="screenSize|keyboardHidden|orientation"/>
     </application>
 
 </manifest>

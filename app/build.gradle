@@ -63,13 +63,14 @@ dependencies {
     implementation(name: 'myrefresh', ext: 'aar')
     implementation(name: 'sdklibrary', ext: 'aar')
     implementation(name: 'Dialog', ext: 'aar')
+    implementation(name: 'fastshape', ext: 'aar')
 //    implementation(name: 'MyProgress', ext: 'aar')
 //    implementation(name: 'rxandroid-2.0.2', ext: 'aar')
 
 //    implementation 'com.android.support:multidex:1.0.1'
 //    implementation(name: 'rxandroid', ext: 'aar')
     implementation 'com.github:retrofitutil:1.1.4'
-    implementation 'com.github:fastshape:1.0.4'
+//    implementation 'com.github:fastshape:1.0.4'
     implementation 'com.github:RxBus:1.0.5'
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'
     implementation 'top.zibin:Luban:1.1.3'

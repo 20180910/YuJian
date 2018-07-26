@@ -12,15 +12,23 @@ import com.github.androidtools.PhoneUtils;
 import com.github.androidtools.SPUtils;
 import com.github.androidtools.inter.MyOnClickListener;
 import com.github.baseclass.adapter.MyRecyclerViewHolder;
+import com.github.baseclass.view.Loading;
 import com.github.fastshape.MyTextView;
 import com.zhizhong.yujian.AppXml;
+import com.zhizhong.yujian.GetSign;
 import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.base.GlideUtils;
+import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.module.mall.activity.GoodsDetailActivity;
 import com.zhizhong.yujian.module.my.activity.LoginActivity;
+import com.zhizhong.yujian.network.NetApiRequest;
+import com.zhizhong.yujian.network.response.CollectObj;
 import com.zhizhong.yujian.network.response.GoodsObj;
 import com.zhizhong.yujian.tools.TextViewUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class GoodsAdapter extends MyAdapter<GoodsObj> {
     public GoodsAdapter(Context mContext, int layoutId, int pageSize) {
@@ -50,7 +58,7 @@ public class GoodsAdapter extends MyAdapter<GoodsObj> {
         tv_goods_old_price.setText("¥"+item.getOriginal_price());
         TextViewUtils.underline(tv_goods_old_price);
 
-        MyTextView tv_goods_collection = (MyTextView) holder.getView(R.id.tv_goods_collection);
+        final MyTextView tv_goods_collection = (MyTextView) holder.getView(R.id.tv_goods_collection);
         if(item.getIs_collect()==1){
             tv_goods_collection.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.collection,0,0,0);
         }else{
@@ -62,7 +70,7 @@ public class GoodsAdapter extends MyAdapter<GoodsObj> {
                 if(SPUtils.getString(mContext, AppXml.userId,"0").equals("0")){
                     mContext.startActivity(new Intent(mContext, LoginActivity.class));
                 }else{
-                    collection(item.getGoods_id());
+                    collection(tv_goods_collection,item.getGoods_id());
                 }
             }
         });
@@ -77,7 +85,21 @@ public class GoodsAdapter extends MyAdapter<GoodsObj> {
         });
     }
 
-    private void collection(String goods_id) {
-
+    private void collection(final MyTextView tv_goods_collection,String goodsId) {
+        Loading.show(mContext);
+        Map<String,String> map=new HashMap<String,String>();
+        map.put("user_id",SPUtils.getString(mContext,AppXml.userId,"0"));
+        map.put("goods_id",goodsId);
+        map.put("sign", GetSign.getSign(map));
+        NetApiRequest.collectGoods(map, new MyCallBack<CollectObj>(mContext) {
+            @Override
+            public void onSuccess(CollectObj obj, int errorCode, String msg) {
+                if(obj.getIs_collect()==1){
+                    tv_goods_collection.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.collection,0,0,0);
+                }else{
+                    tv_goods_collection.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.collection_mall,0,0,0);
+                }
+            }
+        });
     }
 }

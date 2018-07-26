@@ -29,4 +29,5 @@ public interface IRequest {
     @GET("api/GoodsClassiFication/GetGoodsDetails")
     Call<ResponseObj<GoodsDetailObj>> getGoodsDetail(@QueryMap Map<String, String> map);
 
+
 }
