@@ -1,0 +1,155 @@
+package com.zhizhong.yujian.module.mall.fragment;
+
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
+
+import com.github.androidtools.PhoneUtils;
+import com.github.baseclass.BaseDividerGridItem;
+import com.github.baseclass.adapter.MyRecyclerViewHolder;
+import com.github.fastshape.MyTextView;
+import com.youth.banner.Banner;
+import com.zhizhong.yujian.R;
+import com.zhizhong.yujian.adapter.GoodsAdapter;
+import com.zhizhong.yujian.adapter.MyAdapter;
+import com.zhizhong.yujian.base.BaseFragment;
+import com.zhizhong.yujian.base.GlideLoader;
+import com.zhizhong.yujian.base.GlideUtils;
+import com.zhizhong.yujian.base.ImageSizeUtils;
+import com.zhizhong.yujian.base.MyCallBack;
+import com.zhizhong.yujian.module.mall.network.ApiRequest;
+import com.zhizhong.yujian.module.mall.network.response.MallGoodsObj;
+import com.zhizhong.yujian.network.response.GoodsObj;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+
+public class MallFragment extends BaseFragment {
+    @BindView(R.id.tv_mall_shopping_num)
+    MyTextView tv_mall_shopping_num;
+    @BindView(R.id.bn_mall)
+    Banner bn_mall;
+    @BindView(R.id.rv_mall_goods_type)
+    RecyclerView rv_mall_goods_type;
+    @BindView(R.id.rv_mall_tuijian)
+    RecyclerView rv_mall_tuijian;
+
+    MyAdapter goodsTypeAdapter;
+    GoodsAdapter tuiJianAdapter;
+
+    private List<String> bannerList = new ArrayList<String>();
+    @Override
+    protected int getContentView() {
+        return R.layout.mall_frag;
+    }
+
+    @Override
+    protected void initView() {
+        pcfl.disableWhenHorizontalMove(true);
+        goodsTypeAdapter=new MyAdapter<MallGoodsObj.GoodsTypeBean>(mContext,R.layout.mall_goods_type_item,pageSize) {
+            @Override
+            public void bindData(MyRecyclerViewHolder holder, int position, MallGoodsObj.GoodsTypeBean bean) {
+                holder.setText(R.id.tv_mall_goods_type_name,bean.getGoods_type_name());
+                ImageView imageView = holder.getImageView(R.id.iv_mall_goods_type);
+                GlideUtils.into(mContext,bean.getGoods_type_img(),imageView);
+            }
+        };
+        rv_mall_goods_type.setLayoutManager(new GridLayoutManager(mContext,4));
+        rv_mall_goods_type.setAdapter(goodsTypeAdapter);
+
+
+        tuiJianAdapter=new GoodsAdapter(mContext,R.layout.tuijian_goods_item,pageSize);
+        tuiJianAdapter.setOnLoadMoreListener(this);
+
+        rv_mall_tuijian.setLayoutManager(new GridLayoutManager(mContext,2));
+        rv_mall_tuijian.addItemDecoration(new BaseDividerGridItem(mContext,PhoneUtils.dip2px(mContext,10),R.color.white));
+        rv_mall_tuijian.setAdapter(tuiJianAdapter);
+    }
+
+    @Override
+    protected void initData() {
+        showProgress();
+        getOtherData();
+        getData(1,false);
+    }
+
+    @Override
+    protected void getOtherData() {
+        super.getOtherData();
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("rnd",getUserId());
+        map.put("sign",getSign(map));
+        ApiRequest.getMallGoodsType(map, new MyCallBack<MallGoodsObj>(mContext) {
+            @Override
+            public void onSuccess(MallGoodsObj obj, int errorCode, String msg) {
+                if(notEmpty(obj.getMall_shuffling_list())){
+                    List<MallGoodsObj.MallShufflingListBean> list = obj.getMall_shuffling_list();
+                    for (int i = 0; i < list.size(); i++) {
+                        bannerList.add(list.get(i).getImg_url());
+                    }
+                    bn_mall.setLayoutParams(ImageSizeUtils.getImageSizeLayoutParams(mContext));
+                    bn_mall.setImages(bannerList);
+                    bn_mall.setImageLoader(new GlideLoader());
+                    bn_mall.start();
+                }
+                goodsTypeAdapter.setList(obj.getGoods_type(),true);
+            }
+        });
+
+    }
+    @Override
+    protected void getData(int page,final boolean isLoad) {
+        super.getData(page, isLoad);
+        Map<String,String> map=new HashMap<String,String>();
+        map.put("user_id",getUserId());
+        map.put("pagesize",pagesize+"");
+        map.put("page",page+"");
+        map.put("sign",getSign(map));
+        ApiRequest.getMallTuiJian(map, new MyCallBack<List<GoodsObj>>(mContext,pl_load,pcfl) {
+            @Override
+            public void onSuccess(List<GoodsObj> list, int errorCode, String msg) {
+                if(isLoad){
+                    pageNum++;
+                    tuiJianAdapter.addList(list,true);
+                }else{
+                    pageNum=2;
+                    tuiJianAdapter.setList(list,true);
+                }
+            }
+        });
+
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (bn_mall != null && bannerList != null) {
+            bn_mall.stopAutoPlay();
+        }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (bn_mall != null && bannerList != null) {
+            bn_mall.startAutoPlay();
+        }
+    }
+    @OnClick({R.id.iv_mall_scan, R.id.tv_mall_search, R.id.fl_mall_shopping, R.id.iv_mall_msg})
+    public void onViewClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_mall_scan:
+                break;
+            case R.id.tv_mall_search:
+                break;
+            case R.id.fl_mall_shopping:
+                break;
+            case R.id.iv_mall_msg:
+                break;
+        }
+    }
+}

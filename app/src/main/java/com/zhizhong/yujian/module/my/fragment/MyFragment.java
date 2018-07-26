@@ -1,4 +1,4 @@
-package com.zhizhong.yujian.module.home.fragment;
+package com.zhizhong.yujian.module.my.fragment;
 
 import android.os.Bundle;
 import android.view.View;

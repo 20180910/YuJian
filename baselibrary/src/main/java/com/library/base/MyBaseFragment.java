@@ -63,7 +63,7 @@ public abstract class MyBaseFragment extends IBaseFragment implements View.OnCli
     protected abstract void onViewClick(View v);
     protected void initRxBus(){};
     protected void getOtherData(){};
-    protected void getData(int page,boolean isLoad){};
+    protected void getData(int page,final boolean isLoad){};
     protected Unbinder mUnBind;
     protected String TAG=this.getClass().getSimpleName();
     protected ProgressLayout pl_load;

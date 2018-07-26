@@ -23,8 +23,8 @@ import com.zhizhong.yujian.event.LoginSuccessEvent;
 import com.zhizhong.yujian.module.home.fragment.AuctionFragment;
 import com.zhizhong.yujian.module.home.fragment.HomeFragment;
 import com.zhizhong.yujian.module.home.fragment.LiveFragment;
-import com.zhizhong.yujian.module.home.fragment.MallFragment;
-import com.zhizhong.yujian.module.home.fragment.MyFragment;
+import com.zhizhong.yujian.module.mall.fragment.MallFragment;
+import com.zhizhong.yujian.module.my.fragment.MyFragment;
 import com.zhizhong.yujian.module.my.activity.LoginActivity;
 import com.zhizhong.yujian.network.NetApiRequest;
 import com.zhizhong.yujian.network.response.ImageObj;
@@ -43,8 +43,8 @@ public class MainActivity extends BaseActivity {
 //    View status_bar;
 
     HomeFragment homeFragment;
-    LiveFragment touGaoFragment;
     MallFragment foundFragment;
+    LiveFragment touGaoFragment;
     AuctionFragment biYouFragment;
 
     MyFragment myFragment;

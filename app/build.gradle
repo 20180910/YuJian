@@ -83,6 +83,7 @@ dependencies {
     implementation 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
     implementation 'com.contrarywind:Android-PickerView:3.2.6'
 
+    implementation 'com.youth.banner:banner:1.4.9'
     implementation 'com.github.ome450901:SimpleRatingBar:1.4.1'
 
 }

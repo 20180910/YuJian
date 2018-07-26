@@ -83,4 +83,8 @@ public interface IRequest {
     @GET("api/ShippingAddress/GetUserAddressDel")
     Call<ResponseObj<BaseObj>> deleteAddress(@QueryMap Map<String, String> map);
 
+    //设置默认地址
+    @GET("api/ShippingAddress/GetEditDefalut")
+    Call<ResponseObj<BaseObj>> setDefulatAddress(@QueryMap Map<String, String> map);
+
 }

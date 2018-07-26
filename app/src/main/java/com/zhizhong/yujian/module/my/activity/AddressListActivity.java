@@ -53,6 +53,12 @@ public class AddressListActivity extends BaseActivity {
 
                 CheckBox cb_address = (CheckBox) holder.getView(R.id.cb_address);
                 cb_address.setChecked(bean.getIs_default()==1?true:false);
+                cb_address.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        setDefulat(bean.getAddress_id());
+                    }
+                });
 
                 View tv_address_edit = holder.getView(R.id.tv_address_edit);
                 tv_address_edit.setOnClickListener(new MyOnClickListener() {
@@ -91,6 +97,21 @@ public class AddressListActivity extends BaseActivity {
         rv_address_list.setLayoutManager(new LinearLayoutManager(mContext));
         rv_address_list.addItemDecoration(getItemDivider(PhoneUtils.dip2px(mContext,5)));
         rv_address_list.setAdapter(adapter);
+
+    }
+
+    private void setDefulat(String address_id) {
+        showLoading();
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("userid",getUserId());
+        map.put("address_id",address_id);
+        map.put("sign",getSign(map));
+        ApiRequest.setDefulatAddress(map, new MyCallBack<BaseObj>(mContext,true) {
+            @Override
+            public void onSuccess(BaseObj obj, int errorCode, String msg) {
+                getData(1,false);
+            }
+        });
 
     }
 
