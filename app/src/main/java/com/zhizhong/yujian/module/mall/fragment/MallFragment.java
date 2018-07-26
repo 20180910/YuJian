@@ -9,6 +9,8 @@ import com.github.androidtools.PhoneUtils;
 import com.github.baseclass.BaseDividerGridItem;
 import com.github.baseclass.adapter.MyRecyclerViewHolder;
 import com.github.fastshape.MyTextView;
+import com.github.rxbus.MyConsumer;
+import com.library.base.BaseObj;
 import com.youth.banner.Banner;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.adapter.GoodsAdapter;
@@ -18,8 +20,11 @@ import com.zhizhong.yujian.base.GlideLoader;
 import com.zhizhong.yujian.base.GlideUtils;
 import com.zhizhong.yujian.base.ImageSizeUtils;
 import com.zhizhong.yujian.base.MyCallBack;
+import com.zhizhong.yujian.event.JoinShoppingCartEvent;
 import com.zhizhong.yujian.module.mall.network.ApiRequest;
 import com.zhizhong.yujian.module.mall.network.response.MallGoodsObj;
+import com.zhizhong.yujian.module.my.activity.MessageActivity;
+import com.zhizhong.yujian.network.NetApiRequest;
 import com.zhizhong.yujian.network.response.GoodsObj;
 
 import java.util.ArrayList;
@@ -31,14 +36,13 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class MallFragment extends BaseFragment {
-    /*@BindView(R.id.tv_mall_shopping_num)
+    @BindView(R.id.tv_mall_shopping_num)
     MyTextView tv_mall_shopping_num;
-    @BindView(R.id.bn_mall)
+    /*@BindView(R.id.bn_mall)
     Banner bn_mall;
     @BindView(R.id.rv_mall_goods_type)
     RecyclerView rv_mall_goods_type;*/
 
-    MyTextView tv_mall_shopping_num;
     Banner bn_mall;
     RecyclerView rv_mall_goods_type;
 
@@ -61,7 +65,6 @@ public class MallFragment extends BaseFragment {
 
 
         View mallView = getLayoutInflater().inflate(R.layout.mall_include, null);
-        tv_mall_shopping_num=mallView.findViewById(R.id.tv_mall_shopping_num);
         bn_mall=mallView.findViewById(R.id.bn_mall);
         rv_mall_goods_type=mallView.findViewById(R.id.rv_mall_goods_type);
 
@@ -91,8 +94,41 @@ public class MallFragment extends BaseFragment {
     @Override
     protected void initData() {
         showProgress();
+        getShoppingNum();
         getOtherData();
         getData(1,false);
+    }
+
+    @Override
+    protected void initRxBus() {
+        super.initRxBus();
+        getEventReplay(JoinShoppingCartEvent.class, new MyConsumer<JoinShoppingCartEvent>() {
+            @Override
+            public void onAccept(JoinShoppingCartEvent event) {
+                getShoppingNum();
+            }
+        });
+    }
+
+    private void getShoppingNum() {
+        if(noLogin()){
+            tv_mall_shopping_num.setVisibility(View.GONE);
+            return;
+        }
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("user_id",getUserId());
+        map.put("sign",getSign(map));
+        NetApiRequest.getShoppingNum(map, new MyCallBack<BaseObj>(mContext) {
+            @Override
+            public void onSuccess(BaseObj obj, int errorCode, String msg) {
+                if(obj.getShoppingCartCount()>0){
+                    tv_mall_shopping_num.setText(obj.getShoppingCartCount());
+                    tv_mall_shopping_num.setVisibility(View.VISIBLE);
+                }else{
+                    tv_mall_shopping_num.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     @Override
@@ -165,6 +201,7 @@ public class MallFragment extends BaseFragment {
             case R.id.fl_mall_shopping:
                 break;
             case R.id.iv_mall_msg:
+                STActivity(MessageActivity.class);
                 break;
         }
     }

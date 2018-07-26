@@ -1,6 +1,7 @@
 package com.zhizhong.yujian.module.mall.network;
 
 import com.library.base.ResponseObj;
+import com.zhizhong.yujian.module.mall.network.response.GoodsDetailObj;
 import com.zhizhong.yujian.module.mall.network.response.MallGoodsObj;
 import com.zhizhong.yujian.network.response.GoodsObj;
 
@@ -23,5 +24,9 @@ public interface IRequest {
     //商城推荐商品
     @GET("api/GoodsClassiFication/GetRecommend")
     Call<ResponseObj<List<GoodsObj>>> getMallTuiJian(@QueryMap Map<String, String> map);
+
+    //商城商品详情
+    @GET("api/GoodsClassiFication/GetGoodsDetails")
+    Call<ResponseObj<GoodsDetailObj>> getGoodsDetail(@QueryMap Map<String, String> map);
 
 }

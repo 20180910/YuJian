@@ -15,7 +15,7 @@ public class BaseObj implements Serializable {
     private String card_id;//添加信用卡发短信返回card_id
     private String user_agreement;//用户协议
     protected int message_sink;//消息设置1：开，0：关
-
+    private int ShoppingCartCount;
     private String agreement;
 
     public String getAgreement() {
@@ -72,6 +72,14 @@ public class BaseObj implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public int getShoppingCartCount() {
+        return ShoppingCartCount;
+    }
+
+    public void setShoppingCartCount(int shoppingCartCount) {
+        ShoppingCartCount = shoppingCartCount;
     }
 
     public String getMsg() {

@@ -8,7 +8,7 @@ public class IntentParam {
     public static final String xieYiType = "xieYiType";
     public static final String id = "id";
     public static final String content = "content";
-    public static final String guoJia = "guoJia";
+    public static final String goodsId = "goodsId";
     public static final String detailInto = "detailInto";
     public static final String flag = "flag";
     public static final String keChengDetailObj = "keChengDetailObj";
@@ -23,7 +23,7 @@ public class IntentParam {
     public static final String type = "type";
     public static final String peopleId = "peopleId";
     public static final String imgUrl = "imgUrl";
-    public static final String people = "people";
+    public static final String videoUrl = "videoUrl";
     public static final String addressId = "addressId";
     public static final String addressBean = "addressBean";
     public static final String selectBank = "selectBank";

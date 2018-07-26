@@ -6,20 +6,27 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:background="@color/bg_color"
-              android:gravity="center"
     >
-<ImageView
-    android:id="@+id/iv_mall_goods_type"
-    android:layout_width="70dp"
-    android:layout_height="60dp"
-    tools:src="@drawable/shitou"
-    android:layout_margin="10dp"
-    />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="42dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    >
     <TextView
-        android:id="@+id/tv_mall_goods_type_name"
+        android:id="@+id/tv_goods_detail_flag"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        tools:text="品牌:"
+        />
+    <TextView
+        android:id="@+id/tv_goods_detail_flag_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="热销翡翠"
-        android:layout_marginBottom="10dp"
+        tools:text="御见"
         />
+</LinearLayout>
 </LinearLayout>

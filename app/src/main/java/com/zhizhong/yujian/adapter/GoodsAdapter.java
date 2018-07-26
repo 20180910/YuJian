@@ -14,8 +14,10 @@ import com.github.androidtools.inter.MyOnClickListener;
 import com.github.baseclass.adapter.MyRecyclerViewHolder;
 import com.github.fastshape.MyTextView;
 import com.zhizhong.yujian.AppXml;
+import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.base.GlideUtils;
+import com.zhizhong.yujian.module.mall.activity.GoodsDetailActivity;
 import com.zhizhong.yujian.module.my.activity.LoginActivity;
 import com.zhizhong.yujian.network.response.GoodsObj;
 import com.zhizhong.yujian.tools.TextViewUtils;
@@ -30,8 +32,13 @@ public class GoodsAdapter extends MyAdapter<GoodsObj> {
         super.bindData(holder, position, item);
         final ImageView imageView = holder.getImageView(R.id.iv_goods_img);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams.height= (PhoneUtils.getScreenWidth(mContext)-PhoneUtils.dip2px(mContext,10))/2;
-        layoutParams.width= (PhoneUtils.getScreenWidth(mContext)-PhoneUtils.dip2px(mContext,10))/2;
+        if(position%2==0){
+            layoutParams.height= (PhoneUtils.getScreenWidth(mContext)-PhoneUtils.dip2px(mContext,10))/2;
+            layoutParams.width= (PhoneUtils.getScreenWidth(mContext)-PhoneUtils.dip2px(mContext,10))/2;
+        }else{
+            layoutParams.height= (PhoneUtils.getScreenWidth(mContext)-PhoneUtils.dip2px(mContext,10))/2;
+            layoutParams.width= PhoneUtils.getScreenWidth(mContext)/2;
+        }
         imageView.setLayoutParams(layoutParams);
 
         GlideUtils.into(mContext,item.getGoods_image(),imageView);
@@ -57,6 +64,15 @@ public class GoodsAdapter extends MyAdapter<GoodsObj> {
                 }else{
                     collection(item.getGoods_id());
                 }
+            }
+        });
+
+        holder.itemView.setOnClickListener(new MyOnClickListener() {
+            @Override
+            protected void onNoDoubleClick(View view) {
+                Intent intent=new Intent(mContext, GoodsDetailActivity.class);
+                intent.putExtra(IntentParam.goodsId,item.getGoods_id());
+                mContext.startActivity(intent);
             }
         });
     }
