@@ -669,6 +669,7 @@ public abstract class MyBaseActivity extends IBaseActivity implements ProgressLa
         nsv.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                Log.i("--------","===");
                 if (isEmpty(list)) {
                     return;
                 }

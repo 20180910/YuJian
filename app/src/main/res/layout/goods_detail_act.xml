@@ -2,23 +2,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 xmlns:tools="http://schemas.android.com/tools"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/bg_color"
+                android:orientation="vertical"
     >
 
     <com.library.base.ProgressLayout
         android:id="@id/pl_load"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <android.support.v4.widget.NestedScrollView
-                android:id="@id/nsv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/bg_color"
-                android:layout_above="@+id/ll_goods_detail_bottom"
-                >
+            android:id="@id/nsv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/ll_goods_detail_bottom"
+            >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -30,90 +30,99 @@
                     android:layout_width="match_parent"
                     android:layout_height="180dp">
                 </FrameLayout>
+
                 <LinearLayout
                     android:id="@+id/ll_goods_banner_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
                     android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
                     >
+
                     <com.github.fastshape.MyTextView
                         android:id="@+id/tv_goods_banner_video"
                         android:layout_width="wrap_content"
                         android:layout_height="22dp"
-                        android:text="视频"
                         android:layout_marginRight="15dp"
+                        android:gravity="center"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
-                        app:radius="11dp"
-                        app:borderColor="@color/gray_66"
+                        android:text="视频"
                         android:textColor="@color/white"
-                        app:solidColor="@color/gray_66"
-                        android:gravity="center"
                         app:all_line="true"
+                        app:borderColor="@color/gray_66"
+                        app:radius="11dp"
+                        app:solidColor="@color/gray_66"
                         />
+
                     <com.github.fastshape.MyTextView
                         android:id="@+id/tv_goods_banner_image"
                         android:layout_width="wrap_content"
                         android:layout_height="22dp"
-                        android:text="图片"
                         android:layout_marginRight="15dp"
+                        android:gravity="center"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
-                        app:solidColor="@color/white"
-                        app:radius="11dp"
-                        app:borderColor="@color/gray_66"
+                        android:text="图片"
                         android:textColor="@color/gray_66"
-                        android:gravity="center"
                         app:all_line="true"
+                        app:borderColor="@color/gray_66"
+                        app:radius="11dp"
+                        app:solidColor="@color/white"
                         />
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/tv_goods_detail_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="[可卖回]御见翡翠本命佛吊坠御见翡翠本命佛吊坠御见翡翠本命佛吊坠"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="15dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="15dp"
                     android:gravity="center"
-                    android:layout_gravity="center_horizontal"
                     android:textColor="@color/gray_33"
                     android:textSize="14sp"
+                    tools:text="[可卖回]御见翡翠本命佛吊坠御见翡翠本命佛吊坠御见翡翠本命佛吊坠"
                     />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     >
+
                     <TextView
                         android:id="@+id/tv_goods_detail_now_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tools:text="¥234234"
-                        android:textSize="15sp"
                         android:textColor="@color/red"
+                        android:textSize="15sp"
+                        tools:text="¥234234"
                         />
+
                     <TextView
                         android:id="@+id/tv_goods_detail_old_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tools:text="¥23123"
-                        android:textSize="12sp"
                         android:layout_marginLeft="15dp"
+                        android:textSize="12sp"
+                        tools:text="¥23123"
                         />
+
                     <TextView
                         android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:layout_height="wrap_content"
                         android:text="有货:"
                         />
+
                     <TextView
                         android:id="@+id/tv_goods_detail_stock"
                         android:layout_width="wrap_content"
@@ -121,143 +130,164 @@
                         tools:text="1"
                         />
                 </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                >
-                <TextView
-                    android:id="@+id/tv_goods_detail_courier"
-                    android:layout_width="wrap_content"
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="快递:0"
-                    />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:layout_height="wrap_content"
-                    android:text="月销:"
-                    />
-                <TextView
-                    android:id="@+id/tv_goods_detail_sales_volume"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    tools:text="123123"
-                    />
-                <TextView
-                    android:id="@+id/tv_goods_detail_area"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="上海"
-                    />
-            </LinearLayout>
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/tv_goods_detail_courier"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="快递:0"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="月销:"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_goods_detail_sales_volume"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        tools:text="123123"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_goods_detail_area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="上海"
+                        />
+                </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2px"
                     android:background="@color/divider_color"
                     />
+
                 <LinearLayout
                     android:id="@+id/ll_goods_detail_youhuiquan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     android:padding="10dp"
                     >
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="领券"
                         android:layout_marginRight="10dp"
+                        android:text="领券"
                         />
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/youhuiquan"
                         />
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="5dp"
                     android:background="@color/divider_color"
                     />
+
                 <TextView
                     android:id="@+id/tv_goods_detail_evaluation_num"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="43dp"
-                    tools:text="评价(23123)"
-                    android:paddingLeft="10dp"
                     android:gravity="center_vertical"
-                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
                     android:textColor="@color/gray_33"
+                    android:textSize="15sp"
+                    tools:text="评价(23123)"
                     />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2px"
                     android:background="@color/divider_color"
                     />
+
                 <LinearLayout
                     android:id="@+id/ll_goods_detail_evaluation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:gravity="center_vertical"
+                    android:orientation="vertical"
                     >
+
                     <com.library.base.view.MyRecyclerView
                         android:id="@+id/rv_goods_evaluation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         >
                     </com.library.base.view.MyRecyclerView>
+
                     <com.github.fastshape.MyTextView
                         android:id="@+id/tv_goods_detail_look_evaluation"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
-                        android:text="查看全部评论"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:gravity="center"
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="15dp"
+                        android:gravity="center"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:text="查看全部评论"
                         android:textColor="@color/red"
-                        app:borderColor="@color/red"
                         app:all_line="true"
+                        app:borderColor="@color/red"
                         app:radius="15dp"
                         />
                 </LinearLayout>
+
                 <LinearLayout
+                    android:id="@+id/ll_goods_detail_xiangqing"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:orientation="horizontal"
                     android:gravity="center"
+                    android:orientation="horizontal"
                     >
+
                     <View
                         android:layout_width="16dp"
                         android:layout_height="2dp"
                         android:background="@color/gray_66"
                         />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="商品详情"
-                        android:textColor="@color/gray_66"
                         android:layout_marginLeft="4dp"
                         android:layout_marginRight="4dp"
+                        android:text="商品详情"
+                        android:textColor="@color/gray_66"
                         android:textSize="14sp"
                         />
+
                     <View
                         android:layout_width="16dp"
                         android:layout_height="2dp"
                         android:background="@color/gray_66"
                         />
                 </LinearLayout>
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_goods_detail"
                     android:layout_width="match_parent"
@@ -271,38 +301,45 @@
                     android:layout_height="wrap_content"
                     >
                 </android.support.v7.widget.RecyclerView>
+
                 <LinearLayout
+                    android:id="@+id/ll_goods_detail_tuijian"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:orientation="horizontal"
                     android:gravity="center"
+                    android:orientation="horizontal"
                     >
+
                     <View
                         android:layout_width="16dp"
                         android:layout_height="2dp"
                         android:background="@color/gray_66"
                         />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="推荐"
-                        android:textColor="@color/gray_66"
                         android:layout_marginLeft="4dp"
                         android:layout_marginRight="4dp"
+                        android:text="推荐"
+                        android:textColor="@color/gray_66"
                         android:textSize="14sp"
                         />
+
                     <View
                         android:layout_width="16dp"
                         android:layout_height="2dp"
-                        android:background="@color/gray_66"
                         android:layout_marginRight="10dp"
+                        android:background="@color/gray_66"
                         />
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2px"
                     android:background="@color/divider_color"
                     />
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_goods_detail_tuijian"
                     android:layout_width="match_parent"
@@ -310,120 +347,148 @@
                     >
                 </android.support.v7.widget.RecyclerView>
             </LinearLayout>
-            </android.support.v4.widget.NestedScrollView>
+        </android.support.v4.widget.NestedScrollView>
 
         <com.github.fastshape.MyLinearLayout
             android:id="@+id/ll_goods_detail_bottom"
             android:layout_width="match_parent"
             android:layout_height="47dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
             android:layout_alignParentBottom="true"
-            app:top_line="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             app:borderWidth="2px"
+            app:top_line="true"
             >
+
             <com.github.fastshape.MyTextView
                 android:id="@+id/tv_goods_detail_kefu"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="客服"
-                android:gravity="center"
-                android:drawableTop="@drawable/kefu"
                 android:layout_marginBottom="3dp"
                 android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/kefu"
+                android:gravity="center"
+                android:text="客服"
                 android:textSize="12sp"
                 />
+
             <com.github.fastshape.MyTextView
                 android:id="@+id/tv_goods_detail_collection"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="收藏"
-                android:gravity="center"
-                android:drawableTop="@drawable/collection_goods"
                 android:layout_marginBottom="3dp"
                 android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/collection_goods"
+                android:gravity="center"
+                android:text="收藏"
                 android:textSize="12sp"
                 />
+
             <com.github.fastshape.MyTextView
                 android:id="@+id/tv_goods_detail_join_shoppincart"
                 android:layout_width="0dp"
-                android:layout_weight="2"
                 android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
                 android:text="加入购物车"
                 android:textColor="@color/gray_66"
-                android:gravity="center"
                 app:solidColor="#FFF3F4F6"
                 />
+
             <com.github.fastshape.MyTextView
                 android:id="@+id/tv_goods_detail_buy"
                 android:layout_width="0dp"
-                android:layout_weight="2"
                 android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
                 android:text="立即购买"
                 android:textColor="@color/white"
-                android:gravity="center"
                 app:solidColor="@color/red"
                 />
         </com.github.fastshape.MyLinearLayout>
     </com.library.base.ProgressLayout>
-    <LinearLayout
+
+    <RelativeLayout
+        android:id="@+id/rl_goods_detail_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_title_height"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="12dp"
+        android:background="@color/title_bg"
         >
-
         <ImageView
             android:id="@+id/iv_goods_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
             android:src="@drawable/goods_back"
             />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="0px"
-            />
-        <FrameLayout
-            android:id="@+id/fl_goods_shopping"
-            android:layout_width="35dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/goods_shopping"
-                />
-
-            <com.github.fastshape.MyTextView
-                android:id="@+id/tv_goods_shopping_num"
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:layout_gravity="right|top"
-                android:layout_marginRight="2dp"
-                android:layout_marginTop="6dp"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="7sp"
-                app:radius="6dp"
-                app:solidColor="@color/red"
-                tools:text="99"
-                />
-        </FrameLayout>
-
-        <ImageView
-            android:id="@+id/iv_goods_share"
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:paddingRight="12dp"
-            android:src="@drawable/goods_share"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="¥321312"
+            android:textColor="@color/white"
+            android:textSize="14sp"
             />
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            >
+            <FrameLayout
+                android:id="@+id/fl_goods_shopping"
+                android:layout_width="35dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/goods_shopping"
+                    />
+
+                <com.github.fastshape.MyTextView
+                    android:id="@+id/tv_goods_shopping_num"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_gravity="right|top"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="7sp"
+                    app:radius="6dp"
+                    app:solidColor="@color/red"
+                    tools:text="99"
+                    />
+            </FrameLayout>
+            <ImageView
+                android:id="@+id/iv_goods_share"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingRight="12dp"
+                android:src="@drawable/goods_share"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tb_goods_detail"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/rl_goods_detail_title"
+        android:background="@color/title_bg"
+        android:visibility="gone"
+        app:tabIndicatorColor="@color/red"
+        >
+    </android.support.design.widget.TabLayout>
 </RelativeLayout>

@@ -1,16 +1,23 @@
 package com.zhizhong.yujian.module.mall.activity;
 
+import android.annotation.TargetApi;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.Build;
+import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.androidtools.PhoneUtils;
@@ -38,6 +45,7 @@ import com.zhizhong.yujian.tools.TextViewUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -62,8 +70,16 @@ public class GoodsDetailActivity extends BaseActivity {
     TextView tv_goods_detail_sales_volume;
     @BindView(R.id.tv_goods_detail_area)
     TextView tv_goods_detail_area;
+
     @BindView(R.id.tv_goods_detail_evaluation_num)
     TextView tv_goods_detail_evaluation_num;
+
+    @BindView(R.id.ll_goods_detail_xiangqing)
+    LinearLayout ll_goods_detail_xiangqing;
+
+    @BindView(R.id.ll_goods_detail_tuijian)
+    LinearLayout ll_goods_detail_tuijian;
+
     @BindView(R.id.rv_goods_evaluation)
     MyRecyclerView rv_goods_evaluation;
     @BindView(R.id.tv_goods_detail_look_evaluation)
@@ -92,6 +108,14 @@ public class GoodsDetailActivity extends BaseActivity {
     @BindView(R.id.tv_goods_banner_image)
     MyTextView tv_goods_banner_image;
 
+    @BindView(R.id.rl_goods_detail_title)
+    RelativeLayout rl_goods_detail_title;
+
+    @BindView(R.id.tb_goods_detail)
+    TabLayout tb_goods_detail;
+
+    TextView xiangQing,pingJia,tuiJian;
+
     MyAdapter evaluationAdapter;
     MyAdapter goodsDetailAdapter;
     MyAdapter goodsImageAdapter;
@@ -108,6 +132,7 @@ public class GoodsDetailActivity extends BaseActivity {
         return R.layout.goods_detail_act;
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
     @Override
     protected void initView() {
         goodsId = getIntent().getStringExtra(IntentParam.goodsId);
@@ -170,8 +195,138 @@ public class GoodsDetailActivity extends BaseActivity {
         rv_goods_img.addItemDecoration(getItemDivider(0));
         rv_goods_img.setAdapter(goodsImageAdapter);
 
-    }
 
+
+
+        final List<View> viewList=new ArrayList<>();
+        viewList.add(tv_goods_detail_evaluation_num);
+        viewList.add(ll_goods_detail_xiangqing);
+        viewList.add(ll_goods_detail_tuijian);
+
+
+
+        pingJia = new TextView(mContext);
+        pingJia.setHeight(PhoneUtils.dip2px(mContext,40));
+
+        xiangQing = new TextView(mContext);
+        xiangQing.setHeight(PhoneUtils.dip2px(mContext,40));
+
+        tuiJian = new TextView(mContext);
+        tuiJian.setHeight(PhoneUtils.dip2px(mContext,40));
+
+        pingJia.setGravity(Gravity.CENTER);
+        pingJia.setTextColor(getColorStateList());
+        pingJia.setText("评价");
+        pingJia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pingJia.setSelected(true);
+                xiangQing.setSelected(false);
+                tuiJian.setSelected(false);
+                tb_goods_detail.getTabAt(0).select();
+                Log("1==="+tv_goods_detail_evaluation_num.getTop());
+                nsv.scrollTo(0, tv_goods_detail_evaluation_num.getTop());
+            }
+        });
+
+        tb_goods_detail.addTab(tb_goods_detail.newTab().setCustomView(pingJia));
+
+        xiangQing.setGravity(Gravity.CENTER);
+        xiangQing.setTextColor(getColorStateList());
+        xiangQing.setText("详情");
+        xiangQing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pingJia.setSelected(false);
+                xiangQing.setSelected(true);
+                tuiJian.setSelected(false);
+                tb_goods_detail.getTabAt(1).select();
+                Log("2==="+ll_goods_detail_xiangqing.getTop());
+                nsv.scrollTo(0, ll_goods_detail_xiangqing.getTop());
+            }
+        });
+
+        tb_goods_detail.addTab(tb_goods_detail.newTab().setCustomView(xiangQing));
+
+
+
+        tuiJian.setGravity(Gravity.CENTER);
+        tuiJian.setTextColor(getColorStateList());
+        tuiJian.setText("推荐");
+        tuiJian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                xiangQing.setSelected(false);
+                pingJia.setSelected(false);
+                tuiJian.setSelected(true);
+                tb_goods_detail.getTabAt(2).select();
+                Log("3==="+ll_goods_detail_tuijian.getTop());
+                nsv.scrollTo(0, ll_goods_detail_tuijian.getTop());
+            }
+        });
+
+        tb_goods_detail.addTab(tb_goods_detail.newTab().setCustomView(tuiJian));
+
+        /*addTab(xiangQing,"详情",0);
+        addTab(pingJia,"评价",1);
+        addTab(tuiJian,"推荐",2);*/
+
+
+        rl_goods_detail_title.getBackground().mutate().setAlpha(0);
+        nsv.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            int screenWidth = PhoneUtils.getScreenWidth(mContext)*2/3;
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                Log("===onScrollChange");
+                if (scrollY >= 0 && scrollY <= screenWidth) {
+                    double alpha = (double) scrollY / screenWidth;
+                    rl_goods_detail_title.getBackground().mutate().setAlpha((int) (alpha * 255));
+                    tb_goods_detail.setVisibility(View.GONE);
+                } else {
+                    rl_goods_detail_title.getBackground().mutate().setAlpha(255);
+                    tb_goods_detail.setVisibility(View.VISIBLE);
+                }
+
+                if (isEmpty(viewList)) {
+                    return;
+                }
+                for (int i = 0; i < viewList.size(); i++) {
+                    if (keJian(viewList.get(i))) {
+                        switch (i){
+                            case 0:
+                                pingJia.setSelected(true);
+                                xiangQing.setSelected(false);
+                                tuiJian.setSelected(false);
+                                tb_goods_detail.getTabAt(0).select();
+                                break;
+                            case 1:
+                                pingJia.setSelected(false);
+                                xiangQing.setSelected(true);
+                                tuiJian.setSelected(false);
+                                tb_goods_detail.getTabAt(1).select();
+                                break;
+                            case 2:
+                                xiangQing.setSelected(false);
+                                pingJia.setSelected(false);
+                                tuiJian.setSelected(true);
+                                tb_goods_detail.getTabAt(2).select();
+                                break;
+                        }
+                    }
+                }
+            }
+        });
+
+
+    }
+    private ColorStateList getColorStateList(){
+        int[] colors = new int[] {ContextCompat.getColor(mContext,R.color.white) , ContextCompat.getColor(mContext,R.color.gray_99)};
+        int[][] states = new int[2][];
+        states[0] = new int[] { android.R.attr.state_selected };
+        states[1] = new int[] { };
+        ColorStateList stateList=new ColorStateList(states,colors);
+        return stateList;
+    }
     @Override
     protected void initData() {
         showProgress();
