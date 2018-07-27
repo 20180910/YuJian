@@ -24,6 +24,8 @@ import com.github.androidtools.PhoneUtils;
 import com.github.baseclass.BaseDividerGridItem;
 import com.github.baseclass.adapter.MyRecyclerViewHolder;
 import com.github.fastshape.MyTextView;
+import com.github.rxbus.MyConsumer;
+import com.github.rxbus.RxBus;
 import com.library.base.BaseObj;
 import com.library.base.view.MyRecyclerView;
 import com.zhizhong.yujian.IntentParam;
@@ -34,6 +36,7 @@ import com.zhizhong.yujian.base.BaseActivity;
 import com.zhizhong.yujian.base.GlideUtils;
 import com.zhizhong.yujian.base.ImageSizeUtils;
 import com.zhizhong.yujian.base.MyCallBack;
+import com.zhizhong.yujian.event.JoinShoppingCartEvent;
 import com.zhizhong.yujian.module.mall.fragment.GoodsImageFragment;
 import com.zhizhong.yujian.module.mall.fragment.GoodsVideoFragment;
 import com.zhizhong.yujian.module.mall.network.ApiRequest;
@@ -56,6 +59,8 @@ public class GoodsDetailActivity extends BaseActivity {
 
     @BindView(R.id.fl_goods_banner)
     FrameLayout fl_goods_banner;
+    @BindView(R.id.tv_goods_detail_title)
+    TextView tv_goods_detail_title;
     @BindView(R.id.tv_goods_detail_name)
     TextView tv_goods_detail_name;
     @BindView(R.id.tv_goods_detail_now_price)
@@ -282,9 +287,11 @@ public class GoodsDetailActivity extends BaseActivity {
                     double alpha = (double) scrollY / screenWidth;
                     rl_goods_detail_title.getBackground().mutate().setAlpha((int) (alpha * 255));
                     tb_goods_detail.setVisibility(View.GONE);
+                    tv_goods_detail_title.setVisibility(View.GONE);
                 } else {
                     rl_goods_detail_title.getBackground().mutate().setAlpha(255);
                     tb_goods_detail.setVisibility(View.VISIBLE);
+                    tv_goods_detail_title.setVisibility(View.VISIBLE);
                 }
 
                 if (isEmpty(viewList)) {
@@ -328,6 +335,16 @@ public class GoodsDetailActivity extends BaseActivity {
         return stateList;
     }
     @Override
+    protected void initRxBus() {
+        super.initRxBus();
+        getEventReplay(JoinShoppingCartEvent.class, new MyConsumer<JoinShoppingCartEvent>() {
+            @Override
+            public void onAccept(JoinShoppingCartEvent event) {
+                getShoppingNum();
+            }
+        });
+    }
+    @Override
     protected void initData() {
         showProgress();
         getShoppingNum();
@@ -345,7 +362,7 @@ public class GoodsDetailActivity extends BaseActivity {
             @Override
             public void onSuccess(BaseObj obj, int errorCode, String msg) {
                 if(obj.getShoppingCartCount()>0){
-                    tv_goods_shopping_num.setText(obj.getShoppingCartCount());
+                    tv_goods_shopping_num.setText(obj.getShoppingCartCount()+"");
                     tv_goods_shopping_num.setVisibility(View.VISIBLE);
                 }else{
                     tv_goods_shopping_num.setVisibility(View.GONE);
@@ -373,6 +390,7 @@ public class GoodsDetailActivity extends BaseActivity {
                     ll_goods_detail_evaluation.setVisibility(View.VISIBLE);
                 }
                 tv_goods_detail_name.setText(obj.getGoods_name());
+                tv_goods_detail_title.setText("¥"+obj.getGoods_price());
                 tv_goods_detail_now_price.setText("¥"+obj.getGoods_price());
                 tv_goods_detail_old_price.setText("¥"+obj.getOriginal_price());
                 TextViewUtils.underline(tv_goods_detail_old_price);
@@ -388,6 +406,7 @@ public class GoodsDetailActivity extends BaseActivity {
                 evaluationAdapter.setList(obj.getPingjia_list(),true);
                 goodsDetailAdapter.setList(obj.getProduct_parameter_list(),true);
                 goodsImageAdapter.setList(obj.getGoods_details_list(),true);
+
 
 
                 if(obj.getIs_collect()==1){
@@ -459,6 +478,11 @@ public class GoodsDetailActivity extends BaseActivity {
                 collect();
                 break;
             case R.id.tv_goods_detail_join_shoppincart:
+                if(noLogin()){
+                    STActivity(LoginActivity.class);
+                    return;
+                }
+                joinShoppinCart();
                 break;
             case R.id.tv_goods_detail_buy:
                 break;
@@ -466,10 +490,33 @@ public class GoodsDetailActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.fl_goods_shopping:
+                if (noLogin()){
+                    STActivity(LoginActivity.class);
+                    return;
+                }
+                STActivity(ShoppingCartActivity.class);
                 break;
             case R.id.iv_goods_share:
                 break;
         }
+    }
+
+    private void joinShoppinCart() {
+        showLoading();
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("user_id",getUserId());
+        map.put("goods_id",goodsId);
+        map.put("number","1");
+        map.put("sign",getSign(map));
+        NetApiRequest.addShoppingCart(map, new MyCallBack<BaseObj>(mContext) {
+            @Override
+            public void onSuccess(BaseObj obj, int errorCode, String msg) {
+                showMsg(msg);
+                getShoppingNum();
+                RxBus.getInstance().postReplay(new JoinShoppingCartEvent());
+            }
+        });
+
     }
 
     private void collect() {

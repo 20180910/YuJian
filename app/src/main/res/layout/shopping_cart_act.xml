@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -11,127 +12,159 @@
         android:id="@id/pl_load"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/mll_shopping_cart_bottom">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_shopping_cart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/bg_color"
+            android:visibility="gone"
+            android:layout_above="@+id/mll_shopping_cart_bottom"
             >
-            <!--your view-->
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_shopping_cart"
+        </android.support.v7.widget.RecyclerView>
+        <android.support.v4.widget.NestedScrollView
+                android:id="@id/nsv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                >
-            </android.support.v7.widget.RecyclerView>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/qq"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="25dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="购物车竟然是空的"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/gray_99"
-                android:textSize="13sp"
-                />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
-                >
-                <com.github.fastshape.MyTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:text="回到首页"
-                    android:ems="5"
-                    android:gravity="center"
-                    app:radius="4dp"
-                    app:borderColor="@color/gray_66"
-                    android:textColor="@color/gray_66"
-                    app:all_line="true"
-                    android:layout_marginRight="35dp"
-                    />
-                <com.github.fastshape.MyTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:text="随便逛逛"
-                    android:ems="5"
-                    android:gravity="center"
-                    app:radius="4dp"
-                    app:borderColor="@color/red"
-                    android:textColor="@color/red"
-                    app:all_line="true"
-                    />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="@color/divider_color"
-                />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="43dp"
-                android:orientation="horizontal"
-                android:gravity="center"
-                >
-                <View
-                    android:layout_width="16dp"
-                    android:layout_height="3px"
-                    android:background="@color/gray_33"
-                    android:layout_marginRight="4dp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="猜你喜欢"
-                    android:textSize="14sp"
-                    android:textColor="@color/gray_33"
-                    />
-                <View
-                    android:layout_width="16dp"
-                    android:layout_height="3px"
-                    android:background="@color/gray_33"
-                    android:layout_marginLeft="4dp"
-                    />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2px"
-                android:background="@color/divider_color"
-                />
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_shopping_cart_recommend"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2px"
+                android:layout_height="match_parent"
                 >
 
-            </android.support.v7.widget.RecyclerView>
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@color/bg_color"
+                    android:gravity="top"
+                    >
+                    <!--your view-->
+                    <ImageView
+                        android:layout_width="77dp"
+                        android:layout_height="77dp"
+                        android:src="@drawable/shopping_cart_empty"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="25dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="购物车竟然是空的"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/gray_99"
+                        android:textSize="13sp"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="30dp"
+                        >
+                        <com.github.fastshape.MyTextView
+                            android:id="@+id/tv_shopping_cart_home"
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:text="回到首页"
+                            android:ems="5"
+                            android:gravity="center"
+                            app:radius="4dp"
+                            app:borderColor="@color/gray_66"
+                            android:textColor="@color/gray_66"
+                            app:all_line="true"
+                            android:layout_marginRight="35dp"
+                            />
+                        <com.github.fastshape.MyTextView
+                            android:id="@+id/tv_shopping_cart_guangguang"
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:text="随便逛逛"
+                            android:ems="5"
+                            android:gravity="center"
+                            app:radius="4dp"
+                            app:borderColor="@color/red"
+                            android:textColor="@color/red"
+                            app:all_line="true"
+                            />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:background="@color/divider_color"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="43dp"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        >
+                        <View
+                            android:layout_width="16dp"
+                            android:layout_height="3px"
+                            android:background="@color/gray_33"
+                            android:layout_marginRight="4dp"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="猜你喜欢"
+                            android:textSize="14sp"
+                            android:textColor="@color/gray_33"
+                            />
+                        <View
+                            android:layout_width="16dp"
+                            android:layout_height="3px"
+                            android:background="@color/gray_33"
+                            android:layout_marginLeft="4dp"
+                            />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2px"
+                        android:background="@color/divider_color"
+                        />
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_shopping_cart_recommend"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        >
+
+                    </android.support.v7.widget.RecyclerView>
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+        </RelativeLayout>
         <com.github.fastshape.MyLinearLayout
+            android:id="@+id/mll_shopping_cart_bottom"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             app:top_line="true"
             android:layout_alignParentBottom="true"
             >
+            <LinearLayout
+                android:id="@+id/ll_shopping_cart_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                >
+
             <com.github.fastshape.MyCheckBox
+                android:id="@+id/cb_shopping_cart_all"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="全选"
                 android:ems="6"
+                app:checked_drawable="@drawable/shopping_select"
+                app:normal_drawable="@drawable/shopping_normal"
                 android:textColor="@color/gray_66"
+                android:paddingLeft="10dp"
+                android:button="@null"
+                app:drawable_direction="left"
+                android:drawablePadding="10dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -141,14 +174,16 @@
                 android:textColor="@color/gray_66"
                 />
             <TextView
+                android:id="@+id/tv_shopping_cart_total"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:text="¥108"
+                android:text="¥0"
                 android:textColor="@color/red"
                 android:gravity="center_vertical"
                 />
             <TextView
+                android:id="@+id/tv_shopping_cart_jiesuan"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="结算"
@@ -158,6 +193,7 @@
                 android:ems="7"
                 android:textSize="14sp"
                 />
+            </LinearLayout>
         </com.github.fastshape.MyLinearLayout>
     </com.library.base.ProgressLayout>
 </LinearLayout>

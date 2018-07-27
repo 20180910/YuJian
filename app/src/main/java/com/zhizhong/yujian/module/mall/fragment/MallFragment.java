@@ -21,8 +21,10 @@ import com.zhizhong.yujian.base.GlideUtils;
 import com.zhizhong.yujian.base.ImageSizeUtils;
 import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.event.JoinShoppingCartEvent;
+import com.zhizhong.yujian.module.mall.activity.ShoppingCartActivity;
 import com.zhizhong.yujian.module.mall.network.ApiRequest;
 import com.zhizhong.yujian.module.mall.network.response.MallGoodsObj;
+import com.zhizhong.yujian.module.my.activity.LoginActivity;
 import com.zhizhong.yujian.module.my.activity.MessageActivity;
 import com.zhizhong.yujian.network.NetApiRequest;
 import com.zhizhong.yujian.network.response.GoodsObj;
@@ -122,7 +124,7 @@ public class MallFragment extends BaseFragment {
             @Override
             public void onSuccess(BaseObj obj, int errorCode, String msg) {
                 if(obj.getShoppingCartCount()>0){
-                    tv_mall_shopping_num.setText(obj.getShoppingCartCount());
+                    tv_mall_shopping_num.setText(obj.getShoppingCartCount()+"");
                     tv_mall_shopping_num.setVisibility(View.VISIBLE);
                 }else{
                     tv_mall_shopping_num.setVisibility(View.GONE);
@@ -199,6 +201,11 @@ public class MallFragment extends BaseFragment {
             case R.id.tv_mall_search:
                 break;
             case R.id.fl_mall_shopping:
+                if (noLogin()){
+                    STActivity(LoginActivity.class);
+                    return;
+                }
+                STActivity(ShoppingCartActivity.class);
                 break;
             case R.id.iv_mall_msg:
                 STActivity(MessageActivity.class);

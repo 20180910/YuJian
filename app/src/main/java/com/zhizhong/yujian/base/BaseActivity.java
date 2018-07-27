@@ -23,6 +23,7 @@ import com.github.androidtools.ClickUtils;
 import com.github.androidtools.PhoneUtils;
 import com.github.androidtools.SPUtils;
 import com.github.androidtools.inter.MyOnClickListener;
+import com.github.rxbus.RxBus;
 import com.library.base.MyBaseActivity;
 import com.library.base.view.MyWebViewClient;
 import com.sdklibrary.base.qq.share.MyQQActivityResult;
@@ -30,6 +31,7 @@ import com.zhizhong.yujian.AppXml;
 import com.zhizhong.yujian.BuildConfig;
 import com.zhizhong.yujian.GetSign;
 import com.zhizhong.yujian.R;
+import com.zhizhong.yujian.event.JoinShoppingCartEvent;
 
 import org.reactivestreams.Subscription;
 
@@ -91,7 +93,9 @@ public abstract class BaseActivity extends MyBaseActivity {
                 break;
         }
     }
-
+    public void postGetShoppingCartNum(){
+        RxBus.getInstance().postReplay(new JoinShoppingCartEvent());
+    }
     @Override
     public void setAppRightImg(@DrawableRes int appRightImg) {
         super.setAppRightImg(appRightImg);

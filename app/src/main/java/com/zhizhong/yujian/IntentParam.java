@@ -5,15 +5,15 @@ package com.zhizhong.yujian;
  */
 
 public class IntentParam {
-    public static final String xieYiType = "xieYiType";
+    public static final String needSelectMy = "needSelectMy";
     public static final String id = "id";
     public static final String content = "content";
     public static final String goodsId = "goodsId";
     public static final String detailInto = "detailInto";
     public static final String flag = "flag";
     public static final String keChengDetailObj = "keChengDetailObj";
-    public static final String teacherId = "teacherId";
-    public static final String kechengId = "kechengId";
+    public static final String mall = "mall";
+    public static final String selectHome = "selectHome";
     public static final String riliDate = "riliDate";
     public static final String phone = "phone";
     public static final String smsCode = "smsCode";

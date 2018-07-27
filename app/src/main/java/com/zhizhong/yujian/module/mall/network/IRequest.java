@@ -1,8 +1,10 @@
 package com.zhizhong.yujian.module.mall.network;
 
+import com.library.base.BaseObj;
 import com.library.base.ResponseObj;
 import com.zhizhong.yujian.module.mall.network.response.GoodsDetailObj;
 import com.zhizhong.yujian.module.mall.network.response.MallGoodsObj;
+import com.zhizhong.yujian.module.mall.network.response.ShoppingCartObj;
 import com.zhizhong.yujian.network.response.GoodsObj;
 
 import java.util.List;
@@ -28,6 +30,18 @@ public interface IRequest {
     //商城商品详情
     @GET("api/GoodsClassiFication/GetGoodsDetails")
     Call<ResponseObj<GoodsDetailObj>> getGoodsDetail(@QueryMap Map<String, String> map);
+
+    //购物车列表
+    @GET("api/ShoppingCart/GetShoppingCart")
+    Call<ResponseObj<ShoppingCartObj>> getShoppingCart(@QueryMap Map<String, String> map);
+
+    //购物车删除
+    @GET("api/ShoppingCart/GetDelShoppingCart")
+    Call<ResponseObj<BaseObj>> deleteShoppingCart(@QueryMap Map<String, String> map);
+
+    //购物车加减数量
+    @GET("api/ShoppingCart/GetEditNum")
+    Call<ResponseObj<BaseObj>> updateShoppingCartNum(@QueryMap Map<String, String> map);
 
 
 }

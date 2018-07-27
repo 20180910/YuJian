@@ -2,6 +2,8 @@ package com.zhizhong.yujian.network.response;
 
 import com.library.base.BaseObj;
 
+import java.math.BigDecimal;
+
 public class GoodsObj extends BaseObj {
     /**
      * goods_id : 1
@@ -16,9 +18,9 @@ public class GoodsObj extends BaseObj {
     private String goods_id;
     private String goods_image;
     private String goods_name;
-    private double goods_price;
+    private BigDecimal goods_price;
     private int sales_volume;
-    private double original_price;
+    private BigDecimal original_price;
     private int is_collect;
 
     public String getGoods_id() {
@@ -45,11 +47,11 @@ public class GoodsObj extends BaseObj {
         this.goods_name = goods_name;
     }
 
-    public double getGoods_price() {
+    public BigDecimal getGoods_price() {
         return goods_price;
     }
 
-    public void setGoods_price(double goods_price) {
+    public void setGoods_price(BigDecimal goods_price) {
         this.goods_price = goods_price;
     }
 
@@ -61,11 +63,11 @@ public class GoodsObj extends BaseObj {
         this.sales_volume = sales_volume;
     }
 
-    public double getOriginal_price() {
+    public BigDecimal getOriginal_price() {
         return original_price;
     }
 
-    public void setOriginal_price(double original_price) {
+    public void setOriginal_price(BigDecimal original_price) {
         this.original_price = original_price;
     }
 

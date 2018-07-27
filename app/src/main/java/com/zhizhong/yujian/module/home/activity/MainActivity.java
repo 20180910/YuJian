@@ -1,6 +1,7 @@
 package com.zhizhong.yujian.module.home.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.library.base.bean.PayObj;
 import com.zhizhong.yujian.AppXml;
 import com.zhizhong.yujian.Config;
 import com.zhizhong.yujian.GetSign;
+import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.base.BaseActivity;
 import com.zhizhong.yujian.base.MyCallBack;
@@ -24,8 +26,8 @@ import com.zhizhong.yujian.module.home.fragment.AuctionFragment;
 import com.zhizhong.yujian.module.home.fragment.HomeFragment;
 import com.zhizhong.yujian.module.home.fragment.LiveFragment;
 import com.zhizhong.yujian.module.mall.fragment.MallFragment;
-import com.zhizhong.yujian.module.my.fragment.MyFragment;
 import com.zhizhong.yujian.module.my.activity.LoginActivity;
+import com.zhizhong.yujian.module.my.fragment.MyFragment;
 import com.zhizhong.yujian.network.NetApiRequest;
 import com.zhizhong.yujian.network.response.ImageObj;
 
@@ -94,6 +96,19 @@ public class MainActivity extends BaseActivity {
 //        STActivity(LoginActivity.class);
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        String action = intent.getAction();
+        if(IntentParam.selectHome.equals(action)){
+            selectHome();
+            selectView.setChecked(true);
+        }else if(IntentParam.mall.equals(action)){
+            selectMall();
+            selectView.setChecked(true);
+        }
+    }
 
     private void getYouXueImg() {
         Map<String, String> map = new HashMap<String, String>();
@@ -165,7 +180,8 @@ public class MainActivity extends BaseActivity {
                         break;
                     case 5:
                         if (noLogin()) {
-                            STActivity(LoginActivity.class);
+                            Intent intent=new Intent(IntentParam.needSelectMy);
+                            STActivity(intent,LoginActivity.class);
                             selectView.setChecked(true);
                         } else {
                             selectMy();

@@ -10,6 +10,7 @@ import com.github.rxbus.RxBus;
 import com.library.base.BaseObj;
 import com.library.base.tools.ZhengZeUtils;
 import com.zhizhong.yujian.AppXml;
+import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.base.BaseActivity;
 import com.zhizhong.yujian.base.MyCallBack;
@@ -33,6 +34,7 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.tv_login_msg_getcode)
     TextView tv_login_msg_getcode;
     private String smsCode;
+    private boolean needSelectMy;
 
     @Override
     protected int getContentView() {
@@ -43,7 +45,8 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        String action = getIntent().getAction();
+        needSelectMy =TextUtils.equals(IntentParam.needSelectMy,action);
     }
 
     @Override
@@ -80,7 +83,11 @@ public class LoginActivity extends BaseActivity {
             case R.id.iv_login_msg_wx:
                 break;
             case R.id.app_right_tv:
-                STActivityForResult(LoginForPwdActivity.class,100);
+                Intent intent=new Intent();
+                if(needSelectMy){
+                    intent.setAction(IntentParam.needSelectMy);
+                }
+                STActivityForResult(intent,LoginForPwdActivity.class,100);
                 break;
         }
     }
@@ -118,9 +125,9 @@ public class LoginActivity extends BaseActivity {
 
 
 
-
-        RxBus.getInstance().post(new LoginSuccessEvent(LoginSuccessEvent.status_1));
-
+        if(needSelectMy){
+            RxBus.getInstance().post(new LoginSuccessEvent(LoginSuccessEvent.status_1));
+        }
         finish();
     }
 

@@ -7,6 +7,7 @@ import com.github.androidtools.SPUtils;
 import com.github.rxbus.RxBus;
 import com.library.base.tools.ZhengZeUtils;
 import com.zhizhong.yujian.AppXml;
+import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.base.BaseActivity;
 import com.zhizhong.yujian.base.MyCallBack;
@@ -26,6 +27,7 @@ public class LoginForPwdActivity extends BaseActivity {
     MyEditText et_login_phone;
     @BindView(R.id.et_login_pwd)
     MyEditText et_login_pwd;
+    private boolean needSelectMy;
 
     @Override
     protected int getContentView() {
@@ -37,6 +39,8 @@ public class LoginForPwdActivity extends BaseActivity {
     @Override
     protected void initView() {
 
+        String action = getIntent().getAction();
+        needSelectMy =TextUtils.equals(IntentParam.needSelectMy,action);
     }
 
     @Override
@@ -101,8 +105,9 @@ public class LoginForPwdActivity extends BaseActivity {
         SPUtils.setPrefString(mContext,AppXml.qq_name,obj.getQq_name());
         SPUtils.setPrefString(mContext,AppXml.wechat_name,obj.getWechat_name());
 
-        RxBus.getInstance().post(new LoginSuccessEvent(LoginSuccessEvent.status_1));
-
+        if(needSelectMy){
+            RxBus.getInstance().post(new LoginSuccessEvent(LoginSuccessEvent.status_1));
+        }
         setResult(RESULT_OK);
         finish();
     }

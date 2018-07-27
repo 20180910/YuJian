@@ -25,5 +25,17 @@ public class ApiRequest extends BaseApiRequest {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
         getGeneralClient(IRequest.class).getGoodsDetail(map).enqueue(callBack);
     }
+    public static void getShoppingCart(Map map, MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
+        getGeneralClient(IRequest.class).getShoppingCart(map).enqueue(callBack);
+    }
+    public static void deleteShoppingCart(Map map, MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
+        getGeneralClient(IRequest.class).deleteShoppingCart(map).enqueue(callBack);
+    }
+    public static void updateShoppingCartNum(Map map, MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
+        getGeneralClient(IRequest.class).updateShoppingCartNum(map).enqueue(callBack);
+    }
 
 }

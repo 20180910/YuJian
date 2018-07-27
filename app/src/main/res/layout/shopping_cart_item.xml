@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
@@ -14,34 +15,41 @@
         android:gravity="center_vertical"
         >
         <com.github.fastshape.MyCheckBox
+            android:id="@+id/cb_shopping_cart_check"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:checked="true"
+            android:checked="false"
+            app:checked_drawable="@drawable/shopping_select"
+            app:normal_drawable="@drawable/shopping_normal"
+            android:paddingRight="10dp"
             />
         <ImageView
+            android:id="@+id/iv_shopping_cart"
             android:layout_width="90dp"
             android:layout_height="90dp"
-            android:src="@drawable/qq"
-            android:layout_marginLeft="10dp"
+            tools:src="@drawable/qq"
             />
         <RelativeLayout
+            android:id="@+id/rl_shopping_cart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             >
             <TextView
+                android:id="@+id/tv_shopping_cart_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="预见翡翠"
+                tools:text="预见翡翠"
                 android:textSize="14sp"
                 android:textColor="@color/gray_33"
                 android:maxLines="2"
                 android:ellipsize="end"
                 />
                 <TextView
+                    android:id="@+id/tv_shopping_cart_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="¥123"
+                    tools:text="¥123"
                     android:textColor="@color/red"
                     android:textSize="16sp"
                     android:layout_alignParentBottom="true"
@@ -54,14 +62,96 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 >
+                <ImageButton
+                    android:id="@+id/ib_shopping_jian"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/shopping_jian"
+                    android:background="@color/transparent"
+                    />
                 <TextView
+                    android:id="@+id/tv_shopping_cart_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="123"
+                    tools:text="1232"
                     android:textSize="15sp"
                     android:textColor="@color/gray_33"
+                    android:ems="2"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    />
+
+                <ImageButton
+                    android:id="@+id/ib_shopping_jia"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/shopping_jia"
+                    android:background="@color/transparent"
                     />
             </LinearLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_shopping_cart_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:visibility="gone">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                >
+                <ImageButton
+                    android:id="@+id/ib_shopping_jian_edit"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/shopping_jian"
+                    android:background="@color/transparent"
+                    />
+                <TextView
+                    android:id="@+id/tv_shopping_cart_num_edit"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    tools:text="1232"
+                    android:textSize="15sp"
+                    android:textColor="@color/gray_33"
+                    android:ems="2"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    />
+                <ImageButton
+                    android:id="@+id/ib_shopping_jia_edit"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/shopping_jia"
+                    android:background="@color/transparent"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_shopping_cart_price_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="¥123"
+                android:textColor="@color/red"
+                android:textSize="16sp"
+                android:layout_alignParentBottom="true"
+                />
+            <ImageButton
+                android:id="@+id/ib_shopping_cart_delete_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/delete"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:background="@color/transparent"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="5dp"
+                />
         </RelativeLayout>
     </LinearLayout>
 

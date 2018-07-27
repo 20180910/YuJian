@@ -60,6 +60,6 @@
         android:layout_height="2px"
         android:layout_width="match_parent"
         android:background="@color/divider_color"
-        android:visibility="visible"
+        android:visibility="gone"
         />
 </LinearLayout>
