@@ -15,10 +15,10 @@
         android:gravity="center_vertical"
         >
         <ImageView
+            android:id="@+id/iv_sure_order"
             android:layout_width="90dp"
             android:layout_height="90dp"
-            android:src="@drawable/qq"
-            android:layout_marginLeft="10dp"
+            tools:src="@drawable/qq"
             />
         <RelativeLayout
             android:layout_width="match_parent"
@@ -26,18 +26,20 @@
             android:layout_marginLeft="10dp"
             >
             <TextView
+                android:id="@+id/tv_sure_order_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="预见翡翠"
+                tools:text="预见翡翠"
                 android:textSize="14sp"
                 android:textColor="@color/gray_33"
                 android:maxLines="2"
                 android:ellipsize="end"
                 />
                 <TextView
+                    android:id="@+id/tv_sure_order_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="¥123"
+                    tools:text="¥123"
                     android:textColor="@color/red"
                     android:textSize="16sp"
                     android:layout_alignParentBottom="true"
@@ -54,8 +56,8 @@
                 >
                 <ImageView
                     android:id="@+id/iv_sure_order_jian"
-                    android:layout_width="33dp"
-                    android:layout_height="30dp"
+                    android:layout_width="30dp"
+                    android:layout_height="27dp"
                     android:src="@drawable/jian"
                     />
 
@@ -71,8 +73,8 @@
 
                 <ImageView
                     android:id="@+id/iv_sure_order_jia"
-                    android:layout_width="33dp"
-                    android:layout_height="30dp"
+                    android:layout_width="30dp"
+                    android:layout_height="27dp"
                     android:layout_marginLeft="1px"
                     android:src="@drawable/jia"
                     />

@@ -35,7 +35,7 @@ public class AddressListActivity extends BaseActivity {
     MyTextView tv_address_list_add;
 
     MyAdapter adapter;
-
+    boolean isSelectAddress;
     @Override
     protected int getContentView() {
         setAppTitle("我的地址");
@@ -44,6 +44,11 @@ public class AddressListActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        String action = getIntent().getAction();
+        if(IntentParam.selectAddress.equals(action)){
+            isSelectAddress=true;
+        }
+
         adapter=new MyAdapter<AddressObj>(mContext,R.layout.address_list_item,pageSize) {
             @Override
             public void bindData(MyRecyclerViewHolder holder, int position, final AddressObj bean) {
@@ -91,6 +96,17 @@ public class AddressListActivity extends BaseActivity {
                         mDialog.create().show();
                     }
                 });
+                if(isSelectAddress){
+                    holder.itemView.setOnClickListener(new MyOnClickListener() {
+                        @Override
+                        protected void onNoDoubleClick(View view) {
+                            Intent intent=new Intent();
+                            intent.putExtra(IntentParam.addressBean,bean);
+                            setResult(RESULT_OK,intent);
+                            finish();
+                        }
+                    });
+                }
             }
         };
         adapter.setOnLoadMoreListener(this);

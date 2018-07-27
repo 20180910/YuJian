@@ -11,7 +11,7 @@ public class IntentParam {
     public static final String goodsId = "goodsId";
     public static final String detailInto = "detailInto";
     public static final String flag = "flag";
-    public static final String keChengDetailObj = "keChengDetailObj";
+    public static final String shoppingCart = "shoppingCart";
     public static final String mall = "mall";
     public static final String selectHome = "selectHome";
     public static final String riliDate = "riliDate";

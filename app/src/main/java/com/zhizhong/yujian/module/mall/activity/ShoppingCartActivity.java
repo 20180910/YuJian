@@ -18,6 +18,7 @@ import com.github.baseclass.BaseDividerGridItem;
 import com.github.baseclass.adapter.MyRecyclerViewHolder;
 import com.github.fastshape.MyCheckBox;
 import com.github.mydialog.MyDialog;
+import com.google.gson.Gson;
 import com.library.base.BaseObj;
 import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
@@ -31,6 +32,7 @@ import com.zhizhong.yujian.module.mall.network.ApiRequest;
 import com.zhizhong.yujian.module.mall.network.response.ShoppingCartObj;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -194,7 +196,6 @@ public class ShoppingCartActivity extends BaseActivity {
         }
         cb_shopping_cart_all.setChecked(checkAllNum==list.size());
         tv_shopping_cart_total.setText("¥"+total.toString());
-        Log("==="+total);
         if(isSelectCheckAll){
             adapter.notifyDataSetChanged();
         }
@@ -298,15 +299,29 @@ public class ShoppingCartActivity extends BaseActivity {
                 jisuanPrice(true);
                 break;
             case R.id.tv_shopping_cart_jiesuan:
-                int size = adapter.getList().size();
-                if(size<=0){
-                    showMsg("请选择商品");
-                    return;
-                }
-
+                jieSuan();
                 break;
         }
     }
+
+    private void jieSuan() {
+        List list = adapter.getList();
+        List<ShoppingCartObj.ShoppingCartListBean>goodsBeanList=new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            ShoppingCartObj.ShoppingCartListBean bean = (ShoppingCartObj.ShoppingCartListBean) list.get(i);
+            if(bean.isCheck()){
+                goodsBeanList.add(bean);
+            }
+        }
+        if(goodsBeanList.size()<=0){
+            showMsg("请选择商品");
+        }else{
+            Intent intent=new Intent();
+            intent.putExtra(IntentParam.shoppingCart,new Gson().toJson(goodsBeanList));
+            STActivity(intent,SureOrderActivity.class);
+        }
+    }
+
     public void goHome(String action){
         Intent intent= new Intent(action);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);

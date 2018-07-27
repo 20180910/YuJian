@@ -443,7 +443,7 @@ public class GoodsDetailActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tv_goods_banner_video,
+    @OnClick({R.id.tv_goods_banner_video,R.id.ll_goods_detail_youhuiquan,
             R.id.tv_goods_banner_image,R.id.tv_goods_detail_kefu, R.id.tv_goods_detail_collection, R.id.tv_goods_detail_join_shoppincart, R.id.tv_goods_detail_buy, R.id.iv_goods_back, R.id.fl_goods_shopping, R.id.iv_goods_share})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -495,6 +495,9 @@ public class GoodsDetailActivity extends BaseActivity {
                     return;
                 }
                 STActivity(ShoppingCartActivity.class);
+                break;
+            case R.id.ll_goods_detail_youhuiquan:
+                STActivity(LingQuanZhongXinActivity.class);
                 break;
             case R.id.iv_goods_share:
                 break;

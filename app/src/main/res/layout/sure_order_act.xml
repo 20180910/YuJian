@@ -38,7 +38,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
-                        android:src="@drawable/qq"
+                        android:src="@drawable/sure_address"
                         />
 
                     <LinearLayout
@@ -55,7 +55,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="添加收货地址"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             />
                     </LinearLayout>
                     <LinearLayout
@@ -101,7 +101,7 @@
                             android:id="@+id/tv_sure_order_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="8dp"
                             tools:text="收货地址：上海市长宁区长宁路1055号汇都大楼10层(2号线中山公园站8号口)"
                             android:textColor="@color/gray_33"
                             android:maxLines="3"
@@ -116,14 +116,14 @@
                         android:src="@drawable/jiantou_right"
                         />
                 </LinearLayout>
-                <android.support.v7.widget.RecyclerView
-                    android:layout_marginTop="5dp"
+                <com.library.base.view.MyRecyclerView
                     android:id="@+id/rv_sure_order"
+                    android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     >
 
-                </android.support.v7.widget.RecyclerView>
+                </com.library.base.view.MyRecyclerView>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -182,9 +182,10 @@
                         tools:text="留言"
                         android:textSize="14sp"
                         android:gravity="center_vertical"
-                        android:maxLines="4"
-                        android:ellipsize="end"
                         android:background="@color/white"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:maxLength="100"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -220,7 +221,7 @@
                             tools:text="0张可用"
                             android:gravity="center_vertical|right"
                             android:textSize="14sp"
-                            android:layout_marginRight="20dp"
+                            android:layout_marginRight="10dp"
                             />
                         <ImageView
                             android:layout_width="16dp"

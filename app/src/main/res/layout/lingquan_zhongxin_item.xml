@@ -3,27 +3,31 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              xmlns:tools="http://schemas.android.com/tools"
     >
 <LinearLayout
+    android:id="@+id/ll_lingquan_bg"
     android:layout_width="0dp"
     android:layout_weight="1"
     android:layout_height="100dp"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/red"
+    android:background="@drawable/youhuiquan_red"
     >
     <TextView
+        android:id="@+id/tv_lingquan_money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="¥6"
+        tools:text="¥6"
         android:textColor="@color/white"
         android:textSize="21sp"
 
         />
     <TextView
+        android:id="@+id/tv_lingquan_full_money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="满79元可用"
+        tools:text="满79元可用"
         android:textColor="@color/white"
         android:layout_marginTop="10dp"
         />
@@ -35,13 +39,24 @@
         android:padding="10dp"
         >
         <TextView
+            android:id="@+id/tv_lingquan_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="全场商品可用"
+            tools:text="全场商品可用"
             android:textSize="15sp"
             android:textColor="@color/gray_33"
             />
+        <ImageView
+            android:id="@+id/iv_lingquan_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/yilingqu"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            />
             <com.github.fastshape.MyTextView
+                android:id="@+id/tv_lingquan_status"
                 android:layout_width="wrap_content"
                 android:layout_height="26dp"
                 android:text="立即使用"
@@ -59,10 +74,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="使用期限："
-            android:layout_above="@+id/tv_youhuiquan_qx"
+            android:layout_above="@+id/tv_lingquan_qx"
             />
         <TextView
-            android:id="@+id/tv_youhuiquan_qx"
+            android:id="@+id/tv_lingquan_qx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2018/09/09-2018/09/09"
