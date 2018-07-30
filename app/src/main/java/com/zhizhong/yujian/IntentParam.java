@@ -9,12 +9,12 @@ public class IntentParam {
     public static final String id = "id";
     public static final String content = "content";
     public static final String goodsId = "goodsId";
-    public static final String detailInto = "detailInto";
-    public static final String flag = "flag";
+    public static final String youHuiQuanMoney = "youHuiQuanMoney";
+    public static final String youHuiQuanFullMoney = "youHuiQuanFullMoney";
+    public static final String youHuiQuanId = "youHuiQuanId";
     public static final String shoppingCart = "shoppingCart";
     public static final String mall = "mall";
     public static final String selectHome = "selectHome";
-    public static final String riliDate = "riliDate";
     public static final String phone = "phone";
     public static final String smsCode = "smsCode";
     public static final String isEditAddress = "isEditAddress";
@@ -29,8 +29,8 @@ public class IntentParam {
     public static final String selectBank = "selectBank";
     public static final String bank = "bank";
     public static final String nickName = "nickName";
-    public static final String dayijiehuo_title = "dayijiehuo_title";
-    public static final String dayijiehuo_content = "dayijiehuo_content";
+    public static final String useYouHuiQuan = "useYouHuiQuan";
+    public static final String money = "money";
 
     public static final String qianZhengType="qianZhengType";
     public static final String webUrl="webUrl";

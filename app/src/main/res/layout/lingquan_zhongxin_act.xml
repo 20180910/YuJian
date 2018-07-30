@@ -17,6 +17,7 @@
            android:layout_height="match_parent"
            app:ptr_resistance="2.1"
            app:ptr_ratio_of_header_height_to_refresh="1.2"
+           android:layout_above="@+id/ll_lingquan_bottom"
            >
            <android.support.v7.widget.RecyclerView
                android:id="@+id/rv_lingquan"
@@ -28,5 +29,26 @@
 
            </android.support.v7.widget.RecyclerView>
        </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+        <LinearLayout
+            android:id="@+id/ll_lingquan_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_alignParentBottom="true"
+            >
+            <com.github.fastshape.MyTextView
+                android:id="@+id/tv_lingquan_notuse"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="不使用优惠券"
+                app:solidColor="@color/red"
+                app:radius="4dp"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:layout_margin="10dp"
+                />
+        </LinearLayout>
     </com.library.base.ProgressLayout>
 </LinearLayout>

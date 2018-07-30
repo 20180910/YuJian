@@ -21,6 +21,7 @@ import com.zhizhong.yujian.base.GlideUtils;
 import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.module.mall.network.ApiRequest;
 import com.zhizhong.yujian.module.mall.network.response.ShoppingCartObj;
+import com.zhizhong.yujian.module.mall.network.response.YouHuiQuanObj;
 import com.zhizhong.yujian.module.my.activity.AddressListActivity;
 import com.zhizhong.yujian.module.my.network.response.AddressObj;
 
@@ -67,7 +68,10 @@ public class SureOrderActivity extends BaseActivity {
 
     MyAdapter adapter;
     private String youhuiId;
-    private double youhuiMoney=0;
+    private BigDecimal youhuiMoney=new BigDecimal(0);
+    private BigDecimal youHuiQuanFullMoney=new BigDecimal(0);
+    private int youHuiQuanNum;
+
     @Override
     protected int getContentView() {
         setAppTitle("确认订单");
@@ -118,6 +122,12 @@ public class SureOrderActivity extends BaseActivity {
                         number--;
                         bean.setNumber(number);
                         textView.setText(number+"");
+                        if(xiaoJi.doubleValue()<youHuiQuanFullMoney.doubleValue()){
+                            youhuiId="0";
+                            youhuiMoney=new BigDecimal(0);
+                            youHuiQuanFullMoney=new BigDecimal(0);
+                            getYouHuiQuanNum();
+                        }
                         jisuanPrice();
                     }
                 }else{//加
@@ -144,7 +154,7 @@ public class SureOrderActivity extends BaseActivity {
         tv_sure_order_xiaoji.setText("¥"+total.toString());
         xiaoJi =total;
 
-        total=AndroidUtils.jianFa(total,new BigDecimal(youhuiMoney));
+        total=AndroidUtils.jianFa(total,youhuiMoney);
         heJi=total;
 
         tv_sure_order_heji.setText("¥"+total.toString());
@@ -154,6 +164,7 @@ public class SureOrderActivity extends BaseActivity {
     @Override
     protected void initData() {
         showProgress();
+        getYouHuiQuanNum();
         getData(1, false);
     }
 
@@ -196,21 +207,55 @@ public class SureOrderActivity extends BaseActivity {
                 case 100:
                     AddressObj addressObj = (AddressObj) data.getSerializableExtra(IntentParam.addressBean);
                     setAddress(addressObj);
-                    break;
+                break;
+                case 200:
+                    youhuiId=data.getStringExtra(IntentParam.youHuiQuanId);
+                    youhuiMoney= (BigDecimal) data.getSerializableExtra(IntentParam.youHuiQuanMoney);
+                    youHuiQuanFullMoney= (BigDecimal) data.getSerializableExtra(IntentParam.youHuiQuanFullMoney);
+                    if("0".equals(youhuiId)){
+                        getYouHuiQuanNum();
+                    }else{
+                        tv_sure_order_vouchers.setText("-¥"+youhuiMoney);
+                    }
+                    jisuanPrice();
+                break;
             }
         }
+    }
+    public void getYouHuiQuanNum(){
+        Map<String,String> map=new HashMap<String,String>();
+        map.put("user_id",getUserId());
+        map.put("money",xiaoJi+"");
+        map.put("sign",getSign(map));
+        ApiRequest.keYongYouHuiQuan(map, new MyCallBack<List<YouHuiQuanObj>>(mContext,pl_load,pcfl) {
+            @Override
+            public void onSuccess(List<YouHuiQuanObj> list, int errorCode, String msg) {
+                if(notEmpty(list)){
+                    youHuiQuanNum=list.size();
+                }else{
+                    youHuiQuanNum =0;
+                }
+                tv_sure_order_vouchers.setText(youHuiQuanNum+"张可用");
+            }
+        });
+
     }
 
     @OnClick({R.id.ll_sure_order_youhui, R.id.tv_sure_order_commit,R.id.ll_sure_order_select_address,R.id.ll_sure_order_address})
     public void onViewClick(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.ll_sure_order_youhui:
+                intent=new Intent();
+                intent.putExtra(IntentParam.useYouHuiQuan,true);
+                intent.putExtra(IntentParam.money,xiaoJi.toString());
+                STActivityForResult(intent,LingQuanZhongXinActivity.class,200);
                 break;
             case R.id.tv_sure_order_commit:
                 break;
             case R.id.ll_sure_order_address:
             case R.id.ll_sure_order_select_address:
-                Intent intent=new Intent(IntentParam.selectAddress);
+                intent=new Intent(IntentParam.selectAddress);
                 STActivityForResult(intent,AddressListActivity.class,100);
                 break;
         }

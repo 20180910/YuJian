@@ -1,7 +1,6 @@
 package com.zhizhong.yujian.module.my.fragment;
 
 import android.os.Bundle;
-import android.support.v4.widget.NestedScrollView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -63,12 +62,6 @@ public class MyFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        nsv.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                Log("===onScrollChange");
-            }
-        });
     }
 
     @Override

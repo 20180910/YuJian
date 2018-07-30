@@ -51,7 +51,7 @@ dependencies {
     implementation(name: 'androidutils', ext: 'aar')
     implementation(name: 'Dialog', ext: 'aar')
     implementation(name: 'androidbaseclass', ext: 'aar')
-    implementation(name: 'fastshape', ext: 'aar')
+    implementation(name: 'shape', ext: 'aar')
 //    api(name: 'retrofitutil', ext: 'aar')
 
 //    api 'com.squareup.retrofit2:converter-gson:2.1.0'

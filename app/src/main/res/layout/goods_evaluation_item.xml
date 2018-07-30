@@ -27,16 +27,16 @@
             >
 
             <com.github.fastshape.MyImageView
-                android:id="@+id/iv_item_goods_evaluate_img"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/qq"
-                app:clipRadius="18dp"
+                android:id="@+id/iv_goods_allevaluation"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/default_person"
+                app:clipRadius="20dp"
                 android:scaleType="centerCrop"
                 />
 
             <TextView
-                android:id="@+id/tv_item_goods_evaluate_name"
+                android:id="@+id/tv_goods_allevaluation_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -46,7 +46,7 @@
                 />
 
             <TextView
-                android:id="@+id/tv_item_goods_evaluate_date"
+                android:id="@+id/tv_goods_allevaluation_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="2016/10/10"
@@ -55,28 +55,28 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_item_goods_evaluate_content"
+            android:id="@+id/tv_goods_allevaluation_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            tools:text="谢谢养御宝宝给我寄来的礼品，已经是养御的忠实客户了，昨天用了皮肤滑滑的，希望我小绿人茁壮成长。"
+            tools:text="谢谢茁壮成长。"
             android:textColor="@color/gray_99"
             android:paddingRight="10dp"
             />
 
         <LinearLayout
-            android:id="@+id/ll_item_goods_evaluate"
+            android:id="@+id/ll_goods_allevaluation_img"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
+            android:gravity="left"
             android:orientation="horizontal"
             >
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/qq"
+                tools:src="@drawable/qq"
                 android:layout_marginRight="10dp"
                 />
 
@@ -84,11 +84,11 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/qq"
+                tools:src="@drawable/qq"
                 />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/ll_zhui_ping"
+            android:id="@+id/ll_goods_allevaluation_again"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -104,35 +104,35 @@
                 android:layout_marginTop="10dp"
                 />
             <TextView
-                android:id="@+id/tv_item_goods_evaluate_content_zj"
+                android:id="@+id/tv_goods_allevaluation_again_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                tools:text="谢谢养御宝宝给我寄来的礼品，已经是养御的忠实客户了，昨天用了皮肤滑滑的，希望我小绿人茁壮成长。"
+                tools:text="正品"
                 android:textColor="@color/gray_99"
                 android:paddingRight="10dp"
                 />
             <LinearLayout
-                android:id="@+id/ll_item_goods_evaluate_zj"
+                android:id="@+id/ll_goods_allevaluation_again_img"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:gravity="center_vertical"
+                android:gravity="left"
                 android:orientation="horizontal"
                 >
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/qq"
+                    tools:src="@drawable/qq"
                     android:layout_marginRight="10dp"
                     />
 
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/qq"
+                    android:scaleType="fitCenter"
+                    tools:src="@drawable/qq"
                     />
             </LinearLayout>
         </LinearLayout>

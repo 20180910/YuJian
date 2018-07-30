@@ -1,6 +1,7 @@
 package com.zhizhong.yujian.module.mall.activity;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
@@ -26,6 +27,7 @@ import com.github.baseclass.adapter.MyRecyclerViewHolder;
 import com.github.fastshape.MyTextView;
 import com.github.rxbus.MyConsumer;
 import com.github.rxbus.RxBus;
+import com.google.gson.Gson;
 import com.library.base.BaseObj;
 import com.library.base.view.MyRecyclerView;
 import com.zhizhong.yujian.IntentParam;
@@ -41,6 +43,7 @@ import com.zhizhong.yujian.module.mall.fragment.GoodsImageFragment;
 import com.zhizhong.yujian.module.mall.fragment.GoodsVideoFragment;
 import com.zhizhong.yujian.module.mall.network.ApiRequest;
 import com.zhizhong.yujian.module.mall.network.response.GoodsDetailObj;
+import com.zhizhong.yujian.module.mall.network.response.ShoppingCartObj;
 import com.zhizhong.yujian.module.my.activity.LoginActivity;
 import com.zhizhong.yujian.network.NetApiRequest;
 import com.zhizhong.yujian.network.response.CollectObj;
@@ -127,6 +130,7 @@ public class GoodsDetailActivity extends BaseActivity {
 
     GoodsAdapter goodsAdapter;
 
+    GoodsDetailObj goodsDetailObj;
 
     private String goodsId;
     private GoodsImageFragment goodsImageFragment;
@@ -229,7 +233,6 @@ public class GoodsDetailActivity extends BaseActivity {
                 xiangQing.setSelected(false);
                 tuiJian.setSelected(false);
                 tb_goods_detail.getTabAt(0).select();
-                Log("1==="+tv_goods_detail_evaluation_num.getTop());
                 nsv.scrollTo(0, tv_goods_detail_evaluation_num.getTop());
             }
         });
@@ -246,7 +249,6 @@ public class GoodsDetailActivity extends BaseActivity {
                 xiangQing.setSelected(true);
                 tuiJian.setSelected(false);
                 tb_goods_detail.getTabAt(1).select();
-                Log("2==="+ll_goods_detail_xiangqing.getTop());
                 nsv.scrollTo(0, ll_goods_detail_xiangqing.getTop());
             }
         });
@@ -265,7 +267,6 @@ public class GoodsDetailActivity extends BaseActivity {
                 pingJia.setSelected(false);
                 tuiJian.setSelected(true);
                 tb_goods_detail.getTabAt(2).select();
-                Log("3==="+ll_goods_detail_tuijian.getTop());
                 nsv.scrollTo(0, ll_goods_detail_tuijian.getTop());
             }
         });
@@ -282,7 +283,6 @@ public class GoodsDetailActivity extends BaseActivity {
             int screenWidth = PhoneUtils.getScreenWidth(mContext)*2/3;
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                Log("===onScrollChange");
                 if (scrollY >= 0 && scrollY <= screenWidth) {
                     double alpha = (double) scrollY / screenWidth;
                     rl_goods_detail_title.getBackground().mutate().setAlpha((int) (alpha * 255));
@@ -370,7 +370,6 @@ public class GoodsDetailActivity extends BaseActivity {
             }
         });
     }
-
     @Override
     protected void getData(int page, boolean isLoad) {
         super.getData(page, isLoad);
@@ -381,7 +380,7 @@ public class GoodsDetailActivity extends BaseActivity {
         ApiRequest.getGoodsDetail(map, new MyCallBack<GoodsDetailObj>(mContext, pl_load, pcfl) {
             @Override
             public void onSuccess(GoodsDetailObj obj, int errorCode, String msg) {
-
+                goodsDetailObj=obj;
                 setBanner(obj);
 
                 if(isEmpty(obj.getPingjia_list())){
@@ -443,10 +442,16 @@ public class GoodsDetailActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tv_goods_banner_video,R.id.ll_goods_detail_youhuiquan,
+    @OnClick({R.id.tv_goods_banner_video,R.id.ll_goods_detail_youhuiquan,R.id.tv_goods_detail_look_evaluation,
             R.id.tv_goods_banner_image,R.id.tv_goods_detail_kefu, R.id.tv_goods_detail_collection, R.id.tv_goods_detail_join_shoppincart, R.id.tv_goods_detail_buy, R.id.iv_goods_back, R.id.fl_goods_shopping, R.id.iv_goods_share})
     public void onClick(View view) {
+        Intent intent;
         switch (view.getId()) {
+            case R.id.tv_goods_detail_look_evaluation:
+                intent=new Intent();
+                intent.putExtra(IntentParam.goodsId,goodsId);
+                STActivity(intent,GoodsEvaluationActivity.class);
+                break;
             case R.id.tv_goods_banner_video:
                 tv_goods_banner_video.setTextColor(ContextCompat.getColor(mContext,R.color.white));
                 tv_goods_banner_video.getViewHelper().setSolidColor(ContextCompat.getColor(mContext,R.color.gray_66)).complete();
@@ -485,6 +490,20 @@ public class GoodsDetailActivity extends BaseActivity {
                 joinShoppinCart();
                 break;
             case R.id.tv_goods_detail_buy:
+                List<ShoppingCartObj.ShoppingCartListBean>goodsBeanList=new ArrayList<>();
+                ShoppingCartObj.ShoppingCartListBean bean=new ShoppingCartObj.ShoppingCartListBean();
+                bean.setNumber(1);
+                bean.setStock(goodsDetailObj.getStock());
+                bean.setGoods_id(goodsDetailObj.getGoods_id());
+                bean.setId("0");
+                bean.setPrice(goodsDetailObj.getGoods_price());
+                bean.setGoods_name(goodsDetailObj.getGoods_name());
+                bean.setGoods_image(goodsDetailObj.getGoods_image());
+                goodsBeanList.add(bean);
+
+                intent=new Intent();
+                intent.putExtra(IntentParam.shoppingCart,new Gson().toJson(goodsBeanList));
+                STActivity(intent,SureOrderActivity.class);
                 break;
             case R.id.iv_goods_back:
                 finish();

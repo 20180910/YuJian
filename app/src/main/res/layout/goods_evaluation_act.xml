@@ -19,35 +19,68 @@
             >
             <!--your view-->
             <HorizontalScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal"
+                android:scrollbars="none"
                 >
-                <com.github.fastshape.MyTextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/fl_goods_evaluation_num"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="全部"
-                    android:textColor="@color/white"
-                    app:solidColor="@color/red"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="4dp"
-                    android:textSize="14sp"
-                    app:radius="5dp"
-                    />
+                    android:layout_gravity="center_vertical"
+                    >
+                    <com.github.fastshape.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="全部"
+                        android:textColor="@color/white"
+                        app:solidColor="@color/red"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="10dp"
+                        app:radius="5dp"
+                        />
+                    <com.github.fastshape.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="全部"
+                        android:textColor="@color/white"
+                        app:solidColor="@color/red"
+                        android:layout_marginLeft="10dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:textSize="14sp"
+                        app:radius="5dp"
+                        />
+                </LinearLayout>
+
             </HorizontalScrollView>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2px"
                 android:background="@color/divider_color"
                 />
-            <com.library.base.view.MyRecyclerView
-                android:id="@+id/rv_goods_evaluation"
+            <in.srain.cube.views.ptr.PtrClassicFrameLayout
+                android:id="@id/pcfl_refresh"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                app:ptr_resistance="2.1"
+                app:ptr_ratio_of_header_height_to_refresh="1.2"
                 >
-            </com.library.base.view.MyRecyclerView>
+                <com.library.base.view.MyRecyclerView
+                    android:id="@+id/rv_goods_evaluation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                </com.library.base.view.MyRecyclerView>
+            </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+
 
         </LinearLayout>
     </com.library.base.ProgressLayout>

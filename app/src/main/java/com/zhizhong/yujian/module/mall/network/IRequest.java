@@ -3,6 +3,8 @@ package com.zhizhong.yujian.module.mall.network;
 import com.library.base.BaseObj;
 import com.library.base.ResponseObj;
 import com.zhizhong.yujian.module.mall.network.response.GoodsDetailObj;
+import com.zhizhong.yujian.module.mall.network.response.GoodsEvaluationNumObj;
+import com.zhizhong.yujian.module.mall.network.response.GoodsEvaluationObj;
 import com.zhizhong.yujian.module.mall.network.response.MallGoodsObj;
 import com.zhizhong.yujian.module.mall.network.response.ShoppingCartObj;
 import com.zhizhong.yujian.module.mall.network.response.YouHuiQuanObj;
@@ -61,6 +63,15 @@ public interface IRequest {
     //领取优惠券
     @GET("api/GoodsClassiFication/GetAddCoupon")
     Call<ResponseObj<BaseObj>> lingQuYouHuiQuan(@QueryMap Map<String, String> map);
+
+
+    //商品评价数量
+    @GET("api/GoodsClassiFication/GetAppraiseNum")
+    Call<ResponseObj<GoodsEvaluationNumObj>> getGoodsAllEvaluationNum(@QueryMap Map<String, String> map);
+
+    //商品评价
+    @GET("api/GoodsClassiFication/GetAppraiseList")
+    Call<ResponseObj<List<GoodsEvaluationObj>>> getGoodsAllEvaluation(@QueryMap Map<String, String> map);
 
 
 }

@@ -3,6 +3,7 @@ package com.zhizhong.yujian.module.mall.network.response;
 import com.library.base.BaseObj;
 import com.zhizhong.yujian.network.response.GoodsObj;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class GoodsDetailObj extends BaseObj {
@@ -30,8 +31,8 @@ public class GoodsDetailObj extends BaseObj {
     private String goods_name;
     private String goods_image;
     private String goods_video;
-    private double goods_price;
-    private double original_price;
+    private BigDecimal goods_price;
+    private BigDecimal original_price;
     private int courier;
     private int sales_volume;
     private String addresss;
@@ -76,19 +77,19 @@ public class GoodsDetailObj extends BaseObj {
         this.goods_video = goods_video;
     }
 
-    public double getGoods_price() {
+    public BigDecimal getGoods_price() {
         return goods_price;
     }
 
-    public void setGoods_price(double goods_price) {
+    public void setGoods_price(BigDecimal goods_price) {
         this.goods_price = goods_price;
     }
 
-    public double getOriginal_price() {
+    public BigDecimal getOriginal_price() {
         return original_price;
     }
 
-    public void setOriginal_price(double original_price) {
+    public void setOriginal_price(BigDecimal original_price) {
         this.original_price = original_price;
     }
 

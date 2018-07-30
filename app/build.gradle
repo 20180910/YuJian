@@ -63,7 +63,7 @@ dependencies {
     implementation(name: 'myrefresh', ext: 'aar')
     implementation(name: 'sdklibrary', ext: 'aar')
     implementation(name: 'Dialog', ext: 'aar')
-    implementation(name: 'fastshape', ext: 'aar')
+    implementation(name: 'shape', ext: 'aar')
 //    implementation(name: 'MyProgress', ext: 'aar')
 //    implementation(name: 'rxandroid-2.0.2', ext: 'aar')
 
