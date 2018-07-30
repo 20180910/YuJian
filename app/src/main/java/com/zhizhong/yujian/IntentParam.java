@@ -34,7 +34,7 @@ public class IntentParam {
 
     public static final String qianZhengType="qianZhengType";
     public static final String webUrl="webUrl";
-    public static final String dataId="dataId";
+    public static final String goodsTypeId="goodsTypeId";
     public static final String title="title";
     public static final String visaId="visaId";
     public static final String qianZhengObj="qianZhengObj";

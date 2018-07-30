@@ -5,6 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@color/bg_color"
+                                        android:id="@+id/dl_goods_class"
     >
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +29,7 @@
                 <com.github.fastshape.MyLinearLayout
                     android:id="@+id/ll_goods_order"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="43dp"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     >
@@ -40,7 +41,7 @@
                         android:text="价格排序"
                         android:gravity="center"
                         android:textColor="@color/gray_33"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         />
                     <TextView
                         android:id="@+id/tv_goods_xl"
@@ -50,33 +51,53 @@
                         android:text="销量排序"
                         android:gravity="center"
                         android:textColor="@color/gray_33"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         />
-                    <TextView
-                        android:id="@+id/tv_order_class_sx"
+                    <LinearLayout
+                        android:id="@+id/ll_order_class_sx"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:text="筛选"
+                        android:orientation="horizontal"
                         android:gravity="center"
-                        android:paddingRight="10dp"
-                        android:paddingLeft="10dp"
-                        android:textSize="15sp"
-                        android:textColor="@color/gray_33"
-                        />
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="筛选"
+                            android:gravity="center"
+                            android:textSize="14sp"
+                            android:textColor="@color/gray_33"
+                            android:layout_marginRight="6dp"
+                            />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/shaixuan"
+                            />
+                    </LinearLayout>
+
                 </com.github.fastshape.MyLinearLayout>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2px"
                     android:background="@color/divider_color"
                     />
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_goods_class"
+                <in.srain.cube.views.ptr.PtrClassicFrameLayout
+                    android:id="@id/pcfl_refresh"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2px"
+                    android:layout_height="match_parent"
+                    app:ptr_resistance="2.1"
+                    app:ptr_ratio_of_header_height_to_refresh="1.2"
                     >
-                </android.support.v7.widget.RecyclerView>
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_goods_class"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                    </android.support.v7.widget.RecyclerView>
+                </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+
             </LinearLayout>
         </com.library.base.ProgressLayout>
     </LinearLayout>

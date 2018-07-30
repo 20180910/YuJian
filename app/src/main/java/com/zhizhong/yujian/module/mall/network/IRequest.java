@@ -74,4 +74,9 @@ public interface IRequest {
     Call<ResponseObj<List<GoodsEvaluationObj>>> getGoodsAllEvaluation(@QueryMap Map<String, String> map);
 
 
+    //商品分类列表
+    @GET("api/GoodsClassiFication/GetGoodsList")
+    Call<ResponseObj<List<GoodsObj>>> getGoodsClassList(@QueryMap Map<String, String> map);
+
+
 }

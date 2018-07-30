@@ -30,6 +30,7 @@
             android:paddingRight="15dp"
             >
             <com.zhizhong.yujian.view.MyEditText
+                android:id="@+id/et_goods_class_minprice"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="40dp"
@@ -40,6 +41,7 @@
                 android:imeOptions="actionNext"
                 app:radius="5dp"
                 android:hint="最低价"
+                app:hiddenClearIcon="true"
                 />
             <View
                 android:layout_width="19dp"
@@ -48,6 +50,7 @@
                 android:layout_margin="10dp"
                 />
             <com.zhizhong.yujian.view.MyEditText
+                android:id="@+id/et_goods_class_maxprice"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="40dp"
@@ -58,6 +61,7 @@
                 android:imeOptions="actionNext"
                 app:radius="5dp"
                 android:hint="最高价"
+                app:hiddenClearIcon="true"
                 />
         </LinearLayout>
     </LinearLayout>
@@ -69,9 +73,10 @@
     android:layout_alignParentBottom="true"
     >
     <TextView
+        android:id="@+id/tv_goods_class_reset"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="55dp"
+        android:layout_height="45dp"
         android:text="重置"
         android:background="#FF676767"
         android:textColor="@color/white"
@@ -79,9 +84,10 @@
         android:textSize="14sp"
         />
     <TextView
+        android:id="@+id/tv_goods_class_complete"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="55dp"
+        android:layout_height="45dp"
         android:text="完成"
         android:background="#FF353535"
         android:textColor="@color/white"

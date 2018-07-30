@@ -1,17 +1,20 @@
 package com.zhizhong.yujian.module.mall.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.github.androidtools.PhoneUtils;
+import com.github.androidtools.inter.MyOnClickListener;
 import com.github.baseclass.BaseDividerGridItem;
 import com.github.baseclass.adapter.MyRecyclerViewHolder;
 import com.github.fastshape.MyTextView;
 import com.github.rxbus.MyConsumer;
 import com.library.base.BaseObj;
 import com.youth.banner.Banner;
+import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.adapter.GoodsAdapter;
 import com.zhizhong.yujian.adapter.MyAdapter;
@@ -21,6 +24,7 @@ import com.zhizhong.yujian.base.GlideUtils;
 import com.zhizhong.yujian.base.ImageSizeUtils;
 import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.event.JoinShoppingCartEvent;
+import com.zhizhong.yujian.module.mall.activity.GoodsClassActivity;
 import com.zhizhong.yujian.module.mall.activity.ShoppingCartActivity;
 import com.zhizhong.yujian.module.mall.network.ApiRequest;
 import com.zhizhong.yujian.module.mall.network.response.MallGoodsObj;
@@ -73,10 +77,20 @@ public class MallFragment extends BaseFragment {
 
         goodsTypeAdapter=new MyAdapter<MallGoodsObj.GoodsTypeBean>(mContext,R.layout.mall_goods_type_item,pageSize) {
             @Override
-            public void bindData(MyRecyclerViewHolder holder, int position, MallGoodsObj.GoodsTypeBean bean) {
+            public void bindData(MyRecyclerViewHolder holder, int position, final MallGoodsObj.GoodsTypeBean bean) {
                 holder.setText(R.id.tv_mall_goods_type_name,bean.getGoods_type_name());
                 ImageView imageView = holder.getImageView(R.id.iv_mall_goods_type);
                 GlideUtils.into(mContext,bean.getGoods_type_img(),imageView);
+
+                holder.itemView.setOnClickListener(new MyOnClickListener() {
+                    @Override
+                    protected void onNoDoubleClick(View view) {
+                        Intent intent=new Intent();
+                        intent.putExtra(IntentParam.goodsTypeId,bean.getGoods_type_id());
+                        intent.putExtra(IntentParam.title,bean.getGoods_type_name());
+                        STActivity(intent,GoodsClassActivity.class);
+                    }
+                });
             }
         };
         rv_mall_goods_type.setLayoutManager(new GridLayoutManager(mContext,4));
