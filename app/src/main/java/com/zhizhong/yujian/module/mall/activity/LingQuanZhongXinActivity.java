@@ -1,9 +1,14 @@
 package com.zhizhong.yujian.module.mall.activity;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.github.androidtools.PhoneUtils;
 import com.github.baseclass.adapter.MyRecyclerViewHolder;
+import com.library.base.BaseObj;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.adapter.MyAdapter;
 import com.zhizhong.yujian.base.BaseActivity;
@@ -31,14 +36,51 @@ public class LingQuanZhongXinActivity extends BaseActivity {
     @Override
     protected void initView() {
 
-        adapter=new MyAdapter(mContext,R.layout.lingquan_zhongxin_item,pageSize) {
+        adapter=new MyAdapter<YouHuiQuanObj>(mContext,R.layout.lingquan_zhongxin_item,pageSize) {
             @Override
-            public void bindData(MyRecyclerViewHolder holder, int position, Object bean) {
-
+            public void bindData(MyRecyclerViewHolder holder, int position, final YouHuiQuanObj bean) {
+                ImageView imageView = holder.getImageView(R.id.iv_lingquan_status);
+                TextView tv_lingquan_status = holder.getTextView(R.id.tv_lingquan_status);
+                if(bean.getStatus()==1){
+                    imageView.setVisibility(View.VISIBLE);
+                    tv_lingquan_status.setVisibility(View.GONE);
+                }else{
+                    imageView.setVisibility(View.GONE);
+                    tv_lingquan_status.setVisibility(View.VISIBLE);
+                    tv_lingquan_status.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            lingQu(bean.getId());
+                        }
+                    });
+                }
+                holder.setText(R.id.tv_lingquan_money,"¥"+bean.getFace_value());
+                holder.setText(R.id.tv_lingquan_full_money,"满"+bean.getAvailable().toString()+"元可用");
+                holder.setText(R.id.tv_lingquan_title,bean.getTitle());
+                holder.setText(R.id.tv_lingquan_qx,bean.getDeadline());
             }
         };
         adapter.setOnLoadMoreListener(this);
+        rv_lingquan.setLayoutManager(new LinearLayoutManager(mContext));
+        rv_lingquan.addItemDecoration(getItemDivider(PhoneUtils.dip2px(mContext,8)));
         rv_lingquan.setAdapter(adapter);
+
+
+    }
+
+    private void lingQu(String id) {
+        showLoading();
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("user_id",getUserId());
+        map.put("coupons_id",id);
+        map.put("sign",getSign(map));
+        ApiRequest.lingQuYouHuiQuan(map, new MyCallBack<BaseObj>(mContext,true) {
+            @Override
+            public void onSuccess(BaseObj obj, int errorCode, String msg) {
+                showMsg(msg);
+                getData(1,false);
+            }
+        });
 
     }
 

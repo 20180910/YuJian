@@ -58,4 +58,9 @@ public interface IRequest {
     Call<ResponseObj<List<YouHuiQuanObj>>> keYongYouHuiQuan(@QueryMap Map<String, String> map);
 
 
+    //领取优惠券
+    @GET("api/GoodsClassiFication/GetAddCoupon")
+    Call<ResponseObj<BaseObj>> lingQuYouHuiQuan(@QueryMap Map<String, String> map);
+
+
 }
