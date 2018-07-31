@@ -25,5 +25,9 @@ public class ApiRequest extends BaseApiRequest {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
         getGeneralClient(IRequest.class).getAllPaiMai(map).enqueue(callBack);
     }
+    public static void getPaiMaiGoodsDetail(Map map, MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
+        getGeneralClient(IRequest.class).getPaiMaiGoodsDetail(map).enqueue(callBack);
+    }
 
 }

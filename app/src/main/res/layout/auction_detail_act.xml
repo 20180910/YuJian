@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.library.base.ProgressLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/bg_color"
+                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                 xmlns:tools="http://schemas.android.com/tools"
+                                 android:orientation="vertical"
+                                 android:layout_width="match_parent"
+                                 android:layout_height="match_parent"
+                                 android:background="@color/bg_color"
+                                 android:id="@id/pl_load"
     >
-
         <android.support.v4.widget.NestedScrollView
                 android:id="@id/nsv"
                 android:layout_width="match_parent"
@@ -22,13 +23,13 @@
                 >
                 <!--your view-->
                 <FrameLayout
-                    android:id="@+id/fl_goods_banner"
+                    android:id="@+id/fl_paimai_goods_detail_banner"
                     android:layout_width="match_parent"
                     android:layout_height="180dp">
                 </FrameLayout>
 
                 <LinearLayout
-                    android:id="@+id/ll_goods_banner_type"
+                    android:id="@+id/ll_paimai_goods_detail_banner_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
@@ -36,7 +37,7 @@
                     android:orientation="horizontal"
                     >
                     <com.github.fastshape.MyTextView
-                        android:id="@+id/tv_goods_banner_video"
+                        android:id="@+id/tv_paimai_goods_detail_banner_video"
                         android:layout_width="wrap_content"
                         android:layout_height="22dp"
                         android:layout_marginRight="15dp"
@@ -52,7 +53,7 @@
                         />
 
                     <com.github.fastshape.MyTextView
-                        android:id="@+id/tv_goods_banner_image"
+                        android:id="@+id/tv_paimai_goods_detail_banner_image"
                         android:layout_width="wrap_content"
                         android:layout_height="22dp"
                         android:layout_marginRight="15dp"
@@ -69,6 +70,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_paimai_goods_detail_time"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:gravity="center"
@@ -82,6 +84,7 @@
                     android:padding="10dp"
                     >
                     <com.github.fastshape.MyTextView
+                        android:id="@+id/tv_paimai_goods_detail_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0元拍"
@@ -91,19 +94,23 @@
                         app:radius="4dp"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
+                        android:layout_marginTop="2dp"
                         />
                     <TextView
+                        android:id="@+id/tv_paimai_goods_detail_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/_12288_12288_12288_12288_12288_12288"
+                        tools:text=""
                         android:textColor="@color/gray_33"
-                        android:lineSpacingExtra="3dp"
+                        android:lineSpacingExtra="4dp"
+                        android:textSize="15sp"
                         />
                 </FrameLayout>
                 <TextView
+                    android:id="@+id/tv_paimai_goods_detail_jiajia"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="加价幅度:100"
+                    tools:text="加价幅度:100"
                     android:layout_marginLeft="10dp"
                     />
                 <LinearLayout
@@ -120,9 +127,10 @@
                         android:textColor="@color/red"
                         />
                     <TextView
+                        android:id="@+id/tv_paimai_goods_detail_now_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="¥234100"
+                        tools:text="¥234100"
                         android:layout_marginLeft="10dp"
                         android:textSize="16sp"
                         android:textColor="@color/red"
@@ -139,21 +147,24 @@
                     android:layout_marginTop="5dp"
                     >
                     <TextView
+                        android:id="@+id/tv_paimai_goods_detail_weiguan"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="围观:222人"
+                        tools:text="围观:222人"
                         />
                     <TextView
+                        android:id="@+id/tv_paimai_goods_detail_tixing"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="提醒:20人"
+                        tools:text="提醒:20人"
                         />
                     <TextView
+                        android:id="@+id/tv_paimai_goods_detail_chujia"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="出价:20人"
+                        tools:text="出价:20人"
                         />
                 </LinearLayout>
                 <View
@@ -161,16 +172,34 @@
                     android:layout_height="5dp"
                     android:background="@color/divider_color"
                     />
-                <android.support.design.widget.TabLayout
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="出价"
+                    android:paddingLeft="10dp"
+                    android:textColor="@color/red"
+                    android:textSize="15sp"
+                    android:gravity="center_vertical"
+                    />
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                    android:layout_height="2px"
+                    android:background="@color/divider_color"
+                    />
+                 <com.library.base.view.MyRecyclerView
+                     android:id="@+id/rv_paimai_goods_detail_chujia"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     >
 
-                </android.support.design.widget.TabLayout>
-                <android.support.v4.view.ViewPager
+                 </com.library.base.view.MyRecyclerView>
+                <LinearLayout
+                    android:id="@+id/ll_paimai_goods_detail_more_chujia"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp">
-
-                </android.support.v4.view.ViewPager>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    >
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2px"
@@ -182,6 +211,8 @@
                     android:text="查看更多报价"
                     android:gravity="center"
                     />
+
+                </LinearLayout>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="5dp"
@@ -212,14 +243,14 @@
                         />
                 </LinearLayout>
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_goods_detail"
+                    android:id="@+id/rv_paimai_goods_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     >
                 </android.support.v7.widget.RecyclerView>
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_goods_img"
+                    android:id="@+id/rv_paimai_goods_detail_img"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     >
@@ -241,6 +272,7 @@
                         android:text="推荐"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
+                        android:textSize="14sp"
                         />
                     <View
                         android:layout_width="15dp"
@@ -249,7 +281,7 @@
                         />
                 </LinearLayout>
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_goods_tuijian"
+                    android:id="@+id/rv_paimai_goods_detail_tuijian"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     >
@@ -257,7 +289,6 @@
 
             </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
-    <include layout="@layout/app_title"/>
     <com.github.fastshape.MyLinearLayout
         android:id="@+id/ll_bottom"
         android:layout_width="match_parent"
@@ -269,26 +300,32 @@
         app:borderWidth="2px"
         >
         <com.github.fastshape.MyTextView
+            android:id="@+id/tv_paimai_goods_detail_kefu"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/kefu"
+            android:gravity="center"
             android:text="客服"
-            android:gravity="center"
-            android:drawableTop="@drawable/qq"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
+            android:textSize="12sp"
             />
+
         <com.github.fastshape.MyTextView
+            android:id="@+id/tv_paimai_goods_detail_collection"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="收藏"
-            android:gravity="center"
-            android:drawableTop="@drawable/qq"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="3dp"
             android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/collection_goods"
+            android:gravity="center"
+            android:text="收藏"
+            android:textSize="12sp"
             />
         <LinearLayout
+            android:id="@+id/ll_paimai_goods_detail_tixing"
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="match_parent"
@@ -299,7 +336,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/qq"
+                android:src="@drawable/tixing"
                 />
             <com.github.fastshape.MyTextView
                 android:layout_width="wrap_content"
@@ -312,6 +349,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_paimai_goods_detail_chujia"
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="match_parent"
@@ -322,7 +360,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/qq"
+                android:src="@drawable/chujia"
                 />
             <com.github.fastshape.MyTextView
                 android:layout_width="wrap_content"
@@ -334,4 +372,41 @@
                 />
         </LinearLayout>
     </com.github.fastshape.MyLinearLayout>
+    <RelativeLayout
+        android:id="@+id/rl_paimai_goods_detail_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_title_height"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:background="@color/title_bg"
+        >
+        <ImageView
+            android:id="@+id/iv_paimai_goods_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/goods_back"
+            />
+        <TextView
+            android:id="@+id/tv_paimai_goods_detail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            tools:text="¥321312"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:visibility="gone"
+            />
+            <ImageView
+                android:id="@+id/iv_paimai_goods_share"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingRight="12dp"
+                android:src="@drawable/goods_share"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                />
+    </RelativeLayout>
 </com.library.base.ProgressLayout>

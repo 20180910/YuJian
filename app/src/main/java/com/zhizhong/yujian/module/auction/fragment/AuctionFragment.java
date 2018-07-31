@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.github.androidtools.PhoneUtils;
+import com.github.androidtools.inter.MyOnClickListener;
 import com.github.baseclass.BaseDividerGridItem;
 import com.github.rxbus.MyConsumer;
 import com.youth.banner.Banner;
@@ -24,12 +25,12 @@ import com.zhizhong.yujian.base.GlideLoader;
 import com.zhizhong.yujian.base.GlideUtils;
 import com.zhizhong.yujian.base.ImageSizeUtils;
 import com.zhizhong.yujian.base.MyCallBack;
+import com.zhizhong.yujian.module.auction.activity.AuctionDetailActivity;
 import com.zhizhong.yujian.module.auction.adapter.PaiMaiGoodsAdapter;
 import com.zhizhong.yujian.module.auction.event.CountdownEvent;
 import com.zhizhong.yujian.module.auction.network.ApiRequest;
 import com.zhizhong.yujian.module.auction.network.response.PaiMaiBannerObj;
 import com.zhizhong.yujian.module.auction.network.response.PaiMaiGoodsObj;
-import com.zhizhong.yujian.module.mall.activity.GoodsDetailActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -161,7 +162,7 @@ public class AuctionFragment extends BaseFragment {
                     public void OnBannerClick(int position) {
                         Intent intent = new Intent();
                         intent.putExtra(IntentParam.goodsId, obj.getShuffling_list().get(position).getGoods_id());
-                        STActivity(intent, GoodsDetailActivity.class);
+                        STActivity(intent, AuctionDetailActivity.class);
                     }
                 });
                 bn_paimai_img_banner.start();
@@ -189,7 +190,7 @@ public class AuctionFragment extends BaseFragment {
                 if (notEmpty(list)) {
                     for (int i = 0; i < list.size(); i++) {
 
-                        PaiMaiGoodsObj paiMaiGoodsObj = list.get(i);
+                        final PaiMaiGoodsObj paiMaiGoodsObj = list.get(i);
 
                         View jiePaiView = getLayoutInflater().inflate(R.layout.auction_jijiangjiepai_include, null);
 
@@ -215,6 +216,15 @@ public class AuctionFragment extends BaseFragment {
 
 
                         ll_paimai_jijianjiepai.addView(jiePaiView);
+
+                        jiePaiView.setOnClickListener(new MyOnClickListener() {
+                            @Override
+                            protected void onNoDoubleClick(View view) {
+                                Intent intent=new Intent();
+                                intent.putExtra(IntentParam.goodsId,paiMaiGoodsObj.getGoods_id());
+                                STActivity(AuctionDetailActivity.class);
+                            }
+                        });
 
                     }
 

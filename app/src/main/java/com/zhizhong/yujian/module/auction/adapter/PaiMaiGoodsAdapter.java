@@ -1,6 +1,7 @@
 package com.zhizhong.yujian.module.auction.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
@@ -12,11 +13,14 @@ import android.widget.TextView;
 
 import com.github.androidtools.DateUtils;
 import com.github.androidtools.PhoneUtils;
+import com.github.androidtools.inter.MyOnClickListener;
 import com.github.baseclass.adapter.MyRecyclerViewHolder;
 import com.github.rxbus.RxBus;
+import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.adapter.MyAdapter;
 import com.zhizhong.yujian.base.GlideUtils;
+import com.zhizhong.yujian.module.auction.activity.AuctionDetailActivity;
 import com.zhizhong.yujian.module.auction.event.CountdownEvent;
 import com.zhizhong.yujian.module.auction.network.response.PaiMaiGoodsObj;
 import com.zhizhong.yujian.tools.DateFormatUtils;
@@ -40,7 +44,7 @@ public class PaiMaiGoodsAdapter extends MyAdapter<PaiMaiGoodsObj> {
     }
 
     @Override
-    public void bindData(MyRecyclerViewHolder holder, int position, PaiMaiGoodsObj item) {
+    public void bindData(MyRecyclerViewHolder holder, int position, final PaiMaiGoodsObj item) {
         super.bindData(holder, position, item);
         ImageView iv_paimai_type = holder.getImageView(R.id.iv_paimai_type);
         if(item.getType()==1){
@@ -91,6 +95,16 @@ public class PaiMaiGoodsAdapter extends MyAdapter<PaiMaiGoodsObj> {
         }
         holder.setText(R.id.tv_paimai_goods_name,item.getGoods_name());
         holder.setText(R.id.tv_paimai_goods_now_price,"当前:¥"+item.getDangqian_price().toString());
+
+
+        holder.itemView.setOnClickListener(new MyOnClickListener() {
+            @Override
+            protected void onNoDoubleClick(View view) {
+                Intent intent=new Intent(mContext,AuctionDetailActivity.class);
+                intent.putExtra(IntentParam.goodsId,item.getGoods_id());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     public void daoJiShi(final TextView textView,final int flag,final long beginTime,final long endTime){
