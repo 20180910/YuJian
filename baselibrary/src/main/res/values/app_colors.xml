@@ -5,7 +5,7 @@
     <!--<color name="app_status">#419BF3</color>-->
     <!--<color name="app_bar">#419BF3</color>-->
 
-    <color name="app_status">#ffffff</color>
+    <color name="app_status">#FF353535</color>
     <color name="app_bar">#ffffff</color>
     <color name="bg_color">#ffffff</color>
     <!--<color name="theme_color">#419BF3</color>-->

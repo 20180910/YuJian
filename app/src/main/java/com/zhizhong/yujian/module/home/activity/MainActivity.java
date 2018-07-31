@@ -22,7 +22,7 @@ import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.base.BaseActivity;
 import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.event.LoginSuccessEvent;
-import com.zhizhong.yujian.module.home.fragment.AuctionFragment;
+import com.zhizhong.yujian.module.auction.fragment.AuctionFragment;
 import com.zhizhong.yujian.module.home.fragment.HomeFragment;
 import com.zhizhong.yujian.module.home.fragment.LiveFragment;
 import com.zhizhong.yujian.module.mall.fragment.MallFragment;

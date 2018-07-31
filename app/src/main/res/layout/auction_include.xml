@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/bg_color"
+              android:orientation="vertical"
+    >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <com.youth.banner.Banner
+                android:id="@+id/bn_paimai_img_banner"
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                app:delay_time="5000"
+                app:image_scale_type="fit_xy"
+                app:scroll_time="2000"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/divider_color"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                >
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="16dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0元拍"
+                            android:textColor="@color/gray_66"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_paimai_lingyuanpai"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/gray_99"
+                            tools:text="0元起拍"
+                            android:textSize="12sp"
+                            />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/iv_paimai_lingyuan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="70dp"
+                        android:layout_gravity="bottom|right"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginRight="5dp"
+                        android:adjustViewBounds="true"
+                        tools:src="@drawable/qq"
+                        />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2px"
+                    android:layout_weight="1"
+                    android:gravity="top"
+                    android:orientation="vertical"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="2px"
+                        android:background="@color/white"
+                        >
+
+                        <TextView
+                            android:id="@+id/tv_paimai_xrtj"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/gray_66"
+                            android:text="新人推荐"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_paimai_xingrentuijian"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_paimai_xrtj"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            tools:text="0元起拍"
+                            android:textSize="12sp"
+                            />
+
+                        <ImageView
+                            android:id="@+id/iv_paimai_xinren"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:adjustViewBounds="true"
+                            tools:src="@drawable/qq"
+                            />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="2px"
+                        android:background="@color/white"
+                        >
+
+                        <TextView
+                            android:id="@+id/tv_paimai_lspp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:text="历史拍品"
+                            android:textColor="@color/gray_66"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_paimai_lishipaipin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_paimai_lspp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            tools:text="0元起拍"
+                            android:textSize="12sp"
+                            />
+
+                        <ImageView
+                            android:id="@+id/iv_paimai_lishi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:adjustViewBounds="true"
+                            tools:src="@drawable/qq"
+                            />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_paimai_jijianjiepai_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="43dp"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="即将结拍"
+                    android:textColor="@color/gray_33"
+                    android:textSize="16sp"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/ll_paimai_jijianjiepai"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="15dp"
+                    android:paddingLeft="10dp"
+                    >
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@color/divider_color"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:background="@color/white"
+                android:drawableRight="@drawable/arrow_right"
+                android:gravity="center"
+                android:paddingRight="10dp"
+                android:text="全部"
+                android:textColor="@color/gray_33"
+                android:textSize="17sp"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/divider_color"
+                />
+        </LinearLayout>
+</LinearLayout>

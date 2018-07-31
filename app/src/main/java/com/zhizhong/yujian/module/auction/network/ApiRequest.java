@@ -4,7 +4,6 @@ import com.github.retrofitutil.NoNetworkException;
 import com.library.base.BaseApiRequest;
 import com.zhizhong.yujian.Config;
 import com.zhizhong.yujian.base.MyCallBack;
-import com.zhizhong.yujian.module.home.network.*;
 
 import java.util.Map;
 
@@ -14,9 +13,17 @@ import java.util.Map;
 
 public class ApiRequest extends BaseApiRequest {
  
-    public static void getHomeZiXun(Map map, MyCallBack callBack) {
+    public static void getPaiMaiBanner(Map map, MyCallBack callBack) {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
-        getGeneralClient(com.zhizhong.yujian.module.home.network.IRequest.class).getHomeZiXun(map).enqueue(callBack);
+        getGeneralClient(IRequest.class).getPaiMaiBanner(map).enqueue(callBack);
+    }
+    public static void getPaiMaiTuiJian(Map map, MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
+        getGeneralClient(IRequest.class).getPaiMaiTuiJian(map).enqueue(callBack);
+    }
+    public static void getAllPaiMai(Map map, MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
+        getGeneralClient(IRequest.class).getAllPaiMai(map).enqueue(callBack);
     }
 
 }

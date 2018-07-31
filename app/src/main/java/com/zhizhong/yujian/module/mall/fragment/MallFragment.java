@@ -14,6 +14,7 @@ import com.github.fastshape.MyTextView;
 import com.github.rxbus.MyConsumer;
 import com.library.base.BaseObj;
 import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
 import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.adapter.GoodsAdapter;
@@ -25,6 +26,7 @@ import com.zhizhong.yujian.base.ImageSizeUtils;
 import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.event.JoinShoppingCartEvent;
 import com.zhizhong.yujian.module.mall.activity.GoodsClassActivity;
+import com.zhizhong.yujian.module.mall.activity.GoodsDetailActivity;
 import com.zhizhong.yujian.module.mall.activity.ShoppingCartActivity;
 import com.zhizhong.yujian.module.mall.network.ApiRequest;
 import com.zhizhong.yujian.module.mall.network.response.MallGoodsObj;
@@ -157,13 +159,21 @@ public class MallFragment extends BaseFragment {
             @Override
             public void onSuccess(MallGoodsObj obj, int errorCode, String msg) {
                 if(notEmpty(obj.getMall_shuffling_list())){
-                    List<MallGoodsObj.MallShufflingListBean> list = obj.getMall_shuffling_list();
+                    final List<MallGoodsObj.MallShufflingListBean> list = obj.getMall_shuffling_list();
                     for (int i = 0; i < list.size(); i++) {
                         bannerList.add(list.get(i).getImg_url());
                     }
                     bn_mall.setLayoutParams(ImageSizeUtils.getImageSizeLayoutParams(mContext));
                     bn_mall.setImages(bannerList);
                     bn_mall.setImageLoader(new GlideLoader());
+                    bn_mall.setOnBannerListener(new OnBannerListener() {
+                        @Override
+                        public void OnBannerClick(int position) {
+                            Intent intent=new Intent();
+                            intent.putExtra(IntentParam.goodsId,list.get(position).getGoods_id());
+                            STActivity(intent,GoodsDetailActivity.class);
+                        }
+                    });
                     bn_mall.start();
                 }
                 goodsTypeAdapter.setList(obj.getGoods_type(),true);

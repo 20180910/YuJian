@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     app:clipBorderColor="@color/gray_99"
     app:clipBorderWidth="1px"
@@ -15,38 +16,42 @@
         android:layout_height="wrap_content"
         >
         <ImageView
+            android:id="@+id/iv_paimai_img"
             android:layout_width="match_parent"
             android:layout_height="90dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/qq"
+            tools:src="@drawable/qq"
+            android:scaleType="centerCrop"
             />
         <TextView
+            android:id="@+id/tv_paimai_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="#3b3d3737"
+            android:background="#A13D3737"
             android:paddingBottom="3dp"
             android:paddingLeft="5dp"
             android:paddingTop="3dp"
-            android:text="拍卖中"
+            tools:text="拍卖中"
             android:textColor="@color/red"
             />
         <TextView
+            android:id="@+id/tv_paimai_chujia_num"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:paddingBottom="3dp"
             android:paddingRight="5dp"
             android:paddingTop="3dp"
-            android:text="1352次出价"
+            tools:text="1352次出价"
             android:textColor="@color/white"
             android:gravity="right"
             />
     </FrameLayout>
     <TextView
+        android:id="@+id/tv_paimai_goods_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="御见翡翠"
+        tools:text="御见翡翠"
         android:textSize="15sp"
         android:textColor="@color/gray_33"
         android:layout_margin="5dp"
@@ -54,9 +59,10 @@
         android:ellipsize="end"
         />
     <TextView
+        android:id="@+id/tv_paimai_goods_now_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="当前:¥199.00"
+        tools:text="当前:¥199.00"
         android:textColor="@color/red"
         android:textSize="13sp"
         android:maxLines="1"
@@ -65,9 +71,10 @@
         android:layout_marginBottom="2dp"
         />
     <TextView
+        android:id="@+id/tv_paimai_goods_end_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="距结束10:00:00"
+        tools:text="距结束10:00:00"
         android:textColor="@color/gray_99"
         android:layout_marginLeft="5dp"
         android:layout_marginBottom="5dp"

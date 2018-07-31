@@ -437,14 +437,9 @@ public class GoodsDetailActivity extends BaseActivity {
 
     }
 
-    @Override
-    protected void onViewClick(View v) {
-
-    }
-
     @OnClick({R.id.tv_goods_banner_video,R.id.ll_goods_detail_youhuiquan,R.id.tv_goods_detail_look_evaluation,
             R.id.tv_goods_banner_image,R.id.tv_goods_detail_kefu, R.id.tv_goods_detail_collection, R.id.tv_goods_detail_join_shoppincart, R.id.tv_goods_detail_buy, R.id.iv_goods_back, R.id.fl_goods_shopping, R.id.iv_goods_share})
-    public void onClick(View view) {
+    public void onViewClick(View view) {
         Intent intent;
         switch (view.getId()) {
             case R.id.tv_goods_detail_look_evaluation:
