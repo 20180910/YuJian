@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -41,6 +42,13 @@ public class PaiMaiGoodsAdapter extends MyAdapter<PaiMaiGoodsObj> {
     @Override
     public void bindData(MyRecyclerViewHolder holder, int position, PaiMaiGoodsObj item) {
         super.bindData(holder, position, item);
+        ImageView iv_paimai_type = holder.getImageView(R.id.iv_paimai_type);
+        if(item.getType()==1){
+            iv_paimai_type.setVisibility(View.VISIBLE);
+        }else{
+            iv_paimai_type.setVisibility(View.GONE);
+        }
+
         final ImageView imageView = holder.getImageView(R.id.iv_paimai_img);
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         if(position%2==0){

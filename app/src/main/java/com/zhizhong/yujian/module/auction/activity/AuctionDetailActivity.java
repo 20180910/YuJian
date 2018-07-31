@@ -2,12 +2,13 @@ package com.zhizhong.yujian.module.auction.activity;
 
 import android.view.View;
 
+import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.base.BaseActivity;
 
 public class AuctionDetailActivity extends BaseActivity {
     @Override
     protected int getContentView() {
-        return 0;
+        return R.layout.auction_detail_act;
     }
 
     @Override

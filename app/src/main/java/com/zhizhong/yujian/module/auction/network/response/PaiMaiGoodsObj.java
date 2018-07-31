@@ -18,6 +18,7 @@ public class PaiMaiGoodsObj extends BaseObj {
     private String goods_id;
     private String goods_image;
     private String goods_name;
+    private int type;
     private int chujia_num;
     private BigDecimal dangqian_price;
     private long begin_time;
@@ -45,6 +46,14 @@ public class PaiMaiGoodsObj extends BaseObj {
 
     public void setGoods_name(String goods_name) {
         this.goods_name = goods_name;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public int getChujia_num() {
