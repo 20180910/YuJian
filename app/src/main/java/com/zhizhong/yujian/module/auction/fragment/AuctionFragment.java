@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.github.androidtools.PhoneUtils;
 import com.github.baseclass.BaseDividerGridItem;
+import com.github.rxbus.MyConsumer;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 import com.zhizhong.yujian.IntentParam;
@@ -24,6 +25,7 @@ import com.zhizhong.yujian.base.GlideUtils;
 import com.zhizhong.yujian.base.ImageSizeUtils;
 import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.module.auction.adapter.PaiMaiGoodsAdapter;
+import com.zhizhong.yujian.module.auction.event.CountdownEvent;
 import com.zhizhong.yujian.module.auction.network.ApiRequest;
 import com.zhizhong.yujian.module.auction.network.response.PaiMaiBannerObj;
 import com.zhizhong.yujian.module.auction.network.response.PaiMaiGoodsObj;
@@ -65,6 +67,28 @@ public class AuctionFragment extends BaseFragment {
     @Override
     protected int getContentView() {
         return R.layout.auction_frag;
+    }
+
+    @Override
+    protected void initRxBus() {
+        super.initRxBus();
+        getEvent(CountdownEvent.class, new MyConsumer<CountdownEvent>() {
+            @Override
+            public void onAccept(CountdownEvent event) {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("type", "0");
+                map.put("pagesize", pagesize + "");
+                map.put("page", "1");
+                map.put("sign", getSign(map));
+                ApiRequest.getAllPaiMai(map, new MyCallBack<List<PaiMaiGoodsObj>>(mContext ) {
+                    @Override
+                    public void onSuccess(List<PaiMaiGoodsObj> list, int errorCode, String msg) {
+                        pageNum = 2;
+                        adapter.setList(list, true);
+                    }
+                });
+            }
+        });
     }
 
     @Override

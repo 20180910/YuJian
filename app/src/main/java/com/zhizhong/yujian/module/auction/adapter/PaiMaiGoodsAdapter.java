@@ -2,6 +2,7 @@ package com.zhizhong.yujian.module.auction.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -11,17 +12,30 @@ import android.widget.TextView;
 import com.github.androidtools.DateUtils;
 import com.github.androidtools.PhoneUtils;
 import com.github.baseclass.adapter.MyRecyclerViewHolder;
+import com.github.rxbus.RxBus;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.adapter.MyAdapter;
 import com.zhizhong.yujian.base.GlideUtils;
+import com.zhizhong.yujian.module.auction.event.CountdownEvent;
 import com.zhizhong.yujian.module.auction.network.response.PaiMaiGoodsObj;
 import com.zhizhong.yujian.tools.DateFormatUtils;
 
+import org.reactivestreams.Subscription;
+
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Flowable;
+import io.reactivex.FlowableSubscriber;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.schedulers.Schedulers;
 
 public class PaiMaiGoodsAdapter extends MyAdapter<PaiMaiGoodsObj> {
+    Handler handler;
     public PaiMaiGoodsAdapter(Context mContext, int layoutId, int pageSize) {
         super(mContext, R.layout.paimai_all_item, pageSize);
+        handler=new Handler(mContext.getMainLooper());
     }
 
     @Override
@@ -42,27 +56,65 @@ public class PaiMaiGoodsAdapter extends MyAdapter<PaiMaiGoodsObj> {
 
 
         TextView tv_paimai_status = holder.getTextView(R.id.tv_paimai_status);
+        TextView tv_paimai_goods_end_time = holder.getTextView(R.id.tv_paimai_goods_end_time);
 
         if(item.getBegin_time()>new Date().getTime()){//开始时间大于当前时间-未开始
             tv_paimai_status.setText("预展中");
             tv_paimai_status.setTextColor(Color.parseColor("#FF065B9D"));
 
             holder.setText(R.id.tv_paimai_chujia_num,null);
-            holder.setText(R.id.tv_paimai_goods_end_time,"开拍时间:"+ DateUtils.dateToString(new Date(item.getBegin_time()),"yyyy-MM-dd HH:mm"));
+            tv_paimai_goods_end_time.setText("开拍时间:"+ DateUtils.dateToString(new Date(item.getBegin_time()),"yyyy-MM-dd HH:mm"));
+
+            daoJiShi(tv_paimai_goods_end_time,0,item.getBegin_time(),item.getEnd_time());
         }else if(item.getEnd_time()<new Date().getTime()){
             tv_paimai_status.setText("已结束");//结束时间小于当前时间-已开始
             tv_paimai_status.setTextColor(ContextCompat.getColor(mContext,R.color.red));
 
             holder.setText(R.id.tv_paimai_chujia_num,item.getChujia_num()+"次出价");
-            holder.setText(R.id.tv_paimai_goods_end_time,null);
+            tv_paimai_goods_end_time.setText("结束时间:"+ DateUtils.dateToString(new Date(item.getEnd_time()),"yyyy-MM-dd HH:mm"));
         }else{
             tv_paimai_status.setText("拍卖中");
             tv_paimai_status.setTextColor(ContextCompat.getColor(mContext,R.color.red));
 
             holder.setText(R.id.tv_paimai_chujia_num,item.getChujia_num()+"次出价");
-            holder.setText(R.id.tv_paimai_goods_end_time,"距结束:"+ DateFormatUtils.getXCTime(item.getBegin_time(),item.getEnd_time(),true));
+            tv_paimai_goods_end_time.setText("距结束:"+ DateFormatUtils.getXCTime(new Date().getTime(),item.getEnd_time(),true));
+
+            daoJiShi(tv_paimai_goods_end_time,1,item.getBegin_time(),item.getEnd_time());
         }
         holder.setText(R.id.tv_paimai_goods_name,item.getGoods_name());
         holder.setText(R.id.tv_paimai_goods_now_price,"当前:¥"+item.getDangqian_price().toString());
+    }
+
+    public void daoJiShi(final TextView textView,final int flag,final long beginTime,final long endTime){
+        Flowable.interval(1, TimeUnit.SECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new FlowableSubscriber<Long>() {
+                    @Override
+                    public void onSubscribe(@NonNull Subscription s) {
+                        s.request(Long.MAX_VALUE);
+                    }
+                    @Override
+                    public void onNext(Long aLong) {
+                        if(flag==0){
+                            textView.setText("开拍时间:"+ DateUtils.dateToString(new Date(beginTime),"yyyy-MM-dd HH:mm"));
+                            if(beginTime<=new Date().getTime()){
+                                RxBus.getInstance().post(new CountdownEvent());
+                            }
+                        }else{
+                            textView.setText("距结束:"+ DateFormatUtils.getXCTime(new Date().getTime(),endTime,true));
+                            if(endTime<new Date().getTime()){
+                                RxBus.getInstance().post(new CountdownEvent());
+                            }
+                        }
+                    }
+                    @Override
+                    public void onError(Throwable t) {
+                    }
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 }
