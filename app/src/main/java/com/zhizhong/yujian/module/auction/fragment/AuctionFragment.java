@@ -1,6 +1,7 @@
 package com.zhizhong.yujian.module.auction.fragment;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +27,7 @@ import com.zhizhong.yujian.base.GlideUtils;
 import com.zhizhong.yujian.base.ImageSizeUtils;
 import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.module.auction.activity.AuctionDetailActivity;
+import com.zhizhong.yujian.module.auction.activity.PaiMaiListActivity;
 import com.zhizhong.yujian.module.auction.adapter.PaiMaiGoodsAdapter;
 import com.zhizhong.yujian.module.auction.event.CountdownEvent;
 import com.zhizhong.yujian.module.auction.network.ApiRequest;
@@ -104,6 +106,12 @@ public class AuctionFragment extends BaseFragment {
         app_right_iv.setVisibility(View.VISIBLE);
 
         View auctionIncludeView = getLayoutInflater().inflate(R.layout.auction_include, null);
+        auctionIncludeView.findViewById(R.id.tv_auction_all).setOnClickListener(getL(0));
+        auctionIncludeView.findViewById(R.id.fl_auction_lingyuan).setOnClickListener(getL(1));
+        auctionIncludeView.findViewById(R.id.rl_auction_xinren).setOnClickListener(getL(2));
+        auctionIncludeView.findViewById(R.id.rl_auction_lishi).setOnClickListener(getL(3));
+
+
         bn_paimai_img_banner = auctionIncludeView.findViewById(R.id.bn_paimai_img_banner);
         tv_paimai_lingyuanpai = auctionIncludeView.findViewById(R.id.tv_paimai_lingyuanpai);
         iv_paimai_lingyuan = auctionIncludeView.findViewById(R.id.iv_paimai_lingyuan);
@@ -124,6 +132,18 @@ public class AuctionFragment extends BaseFragment {
         rv_tuijian_all.setAdapter(adapter);
 
 
+    }
+
+    @NonNull
+    private MyOnClickListener getL(final int index) {
+        return new MyOnClickListener() {
+            @Override
+            protected void onNoDoubleClick(View view) {
+                Intent intent=new Intent();
+                intent.putExtra(IntentParam.index,index);
+                STActivity(intent,PaiMaiListActivity.class);
+            }
+        };
     }
 
     @Override

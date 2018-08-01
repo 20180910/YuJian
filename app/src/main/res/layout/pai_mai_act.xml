@@ -9,6 +9,7 @@
 <include layout="@layout/app_title"/>
 
        <android.support.design.widget.TabLayout
+           android:id="@+id/tb_paimai"
            android:layout_width="match_parent"
            android:layout_height="45dp"
            app:tabIndicatorColor="@color/red"
@@ -22,6 +23,7 @@
         android:background="@color/divider_color"
         />
     <android.support.v4.view.ViewPager
+        android:id="@+id/vp_paimai"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

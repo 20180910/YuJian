@@ -38,7 +38,7 @@
         <activity android:name=".module.my.activity.MyBaoZhengJinActivity"/>
         <activity android:name=".module.my.activity.MyAuctionActivity"/>
         <activity android:name=".module.auction.activity.JiaoNaJinActivity"/>
-        <activity android:name=".module.auction.activity.PaiMaiActivity"/>
+        <activity android:name=".module.auction.activity.PaiMaiListActivity"/>
         <activity android:name=".module.my.activity.HelpCenterActivity"/>
         <activity android:name=".module.my.activity.AccountManageActivity"/>
         <activity android:name=".module.my.activity.MyMaiHuiActivity"/>
@@ -84,6 +84,7 @@
         <activity android:name=".module.my.activity.LoginForPwdActivity"/>
         <activity android:name=".module.mall.activity.GoodsDetailActivity" android:configChanges="screenSize|keyboardHidden|orientation"/>
         <activity android:name=".module.mall.activity.GoodsClassActivity"/>
+        <activity android:name=".module.auction.fragment.ChuJiaActivity"/>
     </application>
 
 </manifest>

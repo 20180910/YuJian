@@ -30,6 +30,9 @@
                         android:text="缴纳保证金"
                         android:paddingLeft="10dp"
                         android:textColor="@color/gray_33"
+                        android:textSize="14sp"
+                        android:drawableLeft="@drawable/baozhengjin"
+                        android:drawablePadding="10dp"
                         />
                     <View
                         android:layout_width="match_parent"
@@ -37,6 +40,7 @@
                         android:background="@color/divider_color"
                         />
                     <com.zhizhong.yujian.view.MyEditText
+                        android:id="@+id/et_baozhengjin_money"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:gravity="center_vertical"
@@ -52,6 +56,7 @@
                         android:hint="请输入保证金"
                         />
                     <com.github.fastshape.MyTextView
+                        android:id="@+id/tv_baozhengjin_commit"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:text="确定"
@@ -81,11 +86,12 @@
                             android:textSize="17sp"
                             />
                         <com.library.base.view.richedit.TheEditor
+                            android:id="@+id/te_baozhengjin_content"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_margin="20dp"
+                            android:background="@color/transparent"
                             >
-
                         </com.library.base.view.richedit.TheEditor>
                     </LinearLayout>
                 </LinearLayout>

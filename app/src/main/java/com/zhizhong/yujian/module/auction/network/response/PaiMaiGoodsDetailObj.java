@@ -46,7 +46,7 @@ public class PaiMaiGoodsDetailObj extends BaseObj {
     private long end_time;
     private List<String> img_list;
     private List<?> pinglun_list;
-    private List<?> chujia_list;
+    private List<ChuJiaObj> chujia_list;
     private List<ProductParameterListBean> product_parameter_list;
     private List<String> goods_details_list;
     private List<PaiMaiGoodsObj> tuijian_list;
@@ -189,11 +189,11 @@ public class PaiMaiGoodsDetailObj extends BaseObj {
         this.pinglun_list = pinglun_list;
     }
 
-    public List<?> getChujia_list() {
+    public List<ChuJiaObj> getChujia_list() {
         return chujia_list;
     }
 
-    public void setChujia_list(List<?> chujia_list) {
+    public void setChujia_list(List<ChuJiaObj> chujia_list) {
         this.chujia_list = chujia_list;
     }
 

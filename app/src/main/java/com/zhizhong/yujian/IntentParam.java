@@ -18,8 +18,8 @@ public class IntentParam {
     public static final String phone = "phone";
     public static final String smsCode = "smsCode";
     public static final String isEditAddress = "isEditAddress";
-    public static final String isEditPeople = "isEditPeople";
-    public static final String visa_id = "visa_id";
+    public static final String baoZhengJin = "baoZhengJin";
+    public static final String index = "index";
     public static final String type = "type";
     public static final String peopleId = "peopleId";
     public static final String imgUrl = "imgUrl";

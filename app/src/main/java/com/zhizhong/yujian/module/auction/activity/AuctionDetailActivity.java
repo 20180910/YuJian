@@ -1,5 +1,6 @@
 package com.zhizhong.yujian.module.auction.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import com.github.androidtools.AndroidUtils;
 import com.github.androidtools.DateUtils;
 import com.github.androidtools.PhoneUtils;
+import com.github.androidtools.inter.MyOnClickListener;
 import com.github.baseclass.BaseDividerGridItem;
 import com.github.baseclass.adapter.MyRecyclerViewHolder;
 import com.github.fastshape.MyTextView;
@@ -35,7 +37,9 @@ import com.zhizhong.yujian.base.ImageSizeUtils;
 import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.module.auction.adapter.PaiMaiGoodsAdapter;
 import com.zhizhong.yujian.module.auction.event.CountdownEvent;
+import com.zhizhong.yujian.module.auction.fragment.ChuJiaActivity;
 import com.zhizhong.yujian.module.auction.network.ApiRequest;
+import com.zhizhong.yujian.module.auction.network.response.BaoZhengJinObj;
 import com.zhizhong.yujian.module.auction.network.response.ChuJiaObj;
 import com.zhizhong.yujian.module.auction.network.response.PaiMaiGoodsDetailObj;
 import com.zhizhong.yujian.module.mall.fragment.GoodsImageFragment;
@@ -126,6 +130,7 @@ public class AuctionDetailActivity extends BaseActivity {
     private long endTime;
     private long beginTime;
     private MySimpleDialog chuJiaDialog;
+    private int baozhengjin;
 
     @Override
     protected int getContentView() {
@@ -158,10 +163,24 @@ public class AuctionDetailActivity extends BaseActivity {
         });
 
 
-        chuJiaAdapter =new MyAdapter(mContext,R.layout.paimai_chujia_item,pageSize) {
+        chuJiaAdapter =new MyAdapter<ChuJiaObj>(mContext,R.layout.paimai_chujia_item,pageSize) {
             @Override
-            public void bindData(MyRecyclerViewHolder holder, int position, Object bean) {
+            public void bindData(MyRecyclerViewHolder holder, int position, ChuJiaObj bean) {
+                ImageView imageView = holder.getImageView(R.id.iv_chujia_person);
+                GlideUtils.into(mContext,bean.getPhoto(),imageView);
+                holder.setText(R.id.tv_chujia_name,bean.getNickname());
+                holder.setText(R.id.tv_chujia_price,"出价:¥"+bean.getPrice().toString());
+                holder.setText(R.id.tv_chujia_time,bean.getAdd_time());
 
+
+                MyTextView tv_chujia_flag = (MyTextView) holder.getView(R.id.tv_chujia_flag);
+                if(position==0){
+                    tv_chujia_flag.setText("领先");
+                    tv_chujia_flag.getViewHelper().setSolidColor(ContextCompat.getColor(mContext,R.color.red)).complete();
+                }else{
+                    tv_chujia_flag.setText("出局");
+                    tv_chujia_flag.getViewHelper().setSolidColor(ContextCompat.getColor(mContext,R.color.gray_99)).complete();
+                }
             }
         };
         rv_paimai_goods_detail_chujia.setAdapter(chuJiaAdapter);
@@ -232,12 +251,11 @@ public class AuctionDetailActivity extends BaseActivity {
         map.put("user_id",getUserId());
         map.put("sign",getSign(map));
         ApiRequest.getPaiMaiGoodsDetail(map, new MyCallBack<PaiMaiGoodsDetailObj>(mContext,pl_load,pcfl) {
-
-
             @Override
             public void onSuccess(PaiMaiGoodsDetailObj obj, int errorCode, String msg) {
                 beginTime = obj.getBegin_time();
                 endTime = obj.getEnd_time();
+                baozhengjin = obj.getIs_baozhengjin();
                 if(beginTime>new Date().getTime()){
                     tv_paimai_goods_detail_time.setText(DateUtils.dateToString(new Date(beginTime),ymdhms)+"开始");
                 }else if(endTime<new Date().getTime()){
@@ -331,6 +349,9 @@ public class AuctionDetailActivity extends BaseActivity {
                 hideFragment(goodsVideoFragment);
                 break;
             case R.id.ll_paimai_goods_detail_more_chujia:
+                Intent intent=new Intent();
+                intent.putExtra(IntentParam.goodsId,goodsId);
+                STActivity(intent,ChuJiaActivity.class);
                 break;
             case R.id.tv_paimai_goods_detail_kefu:
                 break;
@@ -355,12 +376,68 @@ public class AuctionDetailActivity extends BaseActivity {
                 }else if(endTime<new Date().getTime()){
                     showMsg("拍卖已结束");
                     return;
+                }else if(baozhengjin==0){
+                    getBaoZhengJin();
                 }else{
                     getChuJiaPrice();
                 }
                 break;
         }
     }
+
+    private void getBaoZhengJin() {
+        showLoading();
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("rnd",getRnd());
+        map.put("sign",getSign(map));
+        ApiRequest.getBaoZhengJin(map, new MyCallBack<BaoZhengJinObj>(mContext) {
+            @Override
+            public void onSuccess(BaoZhengJinObj obj, int errorCode, String msg) {
+                payBaoZhengJin(obj.getCash_deposit());
+            }
+        });
+
+    }
+
+    private void payBaoZhengJin(final BigDecimal cash_deposit) {
+        View jiaonaView = getLayoutInflater().inflate(R.layout.jiaona_tishi_popu, null);
+        final MySimpleDialog dialog = new MySimpleDialog(mContext);
+        dialog.setGravity(Gravity.CENTER);
+        dialog.setContentView(jiaonaView);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+        jiaonaView.findViewById(R.id.iv_baozhengjin_close).setOnClickListener(new MyOnClickListener() {
+            @Override
+            protected void onNoDoubleClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        TextView tv_baozhengjin_tishi = jiaonaView.findViewById(R.id.tv_baozhengjin_tishi);
+        tv_baozhengjin_tishi.setText("请先缴纳"+cash_deposit.toString()+"元保证金再出价,如果违约会自动扣除,如未违约拍卖结束后可自行提现");
+        jiaonaView.findViewById(R.id.tv_baozhengjin_jiaona).setOnClickListener(new MyOnClickListener() {
+            @Override
+            protected void onNoDoubleClick(View view) {
+                dialog.dismiss();
+                Intent intent=new Intent();
+                intent.putExtra(IntentParam.baoZhengJin,cash_deposit);
+                STActivityForResult(intent,JiaoNaJinActivity.class,1000);
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==RESULT_OK){
+            switch (requestCode){
+                case 1000:
+                    showLoading();
+                    getData(1,false);
+                break;
+            }
+        }
+    }
+
     private void getChuJiaPrice() {
         showLoading();
         Map<String,String>map=new HashMap<String,String>();
@@ -426,13 +503,14 @@ public class AuctionDetailActivity extends BaseActivity {
         map.put("goods_id",goodsId);
         map.put("price",chuJiaResult.toString());
         map.put("sign",getSign(map));
-        ApiRequest.chuJia(map, new MyCallBack<BaseObj>(mContext) {
+        ApiRequest.chuJia(map, new MyCallBack<BaseObj>(mContext,true) {
             @Override
             public void onSuccess(BaseObj obj, int errorCode, String msg) {
                 if(chuJiaDialog!=null){
                     chuJiaDialog.dismiss();
                 }
                 showMsg(msg);
+                getData(1,false);
             }
         });
 

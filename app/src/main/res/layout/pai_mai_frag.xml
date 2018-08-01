@@ -6,11 +6,26 @@
               android:layout_height="match_parent"
               android:background="@color/bg_color"
     >
-<android.support.v7.widget.RecyclerView
-    android:id="@+id/rv_paimai_goods"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    <com.library.base.ProgressLayout
+        android:id="@id/pl_load"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</android.support.v7.widget.RecyclerView>
+    <in.srain.cube.views.ptr.PtrClassicFrameLayout
+        android:id="@id/pcfl_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:ptr_resistance="2.1"
+        app:ptr_ratio_of_header_height_to_refresh="1.2"
+        >
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_paimai_goods"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+        </android.support.v7.widget.RecyclerView>
+    </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+
+    </com.library.base.ProgressLayout>
 </LinearLayout>

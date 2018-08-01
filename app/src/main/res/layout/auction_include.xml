@@ -31,6 +31,7 @@
                 >
 
                 <FrameLayout
+                    android:id="@+id/fl_auction_lingyuan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -85,6 +86,7 @@
                     >
 
                     <RelativeLayout
+                        android:id="@+id/rl_auction_xinren"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="2px"
@@ -127,6 +129,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/rl_auction_lishi"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="2px"
@@ -208,6 +211,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_auction_all"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
                 android:background="@color/white"

@@ -3,7 +3,6 @@ package com.zhizhong.yujian.module.auction.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,10 +36,8 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 
 public class PaiMaiGoodsAdapter extends MyAdapter<PaiMaiGoodsObj> {
-    Handler handler;
     public PaiMaiGoodsAdapter(Context mContext, int layoutId, int pageSize) {
         super(mContext, R.layout.paimai_all_item, pageSize);
-        handler=new Handler(mContext.getMainLooper());
     }
 
     @Override

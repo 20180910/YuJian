@@ -3,6 +3,7 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical">
 
     <com.github.fastshape.MyLinearLayout
@@ -16,16 +17,18 @@
         >
 
         <ImageView
+            android:id="@+id/iv_baozhengjin_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/qq"
+            android:src="@drawable/close"
             android:layout_gravity="right"
             />
 
         <TextView
+            android:id="@+id/tv_baozhengjin_tishi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="请先缴纳请先缴纳请先缴纳请先缴纳请先缴纳请先缴纳请先缴纳请先缴纳请先缴纳请先缴纳请先缴纳请先缴纳请先缴纳请先缴纳请先缴纳"
+            tools:text="请先缴纳请先缴纳请先缴纳请先缴纳请先缴纳请先缴纳请先缴纳请先缴纳请先缴纳请先缴纳请先缴纳请先缴纳请先缴纳请先缴纳请先缴纳"
             android:layout_gravity="center"
             android:textSize="14sp"
             android:textColor="@color/gray_33"
@@ -33,6 +36,7 @@
             />
 
         <com.github.fastshape.MyTextView
+            android:id="@+id/tv_baozhengjin_jiaona"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="去缴纳"
