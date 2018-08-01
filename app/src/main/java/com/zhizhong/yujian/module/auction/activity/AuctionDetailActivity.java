@@ -527,7 +527,6 @@ public class AuctionDetailActivity extends BaseActivity {
                     }
                     @Override
                     public void onNext(Long aLong) {
-
                             textView.setText(""+ DateFormatUtils.getXCTime(new Date().getTime(),endTime,true));
                             if(endTime<new Date().getTime()){
                                 RxBus.getInstance().post(new CountdownEvent());

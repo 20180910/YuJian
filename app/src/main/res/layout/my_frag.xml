@@ -259,6 +259,8 @@
                     android:text="我的拍卖"
                     android:paddingLeft="10dp"
                     android:textSize="14sp"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:paddingRight="10dp"
                     />
                 <View
                     android:layout_width="match_parent"
@@ -273,6 +275,8 @@
                     android:text="我的退款/售后"
                     android:paddingLeft="10dp"
                     android:textSize="14sp"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:paddingRight="10dp"
                     />
                 <View
                     android:layout_width="match_parent"
@@ -287,6 +291,8 @@
                     android:text="我的可卖回"
                     android:paddingLeft="10dp"
                     android:textSize="14sp"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:paddingRight="10dp"
                     />
                 <View
                     android:layout_width="match_parent"
@@ -301,6 +307,8 @@
                     android:text="我的收藏"
                     android:paddingLeft="10dp"
                     android:textSize="14sp"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:paddingRight="10dp"
                     />
                 <View
                     android:layout_width="match_parent"
@@ -315,6 +323,8 @@
                     android:text="我的地址"
                     android:paddingLeft="10dp"
                     android:textSize="14sp"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:paddingRight="10dp"
                     />
                 <View
                     android:layout_width="match_parent"
@@ -329,6 +339,8 @@
                     android:text="我的保证金"
                     android:paddingLeft="10dp"
                     android:textSize="14sp"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:paddingRight="10dp"
                     />
                 <View
                     android:layout_width="match_parent"
@@ -343,6 +355,8 @@
                     android:text="我的评价"
                     android:paddingLeft="10dp"
                     android:textSize="14sp"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:paddingRight="10dp"
                     />
                 <View
                     android:layout_width="match_parent"
@@ -357,6 +371,8 @@
                     android:text="帮助中心"
                     android:paddingLeft="10dp"
                     android:textSize="14sp"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:paddingRight="10dp"
                     />
                 <View
                     android:layout_width="match_parent"

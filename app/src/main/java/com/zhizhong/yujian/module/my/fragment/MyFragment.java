@@ -15,6 +15,7 @@ import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.module.my.activity.AddressListActivity;
 import com.zhizhong.yujian.module.my.activity.HelpCenterActivity;
 import com.zhizhong.yujian.module.my.activity.MessageActivity;
+import com.zhizhong.yujian.module.my.activity.MyCollectionActivity;
 import com.zhizhong.yujian.module.my.activity.MyDataActivity;
 import com.zhizhong.yujian.module.my.activity.SettingActivity;
 import com.zhizhong.yujian.module.my.network.ApiRequest;
@@ -154,6 +155,7 @@ public class MyFragment extends BaseFragment {
             case R.id.tv_my_wodekemaihui:
                 break;
             case R.id.tv_my_wodeshoucang:
+                STActivity(MyCollectionActivity.class);
                 break;
             case R.id.tv_my_wodedizhi:
                 STActivity(AddressListActivity.class);

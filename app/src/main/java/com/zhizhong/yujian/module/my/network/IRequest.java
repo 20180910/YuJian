@@ -5,6 +5,7 @@ import com.library.base.ResponseObj;
 import com.zhizhong.yujian.module.my.network.request.UpdateInfoBody;
 import com.zhizhong.yujian.module.my.network.response.AboutObj;
 import com.zhizhong.yujian.module.my.network.response.AddressObj;
+import com.zhizhong.yujian.module.my.network.response.CollectionGoodsObj;
 import com.zhizhong.yujian.module.my.network.response.HelpCenterObj;
 import com.zhizhong.yujian.module.my.network.response.LoginObj;
 import com.zhizhong.yujian.module.my.network.response.MessageObj;
@@ -86,5 +87,9 @@ public interface IRequest {
     //设置默认地址
     @GET("api/ShippingAddress/GetEditDefalut")
     Call<ResponseObj<BaseObj>> setDefulatAddress(@QueryMap Map<String, String> map);
+
+    //我的收藏
+    @GET("api/UserBase/GetMyCollectionList")
+    Call<ResponseObj<List<CollectionGoodsObj>>> getMyCollection(@QueryMap Map<String, String> map);
 
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
@@ -14,9 +15,11 @@
          android:padding="10dp"
          >
          <ImageView
+             android:id="@+id/iv_collection"
              android:layout_width="110dp"
              android:layout_height="110dp"
-             android:src="@drawable/qq"
+             tools:src="@drawable/shitou"
+             android:scaleType="centerCrop"
              />
          <RelativeLayout
              android:layout_width="match_parent"
@@ -24,33 +27,40 @@
              android:layout_marginLeft="10dp"
              >
              <TextView
-                 android:id="@+id/tv_mycollection_title"
+                 android:id="@+id/tv_collection_title"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:text="御见翡翠"
+                 tools:text="御见翡翠"
                  android:textSize="15sp"
                  android:textColor="@color/gray_33"
                  android:maxLines="1"
                  android:ellipsize="end"
                  />
              <TextView
+                 android:id="@+id/tv_collection_price"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:text="¥213"
+                 tools:text="¥213"
                  android:textColor="@color/red"
                  android:textSize="16sp"
-                 android:layout_below="@+id/tv_mycollection_title"
+                 android:layout_below="@+id/tv_collection_title"
                  android:layout_marginTop="3dp"
                  />
              <com.github.fastshape.MyTextView
+                 android:id="@+id/tv_collection_cancel"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:text="取消收藏"
                  android:layout_alignParentBottom="true"
                  android:textColor="@color/gray_99"
-                 android:layout_marginBottom="8dp"
+                 android:layout_marginBottom="2dp"
+                 android:drawableLeft="@drawable/collection"
+                 android:drawablePadding="5dp"
+                 android:paddingTop="5dp"
+                 android:paddingBottom="5dp"
                  />
              <com.github.fastshape.MyTextView
+                 android:id="@+id/tv_collection_buy"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:text="立即购买"
