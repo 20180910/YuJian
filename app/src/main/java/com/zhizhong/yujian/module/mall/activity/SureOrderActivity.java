@@ -87,8 +87,7 @@ public class SureOrderActivity extends BaseActivity {
     @Override
     protected void initView() {
         String json = getIntent().getStringExtra(IntentParam.shoppingCart);
-        Type type = new TypeToken<List<ShoppingCartObj.ShoppingCartListBean>>() {
-        }.getType();
+        Type type = new TypeToken<List<ShoppingCartObj.ShoppingCartListBean>>(){}.getType();
         goodsBeanList = new Gson().fromJson(json, type);
 
 

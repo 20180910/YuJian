@@ -92,4 +92,8 @@ public interface IRequest {
     @GET("api/UserBase/GetMyCollectionList")
     Call<ResponseObj<List<CollectionGoodsObj>>> getMyCollection(@QueryMap Map<String, String> map);
 
+    //我的订单
+    @GET(" api/UserBase/GetOrderList")
+    Call<ResponseObj<List<CollectionGoodsObj>>> getOrderList(@QueryMap Map<String, String> map);
+
 }

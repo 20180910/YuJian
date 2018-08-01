@@ -19,14 +19,19 @@
             >
             <!--your view-->
             <com.github.fastshape.MyTextView
+                android:id="@+id/tv_account_manage_wx"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="微信"
                 android:textSize="14sp"
                 android:textColor="@color/gray_66"
+                android:drawableLeft="@drawable/account_wx"
+                android:gravity="center_vertical"
+                android:drawablePadding="10dp"
                 />
             <com.github.fastshape.MyTextView
+                android:id="@+id/tv_account_manage_wx_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="未绑定"
@@ -44,14 +49,19 @@
         >
         <!--your view-->
         <com.github.fastshape.MyTextView
+                android:id="@+id/tv_account_manage_qq"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="QQ"
             android:textSize="14sp"
             android:textColor="@color/gray_66"
+            android:drawableLeft="@drawable/account_qq"
+            android:gravity="center_vertical"
+            android:drawablePadding="10dp"
             />
         <com.github.fastshape.MyTextView
+                android:id="@+id/tv_account_manage_qq_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="未绑定"
