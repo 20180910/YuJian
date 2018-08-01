@@ -85,6 +85,7 @@
         <activity android:name=".module.mall.activity.GoodsDetailActivity" android:configChanges="screenSize|keyboardHidden|orientation"/>
         <activity android:name=".module.mall.activity.GoodsClassActivity"/>
         <activity android:name=".module.auction.fragment.ChuJiaActivity"/>
+        <activity android:name=".module.auction.activity.PaiMaiOrderActivity"/>
     </application>
 
 </manifest>

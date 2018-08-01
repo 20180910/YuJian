@@ -7,6 +7,7 @@ import com.zhizhong.yujian.module.auction.network.response.ChuJiaObj;
 import com.zhizhong.yujian.module.auction.network.response.PaiMaiBannerObj;
 import com.zhizhong.yujian.module.auction.network.response.PaiMaiGoodsDetailObj;
 import com.zhizhong.yujian.module.auction.network.response.PaiMaiGoodsObj;
+import com.zhizhong.yujian.module.auction.network.response.PaiMaiOrderObj;
 
 import java.util.List;
 import java.util.Map;
@@ -59,6 +60,12 @@ public interface IRequest {
     //拍卖详情-所有出价
     @GET("api/Auction/GetChuJiaMore")
     Call<ResponseObj<List<ChuJiaObj>>> getAllChuJia(@QueryMap Map<String, String> map);
+
+
+    //拍卖订单
+    @GET("api/Auction/GetMyAuction")
+    Call<ResponseObj<List<PaiMaiOrderObj>>> getPaiMaiOrder(@QueryMap Map<String, String> map);
+
 
 
 

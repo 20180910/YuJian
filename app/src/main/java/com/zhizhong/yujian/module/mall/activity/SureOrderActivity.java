@@ -3,6 +3,7 @@ package com.zhizhong.yujian.module.mall.activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -11,15 +12,19 @@ import android.widget.TextView;
 
 import com.github.androidtools.AndroidUtils;
 import com.github.baseclass.adapter.MyRecyclerViewHolder;
+import com.github.rxbus.RxBus;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.library.base.BaseObj;
 import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.adapter.MyAdapter;
 import com.zhizhong.yujian.base.BaseActivity;
 import com.zhizhong.yujian.base.GlideUtils;
 import com.zhizhong.yujian.base.MyCallBack;
+import com.zhizhong.yujian.event.JoinShoppingCartEvent;
 import com.zhizhong.yujian.module.mall.network.ApiRequest;
+import com.zhizhong.yujian.module.mall.network.request.CommitOrderBody;
 import com.zhizhong.yujian.module.mall.network.response.ShoppingCartObj;
 import com.zhizhong.yujian.module.mall.network.response.YouHuiQuanObj;
 import com.zhizhong.yujian.module.my.activity.AddressListActivity;
@@ -27,6 +32,7 @@ import com.zhizhong.yujian.module.my.network.response.AddressObj;
 
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,7 +73,7 @@ public class SureOrderActivity extends BaseActivity {
     private BigDecimal heJi, xiaoJi;
 
     MyAdapter adapter;
-    private String youhuiId;
+    private String youhuiId="0";
     private BigDecimal youhuiMoney=new BigDecimal(0);
     private BigDecimal youHuiQuanFullMoney=new BigDecimal(0);
     private int youHuiQuanNum;
@@ -252,6 +258,11 @@ public class SureOrderActivity extends BaseActivity {
                 STActivityForResult(intent,LingQuanZhongXinActivity.class,200);
                 break;
             case R.id.tv_sure_order_commit:
+                if(TextUtils.isEmpty(addressId)){
+                    showMsg("请选择地址");
+                    return;
+                }
+                commit();
                 break;
             case R.id.ll_sure_order_address:
             case R.id.ll_sure_order_select_address:
@@ -259,5 +270,44 @@ public class SureOrderActivity extends BaseActivity {
                 STActivityForResult(intent,AddressListActivity.class,100);
                 break;
         }
+    }
+
+    private void commit() {
+        showLoading();
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("user_id",getUserId());
+        map.put("addres_id",addressId);
+        map.put("invoice_type","");
+        map.put("invoice_code","");
+        map.put("invoice_name","");
+        map.put("invoice_tax_number","");
+        map.put("buyer_msg",getSStr(et_sure_order_liuyan));
+        map.put("coupon_id",youhuiId);
+        map.put("sign",getSign(map));
+
+        CommitOrderBody body=new CommitOrderBody();
+
+        List<CommitOrderBody.BodyBean> bodyList=new ArrayList<>();
+        for (int i = 0; i < adapter.getList().size(); i++) {
+
+            ShoppingCartObj.ShoppingCartListBean shoppingCartListBean = (ShoppingCartObj.ShoppingCartListBean) adapter.getList().get(i);
+            CommitOrderBody.BodyBean bodyBean=new CommitOrderBody.BodyBean();
+            bodyBean.setShopping_cart_id(shoppingCartListBean.getId());
+            bodyBean.setGoods_id(shoppingCartListBean.getGoods_id());
+            bodyBean.setNumber(shoppingCartListBean.getNumber());
+
+            bodyList.add(bodyBean);
+        }
+
+        body.setBody(bodyList);
+
+        ApiRequest.commitOrder(map,body,new MyCallBack<BaseObj>(mContext) {
+            @Override
+            public void onSuccess(BaseObj obj, int errorCode, String msg) {
+                RxBus.getInstance().postReplay(new JoinShoppingCartEvent());
+                finish();
+            }
+        });
+
     }
 }

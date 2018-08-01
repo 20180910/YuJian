@@ -2,6 +2,7 @@ package com.zhizhong.yujian.module.mall.network;
 
 import com.library.base.BaseObj;
 import com.library.base.ResponseObj;
+import com.zhizhong.yujian.module.mall.network.request.CommitOrderBody;
 import com.zhizhong.yujian.module.mall.network.response.GoodsDetailObj;
 import com.zhizhong.yujian.module.mall.network.response.GoodsEvaluationNumObj;
 import com.zhizhong.yujian.module.mall.network.response.GoodsEvaluationObj;
@@ -15,7 +16,9 @@ import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
 
 /**
@@ -77,6 +80,11 @@ public interface IRequest {
     //商品分类列表
     @GET("api/GoodsClassiFication/GetGoodsList")
     Call<ResponseObj<List<GoodsObj>>> getGoodsClassList(@QueryMap Map<String, String> map);
+
+
+    //提交订单
+    @POST("api/GoodsClassiFication/PostSubmitOrder")
+    Call<ResponseObj<BaseObj>> commitOrder(@QueryMap Map<String, String> map, @Body CommitOrderBody body);
 
 
 }

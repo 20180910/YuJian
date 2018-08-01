@@ -1,9 +1,11 @@
 package com.zhizhong.yujian.module.my.activity;
 
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.library.base.view.richedit.TheEditor;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.base.BaseActivity;
 import com.zhizhong.yujian.base.GlideUtils;
@@ -21,8 +23,8 @@ public class AboutYuJianActivity extends BaseActivity {
     ImageView iv_about_icon;
     @BindView(R.id.tv_about_title)
     TextView tv_about_title;
-    @BindView(R.id.tv_about_content)
-    TextView tv_about_content;
+    @BindView(R.id.te_about_content)
+    TheEditor te_about_content;
     @BindView(R.id.iv_about_img)
     ImageView iv_about_img;
 
@@ -34,6 +36,8 @@ public class AboutYuJianActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+
+        te_about_content.setInputEnabled(false);
 
     }
 
@@ -55,7 +59,10 @@ public class AboutYuJianActivity extends BaseActivity {
                 GlideUtils.into(mContext,obj.getLogo(),iv_about_icon);
                 GlideUtils.into(mContext,obj.getImg(),iv_about_img);
                 tv_about_title.setText(obj.getTitle());
-                tv_about_content.setText(obj.getContent());
+
+                te_about_content.setBackgroundColor(ContextCompat.getColor(mContext,R.color.transparent));
+                te_about_content.setEditorFontSize(13);
+                te_about_content.setHtml(obj.getContent());
             }
         });
 

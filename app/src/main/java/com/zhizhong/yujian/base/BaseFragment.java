@@ -158,6 +158,7 @@ public abstract class BaseFragment extends MyBaseFragment {
             bn_home.start();
         }
     }*/
+
     public int getAppVersionCode() {
         Context context = mContext;
         int versioncode = 1;
@@ -403,4 +404,7 @@ public abstract class BaseFragment extends MyBaseFragment {
             }
         });
     }*/
+   public void showPay(){
+
+   }
 }

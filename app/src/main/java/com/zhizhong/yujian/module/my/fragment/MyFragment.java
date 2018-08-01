@@ -12,6 +12,7 @@ import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.base.BaseFragment;
 import com.zhizhong.yujian.base.GlideUtils;
 import com.zhizhong.yujian.base.MyCallBack;
+import com.zhizhong.yujian.module.auction.activity.PaiMaiOrderActivity;
 import com.zhizhong.yujian.module.my.activity.AddressListActivity;
 import com.zhizhong.yujian.module.my.activity.HelpCenterActivity;
 import com.zhizhong.yujian.module.my.activity.MessageActivity;
@@ -149,6 +150,7 @@ public class MyFragment extends BaseFragment {
             case R.id.ll_my_daipingjia:
                 break;
             case R.id.tv_my_wodepaimai:
+                STActivity(PaiMaiOrderActivity.class);
                 break;
             case R.id.tv_my_wodetuikuan:
                 break;

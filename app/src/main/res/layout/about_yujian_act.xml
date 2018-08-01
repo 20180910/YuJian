@@ -68,16 +68,14 @@
                     tools:text="带你一起遇见原石之美"
                     />
 
-                <TextView
-                    android:id="@+id/tv_about_content"
+                <com.library.base.view.richedit.TheEditor
+                    android:id="@+id/te_about_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
                     android:layout_marginTop="10dp"
-                    android:textColor="@color/gray_66"
-                    tools:text="关于关于"
                     />
 
                 <ImageView
@@ -88,6 +86,7 @@
                     android:layout_marginRight="30dp"
                     android:adjustViewBounds="true"
                     tools:src="@drawable/about_img"
+                    android:layout_marginBottom="30dp"
                     />
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
