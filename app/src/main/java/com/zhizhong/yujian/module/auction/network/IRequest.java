@@ -1,6 +1,8 @@
 package com.zhizhong.yujian.module.auction.network;
 
+import com.library.base.BaseObj;
 import com.library.base.ResponseObj;
+import com.zhizhong.yujian.module.auction.network.response.ChuJiaObj;
 import com.zhizhong.yujian.module.auction.network.response.PaiMaiBannerObj;
 import com.zhizhong.yujian.module.auction.network.response.PaiMaiGoodsDetailObj;
 import com.zhizhong.yujian.module.auction.network.response.PaiMaiGoodsObj;
@@ -32,5 +34,17 @@ public interface IRequest {
     //拍卖-商品详情
     @GET("api/Auction/GetAuctionDetails")
     Call<ResponseObj<PaiMaiGoodsDetailObj>> getPaiMaiGoodsDetail(@QueryMap Map<String, String> map);
+
+    //拍卖详情-提醒
+    @GET("api/Auction/GetRemind")
+    Call<ResponseObj<BaseObj>> paiMaiDetailTiXing(@QueryMap Map<String, String> map);
+
+    //拍卖详情-获取价格
+    @GET("api/Auction/GetChuJiaPrice")
+    Call<ResponseObj<ChuJiaObj>> getChuJiaPrice(@QueryMap Map<String, String> map);
+
+    //拍卖详情-出价
+    @GET("api/Auction/GetOfferPrice")
+    Call<ResponseObj<BaseObj>> chuJia(@QueryMap Map<String, String> map);
 
 }

@@ -1,10 +1,13 @@
 package com.zhizhong.yujian.module.auction.activity;
 
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -13,10 +16,15 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.github.androidtools.AndroidUtils;
+import com.github.androidtools.DateUtils;
 import com.github.androidtools.PhoneUtils;
 import com.github.baseclass.BaseDividerGridItem;
 import com.github.baseclass.adapter.MyRecyclerViewHolder;
 import com.github.fastshape.MyTextView;
+import com.github.mydialog.MySimpleDialog;
+import com.github.rxbus.RxBus;
+import com.library.base.BaseObj;
 import com.library.base.view.MyRecyclerView;
 import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
@@ -26,14 +34,35 @@ import com.zhizhong.yujian.base.GlideUtils;
 import com.zhizhong.yujian.base.ImageSizeUtils;
 import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.module.auction.adapter.PaiMaiGoodsAdapter;
+import com.zhizhong.yujian.module.auction.event.CountdownEvent;
 import com.zhizhong.yujian.module.auction.network.ApiRequest;
+import com.zhizhong.yujian.module.auction.network.response.ChuJiaObj;
 import com.zhizhong.yujian.module.auction.network.response.PaiMaiGoodsDetailObj;
+import com.zhizhong.yujian.module.mall.fragment.GoodsImageFragment;
+import com.zhizhong.yujian.module.mall.fragment.GoodsVideoFragment;
+import com.zhizhong.yujian.module.my.activity.LoginActivity;
+import com.zhizhong.yujian.network.NetApiRequest;
+import com.zhizhong.yujian.network.response.CollectObj;
+import com.zhizhong.yujian.tools.DateFormatUtils;
 
+import org.reactivestreams.Subscription;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Flowable;
+import io.reactivex.FlowableSubscriber;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.schedulers.Schedulers;
+
+import static com.github.androidtools.DateUtils.ymdhms;
 
 public class AuctionDetailActivity extends BaseActivity {
     @BindView(R.id.fl_paimai_goods_detail_banner)
@@ -86,6 +115,17 @@ public class AuctionDetailActivity extends BaseActivity {
     private String goodsId;
     private MyAdapter goodsDetailAdapter;
     private MyAdapter<String> goodsImageAdapter;
+
+
+    private GoodsImageFragment goodsImageFragment;
+    private GoodsVideoFragment goodsVideoFragment;
+    private BigDecimal raisePrice;
+    BigDecimal chuJiaResult;
+
+
+    private long endTime;
+    private long beginTime;
+    private MySimpleDialog chuJiaDialog;
 
     @Override
     protected int getContentView() {
@@ -192,10 +232,34 @@ public class AuctionDetailActivity extends BaseActivity {
         map.put("user_id",getUserId());
         map.put("sign",getSign(map));
         ApiRequest.getPaiMaiGoodsDetail(map, new MyCallBack<PaiMaiGoodsDetailObj>(mContext,pl_load,pcfl) {
+
+
             @Override
             public void onSuccess(PaiMaiGoodsDetailObj obj, int errorCode, String msg) {
-                tv_paimai_goods_detail_name.setText(getResources().getString(R.string.kg)+obj.getGoods_name());
-                tv_paimai_goods_detail_jiajia.setText("加价幅度:"+obj.getRaise_price());
+                beginTime = obj.getBegin_time();
+                endTime = obj.getEnd_time();
+                if(beginTime>new Date().getTime()){
+                    tv_paimai_goods_detail_time.setText(DateUtils.dateToString(new Date(beginTime),ymdhms)+"开始");
+                }else if(endTime<new Date().getTime()){
+                    tv_paimai_goods_detail_time.setText("已结束");
+                }else{
+                    tv_paimai_goods_detail_time.setText(DateUtils.dateToString(new Date(endTime),ymdhms)+"结束");
+                }
+                if(obj.getType()==1){
+                    tv_paimai_goods_detail_type.setVisibility(View.VISIBLE);
+                    tv_paimai_goods_detail_name.setText(getResources().getString(R.string.kg)+obj.getGoods_name());
+                }else{
+                    tv_paimai_goods_detail_type.setVisibility(View.GONE);
+                    tv_paimai_goods_detail_name.setText(obj.getGoods_name());
+                }
+                setBanner(obj);
+                if(obj.getIs_collect()==1){
+                    tv_paimai_goods_detail_collection.setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.collection,0,0);
+                }else{
+                    tv_paimai_goods_detail_collection.setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.collection_goods,0,0);
+                }
+                raisePrice = obj.getRaise_price();
+                tv_paimai_goods_detail_jiajia.setText("加价幅度:"+obj.getRaise_price().toString());
                 tv_paimai_goods_detail_now_price.setText("¥"+obj.getClap_price().toString());
                 tv_paimai_goods_detail_title.setText("¥"+obj.getClap_price().toString());
                 tv_paimai_goods_detail_weiguan.setText("围观:"+obj.getSales_volume()+"人");
@@ -218,20 +282,220 @@ public class AuctionDetailActivity extends BaseActivity {
             }
         });
     }
+    private void setBanner(PaiMaiGoodsDetailObj obj) {
 
-    @OnClick({R.id.ll_paimai_goods_detail_more_chujia,R.id.tv_paimai_goods_detail_kefu, R.id.tv_paimai_goods_detail_collection, R.id.ll_paimai_goods_detail_tixing, R.id.ll_paimai_goods_detail_chujia})
+        ArrayList<String> list=new ArrayList<>();
+        list.addAll(obj.getImg_list());
+
+        goodsImageFragment = GoodsImageFragment.newInstance(list);
+        addFragment(R.id.fl_paimai_goods_detail_banner, goodsImageFragment);
+
+        if(TextUtils.isEmpty(obj.getGoods_video())){
+            ll_paimai_goods_detail_banner_type.setVisibility(View.GONE);
+        }else{
+            goodsVideoFragment = GoodsVideoFragment.newInstance(obj.getGoods_image(), obj.getGoods_video());
+            addFragment(R.id.fl_paimai_goods_detail_banner, goodsVideoFragment);
+            hideFragment(goodsImageFragment);
+            ll_paimai_goods_detail_banner_type.setVisibility(View.VISIBLE);
+        }
+
+    }
+    @OnClick({R.id.iv_paimai_goods_share,R.id.iv_paimai_goods_back,R.id.tv_paimai_goods_detail_banner_video,R.id.tv_paimai_goods_detail_banner_image,R.id.ll_paimai_goods_detail_more_chujia,R.id.tv_paimai_goods_detail_kefu, R.id.tv_paimai_goods_detail_collection, R.id.ll_paimai_goods_detail_tixing, R.id.ll_paimai_goods_detail_chujia})
     public void onViewClick(View view) {
         switch (view.getId()) {
+            case R.id.iv_paimai_goods_back:
+                finish();
+                break;
+            case R.id.iv_paimai_goods_share:
+
+                break;
+            case R.id.tv_paimai_goods_detail_banner_video:
+                tv_paimai_goods_detail_banner_video.setTextColor(ContextCompat.getColor(mContext,R.color.white));
+                tv_paimai_goods_detail_banner_video.getViewHelper().setSolidColor(ContextCompat.getColor(mContext,R.color.gray_66)).complete();
+
+                tv_paimai_goods_detail_banner_video.setTextColor(ContextCompat.getColor(mContext,R.color.gray_66));
+                tv_paimai_goods_detail_banner_video.getViewHelper().setSolidColor(ContextCompat.getColor(mContext,R.color.white)).complete();
+
+                showFragment(goodsVideoFragment);
+                hideFragment(goodsImageFragment);
+                break;
+            case R.id.tv_paimai_goods_detail_banner_image:
+                tv_paimai_goods_detail_banner_image.setTextColor(ContextCompat.getColor(mContext,R.color.white));
+                tv_paimai_goods_detail_banner_image.getViewHelper().setSolidColor(ContextCompat.getColor(mContext,R.color.gray_66)).complete();
+
+                tv_paimai_goods_detail_banner_video.setTextColor(ContextCompat.getColor(mContext,R.color.gray_66));
+                tv_paimai_goods_detail_banner_video.getViewHelper().setSolidColor(ContextCompat.getColor(mContext,R.color.white)).complete();
+
+
+                showFragment(goodsImageFragment);
+                hideFragment(goodsVideoFragment);
+                break;
             case R.id.ll_paimai_goods_detail_more_chujia:
                 break;
             case R.id.tv_paimai_goods_detail_kefu:
                 break;
             case R.id.tv_paimai_goods_detail_collection:
+                if(noLogin()){
+                    STActivity(LoginActivity.class);
+                    return;
+                }
+                collect();
                 break;
             case R.id.ll_paimai_goods_detail_tixing:
+                if(noLogin()){
+                    STActivity(LoginActivity.class);
+                    return;
+                }
+                tiXing();
                 break;
             case R.id.ll_paimai_goods_detail_chujia:
+                if(beginTime>new Date().getTime()){
+                    showMsg("拍卖未开始");
+                    return;
+                }else if(endTime<new Date().getTime()){
+                    showMsg("拍卖已结束");
+                    return;
+                }else{
+                    getChuJiaPrice();
+                }
                 break;
         }
+    }
+    private void getChuJiaPrice() {
+        showLoading();
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("goods_id",goodsId);
+        map.put("sign",getSign(map));
+        ApiRequest.getChuJiaPrice(map, new MyCallBack<ChuJiaObj>(mContext) {
+            @Override
+            public void onSuccess(ChuJiaObj obj, int errorCode, String msg) {
+                showChuJiaPopu(obj.getPrice());
+            }
+        });
+
+
+    }
+    private void showChuJiaPopu(final BigDecimal price) {
+        chuJiaResult=price;
+        View chuJiaView = getLayoutInflater().inflate(R.layout.paimai_chujia_popu, null);
+
+        TextView tv_paimai_chujia_time = chuJiaView.findViewById(R.id.tv_paimai_chujia_time);
+        TextView tv_paimai_chujia_jiajia = chuJiaView.findViewById(R.id.tv_paimai_chujia_jiajia);
+        final TextView tv_paimai_chujia_price = chuJiaView.findViewById(R.id.tv_paimai_chujia_price);
+        tv_paimai_chujia_time.setText(""+ DateFormatUtils.getXCTime(new Date().getTime(),endTime,true));
+        daoJiShi(tv_paimai_chujia_time,beginTime,endTime);
+        tv_paimai_chujia_jiajia.setText(raisePrice.toString()+"元");
+        tv_paimai_chujia_price.setText(price.toString());
+
+
+        chuJiaView.findViewById(R.id.iv_paimai_chujia_jian).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chuJiaResult = AndroidUtils.jianFa(chuJiaResult, raisePrice);
+                if(chuJiaResult.doubleValue()>0){
+                    tv_paimai_chujia_price.setText(chuJiaResult.toString());
+                }
+            }
+        });
+        chuJiaView.findViewById(R.id.iv_paimai_chujia_jia).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chuJiaResult = AndroidUtils.jiaFa(chuJiaResult, raisePrice);
+                tv_paimai_chujia_price.setText(chuJiaResult.toString());
+            }
+        });
+        chuJiaView.findViewById(R.id.tv_paimai_chujia_commit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chuJia(chuJiaResult);
+            }
+        });
+
+        chuJiaDialog = new MySimpleDialog(mContext);
+        chuJiaDialog.setGravity(Gravity.BOTTOM);
+        chuJiaDialog.setFullWidth();
+        chuJiaDialog.setContentView(chuJiaView);
+        chuJiaDialog.setCanceledOnTouchOutside(true);
+        chuJiaDialog.show();
+    }
+
+    private void chuJia(BigDecimal chuJiaResult) {
+        showLoading();
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("user_id",getUserId());
+        map.put("goods_id",goodsId);
+        map.put("price",chuJiaResult.toString());
+        map.put("sign",getSign(map));
+        ApiRequest.chuJia(map, new MyCallBack<BaseObj>(mContext) {
+            @Override
+            public void onSuccess(BaseObj obj, int errorCode, String msg) {
+                if(chuJiaDialog!=null){
+                    chuJiaDialog.dismiss();
+                }
+                showMsg(msg);
+            }
+        });
+
+    }
+
+    public void daoJiShi(final TextView textView, final long beginTime,final long endTime){
+        Flowable.interval(1, TimeUnit.SECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new FlowableSubscriber<Long>() {
+                    @Override
+                    public void onSubscribe(@NonNull Subscription s) {
+                        s.request(Long.MAX_VALUE);
+                    }
+                    @Override
+                    public void onNext(Long aLong) {
+
+                            textView.setText(""+ DateFormatUtils.getXCTime(new Date().getTime(),endTime,true));
+                            if(endTime<new Date().getTime()){
+                                RxBus.getInstance().post(new CountdownEvent());
+                            }
+                    }
+                    @Override
+                    public void onError(Throwable t) {
+                    }
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+
+    private void tiXing() {
+        showLoading();
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("user_id",getUserId());
+        map.put("goods_id",goodsId);
+        map.put("sign",getSign(map));
+        ApiRequest.paiMaiDetailTiXing(map, new MyCallBack<BaseObj>(mContext) {
+            @Override
+            public void onSuccess(BaseObj obj, int errorCode, String msg) {
+                showMsg(msg);
+            }
+        });
+    }
+
+    private void collect() {
+        showLoading();
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("user_id",getUserId());
+        map.put("goods_id",goodsId);
+        map.put("sign",getSign(map));
+        NetApiRequest.collectGoods(map, new MyCallBack<CollectObj>(mContext) {
+            @Override
+            public void onSuccess(CollectObj obj, int errorCode, String msg) {
+                if(obj.getIs_collect()==1){
+                    tv_paimai_goods_detail_collection.setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.collection,0,0);
+                }else{
+                    tv_paimai_goods_detail_collection.setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.collection_goods,0,0);
+                }
+            }
+        });
+
     }
 }

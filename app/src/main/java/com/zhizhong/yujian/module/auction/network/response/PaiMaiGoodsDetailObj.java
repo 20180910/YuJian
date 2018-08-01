@@ -33,16 +33,17 @@ public class PaiMaiGoodsDetailObj extends BaseObj {
     private String goods_name;
     private String goods_image;
     private String goods_video;
-    private double raise_price;
+    private BigDecimal raise_price;
     private BigDecimal clap_price;
     private String sales_volume;//围观人数
     private int stock;//库存
+    private int type;
     private String tixing;
     private String chujia_num;
     private int is_collect;
     private int is_baozhengjin;//保证金是否额度达标(1是 0否)
-    private int begin_time;
-    private int end_time;
+    private long begin_time;
+    private long end_time;
     private List<String> img_list;
     private List<?> pinglun_list;
     private List<?> chujia_list;
@@ -50,8 +51,18 @@ public class PaiMaiGoodsDetailObj extends BaseObj {
     private List<String> goods_details_list;
     private List<PaiMaiGoodsObj> tuijian_list;
 
+    private int multiple=1000;
+
     public String getGoods_id() {
         return goods_id;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public void setGoods_id(String goods_id) {
@@ -82,11 +93,11 @@ public class PaiMaiGoodsDetailObj extends BaseObj {
         this.goods_video = goods_video;
     }
 
-    public double getRaise_price() {
+    public BigDecimal getRaise_price() {
         return raise_price;
     }
 
-    public void setRaise_price(double raise_price) {
+    public void setRaise_price(BigDecimal raise_price) {
         this.raise_price = raise_price;
     }
 
@@ -146,19 +157,19 @@ public class PaiMaiGoodsDetailObj extends BaseObj {
         this.is_baozhengjin = is_baozhengjin;
     }
 
-    public int getBegin_time() {
-        return begin_time;
+    public long getBegin_time() {
+        return begin_time*multiple;
     }
 
-    public void setBegin_time(int begin_time) {
+    public void setBegin_time(long begin_time) {
         this.begin_time = begin_time;
     }
 
-    public int getEnd_time() {
-        return end_time;
+    public long getEnd_time() {
+        return end_time*multiple;
     }
 
-    public void setEnd_time(int end_time) {
+    public void setEnd_time(long end_time) {
         this.end_time = end_time;
     }
 

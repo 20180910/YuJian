@@ -222,7 +222,7 @@ public class AuctionFragment extends BaseFragment {
                             protected void onNoDoubleClick(View view) {
                                 Intent intent=new Intent();
                                 intent.putExtra(IntentParam.goodsId,paiMaiGoodsObj.getGoods_id());
-                                STActivity(AuctionDetailActivity.class);
+                                STActivity(intent,AuctionDetailActivity.class);
                             }
                         });
 

@@ -74,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:gravity="center"
-                    android:text="今天22:00结束"
+                    tools:text="今天22:00结束"
                     android:background="@color/red"
                     android:textColor="@color/white"
                     />
