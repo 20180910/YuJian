@@ -9,6 +9,7 @@ import com.zhizhong.yujian.module.my.network.response.CollectionGoodsObj;
 import com.zhizhong.yujian.module.my.network.response.HelpCenterObj;
 import com.zhizhong.yujian.module.my.network.response.LoginObj;
 import com.zhizhong.yujian.module.my.network.response.MessageObj;
+import com.zhizhong.yujian.module.my.network.response.OrderDetailObj;
 import com.zhizhong.yujian.module.my.network.response.OrderObj;
 
 import java.util.List;
@@ -104,5 +105,9 @@ public interface IRequest {
     //我的订单-取消
     @GET("api/UserBase/GetDelOrder")
     Call<ResponseObj<BaseObj>> deleteOrder(@QueryMap Map<String, String> map);
+
+    //订单详情
+    @GET("api/UserBase/GetOrderMore")
+    Call<ResponseObj<OrderDetailObj>> getOrderDetail(@QueryMap Map<String, String> map);
 
 }

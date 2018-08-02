@@ -32,7 +32,7 @@ public class IntentParam {
     public static final String useYouHuiQuan = "useYouHuiQuan";
     public static final String money = "money";
 
-    public static final String qianZhengType="qianZhengType";
+    public static final String orderNo="orderNo";
     public static final String webUrl="webUrl";
     public static final String goodsTypeId="goodsTypeId";
     public static final String title="title";

@@ -1,6 +1,7 @@
 package com.zhizhong.yujian.module.my.fragment;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +24,7 @@ import com.zhizhong.yujian.base.BaseFragment;
 import com.zhizhong.yujian.base.GlideUtils;
 import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.event.MyOrderEvent;
+import com.zhizhong.yujian.module.my.activity.OrderDetailActivity;
 import com.zhizhong.yujian.module.my.network.ApiRequest;
 import com.zhizhong.yujian.module.my.network.response.OrderObj;
 
@@ -67,6 +69,14 @@ public class MyOrderFragment extends BaseFragment {
         adapter=new MyAdapter<OrderObj>(mContext,R.layout.my_order_item,pageSize) {
             @Override
             public void bindData(MyRecyclerViewHolder holder, int position, final OrderObj bean) {
+                holder.itemView.setOnClickListener(new MyOnClickListener() {
+                    @Override
+                    protected void onNoDoubleClick(View view) {
+                        Intent intent=new Intent();
+                        intent.putExtra(IntentParam.orderNo,bean.getOrder_no());
+                        STActivity(intent,OrderDetailActivity.class);
+                    }
+                });
 
                 holder.setText(R.id.tv_order_no,bean.getOrder_no());
                 LinearLayout ll_order_goods_list = (LinearLayout) holder.getView(R.id.ll_order_goods_list);
