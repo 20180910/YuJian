@@ -54,6 +54,7 @@ public class YouHuiQuanFragment extends BaseFragment {
                     view.setBackgroundResource(R.drawable.youhuiquan_red);
                 }
 
+
                 holder.setText(R.id.tv_youhuiquan_money,"¥"+bean.getFace_value());
                 holder.setText(R.id.tv_youhuiquan_full_money,"满"+bean.getAvailable().toString()+"元可用");
                 holder.setText(R.id.tv_youhuiquan_title,bean.getTitle());

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -32,11 +33,14 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="账户余额"
+                    android:drawableLeft="@drawable/baozhengjin"
+                    android:drawablePadding="10dp"
                     />
                 <TextView
+                    android:id="@+id/tv_tixian_account_balance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="¥1312"
+                    tools:text="¥1312"
                     android:textColor="@color/red"
                     android:textSize="14sp"
                     />
@@ -52,10 +56,15 @@
                 android:background="@color/white"
                 >
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="请选择提现方式"
+                    android:id="@+id/tv_tixian_way"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="请选择提现方式"
                     android:background="@color/white"
+                    android:drawableLeft="@drawable/fangshi"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:gravity="center_vertical"
                     />
             </LinearLayout>
             <LinearLayout
@@ -83,10 +92,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="¥"
+                        android:layout_gravity="bottom"
                         />
                         <com.zhizhong.yujian.view.MyEditText
+                            android:id="@+id/et_tixian_money"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="30dp"
                             android:gravity="center_vertical"
                             android:textSize="13sp"
                             android:inputType="numberDecimal"
@@ -95,13 +106,15 @@
                             />
                 </com.github.fastshape.MyLinearLayout>
                 <com.github.fastshape.MyTextView
+                    android:id="@+id/tv_tixian_full_money"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:text="当前最多提现¥400"
+                    tools:text="当前最多提现¥400"
                     android:gravity="center_vertical"
                     app:bottom_line="true"
                     />
                 <com.github.fastshape.MyTextView
+                    android:id="@+id/tv_tixian_commit"
                     android:layout_width="match_parent"
                     android:layout_height="43dp"
                     android:text="申请提现"

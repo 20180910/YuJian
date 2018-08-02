@@ -6,24 +6,31 @@
               android:layout_height="match_parent"
               android:background="@color/bg_color"
     >
-<RadioGroup
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <com.github.fastshape.MyRadioButton
+    <com.github.fastshape.MyTextView
+        android:id="@+id/tv_tixian_ali"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:text="支付宝"
+        android:paddingLeft="10dp"
+        android:checked="true"
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/tixian_alipay"
+        android:gravity="center_vertical"
         />
     <View
         android:layout_width="match_parent"
         android:layout_height="2px"
         android:background="@color/divider_color"
         />
-    <com.github.fastshape.MyRadioButton
+    <com.github.fastshape.MyTextView
+        android:id="@+id/tv_tixian_bank"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:text="银行卡"
+        android:paddingLeft="10dp"
         android:checked="true"
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/tixian_bank"
+        android:gravity="center_vertical"
         />
-</RadioGroup>
 </LinearLayout>

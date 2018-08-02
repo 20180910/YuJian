@@ -49,7 +49,7 @@ public class ZhangHuChongZhiActivity extends BaseActivity {
                     showMsg("请输入充值金额");
                     return;
                 }else if(money<=0){
-                    showMsg("充值金额不能为0");
+                    showMsg("充值金额不能小于0");
                     return;
                 }
                 chongZhi(money);
@@ -66,6 +66,7 @@ public class ZhangHuChongZhiActivity extends BaseActivity {
             @Override
             public void onSuccess(BaseObj obj, int errorCode, String msg) {
                 showPay();
+//                setResult(RESULT_OK);
 //                finish();
             }
         });

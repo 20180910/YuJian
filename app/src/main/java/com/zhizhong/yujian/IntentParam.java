@@ -31,6 +31,8 @@ public class IntentParam {
     public static final String nickName = "nickName";
     public static final String useYouHuiQuan = "useYouHuiQuan";
     public static final String money = "money";
+    public static final String alipayAccount = "alipayAccount";
+    public static final String alipayId = "alipayId";
 
     public static final String orderNo="orderNo";
     public static final String webUrl="webUrl";

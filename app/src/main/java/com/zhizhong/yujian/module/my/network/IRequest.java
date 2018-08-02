@@ -6,12 +6,14 @@ import com.zhizhong.yujian.module.mall.network.response.YouHuiQuanObj;
 import com.zhizhong.yujian.module.my.network.request.UpdateInfoBody;
 import com.zhizhong.yujian.module.my.network.response.AboutObj;
 import com.zhizhong.yujian.module.my.network.response.AddressObj;
+import com.zhizhong.yujian.module.my.network.response.AliAccountListObj;
 import com.zhizhong.yujian.module.my.network.response.ChongZhiObj;
 import com.zhizhong.yujian.module.my.network.response.CollectionGoodsObj;
 import com.zhizhong.yujian.module.my.network.response.HelpCenterObj;
 import com.zhizhong.yujian.module.my.network.response.LoginObj;
 import com.zhizhong.yujian.module.my.network.response.MessageObj;
 import com.zhizhong.yujian.module.my.network.response.MyBalanceObj;
+import com.zhizhong.yujian.module.my.network.response.MyMoneyObj;
 import com.zhizhong.yujian.module.my.network.response.OrderDetailObj;
 import com.zhizhong.yujian.module.my.network.response.OrderObj;
 import com.zhizhong.yujian.module.my.network.response.YouHuiQuanNumObj;
@@ -119,7 +121,7 @@ public interface IRequest {
     @GET("api/UserBase/GetLogisticsInformation")
     Call<ResponseObj<WuLiuObj>> getWuLiuDetail(@QueryMap Map<String, String> map);
 
-    //我的余额
+    //我的余额明细
     @GET("api/UserBase/GetMyBalance")
     Call<ResponseObj<MyBalanceObj>> getMyBalance(@QueryMap Map<String, String> map);
 
@@ -134,5 +136,21 @@ public interface IRequest {
     //我的优惠券
     @GET("api/UserBase/GetMyCoupons")
     Call<ResponseObj<List<YouHuiQuanObj>>> getMyYouHuiQuan(@QueryMap Map<String, String> map);
+
+    //我的余额
+    @GET("api/UserBase/GetWithdShow")
+    Call<ResponseObj<MyMoneyObj>> getMyMoney(@QueryMap Map<String,String> map);
+
+    //支付宝账户列表
+    @GET("api/CashWithdrawal/GetAlipayAccount")
+    Call<ResponseObj<List<AliAccountListObj>>> getAliAccountList(@QueryMap Map<String,String> map);
+
+    //删除支付宝账户
+    @GET("api/CashWithdrawal/GetDelAlipayAccount")
+    Call<ResponseObj<BaseObj>> deleteAliAccount(@QueryMap Map<String,String> map);
+
+    //添加支付宝账户
+    @GET("api/CashWithdrawal/GetAddAccount")
+    Call<ResponseObj<BaseObj>> addAliAccount(@QueryMap Map<String,String> map);
 
 }

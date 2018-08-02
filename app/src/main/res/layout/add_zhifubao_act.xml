@@ -34,6 +34,7 @@
                     android:ems="5"
                     />
                 <com.zhizhong.yujian.view.MyEditText
+                    android:id="@+id/et_add_zhifubao_account"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -60,6 +61,7 @@
                     android:ems="5"
                     />
                 <com.zhizhong.yujian.view.MyEditText
+                    android:id="@+id/et_add_zhifubao_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -71,6 +73,7 @@
                     />
             </LinearLayout>
             <com.github.fastshape.MyTextView
+                android:id="@+id/tv_add_zhifubao_commit"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="确认添加"

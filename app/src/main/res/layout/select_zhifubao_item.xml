@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.mcxtzhang.swipemenulib.SwipeMenuLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:background="@color/bg_color"
+            android:id="@+id/sml_select_alipay"
+            android:clickable="true"
     >
-
-</LinearLayout>
+<TextView
+    android:id="@+id/tv_select_alipay_account"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    tools:text="支付宝账户: 12312312"
+    android:gravity="center_vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    />
+    <TextView
+        android:id="@+id/tv_select_alipay_delete"
+        android:layout_width="55dp"
+        android:layout_height="match_parent"
+        android:background="@color/red"
+        android:gravity="center"
+        android:text="删除"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        />
+</com.mcxtzhang.swipemenulib.SwipeMenuLayout>

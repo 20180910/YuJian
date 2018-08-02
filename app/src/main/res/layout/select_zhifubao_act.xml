@@ -16,7 +16,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="@color/bg_color"
-            android:layout_above="@+id/tv_select_zhifubao"
             >
             <!--your view-->
             <TextView
@@ -31,27 +30,21 @@
                 android:layout_height="2px"
                 android:background="@color/divider_color"
                 />
-            <com.library.base.view.MyRecyclerView
-                android:id="@+id/rv_zhifubao"
+            <in.srain.cube.views.ptr.PtrClassicFrameLayout
+                android:id="@id/pcfl_refresh"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                app:ptr_resistance="2.1"
+                app:ptr_ratio_of_header_height_to_refresh="1.2"
                 >
-            </com.library.base.view.MyRecyclerView>
+                <com.library.base.view.MyRecyclerView
+                    android:id="@+id/rv_zhifubao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                </com.library.base.view.MyRecyclerView>
+            </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+
         </LinearLayout>
-        <com.github.fastshape.MyTextView
-            android:id="@+id/tv_select_zhifubao"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="编辑"
-            android:gravity="center"
-            android:layout_marginTop="25dp"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            app:solidColor="@color/red_button"
-            app:pressColor="@color/red_press"
-            app:radius="4dp"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="10dp"
-            />
     </com.library.base.ProgressLayout>
 </LinearLayout>

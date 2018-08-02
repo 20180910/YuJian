@@ -96,6 +96,7 @@ public class MyMoneyActivity extends BaseActivity {
                 STActivityForResult(ZhangHuChongZhiActivity.class,1000);
                 break;
             case R.id.ll_my_balance_tixian:
+                STActivity(TiXianActivity.class);
                 break;
         }
     }
