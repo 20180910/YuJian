@@ -319,6 +319,7 @@ public class ShoppingCartActivity extends BaseActivity {
             Intent intent=new Intent();
             intent.putExtra(IntentParam.shoppingCart,new Gson().toJson(goodsBeanList));
             STActivity(intent,SureOrderActivity.class);
+            finish();
         }
     }
 
