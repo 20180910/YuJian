@@ -9,13 +9,15 @@
 <include layout="@layout/app_title"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="57dp"
+        android:layout_height="50dp"
         android:text="账户余额"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
         android:textSize="14sp"
         android:textColor="@color/gray_33"
         android:background="@color/white"
+        android:drawableLeft="@drawable/baozhengjin"
+        android:drawablePadding="10dp"
         />
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,6 +28,7 @@
         android:background="@color/white"
         >
         <com.zhizhong.yujian.view.MyEditText
+            android:id="@+id/et_balance_chongzhi"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:gravity="center_vertical"
@@ -38,6 +41,7 @@
             app:radius="4dp"
             />
         <com.github.fastshape.MyTextView
+            android:id="@+id/tv_balance_chongzhi_commit"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="确定充值"

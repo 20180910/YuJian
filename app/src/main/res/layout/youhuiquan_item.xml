@@ -3,30 +3,35 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              xmlns:tools="http://schemas.android.com/tools"
     >
-<LinearLayout
-    android:layout_width="0dp"
-    android:layout_weight="1"
-    android:layout_height="100dp"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:background="@color/red"
-    >
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="¥6"
-        android:textColor="@color/white"
-        android:textSize="21sp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="满79元可用"
-        android:textColor="@color/white"
-        android:layout_marginTop="10dp"
-        />
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_youhuiquan_bg"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/youhuiquan_red"
+        >
+        <TextView
+            android:id="@+id/tv_youhuiquan_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="¥6"
+            android:textColor="@color/white"
+            android:textSize="21sp"
+
+            />
+        <TextView
+            android:id="@+id/tv_youhuiquan_full_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="满79元可用"
+            android:textColor="@color/white"
+            android:layout_marginTop="10dp"
+            />
+    </LinearLayout>
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_weight="2"
@@ -34,26 +39,22 @@
         android:padding="10dp"
         >
         <TextView
+            android:id="@+id/tv_youhuiquan_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="全场商品可用"
+            tools:text="全场商品可用"
             android:textSize="15sp"
             android:textColor="@color/gray_33"
             />
-            <com.github.fastshape.MyTextView
-                android:layout_width="wrap_content"
-                android:layout_height="26dp"
-                android:text="立即使用"
-                android:paddingLeft="13dp"
-                android:paddingRight="13dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                app:borderColor="@color/red"
-                android:textColor="@color/red"
-                app:all_line="true"
-                app:radius="13dp"
-                android:gravity="center"
-                />
+        <ImageView
+            android:id="@+id/iv_youhuiquan_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/yiguoqi"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

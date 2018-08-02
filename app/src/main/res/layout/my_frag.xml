@@ -84,6 +84,7 @@
                     android:paddingBottom="10dp"
                     >
                     <LinearLayout
+                        android:id="@+id/ll_my_yue"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -112,6 +113,7 @@
                         android:layout_marginBottom="5dp"
                         />
                     <LinearLayout
+                        android:id="@+id/ll_my_youhuiquan"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"

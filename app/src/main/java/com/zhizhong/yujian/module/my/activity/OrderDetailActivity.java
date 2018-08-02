@@ -1,6 +1,7 @@
 package com.zhizhong.yujian.module.my.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -330,7 +331,9 @@ public class OrderDetailActivity extends BaseActivity {
     public void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.ll_order_detail_wuliu_content:
-
+                Intent intent = new Intent();
+                intent.putExtra(IntentParam.orderNo, orderNo);
+                STActivity(intent, WuLiuActivity.class);
                 break;
         }
     }

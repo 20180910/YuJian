@@ -20,8 +20,10 @@ import com.zhizhong.yujian.module.my.activity.HelpCenterActivity;
 import com.zhizhong.yujian.module.my.activity.MessageActivity;
 import com.zhizhong.yujian.module.my.activity.MyCollectionActivity;
 import com.zhizhong.yujian.module.my.activity.MyDataActivity;
+import com.zhizhong.yujian.module.my.activity.MyMoneyActivity;
 import com.zhizhong.yujian.module.my.activity.MyOrderActivity;
 import com.zhizhong.yujian.module.my.activity.SettingActivity;
+import com.zhizhong.yujian.module.my.activity.YouHuiQuanActivity;
 import com.zhizhong.yujian.module.my.network.ApiRequest;
 import com.zhizhong.yujian.module.my.network.response.LoginObj;
 
@@ -133,9 +135,15 @@ public class MyFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.iv_my,R.id.iv_my_setting, R.id.iv_my_message, R.id.ll_my_allorder, R.id.ll_my_daifukuan, R.id.ll_my_daifahuo, R.id.ll_my_daipingjia, R.id.tv_my_wodepaimai, R.id.tv_my_wodetuikuan, R.id.tv_my_wodekemaihui, R.id.tv_my_wodeshoucang, R.id.tv_my_wodedizhi, R.id.tv_my_wodebaozhengjin, R.id.tv_my_wodepingjia, R.id.tv_my_help})
+    @OnClick({R.id.ll_my_yue,R.id.ll_my_youhuiquan,R.id.iv_my,R.id.iv_my_setting, R.id.iv_my_message, R.id.ll_my_allorder, R.id.ll_my_daifukuan, R.id.ll_my_daifahuo,R.id.ll_my_daishouhuo, R.id.ll_my_daipingjia, R.id.tv_my_wodepaimai, R.id.tv_my_wodetuikuan, R.id.tv_my_wodekemaihui, R.id.tv_my_wodeshoucang, R.id.tv_my_wodedizhi, R.id.tv_my_wodebaozhengjin, R.id.tv_my_wodepingjia, R.id.tv_my_help})
     public void onViewClick(View view) {
         switch (view.getId()) {
+            case R.id.ll_my_yue:
+                STActivity(MyMoneyActivity.class);
+                break;
+            case R.id.ll_my_youhuiquan:
+                STActivity(YouHuiQuanActivity.class);
+                break;
             case R.id.iv_my:
                 STActivity(MyDataActivity.class);
                 break;
@@ -156,6 +164,11 @@ public class MyFragment extends BaseFragment {
             case R.id.ll_my_daifahuo:
                 intent = new Intent();
                 intent.putExtra(IntentParam.type,MyOrderFragment.type_2);
+                STActivity(intent,MyOrderActivity.class);
+                break;
+            case R.id.ll_my_daishouhuo:
+                intent = new Intent();
+                intent.putExtra(IntentParam.type,MyOrderFragment.type_3);
                 STActivity(intent,MyOrderActivity.class);
                 break;
             case R.id.ll_my_daipingjia:

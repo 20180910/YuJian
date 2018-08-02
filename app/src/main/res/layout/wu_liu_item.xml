@@ -3,6 +3,7 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              xmlns:tools="http://schemas.android.com/tools"
               android:background="@color/white"
               android:orientation="vertical"
               android:paddingRight="10dp"
@@ -69,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="[上海市]在上海普陀区曹安路公司进行签收扫描，快件已被 已签收 签收，感谢使用韵达快递，期待再次为您服务"
+                tools:text="[上海市]在上海普陀区曹安路公司进行签收扫描，快件已被 已签收 签收，感谢使用韵达快递，期待再次为您服务"
                 android:textColor="@color/gray_66"
                 android:textSize="14sp"
                 />
@@ -81,7 +82,7 @@
                 android:layout_marginTop="10dp"
                 android:paddingBottom="10dp"
                 app:bottom_line="true"
-                android:text="2017/06/01 16:00"
+                tools:text="2017/06/01 16:00"
                 android:textColor="@color/gray_99"
                 />
         </LinearLayout>

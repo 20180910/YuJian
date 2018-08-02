@@ -2,15 +2,20 @@ package com.zhizhong.yujian.module.my.network;
 
 import com.library.base.BaseObj;
 import com.library.base.ResponseObj;
+import com.zhizhong.yujian.module.mall.network.response.YouHuiQuanObj;
 import com.zhizhong.yujian.module.my.network.request.UpdateInfoBody;
 import com.zhizhong.yujian.module.my.network.response.AboutObj;
 import com.zhizhong.yujian.module.my.network.response.AddressObj;
+import com.zhizhong.yujian.module.my.network.response.ChongZhiObj;
 import com.zhizhong.yujian.module.my.network.response.CollectionGoodsObj;
 import com.zhizhong.yujian.module.my.network.response.HelpCenterObj;
 import com.zhizhong.yujian.module.my.network.response.LoginObj;
 import com.zhizhong.yujian.module.my.network.response.MessageObj;
+import com.zhizhong.yujian.module.my.network.response.MyBalanceObj;
 import com.zhizhong.yujian.module.my.network.response.OrderDetailObj;
 import com.zhizhong.yujian.module.my.network.response.OrderObj;
+import com.zhizhong.yujian.module.my.network.response.YouHuiQuanNumObj;
+import com.zhizhong.yujian.network.response.WuLiuObj;
 
 import java.util.List;
 import java.util.Map;
@@ -109,5 +114,25 @@ public interface IRequest {
     //订单详情
     @GET("api/UserBase/GetOrderMore")
     Call<ResponseObj<OrderDetailObj>> getOrderDetail(@QueryMap Map<String, String> map);
+
+    //物流详情
+    @GET("api/UserBase/GetLogisticsInformation")
+    Call<ResponseObj<WuLiuObj>> getWuLiuDetail(@QueryMap Map<String, String> map);
+
+    //我的余额
+    @GET("api/UserBase/GetMyBalance")
+    Call<ResponseObj<MyBalanceObj>> getMyBalance(@QueryMap Map<String, String> map);
+
+    //充值-缴纳保证金
+    @GET("api/CashWithdrawal/GetCreateOrder")
+    Call<ResponseObj<ChongZhiObj>> chongZhiOrder(@QueryMap Map<String, String> map);
+
+    //优惠券数量
+    @GET("api/UserBase/GetMyCouponsNum")
+    Call<ResponseObj<YouHuiQuanNumObj>> getYouHuiQuanNum(@QueryMap Map<String, String> map);
+
+    //我的优惠券
+    @GET("api/UserBase/GetMyCouponsNum")
+    Call<ResponseObj<List<YouHuiQuanObj>>> getMyYouHuiQuan(@QueryMap Map<String, String> map);
 
 }

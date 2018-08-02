@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
@@ -15,21 +16,24 @@
     android:paddingRight="10dp"
     >
     <TextView
+        android:id="@+id/tv_balance_mingxi_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2018年07月02日"
+        tools:text="2018年07月02日"
         android:ems="9"
         />
     <TextView
+        android:id="@+id/tv_balance_mingxi_flag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="充值"
+        tools:text="充值"
         android:layout_marginRight="3dp"
         />
     <TextView
+        android:id="@+id/tv_balance_mingxi_money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+400"
+        tools:text="+400"
         android:textColor="@color/red"
         />
 </LinearLayout>

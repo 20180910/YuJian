@@ -39,29 +39,26 @@
                         android:layout_height="wrap_content"
                         android:text="订单编号:"
                         android:layout_marginRight="5dp"
-                        android:textSize="14sp"
                         />
                     <TextView
                         android:id="@+id/tv_wu_liu_no"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         tools:text="TD123456"
-                        android:textSize="14sp"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="配送方式:"
-                        android:textSize="14sp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
                         />
                     <TextView
                         android:id="@+id/tv_wu_liu_kuaidi"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         tools:text="顺丰快递"
-                        android:textSize="14sp"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -77,14 +74,12 @@
                         android:layout_height="wrap_content"
                         android:text="官方电话:"
                         android:layout_marginRight="5dp"
-                        android:textSize="14sp"
                         />
                     <TextView
                         android:id="@+id/tv_wu_liu_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         tools:text="4001-111-123"
-                        android:textSize="15sp"
                         />
                 </LinearLayout>
             </LinearLayout>
