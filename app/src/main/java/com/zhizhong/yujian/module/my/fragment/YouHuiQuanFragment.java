@@ -38,15 +38,20 @@ public class YouHuiQuanFragment extends BaseFragment {
         adapter=new MyAdapter<YouHuiQuanObj>(mContext,R.layout.youhuiquan_item,pageSize) {
             @Override
             public void bindData(MyRecyclerViewHolder holder, int position, YouHuiQuanObj bean) {
+                View view = holder.getView(R.id.ll_youhuiquan_bg);
+
                 ImageView iv_youhuiquan_status = holder.getImageView(R.id.iv_youhuiquan_status);
                 if("1".equals(getArguments().getString(IntentParam.type))){
                     iv_youhuiquan_status.setVisibility(View.VISIBLE);
                     iv_youhuiquan_status.setImageResource(R.drawable.yishiyong);
+                    view.setBackgroundResource(R.drawable.youhuiquan_gray);
                 }else if("2".equals(getArguments().getString(IntentParam.type))){
                     iv_youhuiquan_status.setVisibility(View.VISIBLE);
                     iv_youhuiquan_status.setImageResource(R.drawable.yiguoqi);
+                    view.setBackgroundResource(R.drawable.youhuiquan_gray);
                 }else{
                     iv_youhuiquan_status.setVisibility(View.GONE);
+                    view.setBackgroundResource(R.drawable.youhuiquan_red);
                 }
 
                 holder.setText(R.id.tv_youhuiquan_money,"¥"+bean.getFace_value());

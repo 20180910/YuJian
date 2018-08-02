@@ -132,7 +132,7 @@ public interface IRequest {
     Call<ResponseObj<YouHuiQuanNumObj>> getYouHuiQuanNum(@QueryMap Map<String, String> map);
 
     //我的优惠券
-    @GET("api/UserBase/GetMyCouponsNum")
+    @GET("api/UserBase/GetMyCoupons")
     Call<ResponseObj<List<YouHuiQuanObj>>> getMyYouHuiQuan(@QueryMap Map<String, String> map);
 
 }

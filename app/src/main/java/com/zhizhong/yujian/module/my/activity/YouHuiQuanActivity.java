@@ -50,6 +50,7 @@ public class YouHuiQuanActivity extends BaseActivity {
         adapter.setList(list);
         adapter.setTitleList(titleList);
         vp_youhuiquan.setAdapter(adapter);
+        vp_youhuiquan.setOffscreenPageLimit(list.size()-1);
 
         tv_youhuiquan.setupWithViewPager(vp_youhuiquan);
 
