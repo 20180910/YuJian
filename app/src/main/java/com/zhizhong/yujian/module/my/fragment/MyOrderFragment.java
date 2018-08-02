@@ -1,5 +1,6 @@
 package com.zhizhong.yujian.module.my.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,12 +12,17 @@ import android.widget.TextView;
 import com.github.androidtools.PhoneUtils;
 import com.github.androidtools.inter.MyOnClickListener;
 import com.github.baseclass.adapter.MyRecyclerViewHolder;
+import com.github.mydialog.MyDialog;
+import com.github.rxbus.MyConsumer;
+import com.github.rxbus.RxBus;
+import com.library.base.BaseObj;
 import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.adapter.MyAdapter;
 import com.zhizhong.yujian.base.BaseFragment;
 import com.zhizhong.yujian.base.GlideUtils;
 import com.zhizhong.yujian.base.MyCallBack;
+import com.zhizhong.yujian.event.MyOrderEvent;
 import com.zhizhong.yujian.module.my.network.ApiRequest;
 import com.zhizhong.yujian.module.my.network.response.OrderObj;
 
@@ -165,7 +171,7 @@ public class MyOrderFragment extends BaseFragment {
                 tv_order_delete.setOnClickListener(new MyOnClickListener() {
                     @Override
                     protected void onNoDoubleClick(View view) {
-                        cancelOrder(bean.getOrder_no());
+                        deleteOrder(bean.getOrder_no());
                     }
                 });
                 tv_order_pay.setOnClickListener(new MyOnClickListener() {
@@ -205,6 +211,36 @@ public class MyOrderFragment extends BaseFragment {
 
     }
 
+    private void deleteOrder(final String order_no) {
+        MyDialog.Builder mDialog=new MyDialog.Builder(mContext);
+        mDialog.setMessage("是否确认删除订单?");
+        mDialog.setNegativeButton(new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        mDialog.setPositiveButton(new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                showLoading();
+                Map<String,String>map=new HashMap<String,String>();
+                map.put("user_id",getUserId());
+                map.put("order_no",order_no);
+                map.put("sign",getSign(map));
+                ApiRequest.deleteOrder(map, new MyCallBack<BaseObj>(mContext,true) {
+                    @Override
+                    public void onSuccess(BaseObj obj, int errorCode, String msg) {
+                        showMsg(msg);
+                        RxBus.getInstance().post(new MyOrderEvent(MyOrderFragment.type_0));
+                    }
+                });
+            }
+        });
+        mDialog.create().show();
+    }
+
     private void evaluationOrder(String order_no) {
 
     }
@@ -217,10 +253,49 @@ public class MyOrderFragment extends BaseFragment {
 
     }
 
-    private void cancelOrder(String order_no) {
+    private void cancelOrder(final String order_no) {
+        MyDialog.Builder mDialog=new MyDialog.Builder(mContext);
+        mDialog.setMessage("是否确认取消订单?");
+        mDialog.setNegativeButton(new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        mDialog.setPositiveButton(new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                showLoading();
+                Map<String,String>map=new HashMap<String,String>();
+                map.put("user_id",getUserId());
+                map.put("order_no",order_no);
+                map.put("sign",getSign(map));
+                ApiRequest.cancelOrder(map, new MyCallBack<BaseObj>(mContext,true) {
+                    @Override
+                    public void onSuccess(BaseObj obj, int errorCode, String msg) {
+                        showMsg(msg);
+                        RxBus.getInstance().post(new MyOrderEvent(MyOrderFragment.type_0));
+                    }
+                });
+            }
+        });
+        mDialog.create().show();
 
     }
 
+    @Override
+    protected void initRxBus() {
+        super.initRxBus();
+        getEvent(MyOrderEvent.class, new MyConsumer<MyOrderEvent>() {
+            @Override
+            public void onAccept(MyOrderEvent event) {
+                if(event.type==MyOrderFragment.type_0){
+                    getData(1,false);
+                }
+            }
+        });
+    }
 
     @Override
     protected void initData() {

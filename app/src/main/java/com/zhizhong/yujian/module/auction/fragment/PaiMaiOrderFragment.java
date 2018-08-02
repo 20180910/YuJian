@@ -22,7 +22,7 @@ import com.zhizhong.yujian.adapter.MyAdapter;
 import com.zhizhong.yujian.base.BaseFragment;
 import com.zhizhong.yujian.base.GlideUtils;
 import com.zhizhong.yujian.base.MyCallBack;
-import com.zhizhong.yujian.event.OrderEvent;
+import com.zhizhong.yujian.event.PaiMaiOrderEvent;
 import com.zhizhong.yujian.module.auction.activity.AuctionDetailActivity;
 import com.zhizhong.yujian.module.auction.network.ApiRequest;
 import com.zhizhong.yujian.module.auction.network.response.PaiMaiOrderObj;
@@ -191,8 +191,8 @@ public class PaiMaiOrderFragment extends BaseFragment {
             @Override
             public void onSuccess(BaseObj obj, int errorCode, String msg) {
                 showMsg(msg);
-                RxBus.getInstance().post(new OrderEvent(PaiMaiOrderFragment.type3));
-                RxBus.getInstance().post(new OrderEvent(PaiMaiOrderFragment.type4));
+                RxBus.getInstance().post(new PaiMaiOrderEvent(PaiMaiOrderFragment.type3));
+                RxBus.getInstance().post(new PaiMaiOrderEvent(PaiMaiOrderFragment.type4));
             }
         });
 
@@ -201,9 +201,9 @@ public class PaiMaiOrderFragment extends BaseFragment {
     @Override
     protected void initRxBus() {
         super.initRxBus();
-        getEvent(OrderEvent.class, new MyConsumer<OrderEvent>() {
+        getEvent(PaiMaiOrderEvent.class, new MyConsumer<PaiMaiOrderEvent>() {
             @Override
-            public void onAccept(OrderEvent event) {
+            public void onAccept(PaiMaiOrderEvent event) {
                 if(getArguments().getInt(IntentParam.type,-1)==PaiMaiOrderFragment.type3||getArguments().getInt(IntentParam.type,-1)==PaiMaiOrderFragment.type4){
                     getData(1,false);
                 }
