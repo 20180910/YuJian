@@ -44,7 +44,7 @@ public class PaiMaiOrderActivity extends BaseActivity {
         List<String>titleList=new ArrayList<>();
         titleList.add("拍卖中");//0
         titleList.add("已出局");//5
-        titleList.add("待支付");//1
+        titleList.add("待付款");//1
         titleList.add("待发货");//2
         titleList.add("待收货");//3
         titleList.add("已完成");//4

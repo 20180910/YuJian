@@ -1,5 +1,6 @@
 package com.zhizhong.yujian.module.my.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import com.github.androidtools.SPUtils;
 import com.github.fastshape.MyImageView;
 import com.zhizhong.yujian.AppXml;
+import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.base.BaseFragment;
 import com.zhizhong.yujian.base.GlideUtils;
@@ -18,6 +20,7 @@ import com.zhizhong.yujian.module.my.activity.HelpCenterActivity;
 import com.zhizhong.yujian.module.my.activity.MessageActivity;
 import com.zhizhong.yujian.module.my.activity.MyCollectionActivity;
 import com.zhizhong.yujian.module.my.activity.MyDataActivity;
+import com.zhizhong.yujian.module.my.activity.MyOrderActivity;
 import com.zhizhong.yujian.module.my.activity.SettingActivity;
 import com.zhizhong.yujian.module.my.network.ApiRequest;
 import com.zhizhong.yujian.module.my.network.response.LoginObj;
@@ -47,6 +50,7 @@ public class MyFragment extends BaseFragment {
     TextView tv_my_balance;
     @BindView(R.id.tv_my_coupon)
     TextView tv_my_coupon;
+    private Intent intent;
 
     @Override
     protected int getContentView() {
@@ -142,12 +146,22 @@ public class MyFragment extends BaseFragment {
                 STActivity(MessageActivity.class);
                 break;
             case R.id.ll_my_allorder:
+                STActivity(MyOrderActivity.class);
                 break;
             case R.id.ll_my_daifukuan:
+                intent = new Intent();
+                intent.putExtra(IntentParam.type,MyOrderFragment.type_1);
+                STActivity(intent,MyOrderActivity.class);
                 break;
             case R.id.ll_my_daifahuo:
+                intent = new Intent();
+                intent.putExtra(IntentParam.type,MyOrderFragment.type_2);
+                STActivity(intent,MyOrderActivity.class);
                 break;
             case R.id.ll_my_daipingjia:
+                intent = new Intent();
+                intent.putExtra(IntentParam.type,MyOrderFragment.type_4);
+                STActivity(intent,MyOrderActivity.class);
                 break;
             case R.id.tv_my_wodepaimai:
                 STActivity(PaiMaiOrderActivity.class);

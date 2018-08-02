@@ -9,6 +9,7 @@ import com.zhizhong.yujian.module.my.network.response.CollectionGoodsObj;
 import com.zhizhong.yujian.module.my.network.response.HelpCenterObj;
 import com.zhizhong.yujian.module.my.network.response.LoginObj;
 import com.zhizhong.yujian.module.my.network.response.MessageObj;
+import com.zhizhong.yujian.module.my.network.response.OrderObj;
 
 import java.util.List;
 import java.util.Map;
@@ -94,6 +95,6 @@ public interface IRequest {
 
     //我的订单
     @GET(" api/UserBase/GetOrderList")
-    Call<ResponseObj<List<CollectionGoodsObj>>> getOrderList(@QueryMap Map<String, String> map);
+    Call<ResponseObj<List<OrderObj>>> getOrderList(@QueryMap Map<String, String> map);
 
 }
