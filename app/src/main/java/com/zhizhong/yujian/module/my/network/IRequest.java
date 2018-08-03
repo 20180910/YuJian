@@ -7,9 +7,12 @@ import com.zhizhong.yujian.module.my.network.request.UpdateInfoBody;
 import com.zhizhong.yujian.module.my.network.response.AboutObj;
 import com.zhizhong.yujian.module.my.network.response.AddressObj;
 import com.zhizhong.yujian.module.my.network.response.AliAccountListObj;
+import com.zhizhong.yujian.module.my.network.response.BankAccountObj;
+import com.zhizhong.yujian.module.my.network.response.BankListObj;
 import com.zhizhong.yujian.module.my.network.response.ChongZhiObj;
 import com.zhizhong.yujian.module.my.network.response.CollectionGoodsObj;
 import com.zhizhong.yujian.module.my.network.response.HelpCenterObj;
+import com.zhizhong.yujian.module.my.network.response.KaiHuHangObj;
 import com.zhizhong.yujian.module.my.network.response.LoginObj;
 import com.zhizhong.yujian.module.my.network.response.MessageObj;
 import com.zhizhong.yujian.module.my.network.response.MyBalanceObj;
@@ -152,5 +155,29 @@ public interface IRequest {
     //添加支付宝账户
     @GET("api/CashWithdrawal/GetAddAccount")
     Call<ResponseObj<BaseObj>> addAliAccount(@QueryMap Map<String,String> map);
+
+    //提现
+    @GET("api/CashWithdrawal/GetWithdrawals")
+    Call<ResponseObj<BaseObj>> tiXian(@QueryMap Map<String,String> map);
+
+    //银行列表
+    @GET("api/CashWithdrawal/GetBankList")
+    Call<ResponseObj<List<BankListObj>>>getBankList(@QueryMap Map<String,String> map);
+
+    //银行卡账户列表
+    @GET("api/CashWithdrawal/GetAccount")
+    Call<ResponseObj<List<BankAccountObj>>>getBankAccount(@QueryMap Map<String,String> map);
+
+    //添加银行卡账户
+    @GET("api/CashWithdrawal/GetAddAccount")
+    Call<ResponseObj<BaseObj>>addBankAccount(@QueryMap Map<String,String> map);
+
+    //删除银行卡账户
+    @GET("api/CashWithdrawal/GetDelAccount")
+    Call<ResponseObj<BaseObj>>deleteBankAccount(@QueryMap Map<String,String> map);
+
+    //开户行查询说明
+    @GET("api/CashWithdrawal/GetCheckOpeningBank")
+    Call<ResponseObj<KaiHuHangObj>>getKaiHuHangShuoMing(@QueryMap Map<String,String> map);
 
 }

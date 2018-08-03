@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -33,14 +34,23 @@
                     android:text="银行"
                     android:ems="6"
                     />
+                <ImageView
+                    android:id="@+id/iv_add_bank_icon"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    tools:src="@drawable/yinhang"
+                    android:layout_marginRight="10dp"
+                    android:visibility="gone"
+                    />
                     <TextView
+                        android:id="@+id/tv_add_bank_name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="请选择所属银行"
+                        android:hint="请选择所属银行"
                         android:gravity="center_vertical"
                         android:textColor="@color/gray_99"
+                        android:drawableRight="@drawable/arrow_right"
                         />
-
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,7 +58,6 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp"
                 android:background="@color/white"
                 android:layout_marginTop="2px"
                 >
@@ -59,7 +68,9 @@
                     android:ems="6"
                     />
                 <com.zhizhong.yujian.view.MyEditText
-                    android:layout_width="match_parent"
+                    android:id="@+id/et_add_bank_zhihang"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="40dp"
                     android:gravity="center_vertical"
                     app:solidColor="@color/white"
@@ -68,6 +79,15 @@
                     android:textColor="@color/gray_99"
                     android:hint="请输入省市+支行名"
                     android:paddingLeft="0dp"
+                    />
+                <ImageButton
+                    android:id="@+id/ib_add_bank_shuoming"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/jieshi"
+                    android:background="@color/transparent"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
                     />
             </LinearLayout>
             <LinearLayout
@@ -87,6 +107,7 @@
                     android:ems="6"
                     />
                 <com.zhizhong.yujian.view.MyEditText
+                    android:id="@+id/et_add_bank_card"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:gravity="center_vertical"
@@ -115,6 +136,7 @@
                     android:ems="6"
                     />
                 <com.zhizhong.yujian.view.MyEditText
+                    android:id="@+id/et_add_bank_username"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:gravity="center_vertical"
@@ -127,6 +149,7 @@
                     />
             </LinearLayout>
             <com.github.fastshape.MyTextView
+                android:id="@+id/tv_add_bank_save"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="保存"

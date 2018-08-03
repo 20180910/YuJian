@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.github.androidtools.inter.MyOnClickListener;
 import com.github.fastshape.MyTextView;
 import com.github.mydialog.MySimpleDialog;
+import com.library.base.BaseObj;
 import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.base.BaseActivity;
@@ -37,7 +38,8 @@ public class TiXianActivity extends BaseActivity {
 
 
     private MyMoneyObj moneyObj;
-    private String alipayId;
+    private String tiXianAccountId;
+    private String tiXianType;
 
     @Override
     protected int getContentView() {
@@ -57,6 +59,11 @@ public class TiXianActivity extends BaseActivity {
     }
 
     @Override
+    protected void onMyReStart() {
+        super.onMyReStart();
+        getData(1,false);
+    }
+    @Override
     protected void getData(int page, boolean isLoad) {
         super.getData(page, isLoad);
         Map<String,String> map=new HashMap<String,String>();
@@ -70,7 +77,6 @@ public class TiXianActivity extends BaseActivity {
                 tv_tixian_full_money.setText("当前最多提现¥"+obj.getAccount_balance());
             }
         });
-
     }
 
     @OnClick({R.id.tv_tixian_way, R.id.tv_tixian_commit})
@@ -80,22 +86,40 @@ public class TiXianActivity extends BaseActivity {
                 selectPayWay();
                 break;
             case R.id.tv_tixian_commit:
-                double money = Double.parseDouble(getSStr(et_tixian_money));
                 if(TextUtils.isEmpty(getSStr(tv_tixian_way))){
                     showMsg("请选择提现方式");
                     return;
                 }else if(TextUtils.isEmpty(getSStr(et_tixian_money))){
                     showMsg("请输入提现金额");
                     return;
-                }else if(money<=0){
+                }
+                double money = Double.parseDouble(getSStr(et_tixian_money));
+                if(money<=0){
                     showMsg("提现金额不能小于0");
                     return;
                 }else if(money>(moneyObj.getAccount_balance().doubleValue())){
                     showMsg("提现金额不能超过余额");
                     return;
                 }
+                tiXian(money);
                 break;
         }
+    }
+
+    private void tiXian(double money) {
+        showLoading();
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("user_id",getUserId());
+        map.put("type",tiXianType);
+        map.put("account_id",tiXianAccountId);
+        map.put("amount",money+"");
+        map.put("sign",getSign(map));
+        ApiRequest.tiXian(map,new MyCallBack<BaseObj>(mContext) {
+            @Override
+            public void onSuccess(BaseObj obj, int errorCode, String msg) {
+                STActivityForResult(TiXianResultActivity.class,300);
+            }
+        });
     }
 
     private void selectPayWay() {
@@ -129,13 +153,19 @@ public class TiXianActivity extends BaseActivity {
         if(resultCode==RESULT_OK){
             switch (requestCode){
                 case 100:
+                    tiXianType="1";
                     String alipayAccount = data.getStringExtra(IntentParam.alipayAccount);
-                    alipayId = data.getStringExtra(IntentParam.alipayId);
+                    tiXianAccountId = data.getStringExtra(IntentParam.alipayId);
                     tv_tixian_way.setText("支付宝账户："+alipayAccount);
                     break;
                 case 200:
-                    String alipayAccount2= data.getStringExtra(IntentParam.alipayAccount);
-                    String alipayId2 = data.getStringExtra(IntentParam.alipayId);
+                    tiXianType="2";
+                    String bankAccount= data.getStringExtra(IntentParam.bankAccount);
+                    tiXianAccountId = data.getStringExtra(IntentParam.bankId);
+                    tv_tixian_way.setText("银行卡："+bankAccount);
+                    break;
+                case 300:
+                    finish();
                     break;
             }
         }

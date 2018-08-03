@@ -33,6 +33,8 @@ public class IntentParam {
     public static final String money = "money";
     public static final String alipayAccount = "alipayAccount";
     public static final String alipayId = "alipayId";
+    public static final String bankAccount = "bankAccount";
+    public static final String bankId = "bankId";
 
     public static final String orderNo="orderNo";
     public static final String webUrl="webUrl";

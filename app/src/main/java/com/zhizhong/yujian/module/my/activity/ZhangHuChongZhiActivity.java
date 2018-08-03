@@ -44,11 +44,12 @@ public class ZhangHuChongZhiActivity extends BaseActivity {
     protected void onViewClick(View v) {
         switch (v.getId()){
             case R.id.tv_balance_chongzhi_commit:
-                double money=Double.parseDouble(getSStr(et_balance_chongzhi));
                 if(TextUtils.isEmpty(getSStr(et_balance_chongzhi))){
                     showMsg("请输入充值金额");
                     return;
-                }else if(money<=0){
+                }
+                double money=Double.parseDouble(getSStr(et_balance_chongzhi));
+                if(money<=0){
                     showMsg("充值金额不能小于0");
                     return;
                 }

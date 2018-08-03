@@ -1,43 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
     >
-<com.github.fastshape.MyLinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
-    app:solidColor="@color/white"
-    app:radius="5dp"
-    >
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="开户行如何查询?"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/gray_33"
-        android:textSize="14sp"
-        />
-    <com.library.base.view.richedit.TheEditor
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        >
+    <android.support.v4.widget.NestedScrollView
+            android:id="@id/nsv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
 
-    </com.library.base.view.richedit.TheEditor>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/divider_color"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="我知道了"
-        android:gravity="center"
-        />
-</com.github.fastshape.MyLinearLayout>
+        <com.github.fastshape.MyLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            app:solidColor="@color/white"
+            app:radius="5dp"
+            >
+            <TextView
+                android:id="@+id/tv_add_bank_chaxun_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="开户行如何查询?"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/gray_33"
+                android:textSize="14sp"
+                />
+            <com.library.base.view.richedit.TheEditor
+                android:id="@+id/te_add_bank_chaxun_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                >
+
+            </com.library.base.view.richedit.TheEditor>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/divider_color"
+                />
+            <TextView
+                android:id="@+id/tv_add_bank_chaxun_known"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="我知道了"
+                android:gravity="center"
+                android:textColor="@color/blue_00"
+                android:textSize="14sp"
+                />
+        </com.github.fastshape.MyLinearLayout>
+        </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

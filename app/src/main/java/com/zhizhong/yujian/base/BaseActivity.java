@@ -22,13 +22,11 @@ import android.widget.TextView;
 import com.github.androidtools.ClickUtils;
 import com.github.androidtools.PhoneUtils;
 import com.github.androidtools.SPUtils;
-import com.github.androidtools.inter.MyOnClickListener;
 import com.github.rxbus.RxBus;
 import com.library.base.MyBaseActivity;
 import com.library.base.view.MyWebViewClient;
 import com.sdklibrary.base.qq.share.MyQQActivityResult;
 import com.zhizhong.yujian.AppXml;
-import com.zhizhong.yujian.BuildConfig;
 import com.zhizhong.yujian.GetSign;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.event.JoinShoppingCartEvent;
@@ -106,7 +104,7 @@ public abstract class BaseActivity extends MyBaseActivity {
 
 
 
-    @Override
+    /*@Override
     protected void setClickListener() {
         super.setClickListener();
         if (BuildConfig.DEBUG && app_title != null) {
@@ -117,7 +115,7 @@ public abstract class BaseActivity extends MyBaseActivity {
                 }
             });
         }
-    }
+    }*/
 
     protected String getSign(Map map) {
         return GetSign.getSign(map);

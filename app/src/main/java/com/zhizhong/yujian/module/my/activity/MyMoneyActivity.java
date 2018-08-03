@@ -1,6 +1,5 @@
 package com.zhizhong.yujian.module.my.activity;
 
-import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
@@ -65,7 +64,11 @@ public class MyMoneyActivity extends BaseActivity {
         showProgress();
         getData(1, false);
     }
-
+    @Override
+    protected void onMyReStart() {
+        super.onMyReStart();
+        getData(1,false);
+    }
     @Override
     protected void getData(int page,final boolean isLoad) {
         super.getData(page, isLoad);
@@ -98,19 +101,6 @@ public class MyMoneyActivity extends BaseActivity {
             case R.id.ll_my_balance_tixian:
                 STActivity(TiXianActivity.class);
                 break;
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==RESULT_OK){
-            switch (requestCode){
-                case 1000:
-                    showLoading();
-                    getData(1,false);
-                break;
-            }
         }
     }
 }

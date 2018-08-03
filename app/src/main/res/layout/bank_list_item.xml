@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.mcxtzhang.swipemenulib.SwipeMenuLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:background="@color/bg_color"
+            android:clickable="true"
+
     >
 <LinearLayout
+    android:id="@+id/ll_bank_account"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -14,9 +18,10 @@
     android:padding="10dp"
     >
     <com.github.fastshape.MyImageView
+        android:id="@+id/iv_bank_account"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:src="@drawable/qq"
+        tools:src="@drawable/qq"
         app:clipRadius="22dp"
         android:layout_marginTop="3dp"
         android:layout_marginBottom="3dp"
@@ -31,18 +36,30 @@
         android:layout_marginBottom="3dp"
         >
         <TextView
+            android:id="@+id/tv_bank_account_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="中国银行"
+            tools:text="中国银行"
             android:textSize="14sp"
             android:textColor="@color/gray_33"
             />
         <TextView
+            android:id="@+id/tv_bank_account_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="尾号123123"
+            tools:text="尾号123123"
             android:layout_marginTop="2dp"
             />
     </LinearLayout>
 </LinearLayout>
-</LinearLayout>
+    <TextView
+        android:id="@+id/tv_bank_account_delete"
+        android:layout_width="55dp"
+        android:layout_height="match_parent"
+        android:background="@color/red"
+        android:gravity="center"
+        android:text="删除"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        />
+</com.mcxtzhang.swipemenulib.SwipeMenuLayout>
