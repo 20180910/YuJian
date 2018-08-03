@@ -324,7 +324,6 @@ public class OrderDetailActivity extends BaseActivity {
             }
         });
         mDialog.create().show();
-
     }
 
     @OnClick({R.id.ll_order_detail_wuliu_content})

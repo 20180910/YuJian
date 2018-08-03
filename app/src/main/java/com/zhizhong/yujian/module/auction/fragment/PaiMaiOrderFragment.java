@@ -24,6 +24,7 @@ import com.zhizhong.yujian.base.GlideUtils;
 import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.event.PaiMaiOrderEvent;
 import com.zhizhong.yujian.module.auction.activity.AuctionDetailActivity;
+import com.zhizhong.yujian.module.auction.activity.PaiMaiOrderDetailActivity;
 import com.zhizhong.yujian.module.auction.network.ApiRequest;
 import com.zhizhong.yujian.module.auction.network.response.PaiMaiOrderObj;
 import com.zhizhong.yujian.network.NetApiRequest;
@@ -151,6 +152,14 @@ public class PaiMaiOrderFragment extends BaseFragment {
                 holder.setText(R.id.tv_paimai_order_total_price,"合计:¥"+bean.getCombined().toString());
 
 
+                holder.itemView.setOnClickListener(new MyOnClickListener() {
+                    @Override
+                    protected void onNoDoubleClick(View view) {
+                        Intent intent=new Intent();
+                        intent.putExtra(IntentParam.orderNo,bean.getOrder_no());
+                        STActivity(intent,PaiMaiOrderDetailActivity.class);
+                    }
+                });
             }
         };
         adapter.setOnLoadMoreListener(this);

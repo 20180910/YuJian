@@ -40,6 +40,7 @@ public class PaiMaiOrderActivity extends BaseActivity {
         list.add(PaiMaiOrderFragment.newInstance(PaiMaiOrderFragment.type2));
         list.add(PaiMaiOrderFragment.newInstance(PaiMaiOrderFragment.type3));
         list.add(PaiMaiOrderFragment.newInstance(PaiMaiOrderFragment.type4));
+        list.add(PaiMaiOrderFragment.newInstance(PaiMaiOrderFragment.type6));
 
         List<String>titleList=new ArrayList<>();
         titleList.add("拍卖中");//0
@@ -48,6 +49,7 @@ public class PaiMaiOrderActivity extends BaseActivity {
         titleList.add("待发货");//2
         titleList.add("待收货");//3
         titleList.add("已完成");//4
+        titleList.add("已取消");//6
 
         fragmentAdapter.setList(list);
         fragmentAdapter.setTitleList(titleList);
