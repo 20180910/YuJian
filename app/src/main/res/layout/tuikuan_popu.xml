@@ -7,6 +7,7 @@
               android:background="@color/gray_bg"
     >
 <TextView
+    android:id="@+id/tv_tuikuan_type_one"
     android:layout_width="match_parent"
     android:layout_height="45dp"
     android:text="仅退款"
@@ -14,6 +15,7 @@
     android:background="@color/white"
     />
     <TextView
+        android:id="@+id/tv_tuikuan_type_second"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:text="退货退款"
@@ -22,6 +24,7 @@
         android:layout_marginTop="2px"
         />
     <TextView
+        android:id="@+id/tv_tuikuan_type_cancel"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:text="取消"

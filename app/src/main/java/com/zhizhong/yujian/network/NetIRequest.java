@@ -77,6 +77,10 @@ public interface NetIRequest {
     @GET("api/UserBase/GetConfirmReceiptGoods")
     Call<ResponseObj<BaseObj>> sureOrder(@QueryMap Map<String, String> map);
 
+    //余额支付
+    @GET("api/GoodsClassiFication/GetBalancePayment")
+    Call<ResponseObj<BaseObj>> yuePay(@QueryMap Map<String, String> map);
+
  /*   //第三方登录
     @GET("api/MQLib/GetAddWXUser")
     Call<ResponseObj<LoginObj>> appLogin(@QueryMap Map<String, String> map);

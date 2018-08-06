@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -14,7 +15,7 @@
         <android.support.v4.widget.NestedScrollView
                 android:id="@id/nsv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#FFF3F4F6"
                 android:layout_above="@+id/tv_tuikuan_commit"
                 >
@@ -35,15 +36,19 @@
                     android:paddingRight="10dp"
                     >
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="退款类型"
                         />
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="仅退款"
+                        android:id="@+id/tv_tuikuan_type"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:hint="请选择退款类型"
+                        android:gravity="right|center_vertical"
+                        android:drawableRight="@drawable/arrow_right"
+                        android:drawablePadding="10dp"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -57,15 +62,19 @@
                     android:layout_marginTop="2px"
                     >
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="退款原因"
                         />
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="7天无理由退换货"
+                        android:id="@+id/tv_tuikuan_reason"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|right"
+                        android:hint="请选择退款原因"
+                        android:drawableRight="@drawable/arrow_right"
+                        android:drawablePadding="10dp"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -85,9 +94,10 @@
                         android:text="退款金额"
                         />
                     <TextView
+                        android:id="@+id/tv_tuikuan_money"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="最多可退299元"
+                        tools:text="最多可退299元"
                         android:textColor="@color/gray_99"
                         />
                 </LinearLayout>
@@ -106,6 +116,7 @@
                         android:text="退款说明"
                         />
                     <com.zhizhong.yujian.view.MyEditText
+                        android:id="@+id/et_tuikuan_content"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="top"
@@ -128,16 +139,17 @@
                     >
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rv_tuikuan"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         >
-
                     </android.support.v7.widget.RecyclerView>
                     <TextView
+                        android:id="@+id/tv_tuikuan_shuoming"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="上传凭证,最多3张"
                         android:textColor="@color/gray_99"
+                        android:layout_marginLeft="20dp"
                         />
                 </LinearLayout>
             </LinearLayout>

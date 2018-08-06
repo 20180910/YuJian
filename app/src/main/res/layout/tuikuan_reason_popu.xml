@@ -6,6 +6,13 @@
               android:layout_height="match_parent"
               android:background="@color/gray_bg"
     >
+    <LinearLayout
+        android:id="@+id/ll_tuikuan_reason"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        >
     <TextView
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -37,7 +44,10 @@
         android:background="@color/white"
         android:layout_marginTop="2px"
         />
+
+    </LinearLayout>
     <TextView
+        android:id="@+id/tv_tuikuan_reason_cancel"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:text="取消"

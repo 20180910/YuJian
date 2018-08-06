@@ -21,7 +21,6 @@ public class MyAdapter<T> extends MyLoadMoreAdapter<T> {
     public void bindData(MyRecyclerViewHolder holder, int position, T item) {
 
     }
-
     @Override
     public void setHiddenPromptView(boolean hiddenPromptView) {
         super.setHiddenPromptView(true);

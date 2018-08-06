@@ -86,7 +86,7 @@ public class PaiMaiOrderFragment extends BaseFragment {
                 tv_paimai_order_pay.setOnClickListener(new MyOnClickListener() {
                     @Override
                     protected void onNoDoubleClick(View view) {
-                        showPay();
+                        showPay(null,null);
                     }
                 });
                 tv_paimai_order_sure.setOnClickListener(new MyOnClickListener() {

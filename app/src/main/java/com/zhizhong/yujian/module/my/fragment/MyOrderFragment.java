@@ -24,7 +24,10 @@ import com.zhizhong.yujian.base.BaseFragment;
 import com.zhizhong.yujian.base.GlideUtils;
 import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.event.MyOrderEvent;
+import com.zhizhong.yujian.event.PayEvent;
+import com.zhizhong.yujian.module.mall.event.TuiKuanEvent;
 import com.zhizhong.yujian.module.my.activity.OrderDetailActivity;
+import com.zhizhong.yujian.module.my.activity.TuiKuanActivity;
 import com.zhizhong.yujian.module.my.network.ApiRequest;
 import com.zhizhong.yujian.module.my.network.response.OrderObj;
 
@@ -187,7 +190,7 @@ public class MyOrderFragment extends BaseFragment {
                 tv_order_pay.setOnClickListener(new MyOnClickListener() {
                     @Override
                     protected void onNoDoubleClick(View view) {
-                        showPay();
+                        showPay(bean.getOrder_no(),bean.getCombined().toString());
                     }
                 });
                 tv_order_sure.setOnClickListener(new MyOnClickListener() {
@@ -256,7 +259,9 @@ public class MyOrderFragment extends BaseFragment {
     }
 
     private void tuikuanOrder(String order_no) {
-
+        Intent intent=new Intent();
+        intent.putExtra(IntentParam.orderNo,order_no);
+        STActivity(intent,TuiKuanActivity.class);
     }
 
     private void sureOrder(String order_no) {
@@ -303,6 +308,18 @@ public class MyOrderFragment extends BaseFragment {
                 if(event.type==MyOrderFragment.type_0){
                     getData(1,false);
                 }
+            }
+        });
+        getEvent(PayEvent.class, new MyConsumer<PayEvent>() {
+            @Override
+            public void onAccept(PayEvent event) {
+                getData(1,false);
+            }
+        });
+        getEvent(TuiKuanEvent.class, new MyConsumer<TuiKuanEvent>() {
+            @Override
+            public void onAccept(TuiKuanEvent event) {
+                getData(1,false);
             }
         });
     }

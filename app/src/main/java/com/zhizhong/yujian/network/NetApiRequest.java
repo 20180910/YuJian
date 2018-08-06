@@ -67,6 +67,10 @@ public class NetApiRequest extends BaseApiRequest {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return; }
         getGeneralClient(NetIRequest.class).sureOrder(map).enqueue(callBack);
     }
+    public static void yuePay(Map map  , MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return; }
+        getGeneralClient(NetIRequest.class).yuePay(map).enqueue(callBack);
+    }
     /*public static void appLogin(Map map  , MyCallBack callBack) {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return; }
         getGeneralClient(NetIRequest.class).appLogin(map).enqueue(callBack);

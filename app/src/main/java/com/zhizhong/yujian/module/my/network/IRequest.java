@@ -20,6 +20,8 @@ import com.zhizhong.yujian.module.my.network.response.MyBaoZhengJinObj;
 import com.zhizhong.yujian.module.my.network.response.MyMoneyObj;
 import com.zhizhong.yujian.module.my.network.response.OrderDetailObj;
 import com.zhizhong.yujian.module.my.network.response.OrderObj;
+import com.zhizhong.yujian.module.my.network.response.TuiKuanMoneyObj;
+import com.zhizhong.yujian.module.my.network.response.TuiKuanReasonObj;
 import com.zhizhong.yujian.module.my.network.response.YouHuiQuanNumObj;
 import com.zhizhong.yujian.network.response.WuLiuObj;
 
@@ -188,5 +190,17 @@ public interface IRequest {
     //我的保证金
     @GET("api/UserBase/GetMyCashDeposit")
     Call<ResponseObj<MyBaoZhengJinObj>>myBaoZhengJin(@QueryMap Map<String,String> map);
+
+    //申请退款金额
+    @GET("api/UserBase/GetApplyForRefundsMoney")
+    Call<ResponseObj<TuiKuanMoneyObj>>tuiKuanMoney(@QueryMap Map<String,String> map);
+
+    //申请退款原因
+    @GET("api/UserBase/GetRefundReason")
+    Call<ResponseObj<List<TuiKuanReasonObj>>>tuiKuanReason(@QueryMap Map<String,String> map);
+
+    //提交申请退款
+    @GET("api/UserBase/GetApplyForRefunds")
+    Call<ResponseObj<BaseObj>>tuiKuan(@QueryMap Map<String,String> map);
 
 }
