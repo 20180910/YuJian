@@ -138,6 +138,10 @@ public class ApiRequest extends BaseApiRequest {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
         getGeneralClient(IRequest.class).tiXian(map).enqueue(callBack);
     }
+    public static void tiXianForBaoZhengJin(Map map, MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
+        getGeneralClient(IRequest.class).tiXianForBaoZhengJin(map).enqueue(callBack);
+    }
     public static void getBankList(Map map, MyCallBack callBack) {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
         getGeneralClient(IRequest.class).getBankList(map).enqueue(callBack);
@@ -157,6 +161,10 @@ public class ApiRequest extends BaseApiRequest {
     public static void deleteBankAccount(Map map, MyCallBack callBack) {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
         getGeneralClient(IRequest.class).deleteBankAccount(map).enqueue(callBack);
+    }
+    public static void myBaoZhengJin(Map map, MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
+        getGeneralClient(IRequest.class).myBaoZhengJin(map).enqueue(callBack);
     }
 
 }

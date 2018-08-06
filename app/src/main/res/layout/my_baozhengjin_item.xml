@@ -3,26 +3,30 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              xmlns:tools="http://schemas.android.com/tools"
               android:background="@color/bg_color"
     >
     <TextView
+        android:id="@+id/tv_my_baozhengjin_time"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:text="2018年07月12日"
+        tools:text="2018年07月12日"
         android:gravity="center_vertical"
         android:ems="9"
         android:layout_marginLeft="10dp"
         />
     <TextView
+        android:id="@+id/tv_my_baozhengjin_shuoming"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:text="缴纳"
+        tools:text="缴纳"
         android:gravity="center_vertical"
         />
     <TextView
+        android:id="@+id/tv_my_baozhengjin_money"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:text="+500元"
+        tools:text="+500元"
         android:gravity="center_vertical"
         android:textColor="@color/red"
         android:layout_marginRight="10dp"

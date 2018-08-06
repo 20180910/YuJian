@@ -30,7 +30,7 @@
                     android:gravity="center"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
-                    tools:text="提现申请提交成功\n客服会在3个工作日内\n处理您的申请"
+                    android:text="提现申请提交成功\n客服会在3个工作日内\n处理您的申请"
                     android:lineSpacingExtra="3dp"
                     />
 

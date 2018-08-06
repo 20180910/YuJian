@@ -1,6 +1,7 @@
 package com.zhizhong.yujian.module.auction.activity;
 
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.github.fastshape.MyTextView;
@@ -38,9 +39,11 @@ public class JiaoNaJinActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        baoZhengJin = (BigDecimal) getIntent().getSerializableExtra(IntentParam.baoZhengJin);
-        et_baozhengjin_money.setText(baoZhengJin.toString());
-
+        String money = getIntent().getStringExtra(IntentParam.baoZhengJin);
+        if(!TextUtils.isEmpty(money)){
+            baoZhengJin =new BigDecimal(money) ;
+            et_baozhengjin_money.setText(baoZhengJin.toString());
+        }
         te_baozhengjin_content.setInputEnabled(false);
     }
 

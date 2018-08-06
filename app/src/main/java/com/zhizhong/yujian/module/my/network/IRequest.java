@@ -16,6 +16,7 @@ import com.zhizhong.yujian.module.my.network.response.KaiHuHangObj;
 import com.zhizhong.yujian.module.my.network.response.LoginObj;
 import com.zhizhong.yujian.module.my.network.response.MessageObj;
 import com.zhizhong.yujian.module.my.network.response.MyBalanceObj;
+import com.zhizhong.yujian.module.my.network.response.MyBaoZhengJinObj;
 import com.zhizhong.yujian.module.my.network.response.MyMoneyObj;
 import com.zhizhong.yujian.module.my.network.response.OrderDetailObj;
 import com.zhizhong.yujian.module.my.network.response.OrderObj;
@@ -160,6 +161,10 @@ public interface IRequest {
     @GET("api/CashWithdrawal/GetWithdrawals")
     Call<ResponseObj<BaseObj>> tiXian(@QueryMap Map<String,String> map);
 
+    //提现-保证金提现
+    @GET("api/CashWithdrawal/GetCashDepositWithdrawal")
+    Call<ResponseObj<BaseObj>> tiXianForBaoZhengJin(@QueryMap Map<String,String> map);
+
     //银行列表
     @GET("api/CashWithdrawal/GetBankList")
     Call<ResponseObj<List<BankListObj>>>getBankList(@QueryMap Map<String,String> map);
@@ -179,5 +184,9 @@ public interface IRequest {
     //开户行查询说明
     @GET("api/CashWithdrawal/GetCheckOpeningBank")
     Call<ResponseObj<KaiHuHangObj>>getKaiHuHangShuoMing(@QueryMap Map<String,String> map);
+
+    //我的保证金
+    @GET("api/UserBase/GetMyCashDeposit")
+    Call<ResponseObj<MyBaoZhengJinObj>>myBaoZhengJin(@QueryMap Map<String,String> map);
 
 }

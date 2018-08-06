@@ -18,6 +18,7 @@ import com.zhizhong.yujian.module.my.network.ApiRequest;
 import com.zhizhong.yujian.module.my.network.response.MyMoneyObj;
 import com.zhizhong.yujian.view.MyEditText;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,11 +36,16 @@ public class TiXianActivity extends BaseActivity {
     MyTextView tv_tixian_full_money;
     @BindView(R.id.tv_tixian_commit)
     MyTextView tv_tixian_commit;
+    @BindView(R.id.tv_tixian_flag)
+    TextView tv_tixian_flag;
 
 
-    private MyMoneyObj moneyObj;
     private String tiXianAccountId;
     private String tiXianType;
+    private boolean isBaoZhengJin;
+    private double baoZhengJinMoney;
+
+    private double yuE;
 
     @Override
     protected int getContentView() {
@@ -49,7 +55,16 @@ public class TiXianActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        isBaoZhengJin = getIntent().getBooleanExtra(IntentParam.isBaoZhengJin, false);
+        if(isBaoZhengJin){
+            BigDecimal money = (BigDecimal) getIntent().getSerializableExtra(IntentParam.baoZhengJinMoney);
+            baoZhengJinMoney=money.doubleValue();
+            tv_tixian_flag.setText("保证金余额");
+            tv_tixian_full_money.setText("当前最多提现¥"+baoZhengJinMoney+"");
+            yuE=baoZhengJinMoney;
+        }else{
+            tv_tixian_flag.setText("账户余额");
+        }
     }
 
     @Override
@@ -66,17 +81,22 @@ public class TiXianActivity extends BaseActivity {
     @Override
     protected void getData(int page, boolean isLoad) {
         super.getData(page, isLoad);
-        Map<String,String> map=new HashMap<String,String>();
-        map.put("user_id",getUserId());
-        map.put("sign",getSign(map));
-        ApiRequest.getMyMoney(map, new MyCallBack<MyMoneyObj>(mContext,pl_load,pcfl) {
-            @Override
-            public void onSuccess(MyMoneyObj obj, int errorCode, String msg) {
-                moneyObj = obj;
-                tv_tixian_account_balance.setText("¥"+obj.getAccount_balance());
-                tv_tixian_full_money.setText("当前最多提现¥"+obj.getAccount_balance());
-            }
-        });
+        if(isBaoZhengJin){
+            pl_load.showContent();
+        }else{
+            Map<String,String> map=new HashMap<String,String>();
+            map.put("user_id",getUserId());
+            map.put("sign",getSign(map));
+            ApiRequest.getMyMoney(map, new MyCallBack<MyMoneyObj>(mContext,pl_load,pcfl) {
+                @Override
+                public void onSuccess(MyMoneyObj obj, int errorCode, String msg) {
+                    yuE=obj.getAccount_balance().doubleValue();
+                    tv_tixian_account_balance.setText("¥"+obj.getAccount_balance());
+                    tv_tixian_full_money.setText("当前最多提现¥"+obj.getAccount_balance());
+                }
+            });
+        }
+
     }
 
     @OnClick({R.id.tv_tixian_way, R.id.tv_tixian_commit})
@@ -97,7 +117,7 @@ public class TiXianActivity extends BaseActivity {
                 if(money<=0){
                     showMsg("提现金额不能小于0");
                     return;
-                }else if(money>(moneyObj.getAccount_balance().doubleValue())){
+                }else if(money>yuE){
                     showMsg("提现金额不能超过余额");
                     return;
                 }
@@ -108,18 +128,36 @@ public class TiXianActivity extends BaseActivity {
 
     private void tiXian(double money) {
         showLoading();
-        Map<String,String>map=new HashMap<String,String>();
-        map.put("user_id",getUserId());
-        map.put("type",tiXianType);
-        map.put("account_id",tiXianAccountId);
-        map.put("amount",money+"");
-        map.put("sign",getSign(map));
-        ApiRequest.tiXian(map,new MyCallBack<BaseObj>(mContext) {
-            @Override
-            public void onSuccess(BaseObj obj, int errorCode, String msg) {
-                STActivityForResult(TiXianResultActivity.class,300);
-            }
-        });
+        if(isBaoZhengJin){
+            Map<String,String>map=new HashMap<String,String>();
+            map.put("user_id",getUserId());
+            map.put("type",tiXianType);
+            map.put("account_id",tiXianAccountId);
+            map.put("amount",money+"");
+            map.put("sign",getSign(map));
+            ApiRequest.tiXianForBaoZhengJin(map,new MyCallBack<BaseObj>(mContext) {
+                @Override
+                public void onSuccess(BaseObj obj, int errorCode, String msg) {
+                    STActivityForResult(TiXianResultActivity.class,300);
+                    finish();
+                }
+            });
+        }else{
+            Map<String,String>map=new HashMap<String,String>();
+            map.put("user_id",getUserId());
+            map.put("type",tiXianType);
+            map.put("account_id",tiXianAccountId);
+            map.put("amount",money+"");
+            map.put("sign",getSign(map));
+            ApiRequest.tiXian(map,new MyCallBack<BaseObj>(mContext) {
+                @Override
+                public void onSuccess(BaseObj obj, int errorCode, String msg) {
+                    STActivityForResult(TiXianResultActivity.class,300);
+                    finish();
+                }
+            });
+        }
+
     }
 
     private void selectPayWay() {

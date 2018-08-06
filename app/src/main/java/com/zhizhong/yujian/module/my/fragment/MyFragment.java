@@ -18,6 +18,7 @@ import com.zhizhong.yujian.module.auction.activity.PaiMaiOrderActivity;
 import com.zhizhong.yujian.module.my.activity.AddressListActivity;
 import com.zhizhong.yujian.module.my.activity.HelpCenterActivity;
 import com.zhizhong.yujian.module.my.activity.MessageActivity;
+import com.zhizhong.yujian.module.my.activity.MyBaoZhengJinActivity;
 import com.zhizhong.yujian.module.my.activity.MyCollectionActivity;
 import com.zhizhong.yujian.module.my.activity.MyDataActivity;
 import com.zhizhong.yujian.module.my.activity.MyMoneyActivity;
@@ -125,10 +126,9 @@ public class MyFragment extends BaseFragment {
             GlideUtils.intoD(mContext,avatar,iv_my,R.drawable.default_person);
 
             tv_my_nickname.setText(nick_name);
-            tv_my_balance.setText("¥"+coupons_count);
-            tv_my_coupon.setText(amount+"");
+            tv_my_balance.setText("¥"+amount);
+            tv_my_coupon.setText(coupons_count+"");
     }
-
 
     @Override
     protected void initData() {
@@ -190,6 +190,7 @@ public class MyFragment extends BaseFragment {
                 STActivity(AddressListActivity.class);
                 break;
             case R.id.tv_my_wodebaozhengjin:
+                STActivity(MyBaoZhengJinActivity.class);
                 break;
             case R.id.tv_my_wodepingjia:
                 break;

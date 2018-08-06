@@ -419,7 +419,7 @@ public class AuctionDetailActivity extends BaseActivity {
             protected void onNoDoubleClick(View view) {
                 dialog.dismiss();
                 Intent intent=new Intent();
-                intent.putExtra(IntentParam.baoZhengJin,cash_deposit);
+                intent.putExtra(IntentParam.baoZhengJin,cash_deposit.toString());
                 STActivityForResult(intent,JiaoNaJinActivity.class,1000);
             }
         });
