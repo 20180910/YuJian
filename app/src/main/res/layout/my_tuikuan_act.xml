@@ -11,11 +11,12 @@
         android:id="@id/pl_load"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
+        <in.srain.cube.views.ptr.PtrClassicFrameLayout
+            android:id="@id/pcfl_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/bg_color"
+            app:ptr_resistance="2.1"
+            app:ptr_ratio_of_header_height_to_refresh="1.2"
             >
             <!--your view-->
             <android.support.v7.widget.RecyclerView
@@ -26,7 +27,6 @@
 
             </android.support.v7.widget.RecyclerView>
 
-
-        </LinearLayout>
+        </in.srain.cube.views.ptr.PtrClassicFrameLayout>
     </com.library.base.ProgressLayout>
 </LinearLayout>

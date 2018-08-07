@@ -20,6 +20,8 @@ import com.zhizhong.yujian.module.my.network.response.MyBaoZhengJinObj;
 import com.zhizhong.yujian.module.my.network.response.MyMoneyObj;
 import com.zhizhong.yujian.module.my.network.response.OrderDetailObj;
 import com.zhizhong.yujian.module.my.network.response.OrderObj;
+import com.zhizhong.yujian.module.my.network.response.TuiHuanHuoDetailObj;
+import com.zhizhong.yujian.module.my.network.response.TuiHuanHuoObj;
 import com.zhizhong.yujian.module.my.network.response.TuiKuanMoneyObj;
 import com.zhizhong.yujian.module.my.network.response.TuiKuanReasonObj;
 import com.zhizhong.yujian.module.my.network.response.YouHuiQuanNumObj;
@@ -195,6 +197,10 @@ public interface IRequest {
     @GET("api/UserBase/GetApplyForRefundsMoney")
     Call<ResponseObj<TuiKuanMoneyObj>>tuiKuanMoney(@QueryMap Map<String,String> map);
 
+    //退换货详情
+    @GET("api/UserBase/GetMyApplyForRefundsDetails")
+    Call<ResponseObj<TuiHuanHuoDetailObj>>tuiHuanHuoDetail(@QueryMap Map<String,String> map);
+
     //申请退款原因
     @GET("api/UserBase/GetRefundReason")
     Call<ResponseObj<List<TuiKuanReasonObj>>>tuiKuanReason(@QueryMap Map<String,String> map);
@@ -202,5 +208,13 @@ public interface IRequest {
     //提交申请退款
     @GET("api/UserBase/GetApplyForRefunds")
     Call<ResponseObj<BaseObj>>tuiKuan(@QueryMap Map<String,String> map);
+
+    //我的退换货列表
+    @GET("api/UserBase/GetMyApplyForRefunds")
+    Call<ResponseObj<List<TuiHuanHuoObj>>>tuiHuanHuoList(@QueryMap Map<String,String> map);
+
+    //取消申请
+    @GET("api/UserBase/GetCancelRequest")
+    Call<ResponseObj<BaseObj>>cancelShenQing(@QueryMap Map<String,String> map);
 
 }

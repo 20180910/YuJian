@@ -39,7 +39,7 @@ public class IntentParam {
     public static final String baoZhengJinMoney = "baoZhengJinMoney";
 
     public static final String orderNo="orderNo";
-    public static final String webUrl="webUrl";
+    public static final String tuiHuanHuo="tuiHuanHuo";
     public static final String goodsTypeId="goodsTypeId";
     public static final String title="title";
     public static final String visaId="visaId";

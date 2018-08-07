@@ -1,5 +1,6 @@
 package com.zhizhong.yujian.module.my.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import com.github.androidtools.PhoneUtils;
 import com.github.androidtools.inter.MyOnClickListener;
 import com.github.baseclass.adapter.MyBaseRecyclerAdapter;
 import com.github.baseclass.adapter.MyRecyclerViewHolder;
+import com.github.mydialog.MyDialog;
 import com.github.mydialog.MySimpleDialog;
 import com.github.rxbus.RxBus;
 import com.github.rxbus.rxjava.MyFlowableSubscriber;
@@ -27,7 +29,9 @@ import com.zhizhong.yujian.base.BaseActivity;
 import com.zhizhong.yujian.base.GlideUtils;
 import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.module.mall.event.TuiKuanEvent;
+import com.zhizhong.yujian.module.my.event.RefreshTuiHuoEvent;
 import com.zhizhong.yujian.module.my.network.ApiRequest;
+import com.zhizhong.yujian.module.my.network.response.TuiHuanHuoDetailObj;
 import com.zhizhong.yujian.module.my.network.response.TuiKuanMoneyObj;
 import com.zhizhong.yujian.module.my.network.response.TuiKuanReasonObj;
 import com.zhizhong.yujian.network.NetApiRequest;
@@ -59,11 +63,15 @@ public class TuiKuanActivity extends BaseActivity {
     MyEditText et_tuikuan_content;
     @BindView(R.id.rv_tuikuan)
     RecyclerView rv_tuikuan;
+    @BindView(R.id.tv_tuikuan_commit)
+    TextView tv_tuikuan_commit;
 
     MyBaseRecyclerAdapter adapter;
     private String orderNo;
     private String tuiKuanType;
     private String reasonId;
+    private boolean isTuiHuanHuo;
+    private int status=-1;
 
     @Override
     protected int getContentView() {
@@ -74,6 +82,7 @@ public class TuiKuanActivity extends BaseActivity {
     @Override
     protected void initView() {
         orderNo = getIntent().getStringExtra(IntentParam.orderNo);
+        isTuiHuanHuo = getIntent().getBooleanExtra(IntentParam.tuiHuanHuo,false);
 
         adapter=new MyBaseRecyclerAdapter<String>(mContext,R.layout.tuikuan_item) {
             @Override
@@ -149,17 +158,61 @@ public class TuiKuanActivity extends BaseActivity {
     @Override
     protected void getData(int page, boolean isLoad) {
         super.getData(page, isLoad);
-        showLoading();
-        Map<String,String> map=new HashMap<String,String>();
-        map.put("user_id",getUserId());
-        map.put("order_no",orderNo);
-        map.put("sign",getSign(map));
-        ApiRequest.tuiKuanMoney(map, new MyCallBack<TuiKuanMoneyObj>(mContext,pl_load,pcfl) {
-            @Override
-            public void onSuccess(TuiKuanMoneyObj obj, int errorCode, String msg) {
-                tv_tuikuan_money.setText("最多可退"+obj.getMoney()+"元");
-            }
-        });
+        if(isTuiHuanHuo){
+            Map<String,String>map=new HashMap<String,String>();
+            map.put("user_id",getUserId());
+            map.put("order_no",orderNo);
+            map.put("sign",getSign(map));
+            ApiRequest.tuiHuanHuoDetail(map, new MyCallBack<TuiHuanHuoDetailObj>(mContext,pl_load,pcfl) {
+                @Override
+                public void onSuccess(TuiHuanHuoDetailObj obj, int errorCode, String msg) {
+                    //1退货中 2退货成功 3退货失败
+                    status = obj.getRefund_status();
+                    if(obj.getRefund_status()==1){
+                        tv_tuikuan_commit.setText("取消申请");
+                    }else if(obj.getRefund_status()==2){
+                        tv_tuikuan_commit.setVisibility(View.GONE);
+                    }else if(obj.getRefund_status()==3){
+                        tv_tuikuan_commit.setText("再次申请");
+                    }
+                    tv_tuikuan_money.setText("最多可退"+obj.getRefund_amount()+"元");
+                    tv_tuikuan_type.setText(obj.getRefund_type());
+                    tuiKuanType=obj.getRefund_type_id();
+
+
+                    if(obj.getRefund_reason_id()!=0){
+                        tv_tuikuan_reason.setText(obj.getRefund_reason());
+                        reasonId=obj.getRefund_reason_id()+"";
+                    }
+
+                    et_tuikuan_content.setText(obj.getRefund_instruction());
+                    List<String>list=new ArrayList<>();
+                    if(!TextUtils.isEmpty(obj.getRefund_voucher1())){
+                        list.add(obj.getRefund_voucher1());
+                    }
+                    if(!TextUtils.isEmpty(obj.getRefund_voucher2())){
+                        list.add(obj.getRefund_voucher2());
+                    }
+                    if(!TextUtils.isEmpty(obj.getRefund_voucher3())){
+                        list.add(obj.getRefund_voucher3());
+                    }
+                    adapter.setList(list,true);
+                }
+            });
+        }else{
+            showLoading();
+            Map<String,String> map=new HashMap<String,String>();
+            map.put("user_id",getUserId());
+            map.put("order_no",orderNo);
+            map.put("sign",getSign(map));
+            ApiRequest.tuiKuanMoney(map, new MyCallBack<TuiKuanMoneyObj>(mContext,pl_load,pcfl) {
+                @Override
+                public void onSuccess(TuiKuanMoneyObj obj, int errorCode, String msg) {
+                    tv_tuikuan_money.setText("最多可退"+obj.getMoney()+"元");
+                }
+            });
+        }
+
 
     }
 
@@ -233,22 +286,56 @@ public class TuiKuanActivity extends BaseActivity {
                 tuiKuanReason();
                 break;
             case R.id.tv_tuikuan_commit:
-                String type = getSStr(tv_tuikuan_type);
-                String reason = getSStr(tv_tuikuan_reason);
-                String content = getSStr(et_tuikuan_content);
-                if(TextUtils.isEmpty(type)){
-                    showMsg("请选择退款类型");
-                    return;
-                }else if(TextUtils.isEmpty(reason)){
-                    showMsg("请选择退款原因");
-                    return;
-                }else if(TextUtils.isEmpty(content)){
-                    showMsg("请输入退款说明");
-                    return;
+                if(status==1){
+                    cancelShenQing();
+                }else{
+                    String type = getSStr(tv_tuikuan_type);
+                    String reason = getSStr(tv_tuikuan_reason);
+                    String content = getSStr(et_tuikuan_content);
+                    if(TextUtils.isEmpty(type)){
+                        showMsg("请选择退款类型");
+                        return;
+                    }else if(TextUtils.isEmpty(reason)){
+                        showMsg("请选择退款原因");
+                        return;
+                    }else if(TextUtils.isEmpty(content)){
+                        showMsg("请输入退款说明");
+                        return;
+                    }
+                    tuiKuan();
                 }
-                tuiKuan();
                 break;
         }
+    }
+
+    private void cancelShenQing() {
+        MyDialog.Builder mDialog=new MyDialog.Builder(mContext);
+        mDialog.setMessage("是否确认取消申请?");
+        mDialog.setNegativeButton(new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        mDialog.setPositiveButton(new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                showLoading();
+                Map<String,String>map=new HashMap<String,String>();
+                map.put("user_id",getUserId());
+                map.put("order_no",orderNo);
+                map.put("sign",getSign(map));
+                ApiRequest.cancelShenQing(map, new MyCallBack<BaseObj>(mContext,true) {
+                    @Override
+                    public void onSuccess(BaseObj obj, int errorCode, String msg) {
+                        RxBus.getInstance().post(new RefreshTuiHuoEvent());
+                        finish();
+                    }
+                });
+            }
+        });
+        mDialog.create().show();
     }
 
 
@@ -283,6 +370,7 @@ public class TuiKuanActivity extends BaseActivity {
             @Override
             public void onSuccess(BaseObj obj, int errorCode, String msg) {
                 RxBus.getInstance().post(new TuiKuanEvent());
+                RxBus.getInstance().post(new RefreshTuiHuoEvent());
                 showMsg(msg);
                 finish();
             }
