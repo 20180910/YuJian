@@ -274,7 +274,7 @@ public class FaBiaoEvaluationActivity extends BaseActivity {
         ApiRequest.faBiaoEvaluation(map,item,new MyCallBack<BaseObj>(mContext) {
             @Override
             public void onSuccess(BaseObj obj, int errorCode, String msg) {
-                showMsg(obj.getMsg());
+                showMsg(msg);
                 RxBus.getInstance().post(new RefreshMyOrderEvent());
                 finish();
             }

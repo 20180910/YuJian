@@ -6,6 +6,7 @@ import com.zhizhong.yujian.Config;
 import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.module.my.network.request.FaBiaoEvaluationBody;
 import com.zhizhong.yujian.module.my.network.request.UpdateInfoBody;
+import com.zhizhong.yujian.module.my.network.response.FaBiaoEvaluationObj;
 
 import java.util.Map;
 
@@ -202,6 +203,18 @@ public class ApiRequest extends BaseApiRequest {
     public static void faBiaoEvaluation(Map map, FaBiaoEvaluationBody body, MyCallBack callBack) {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
         getGeneralClient(IRequest.class).faBiaoEvaluation(map,body).enqueue(callBack);
+    }
+    public static void againEvaluate(Map map, FaBiaoEvaluationObj body, MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
+        getGeneralClient(IRequest.class).againEvaluate(map,body).enqueue(callBack);
+    }
+    public static void myEvaluationList(Map map, MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
+        getGeneralClient(IRequest.class).myEvaluationList(map).enqueue(callBack);
+    }
+    public static void evaluationDetail(Map map, MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
+        getGeneralClient(IRequest.class).evaluationDetail(map).enqueue(callBack);
     }
 
 }

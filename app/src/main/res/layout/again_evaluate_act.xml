@@ -43,7 +43,7 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         tools:src="@drawable/qq"
-                        android:scaleType="fitCenter"
+                        android:scaleType="centerCrop"
                         android:layout_marginRight="13dp"
                         />
                     <TextView
@@ -61,17 +61,21 @@
                         android:layout_marginLeft="20dp"
                         >
                         <com.willy.ratingbar.BaseRatingBar
-                            android:id="@+id/brb_my_make_num"
+                            android:id="@+id/brb_again_make_num"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:srb_clickable="false"
                             app:srb_numStars="5"
                             app:srb_rating="3"
                             app:srb_minimumStars="1"
-                            app:srb_starWidth="15dp"
-                            app:srb_starHeight="15dp"
+                            app:srb_starWidth="17dp"
+                            app:srb_starHeight="17dp"
                             app:srb_starPadding="6dp"
-                            ></com.willy.ratingbar.BaseRatingBar>
+                            app:srb_drawableEmpty="@drawable/star_normal"
+                            app:srb_drawableFilled="@drawable/star_select"
+                            app:srb_isIndicator="true"
+                            >
+                        </com.willy.ratingbar.BaseRatingBar>
                     </LinearLayout>
                     <!--
                             app:srb_drawableFilled="@drawable/star_select"
@@ -81,7 +85,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="好"
+                        tools:text="好"
                         android:gravity="center_vertical|right"
                         />
                 </LinearLayout>

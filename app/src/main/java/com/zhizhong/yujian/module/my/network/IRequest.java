@@ -12,6 +12,7 @@ import com.zhizhong.yujian.module.my.network.response.BankAccountObj;
 import com.zhizhong.yujian.module.my.network.response.BankListObj;
 import com.zhizhong.yujian.module.my.network.response.ChongZhiObj;
 import com.zhizhong.yujian.module.my.network.response.CollectionGoodsObj;
+import com.zhizhong.yujian.module.my.network.response.EvaluationDetailObj;
 import com.zhizhong.yujian.module.my.network.response.FaBiaoEvaluationObj;
 import com.zhizhong.yujian.module.my.network.response.HelpCenterObj;
 import com.zhizhong.yujian.module.my.network.response.KaiHuHangObj;
@@ -19,6 +20,7 @@ import com.zhizhong.yujian.module.my.network.response.LoginObj;
 import com.zhizhong.yujian.module.my.network.response.MessageObj;
 import com.zhizhong.yujian.module.my.network.response.MyBalanceObj;
 import com.zhizhong.yujian.module.my.network.response.MyBaoZhengJinObj;
+import com.zhizhong.yujian.module.my.network.response.MyEvaluationObj;
 import com.zhizhong.yujian.module.my.network.response.MyMoneyObj;
 import com.zhizhong.yujian.module.my.network.response.OrderDetailObj;
 import com.zhizhong.yujian.module.my.network.response.OrderObj;
@@ -230,5 +232,17 @@ public interface IRequest {
     //发表评价
     @POST("api/UserBase/PostPublishAppraise")
     Call<ResponseObj<BaseObj>>faBiaoEvaluation(@QueryMap Map<String,String> map,@Body FaBiaoEvaluationBody body);
+
+    //我的评价列表
+    @GET("api/UserBase/GetMyAppraise")
+    Call<ResponseObj<List<MyEvaluationObj>>>myEvaluationList(@QueryMap Map<String,String> map);
+
+    //再次评价数据显示
+    @GET("api/UserBase/GetAppraiseDetail")
+    Call<ResponseObj<EvaluationDetailObj>>evaluationDetail(@QueryMap Map<String,String> map);
+
+    //追评
+    @POST("api/UserBase/PostAdditionalEvaluation")
+    Call<ResponseObj<BaseObj>>againEvaluate(@QueryMap Map<String,String> map,@Body FaBiaoEvaluationObj body);
 
 }

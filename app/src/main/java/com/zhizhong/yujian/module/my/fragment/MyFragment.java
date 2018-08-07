@@ -21,6 +21,7 @@ import com.zhizhong.yujian.module.my.activity.MessageActivity;
 import com.zhizhong.yujian.module.my.activity.MyBaoZhengJinActivity;
 import com.zhizhong.yujian.module.my.activity.MyCollectionActivity;
 import com.zhizhong.yujian.module.my.activity.MyDataActivity;
+import com.zhizhong.yujian.module.my.activity.MyEvaluationActivity;
 import com.zhizhong.yujian.module.my.activity.MyMoneyActivity;
 import com.zhizhong.yujian.module.my.activity.MyOrderActivity;
 import com.zhizhong.yujian.module.my.activity.MyTuiKuanListActivity;
@@ -195,6 +196,7 @@ public class MyFragment extends BaseFragment {
                 STActivity(MyBaoZhengJinActivity.class);
                 break;
             case R.id.tv_my_wodepingjia:
+                STActivity(MyEvaluationActivity.class);
                 break;
             case R.id.tv_my_help:
                 STActivity(HelpCenterActivity.class);

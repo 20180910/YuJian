@@ -37,6 +37,8 @@ public class IntentParam {
     public static final String bankId = "bankId";
     public static final String isBaoZhengJin = "isBaoZhengJin";
     public static final String baoZhengJinMoney = "baoZhengJinMoney";
+    public static final String zhuiPing = "zhuiPing";
+    public static final String evaluateId = "evaluateId";
 
     public static final String orderNo="orderNo";
     public static final String tuiHuanHuo="tuiHuanHuo";
