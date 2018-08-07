@@ -68,7 +68,7 @@ public class LingQuanZhongXinActivity extends BaseActivity {
                             Intent intent=new Intent();
                             intent.putExtra(IntentParam.youHuiQuanFullMoney,bean.getAvailable());
                             intent.putExtra(IntentParam.youHuiQuanMoney,bean.getFace_value());
-                            intent.putExtra(IntentParam.youHuiQuanId,bean.getId());
+                            intent.putExtra(IntentParam.youHuiQuanId,bean.getCoupons_id());
                             setResult(RESULT_OK,intent);
                             finish();
                         }

@@ -17,6 +17,7 @@ public class YouHuiQuanObj extends BaseObj {
      */
 
     private String id;
+    private String coupons_id;
     private String title;
     private BigDecimal face_value;
     private BigDecimal available;
@@ -31,6 +32,14 @@ public class YouHuiQuanObj extends BaseObj {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getCoupons_id() {
+        return coupons_id;
+    }
+
+    public void setCoupons_id(String coupons_id) {
+        this.coupons_id = coupons_id;
     }
 
     public String getTitle() {
