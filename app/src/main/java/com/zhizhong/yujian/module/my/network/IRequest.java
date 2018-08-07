@@ -3,6 +3,7 @@ package com.zhizhong.yujian.module.my.network;
 import com.library.base.BaseObj;
 import com.library.base.ResponseObj;
 import com.zhizhong.yujian.module.mall.network.response.YouHuiQuanObj;
+import com.zhizhong.yujian.module.my.network.request.FaBiaoEvaluationBody;
 import com.zhizhong.yujian.module.my.network.request.UpdateInfoBody;
 import com.zhizhong.yujian.module.my.network.response.AboutObj;
 import com.zhizhong.yujian.module.my.network.response.AddressObj;
@@ -11,6 +12,7 @@ import com.zhizhong.yujian.module.my.network.response.BankAccountObj;
 import com.zhizhong.yujian.module.my.network.response.BankListObj;
 import com.zhizhong.yujian.module.my.network.response.ChongZhiObj;
 import com.zhizhong.yujian.module.my.network.response.CollectionGoodsObj;
+import com.zhizhong.yujian.module.my.network.response.FaBiaoEvaluationObj;
 import com.zhizhong.yujian.module.my.network.response.HelpCenterObj;
 import com.zhizhong.yujian.module.my.network.response.KaiHuHangObj;
 import com.zhizhong.yujian.module.my.network.response.LoginObj;
@@ -125,6 +127,10 @@ public interface IRequest {
     @GET("api/UserBase/GetOrderMore")
     Call<ResponseObj<OrderDetailObj>> getOrderDetail(@QueryMap Map<String, String> map);
 
+    //订单-确认收货
+    @GET("api/UserBase/GetConfirmReceiptGoods")
+    Call<ResponseObj<BaseObj>> sureOrder(@QueryMap Map<String, String> map);
+
     //物流详情
     @GET("api/UserBase/GetLogisticsInformation")
     Call<ResponseObj<WuLiuObj>> getWuLiuDetail(@QueryMap Map<String, String> map);
@@ -216,5 +222,13 @@ public interface IRequest {
     //取消申请
     @GET("api/UserBase/GetCancelRequest")
     Call<ResponseObj<BaseObj>>cancelShenQing(@QueryMap Map<String,String> map);
+
+    //取消申请
+    @GET("api/UserBase/GetPublishAppraiseImg")
+    Call<ResponseObj<List<FaBiaoEvaluationObj>>>faBiaoEvaluationShow(@QueryMap Map<String,String> map);
+
+    //发表评价
+    @POST("api/UserBase/PostPublishAppraise")
+    Call<ResponseObj<BaseObj>>faBiaoEvaluation(@QueryMap Map<String,String> map,@Body FaBiaoEvaluationBody body);
 
 }

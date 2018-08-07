@@ -26,8 +26,10 @@ import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.event.MyOrderEvent;
 import com.zhizhong.yujian.event.PayEvent;
 import com.zhizhong.yujian.module.mall.event.TuiKuanEvent;
+import com.zhizhong.yujian.module.my.activity.FaBiaoEvaluationActivity;
 import com.zhizhong.yujian.module.my.activity.OrderDetailActivity;
 import com.zhizhong.yujian.module.my.activity.TuiKuanActivity;
+import com.zhizhong.yujian.module.my.event.RefreshMyOrderEvent;
 import com.zhizhong.yujian.module.my.network.ApiRequest;
 import com.zhizhong.yujian.module.my.network.response.OrderObj;
 
@@ -255,7 +257,9 @@ public class MyOrderFragment extends BaseFragment {
     }
 
     private void evaluationOrder(String order_no) {
-
+        Intent intent=new Intent();
+        intent.putExtra(IntentParam.orderNo,order_no);
+        STActivity(intent,FaBiaoEvaluationActivity.class);
     }
 
     private void tuikuanOrder(String order_no) {
@@ -265,6 +269,18 @@ public class MyOrderFragment extends BaseFragment {
     }
 
     private void sureOrder(String order_no) {
+        showLoading();
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("user_id",getUserId());
+        map.put("order_no",order_no);
+        map.put("sign",getSign(map));
+        ApiRequest.sureOrder(map, new MyCallBack<BaseObj>(mContext) {
+            @Override
+            public void onSuccess(BaseObj obj, int errorCode, String msg) {
+                showMsg(msg);
+                RxBus.getInstance().post(new RefreshMyOrderEvent());
+            }
+        });
 
     }
 
@@ -319,6 +335,12 @@ public class MyOrderFragment extends BaseFragment {
         getEvent(TuiKuanEvent.class, new MyConsumer<TuiKuanEvent>() {
             @Override
             public void onAccept(TuiKuanEvent event) {
+                getData(1,false);
+            }
+        });
+        getEvent(RefreshMyOrderEvent.class, new MyConsumer<RefreshMyOrderEvent>() {
+            @Override
+            public void onAccept(RefreshMyOrderEvent event) {
                 getData(1,false);
             }
         });

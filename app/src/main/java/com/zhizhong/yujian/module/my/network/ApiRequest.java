@@ -4,6 +4,7 @@ import com.github.retrofitutil.NoNetworkException;
 import com.library.base.BaseApiRequest;
 import com.zhizhong.yujian.Config;
 import com.zhizhong.yujian.base.MyCallBack;
+import com.zhizhong.yujian.module.my.network.request.FaBiaoEvaluationBody;
 import com.zhizhong.yujian.module.my.network.request.UpdateInfoBody;
 
 import java.util.Map;
@@ -98,6 +99,10 @@ public class ApiRequest extends BaseApiRequest {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
         getGeneralClient(IRequest.class).getOrderDetail(map).enqueue(callBack);
     }
+    public static void sureOrder(Map map, MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
+        getGeneralClient(IRequest.class).sureOrder(map).enqueue(callBack);
+    }
     public static void getWuLiuDetail(Map map, MyCallBack callBack) {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
         getGeneralClient(IRequest.class).getWuLiuDetail(map).enqueue(callBack);
@@ -189,6 +194,14 @@ public class ApiRequest extends BaseApiRequest {
     public static void cancelShenQing(Map map, MyCallBack callBack) {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
         getGeneralClient(IRequest.class).cancelShenQing(map).enqueue(callBack);
+    }
+    public static void faBiaoEvaluationShow(Map map, MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
+        getGeneralClient(IRequest.class).faBiaoEvaluationShow(map).enqueue(callBack);
+    }
+    public static void faBiaoEvaluation(Map map, FaBiaoEvaluationBody body, MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
+        getGeneralClient(IRequest.class).faBiaoEvaluation(map,body).enqueue(callBack);
     }
 
 }

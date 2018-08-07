@@ -6,16 +6,15 @@
               android:layout_width="100dp"
               android:layout_height="100dp"
               android:gravity="center"
-              android:padding="3dp"
              app:borderDashGap="2dp"
              app:borderDashWidth="4dp"
              app:all_line="true"
-                                     app:borderColor="@color/gray_66"
+             app:borderColor="@color/gray_66"
     >
     <LinearLayout
         android:id="@+id/ll_fankui_add"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:orientation="vertical"
         android:gravity="center"
         >
@@ -37,15 +36,15 @@
     
     <FrameLayout
         android:id="@+id/fl_fankui"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:background="#B7E2E2E2"
         android:visibility="gone"
         >
         <ImageView
             android:id="@+id/iv_fankui_img"
-            android:layout_width="94dp"
-            android:layout_height="94dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             tools:src="@drawable/qq"
             />
         <ImageView
