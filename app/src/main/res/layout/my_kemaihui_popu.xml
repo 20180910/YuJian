@@ -10,11 +10,14 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center_vertical"
-    android:padding="20dp"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="30dp"
     app:clipIgnorePadding="true"
     app:clipRadius="5dp"
     app:solidColor="@color/bg_color"
-
+    app:radius="5dp"
     >
     <TextView
         android:layout_width="wrap_content"
@@ -24,7 +27,8 @@
         android:textColor="@color/gray_33"
         android:layout_gravity="center_horizontal"
         />
-    <com.zhizhong.yujian.view.MyEditText
+    <com.github.fastshape.MyTextView
+        android:id="@+id/tv_kemaihui_kuaidi_name"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center_vertical"
@@ -35,20 +39,23 @@
         android:hint="请选择快递公司"
         app:all_line="true"
         android:layout_marginTop="15dp"
+        android:paddingLeft="7dp"
         />
     <com.zhizhong.yujian.view.MyEditText
+        android:id="@+id/et_kemaihui_kuaidi_num"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center_vertical"
         android:textSize="13sp"
         app:solidColor="@color/white"
-        android:inputType="text"
+        android:inputType="textWebEditText"
         android:imeOptions="actionNext"
         android:hint="请填写退回单号"
         app:all_line="true"
         android:layout_marginTop="15dp"
         />
     <com.github.fastshape.MyTextView
+        android:id="@+id/tv_kemaihui_kuaidi_sure"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text="确定"

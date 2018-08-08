@@ -17,6 +17,7 @@ import com.zhizhong.yujian.module.my.network.response.FaBiaoEvaluationObj;
 import com.zhizhong.yujian.module.my.network.response.HelpCenterObj;
 import com.zhizhong.yujian.module.my.network.response.KaiHuHangObj;
 import com.zhizhong.yujian.module.my.network.response.KeMaiHuiObj;
+import com.zhizhong.yujian.module.my.network.response.KuaiDiObj;
 import com.zhizhong.yujian.module.my.network.response.LoginObj;
 import com.zhizhong.yujian.module.my.network.response.MessageObj;
 import com.zhizhong.yujian.module.my.network.response.MyBalanceObj;
@@ -249,5 +250,13 @@ public interface IRequest {
     //我的可卖回
     @GET("api/UserBase/GetRansom")
     Call<ResponseObj<KeMaiHuiObj>>keMaiHui(@QueryMap Map<String,String> map);
+
+    //一键卖回
+    @GET("api/UserBase/GetAddRansom")
+    Call<ResponseObj<BaseObj>>maiHui(@QueryMap Map<String,String> map);
+
+    //快递列表
+    @GET("api/UserBase/GetExpressList")
+    Call<ResponseObj<List<KuaiDiObj>>>getKuaiDi(@QueryMap Map<String,String> map);
 
 }
