@@ -1,6 +1,7 @@
 package com.zhizhong.yujian.module.my.activity;
 
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -12,6 +13,7 @@ import com.github.androidtools.PhoneUtils;
 import com.github.androidtools.inter.MyOnClickListener;
 import com.github.baseclass.adapter.MyBaseRecyclerAdapter;
 import com.github.baseclass.adapter.MyRecyclerViewHolder;
+import com.github.fastshape.MyTextView;
 import com.github.mydialog.MySimpleDialog;
 import com.library.base.BaseObj;
 import com.library.base.view.MyRecyclerView;
@@ -62,18 +64,36 @@ public class KeMaiHuiActivity extends BaseActivity {
                 holder.setText(R.id.tv_kemaihui_sales_price,"¥"+bean.getKemai_price());
 
 
-                holder.getView(R.id.tv_kemaihui_sales).setOnClickListener(new MyOnClickListener() {
-                    @Override
-                    protected void onNoDoubleClick(View view) {
-                        if(TextUtils.isEmpty(keMaiHuiObj.getAddress())){
-                            showMsg("暂无寄回地址,请联系客服");
-                        }else{
-                            goodsId=bean.getGoods_id();
-                            goodsNo=bean.getOrder_no();
-                            jiChu();
+                MyTextView tv_kemaihui_sales= (MyTextView) holder.getView(R.id.tv_kemaihui_sales);
+                //状态(0一键卖回 1已发货 2已卖回)
+                if(bean.getRansom_status()==0){
+                    tv_kemaihui_sales.setText("一键卖回");
+                    tv_kemaihui_sales.getViewHelper().setSolidColor(ContextCompat.getColor(mContext,R.color.red)).complete();
+                    tv_kemaihui_sales.setVisibility(View.VISIBLE);
+                    tv_kemaihui_sales.setOnClickListener(new MyOnClickListener() {
+                        @Override
+                        protected void onNoDoubleClick(View view) {
+                            if(TextUtils.isEmpty(keMaiHuiObj.getAddress())){
+                                showMsg("暂无寄回地址,请联系客服");
+                            }else{
+                                goodsId=bean.getGoods_id();
+                                goodsNo=bean.getOrder_no();
+                                jiChu();
+                            }
                         }
-                    }
-                });
+                    });
+                }else if(bean.getRansom_status()==1){
+                    tv_kemaihui_sales.setText("已发货");
+                    tv_kemaihui_sales.getViewHelper().setSolidColor(ContextCompat.getColor(mContext,R.color.gray_99)).complete();
+                    tv_kemaihui_sales.setVisibility(View.VISIBLE);
+                }else if(bean.getRansom_status()==2){
+                    tv_kemaihui_sales.setText("已卖回");
+                    tv_kemaihui_sales.getViewHelper().setSolidColor(ContextCompat.getColor(mContext,R.color.red)).complete();
+                    tv_kemaihui_sales.setVisibility(View.VISIBLE);
+                }else{
+                    tv_kemaihui_sales.setVisibility(View.GONE);
+                }
+
                 holder.itemView.setOnClickListener(new MyOnClickListener() {
                     @Override
                     protected void onNoDoubleClick(View view) {

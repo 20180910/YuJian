@@ -1,5 +1,6 @@
 package com.zhizhong.yujian.module.my.activity;
 
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -11,6 +12,7 @@ import com.github.androidtools.PhoneUtils;
 import com.github.androidtools.inter.MyOnClickListener;
 import com.github.baseclass.adapter.MyBaseRecyclerAdapter;
 import com.github.baseclass.adapter.MyRecyclerViewHolder;
+import com.github.fastshape.MyTextView;
 import com.github.mydialog.MySimpleDialog;
 import com.library.base.BaseObj;
 import com.library.base.view.MyRecyclerView;
@@ -53,7 +55,7 @@ public class MyMaiHuiActivity extends BaseActivity {
     TextView tv_kemaihui_detail_sales_price;
 
     @BindView(R.id.tv_kemaihui_detail_sales)
-    TextView tv_kemaihui_detail_sales;
+    MyTextView tv_kemaihui_detail_sales;
 
     private KeMaiHuiObj keMaiHuiObj;
     private KeMaiHuiObj.List2Bean goods;
@@ -79,6 +81,21 @@ public class MyMaiHuiActivity extends BaseActivity {
             ll_kemaihui_detail_address_content.setVisibility(View.VISIBLE);
         }
 
+        if(goods.getRansom_status()==0){
+            tv_kemaihui_detail_sales.setText("确定卖回");
+            tv_kemaihui_detail_sales.getViewHelper().setSolidColor(ContextCompat.getColor(mContext,R.color.red)).complete();
+        }else if(goods.getRansom_status()==1){
+            tv_kemaihui_detail_sales.setText("已发货");
+            tv_kemaihui_detail_sales.getViewHelper().setSolidColor(ContextCompat.getColor(mContext,R.color.gray_99)).complete();
+            tv_kemaihui_detail_sales.setEnabled(false);
+        }else if(goods.getRansom_status()==2){
+            tv_kemaihui_detail_sales.setText("已卖回");
+            tv_kemaihui_detail_sales.getViewHelper().setSolidColor(ContextCompat.getColor(mContext,R.color.red)).complete();
+            tv_kemaihui_detail_sales.setEnabled(false);
+        }else{
+            tv_kemaihui_detail_sales.setVisibility(View.GONE);
+        }
+
 
         tv_kemaihui_detail_name.setText(keMaiHuiObj.getRecipient());
         tv_kemaihui_detail_phone.setText(keMaiHuiObj.getPhone());
@@ -101,10 +118,12 @@ public class MyMaiHuiActivity extends BaseActivity {
     public void onViewClick(View v) {
         switch (v.getId()){
             case R.id.tv_kemaihui_detail_sales:
-                if(TextUtils.isEmpty(keMaiHuiObj.getAddress())){
-                    showMsg("暂无寄回地址,请联系客服");
-                }else{
-                    jiChu();
+                if (goods.getRansom_status()==0) {
+                    if(TextUtils.isEmpty(keMaiHuiObj.getAddress())){
+                        showMsg("暂无寄回地址,请联系客服");
+                    }else{
+                        jiChu();
+                    }
                 }
             break;
         }
