@@ -16,6 +16,7 @@ import com.zhizhong.yujian.module.my.network.response.EvaluationDetailObj;
 import com.zhizhong.yujian.module.my.network.response.FaBiaoEvaluationObj;
 import com.zhizhong.yujian.module.my.network.response.HelpCenterObj;
 import com.zhizhong.yujian.module.my.network.response.KaiHuHangObj;
+import com.zhizhong.yujian.module.my.network.response.KeMaiHuiObj;
 import com.zhizhong.yujian.module.my.network.response.LoginObj;
 import com.zhizhong.yujian.module.my.network.response.MessageObj;
 import com.zhizhong.yujian.module.my.network.response.MyBalanceObj;
@@ -244,5 +245,9 @@ public interface IRequest {
     //追评
     @POST("api/UserBase/PostAdditionalEvaluation")
     Call<ResponseObj<BaseObj>>againEvaluate(@QueryMap Map<String,String> map,@Body FaBiaoEvaluationObj body);
+
+    //我的可卖回
+    @GET("api/UserBase/GetRansom")
+    Call<ResponseObj<KeMaiHuiObj>>keMaiHui(@QueryMap Map<String,String> map);
 
 }

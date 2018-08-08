@@ -41,6 +41,7 @@ public class IntentParam {
     public static final String evaluateId = "evaluateId";
 
     public static final String orderNo="orderNo";
+    public static final String keMaiHuiGoods="keMaiHuiGoods";
     public static final String tuiHuanHuo="tuiHuanHuo";
     public static final String goodsTypeId="goodsTypeId";
     public static final String title="title";

@@ -17,6 +17,7 @@ import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.module.auction.activity.PaiMaiOrderActivity;
 import com.zhizhong.yujian.module.my.activity.AddressListActivity;
 import com.zhizhong.yujian.module.my.activity.HelpCenterActivity;
+import com.zhizhong.yujian.module.my.activity.KeMaiHuiActivity;
 import com.zhizhong.yujian.module.my.activity.MessageActivity;
 import com.zhizhong.yujian.module.my.activity.MyBaoZhengJinActivity;
 import com.zhizhong.yujian.module.my.activity.MyCollectionActivity;
@@ -185,6 +186,7 @@ public class MyFragment extends BaseFragment {
                 STActivity(MyTuiKuanListActivity.class);
                 break;
             case R.id.tv_my_wodekemaihui:
+                STActivity(KeMaiHuiActivity.class);
                 break;
             case R.id.tv_my_wodeshoucang:
                 STActivity(MyCollectionActivity.class);

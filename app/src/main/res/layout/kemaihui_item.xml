@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
@@ -14,9 +15,11 @@
         android:padding="10dp"
         >
         <ImageView
+            android:id="@+id/iv_kemaihui"
             android:layout_width="85dp"
             android:layout_height="85dp"
-            android:src="@drawable/qq"
+            tools:src="@drawable/qq"
+            android:scaleType="centerCrop"
             />
         <RelativeLayout
             android:layout_width="match_parent"
@@ -24,15 +27,17 @@
             android:layout_marginLeft="10dp"
             >
             <TextView
+                android:id="@+id/tv_kemaihui_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="御见翡翠"
+                tools:text="御见翡翠"
                 android:textColor="@color/gray_33"
                 android:maxLines="2"
                 android:ellipsize="end"
                 android:textSize="14sp"
                 />
             <com.github.fastshape.MyTextView
+                android:id="@+id/tv_kemaihui_sales"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="一键卖回"
@@ -47,7 +52,7 @@
                 android:textColor="@color/white"
                 />
             <TextView
-                android:id="@+id/tv_kemaihui_mairujia"
+                android:id="@+id/tv_kemaihui_buy_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="买入价¥120"
@@ -59,17 +64,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="还能卖"
-                android:layout_above="@+id/tv_kemaihui_mairujia"
+                android:layout_above="@+id/tv_kemaihui_buy_price"
                 android:textSize="12sp"
                 android:textColor="@color/red"
                 android:layout_marginBottom="3dp"
                 />
             <TextView
+                android:id="@+id/tv_kemaihui_sales_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="¥97"
                 android:layout_toRightOf="@+id/tv_kemaihui_text"
-                android:layout_above="@+id/tv_kemaihui_mairujia"
+                android:layout_above="@+id/tv_kemaihui_buy_price"
                 android:textSize="15sp"
                 android:textColor="@color/red"
                 android:layout_marginBottom="1dp"

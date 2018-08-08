@@ -1,146 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              xmlns:tools="http://schemas.android.com/tools"
               android:background="@color/bg_color"
+              android:orientation="vertical"
     >
-<include layout="@layout/app_title"/>
+
+    <include layout="@layout/app_title"/>
+
     <com.library.base.ProgressLayout
         android:id="@id/pl_load"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:background="@color/bg_color"
+            android:orientation="vertical"
             >
             <!--your view-->
             <TextView
+                android:id="@+id/tv_kemaihui_detail_jihui"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:text="寄回地址:"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 />
+
             <LinearLayout
+                android:id="@+id/ll_kemaihui_detail_address_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:orientation="vertical"
                 >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="收货人:"
+                        android:textColor="@color/gray_33"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_kemaihui_detail_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        tools:text="李富贵"
+                        android:textColor="@color/gray_33"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_kemaihui_detail_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="1893849283"
+                        android:textColor="@color/gray_33"
+                        />
+                </LinearLayout>
+
                 <TextView
+                    android:id="@+id/tv_kemaihui_detail_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="收货人:"
-                    android:textColor="@color/gray_33"
+                    android:layout_margin="10dp"
+                    tools:text="收货地址:上海市地址地址上海市地址地址上海市地址地址上海市地址地址上海市地址地址上海市地址地址上海市地址地址上海市地址地址上海市地址地址上海市地址地址上海市地址地址上海市地址地址"
                     />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="李富贵"
-                    android:textColor="@color/gray_33"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1893849283"
-                    android:textColor="@color/gray_33"
-                    />
+
             </LinearLayout>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="收货地址:上海市地址地址上海市地址地址上海市地址地址上海市地址地址上海市地址地址上海市地址地址上海市地址地址上海市地址地址上海市地址地址上海市地址地址上海市地址地址上海市地址地址"
-                android:layout_margin="10dp"
-                />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2px"
                 android:background="@color/divider_color"
                 />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="10dp"
                 >
+
                 <ImageView
+                    android:id="@+id/iv_kemaihui_detail"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/qq"
+                    tools:src="@drawable/qq"
+                    android:scaleType="centerCrop"
                     />
+
                 <TextView
+                    android:id="@+id/tv_kemaihui_detail_goods_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="御见珠宝"
                     android:layout_marginLeft="10dp"
-                    android:textColor="@color/gray_33"
-                    android:maxLines="2"
                     android:ellipsize="end"
+                    android:maxLines="2"
+                    tools:text="御见珠宝"
+                    android:textColor="@color/gray_33"
                     />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2px"
                 android:background="@color/divider_color"
                 />
+
             <TextView
+                android:id="@+id/tv_kemaihui_detail_buy_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="买入价¥123"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                tools:text="买入价¥123"
                 android:textSize="12sp"
                 />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="bottom"
-                android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:gravity="bottom"
+                android:orientation="horizontal"
                 >
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
                     android:text="还能卖"
                     android:textColor="@color/red"
                     android:textSize="12sp"
-                    android:layout_marginRight="3dp"
                     />
+
                 <TextView
+                    android:id="@+id/tv_kemaihui_detail_sales_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="¥1312"
-                    android:textSize="17sp"
+                    tools:text="¥1312"
                     android:textColor="@color/red"
+                    android:textSize="17sp"
                     />
             </LinearLayout>
         </LinearLayout>
+
         <com.github.fastshape.MyTextView
+            android:id="@+id/tv_kemaihui_detail_sales"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="确定卖回"
-            android:gravity="center"
-            android:layout_marginTop="25dp"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            app:solidColor="@color/red_button"
-            app:pressColor="@color/red_press"
-            app:radius="4dp"
             android:layout_alignParentBottom="true"
             android:layout_margin="10dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="确定卖回"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:pressColor="@color/red_press"
+            app:radius="4dp"
+            app:solidColor="@color/red_button"
             />
+
+        </RelativeLayout>
     </com.library.base.ProgressLayout>
 </LinearLayout>
