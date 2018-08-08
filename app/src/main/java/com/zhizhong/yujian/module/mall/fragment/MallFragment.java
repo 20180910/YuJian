@@ -27,6 +27,7 @@ import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.event.JoinShoppingCartEvent;
 import com.zhizhong.yujian.module.mall.activity.GoodsClassActivity;
 import com.zhizhong.yujian.module.mall.activity.GoodsDetailActivity;
+import com.zhizhong.yujian.module.mall.activity.GoodsSearchActivity;
 import com.zhizhong.yujian.module.mall.activity.NewScanActivity;
 import com.zhizhong.yujian.module.mall.activity.ShoppingCartActivity;
 import com.zhizhong.yujian.module.mall.network.ApiRequest;
@@ -225,6 +226,7 @@ public class MallFragment extends BaseFragment {
                 STActivity(NewScanActivity.class);
                 break;
             case R.id.tv_mall_search:
+                STActivity(GoodsSearchActivity.class);
                 break;
             case R.id.fl_mall_shopping:
                 if (noLogin()){

@@ -39,6 +39,7 @@ public class IntentParam {
     public static final String baoZhengJinMoney = "baoZhengJinMoney";
     public static final String zhuiPing = "zhuiPing";
     public static final String evaluateId = "evaluateId";
+    public static final String searchStr = "searchStr";
 
     public static final String orderNo="orderNo";
     public static final String keMaiHui="keMaiHui";

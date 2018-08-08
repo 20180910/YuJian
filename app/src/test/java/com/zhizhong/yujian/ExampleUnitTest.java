@@ -14,4 +14,13 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
+    @Test
+    public void asdf() {
+        String a="231,";
+        String[] split = a.split(",");
+        for (int i = 0; i < split.length; i++) {
+            System.out.println(split[i]+"==");
+        }
+
+    }
 }

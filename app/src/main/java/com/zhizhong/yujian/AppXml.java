@@ -30,7 +30,7 @@ public class AppXml {
     public static final String create_value = "create_value";
     public static final String create_name = "create_name";
     public static final String create_fenshu = "create_fenshu";
-    public static final String create_xing_num = "create_xing_num";
+    public static final String searchContent = "searchContent";
     public static final String read_value = "read_value";
     public static final String read_name = "read_name";
     public static final String registrationId="registrationId";
