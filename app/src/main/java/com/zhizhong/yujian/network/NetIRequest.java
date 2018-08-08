@@ -7,6 +7,7 @@ import com.library.base.bean.PayObj;
 import com.zhizhong.yujian.network.request.UploadImgBody;
 import com.zhizhong.yujian.network.response.CityObj;
 import com.zhizhong.yujian.network.response.CollectObj;
+import com.zhizhong.yujian.network.response.GoodsObj;
 import com.zhizhong.yujian.network.response.ImageObj;
 import com.zhizhong.yujian.network.response.ShareObj;
 
@@ -80,6 +81,10 @@ public interface NetIRequest {
     //余额支付
     @GET("api/GoodsClassiFication/GetBalancePayment")
     Call<ResponseObj<BaseObj>> yuePay(@QueryMap Map<String, String> map);
+
+    //扫一扫
+    @GET("api/GoodsClassiFication/GetScan")
+    Call<ResponseObj<List<GoodsObj>>> scan(@QueryMap Map<String, String> map);
 
  /*   //第三方登录
     @GET("api/MQLib/GetAddWXUser")

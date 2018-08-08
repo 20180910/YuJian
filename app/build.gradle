@@ -89,4 +89,7 @@ dependencies {
 
     implementation 'cn.jzvd:jiaozivideoplayer:6.2.9'
 
+
+    implementation 'cn.yipianfengye.android:zxing-library:2.2'
+
 }
