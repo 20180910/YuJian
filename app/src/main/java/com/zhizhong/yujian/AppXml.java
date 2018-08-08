@@ -36,8 +36,8 @@ public class AppXml {
     public static final String registrationId="registrationId";
     public static final String qq_name = "qq_name";
     public static final String wechat_name = "wechat_name";
-    public static final String loginJson = "loginJson";
-    public static final String is_show_nicheng = "is_show_nicheng";
+    public static final String bg_img = "bg_img";
+    public static final String vip_levle = "vip_levle";
 
     public static final String jifen = "jifen";
     public static final String commission = "commission";

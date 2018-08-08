@@ -38,6 +38,25 @@ public class LoginObj extends BaseObj {
     private String wechat_name;
     private int is_set_name;//是否显示设置昵称页(1显示 0不显示)
 
+    private String bg_img;
+    private int vip_levle;//（0普通会员 1 VIP会员）
+
+    public String getBg_img() {
+        return bg_img;
+    }
+
+    public void setBg_img(String bg_img) {
+        this.bg_img = bg_img;
+    }
+
+    public int getVip_levle() {
+        return vip_levle;
+    }
+
+    public void setVip_levle(int vip_levle) {
+        this.vip_levle = vip_levle;
+    }
+
     public String getMobile() {
         return mobile;
     }

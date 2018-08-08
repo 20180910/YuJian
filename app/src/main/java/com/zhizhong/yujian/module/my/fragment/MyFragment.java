@@ -1,6 +1,7 @@
 package com.zhizhong.yujian.module.my.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.github.androidtools.SPUtils;
 import com.github.fastshape.MyImageView;
+import com.github.fastshape.MyTextView;
 import com.zhizhong.yujian.AppXml;
 import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
@@ -27,6 +29,7 @@ import com.zhizhong.yujian.module.my.activity.MyMoneyActivity;
 import com.zhizhong.yujian.module.my.activity.MyOrderActivity;
 import com.zhizhong.yujian.module.my.activity.MyTuiKuanListActivity;
 import com.zhizhong.yujian.module.my.activity.SettingActivity;
+import com.zhizhong.yujian.module.my.activity.VIPActivity;
 import com.zhizhong.yujian.module.my.activity.YouHuiQuanActivity;
 import com.zhizhong.yujian.module.my.network.ApiRequest;
 import com.zhizhong.yujian.module.my.network.response.LoginObj;
@@ -48,6 +51,8 @@ public class MyFragment extends BaseFragment {
     ImageView iv_my_setting;
     @BindView(R.id.iv_my_message)
     ImageView iv_my_message;
+    @BindView(R.id.iv_my_bg)
+    ImageView iv_my_bg;
     @BindView(R.id.iv_my)
     MyImageView iv_my;
     @BindView(R.id.tv_my_nickname)
@@ -56,6 +61,10 @@ public class MyFragment extends BaseFragment {
     TextView tv_my_balance;
     @BindView(R.id.tv_my_coupon)
     TextView tv_my_coupon;
+
+    @BindView(R.id.tv_my_vip)
+    MyTextView tv_my_vip;
+
     private Intent intent;
 
     @Override
@@ -96,7 +105,6 @@ public class MyFragment extends BaseFragment {
             @Override
             public void onSuccess(LoginObj obj, int errorCode, String msg) {
                 setLoginObj(obj);
-
             }
         });
 
@@ -115,6 +123,9 @@ public class MyFragment extends BaseFragment {
 
         SPUtils.setPrefString(mContext,AppXml.qq_name,obj.getQq_name());
         SPUtils.setPrefString(mContext,AppXml.wechat_name,obj.getWechat_name());
+
+        SPUtils.setPrefString(mContext,AppXml.bg_img,obj.getBg_img());
+        SPUtils.setPrefInt(mContext,AppXml.vip_levle,obj.getVip_levle());
     }
 
 
@@ -122,15 +133,31 @@ public class MyFragment extends BaseFragment {
     private void setUserInfo() {
 
         String avatar = SPUtils.getString(mContext, AppXml.avatar, "");
+        String bg_img = SPUtils.getString(mContext, AppXml.bg_img, "");
         String nick_name =SPUtils.getString(mContext,AppXml.nick_name,"");
         int coupons_count =SPUtils.getInt(mContext,AppXml.coupons_count,0);
         String amount =SPUtils.getString(mContext,AppXml.amount,"");
+        int vip =SPUtils.getInt(mContext,AppXml.vip_levle,0);
 
             GlideUtils.intoD(mContext,avatar,iv_my,R.drawable.default_person);
+            GlideUtils.intoD(mContext,bg_img,iv_my_bg,R.drawable.my_bg);
 
             tv_my_nickname.setText(nick_name);
             tv_my_balance.setText("¥"+amount);
             tv_my_coupon.setText(coupons_count+"");
+
+        if(vip==1){
+            tv_my_vip.setText("VIP");
+            tv_my_vip.setTextColor(Color.parseColor("#FFE0D28F"));
+            tv_my_vip.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.vip,0,0,0);
+            tv_my_vip.getViewHelper().setBorderColor(Color.parseColor("#FFE0D28F")).complete();
+        }else{
+            tv_my_vip.setText("普通用户");
+            tv_my_vip.setTextColor(Color.parseColor("#FF9A9A9A"));
+            tv_my_vip.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0,0,0);
+            tv_my_vip.getViewHelper().setBorderColor(Color.parseColor("#FF9A9A9A")).complete();
+        }
+
     }
 
     @Override
@@ -138,9 +165,12 @@ public class MyFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.ll_my_yue,R.id.ll_my_youhuiquan,R.id.iv_my,R.id.iv_my_setting, R.id.iv_my_message, R.id.ll_my_allorder, R.id.ll_my_daifukuan, R.id.ll_my_daifahuo,R.id.ll_my_daishouhuo, R.id.ll_my_daipingjia, R.id.tv_my_wodepaimai, R.id.tv_my_wodetuikuan, R.id.tv_my_wodekemaihui, R.id.tv_my_wodeshoucang, R.id.tv_my_wodedizhi, R.id.tv_my_wodebaozhengjin, R.id.tv_my_wodepingjia, R.id.tv_my_help})
+    @OnClick({R.id.tv_my_vip,R.id.ll_my_yue,R.id.ll_my_youhuiquan,R.id.iv_my,R.id.iv_my_setting, R.id.iv_my_message, R.id.ll_my_allorder, R.id.ll_my_daifukuan, R.id.ll_my_daifahuo,R.id.ll_my_daishouhuo, R.id.ll_my_daipingjia, R.id.tv_my_wodepaimai, R.id.tv_my_wodetuikuan, R.id.tv_my_wodekemaihui, R.id.tv_my_wodeshoucang, R.id.tv_my_wodedizhi, R.id.tv_my_wodebaozhengjin, R.id.tv_my_wodepingjia, R.id.tv_my_help})
     public void onViewClick(View view) {
         switch (view.getId()) {
+            case R.id.tv_my_vip:
+                STActivity(VIPActivity.class);
+                break;
             case R.id.ll_my_yue:
                 STActivity(MyMoneyActivity.class);
                 break;

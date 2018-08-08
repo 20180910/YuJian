@@ -87,6 +87,7 @@
         <activity android:name=".module.auction.fragment.ChuJiaActivity"/>
         <activity android:name=".module.auction.activity.PaiMaiOrderActivity"/>
         <activity android:name=".module.auction.activity.PaiMaiOrderDetailActivity"/>
+        <activity android:name=".module.my.activity.VIPActivity"/>
     </application>
 
 </manifest>

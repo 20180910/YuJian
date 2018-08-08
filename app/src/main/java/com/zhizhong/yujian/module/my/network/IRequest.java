@@ -30,6 +30,7 @@ import com.zhizhong.yujian.module.my.network.response.TuiHuanHuoDetailObj;
 import com.zhizhong.yujian.module.my.network.response.TuiHuanHuoObj;
 import com.zhizhong.yujian.module.my.network.response.TuiKuanMoneyObj;
 import com.zhizhong.yujian.module.my.network.response.TuiKuanReasonObj;
+import com.zhizhong.yujian.module.my.network.response.VIPObj;
 import com.zhizhong.yujian.module.my.network.response.YouHuiQuanNumObj;
 import com.zhizhong.yujian.network.response.WuLiuObj;
 
@@ -258,5 +259,9 @@ public interface IRequest {
     //快递列表
     @GET("api/UserBase/GetExpressList")
     Call<ResponseObj<List<KuaiDiObj>>>getKuaiDi(@QueryMap Map<String,String> map);
+
+    //会员中心
+    @GET("api/UserBase/GetMemberCenter")
+    Call<ResponseObj<VIPObj>>VIP(@QueryMap Map<String,String> map);
 
 }

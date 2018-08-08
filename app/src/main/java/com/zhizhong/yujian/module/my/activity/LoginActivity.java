@@ -122,6 +122,8 @@ public class LoginActivity extends BaseActivity {
 
         SPUtils.setPrefString(mContext,AppXml.qq_name,obj.getQq_name());
         SPUtils.setPrefString(mContext,AppXml.wechat_name,obj.getWechat_name());
+        SPUtils.setPrefString(mContext,AppXml.bg_img,obj.getBg_img());
+        SPUtils.setPrefInt(mContext,AppXml.vip_levle,obj.getVip_levle());
 
 
 
