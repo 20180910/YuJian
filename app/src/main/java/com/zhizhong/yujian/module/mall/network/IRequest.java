@@ -8,6 +8,7 @@ import com.zhizhong.yujian.module.mall.network.response.GoodsEvaluationNumObj;
 import com.zhizhong.yujian.module.mall.network.response.GoodsEvaluationObj;
 import com.zhizhong.yujian.module.mall.network.response.MallGoodsObj;
 import com.zhizhong.yujian.module.mall.network.response.ShoppingCartObj;
+import com.zhizhong.yujian.module.mall.network.response.SureOrderObj;
 import com.zhizhong.yujian.module.mall.network.response.YouHuiQuanObj;
 import com.zhizhong.yujian.module.my.network.response.AddressObj;
 import com.zhizhong.yujian.network.response.GoodsObj;
@@ -84,7 +85,7 @@ public interface IRequest {
 
     //提交订单
     @POST("api/GoodsClassiFication/PostSubmitOrder")
-    Call<ResponseObj<BaseObj>> commitOrder(@QueryMap Map<String, String> map, @Body CommitOrderBody body);
+    Call<ResponseObj<SureOrderObj>> commitOrder(@QueryMap Map<String, String> map, @Body CommitOrderBody body);
 
 
 }

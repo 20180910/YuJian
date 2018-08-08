@@ -448,7 +448,6 @@ public abstract class BaseFragment extends MyBaseFragment {
 
     private void yuePay(String orderNo,String money) {
         showLoading();
-        showLoading();
         Map<String,String>map=new HashMap<String,String>();
         map.put("user_id",getUserId());
         map.put("order_no",orderNo);

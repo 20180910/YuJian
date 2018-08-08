@@ -32,6 +32,7 @@ import com.zhizhong.yujian.module.my.activity.TuiKuanActivity;
 import com.zhizhong.yujian.module.my.event.RefreshMyOrderEvent;
 import com.zhizhong.yujian.module.my.network.ApiRequest;
 import com.zhizhong.yujian.module.my.network.response.OrderObj;
+import com.zhizhong.yujian.tools.PayView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -192,7 +193,7 @@ public class MyOrderFragment extends BaseFragment {
                 tv_order_pay.setOnClickListener(new MyOnClickListener() {
                     @Override
                     protected void onNoDoubleClick(View view) {
-                        showPay(bean.getOrder_no(),bean.getCombined().toString());
+                        PayView.showPay(getActivity(),bean.getOrder_no(),bean.getCombined().toString());
                     }
                 });
                 tv_order_sure.setOnClickListener(new MyOnClickListener() {

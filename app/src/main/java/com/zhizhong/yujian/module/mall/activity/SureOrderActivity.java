@@ -4,14 +4,20 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.github.androidtools.AndroidUtils;
+import com.github.androidtools.inter.MyOnClickListener;
 import com.github.baseclass.adapter.MyRecyclerViewHolder;
+import com.github.baseclass.view.Loading;
+import com.github.mydialog.MySimpleDialog;
 import com.github.rxbus.RxBus;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -23,12 +29,15 @@ import com.zhizhong.yujian.base.BaseActivity;
 import com.zhizhong.yujian.base.GlideUtils;
 import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.event.JoinShoppingCartEvent;
+import com.zhizhong.yujian.event.PayEvent;
 import com.zhizhong.yujian.module.mall.network.ApiRequest;
 import com.zhizhong.yujian.module.mall.network.request.CommitOrderBody;
 import com.zhizhong.yujian.module.mall.network.response.ShoppingCartObj;
+import com.zhizhong.yujian.module.mall.network.response.SureOrderObj;
 import com.zhizhong.yujian.module.mall.network.response.YouHuiQuanObj;
 import com.zhizhong.yujian.module.my.activity.AddressListActivity;
 import com.zhizhong.yujian.module.my.network.response.AddressObj;
+import com.zhizhong.yujian.network.NetApiRequest;
 
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
@@ -261,7 +270,7 @@ public class SureOrderActivity extends BaseActivity {
                     showMsg("请选择地址");
                     return;
                 }
-                commit();
+                showPay(heJi);
                 break;
             case R.id.ll_sure_order_address:
             case R.id.ll_sure_order_select_address:
@@ -271,7 +280,7 @@ public class SureOrderActivity extends BaseActivity {
         }
     }
 
-    private void commit() {
+    private void commit(final RadioGroup rg_select_pay) {
         showLoading();
         Map<String,String>map=new HashMap<String,String>();
         map.put("user_id",getUserId());
@@ -300,13 +309,70 @@ public class SureOrderActivity extends BaseActivity {
 
         body.setBody(bodyList);
 
-        ApiRequest.commitOrder(map,body,new MyCallBack<BaseObj>(mContext) {
+        ApiRequest.commitOrder(map,body,new MyCallBack<SureOrderObj>(mContext) {
             @Override
-            public void onSuccess(BaseObj obj, int errorCode, String msg) {
+            public void onSuccess(SureOrderObj obj, int errorCode, String msg) {
                 RxBus.getInstance().postReplay(new JoinShoppingCartEvent());
-                finish();
+                switch (rg_select_pay.getCheckedRadioButtonId()){
+                    case R.id.rb_pay_weixin:
+
+                    break;
+                    case R.id.rb_pay_zhifubao:
+
+                    break;
+                    case R.id.rb_pay_online:
+                        yuePay(obj.getOrder_no(),obj.getCombined()+"");
+                    break;
+                }
             }
         });
 
     }
+
+    public void showPay( final BigDecimal money){
+        final MySimpleDialog dialog=new MySimpleDialog(mContext);
+        View view = mContext.getLayoutInflater().inflate(R.layout.sure_order_popu, null);
+        view.findViewById(R.id.iv_pay_cancle).setOnClickListener(new MyOnClickListener() {
+            @Override
+            protected void onNoDoubleClick(View view) {
+                dialog.dismiss();
+            }
+        });;
+        final RadioGroup rg_select_pay =view.findViewById(R.id.rg_select_pay);
+        final RadioButton rb_pay_weixin =view.findViewById(R.id.rb_pay_weixin);
+        final RadioButton rb_pay_zhifubao =view.findViewById(R.id.rb_pay_zhifubao);
+        final RadioButton rb_pay_online = view.findViewById(R.id.rb_pay_online);
+
+        TextView tv_pay_total = view.findViewById(R.id.tv_pay_total);
+        tv_pay_total.setText("¥"+money.toString());
+        view.findViewById(R.id.tv_pay_commit).setOnClickListener(new MyOnClickListener() {
+            @Override
+            protected void onNoDoubleClick(View view) {
+                dialog.dismiss();
+                commit(rg_select_pay);
+            }
+        });
+        dialog.setContentView(view);
+        dialog.setFullWidth();
+        dialog.setGravity(Gravity.BOTTOM);
+        dialog.show();
+    }
+    public  void yuePay(String orderNo,String money) {
+        Loading.show(mContext);
+        Map<String,String> map=new HashMap<String,String>();
+        map.put("user_id",getUserId( ));
+        map.put("order_no",orderNo);
+        map.put("money",money);
+        map.put("sign",getSign(map));
+        NetApiRequest.yuePay(map, new MyCallBack<BaseObj>(mContext) {
+            @Override
+            public void onSuccess(BaseObj obj, int errorCode, String msg) {
+                RxBus.getInstance().post(new PayEvent());
+                Intent intent=new Intent(mContext,PaySuccessActivity.class);
+                mContext.startActivity(intent);
+                finish();
+            }
+        });
+    }
+
 }
