@@ -88,4 +88,9 @@ public interface IRequest {
     Call<ResponseObj<SureOrderObj>> commitOrder(@QueryMap Map<String, String> map, @Body CommitOrderBody body);
 
 
+    //热门搜索词
+    @GET("api/GoodsClassiFication/GetHottestSearch")
+    Call<ResponseObj<List<String>>> getHotSearch(@QueryMap Map<String, String> map);
+
+
 }

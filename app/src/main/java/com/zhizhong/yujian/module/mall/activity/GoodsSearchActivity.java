@@ -20,7 +20,13 @@ import com.zhizhong.yujian.AppXml;
 import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.base.BaseActivity;
+import com.zhizhong.yujian.base.MyCallBack;
+import com.zhizhong.yujian.module.mall.network.ApiRequest;
 import com.zhizhong.yujian.view.MyEditText;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -62,26 +68,33 @@ public class GoodsSearchActivity extends BaseActivity {
         super.onResume();
         String[] searchContent = getSearchContent();
         fl_history_search.removeAllViews();
+        StringBuilder historyStr=new StringBuilder();//防止历史记录保存过多
         for (int i = 0; i < searchContent.length; i++) {
-            String str=searchContent[i];
-            if(!TextUtils.isEmpty(str)){
-                final MyTextView textView=new MyTextView(mContext);
-                FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                layoutParams.setMargins(0,0,PhoneUtils.dip2px(mContext,10),PhoneUtils.dip2px(mContext,10));
-                textView.setLayoutParams(layoutParams);
-                textView.setText(str);
-                textView.setTextColor(ContextCompat.getColor(mContext,R.color.gray_66));
-                textView.getViewHelper().setSolidColor(Color.parseColor("#FFF5F5F5")).setRadius(PhoneUtils.dip2px(mContext,3)).complete();
-                textView.setPadding(PhoneUtils.dip2px(mContext,18),PhoneUtils.dip2px(mContext,6),PhoneUtils.dip2px(mContext,18),PhoneUtils.dip2px(mContext,6));
-                textView.setOnClickListener(new MyOnClickListener() {
-                    @Override
-                    protected void onNoDoubleClick(View view) {
-                        goSearch(textView.getText().toString());
-                    }
-                });
-                fl_history_search.addView(textView);
+            if(i<=9){
+                String str=searchContent[i];
+                if(!TextUtils.isEmpty(str)){
+                    historyStr.append(str+",");
+                    final MyTextView textView=new MyTextView(mContext);
+                    FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    layoutParams.setMargins(0,0,PhoneUtils.dip2px(mContext,10),PhoneUtils.dip2px(mContext,10));
+                    textView.setLayoutParams(layoutParams);
+                    textView.setText(str);
+                    textView.setTextColor(ContextCompat.getColor(mContext,R.color.gray_66));
+                    textView.getViewHelper().setSolidColor(Color.parseColor("#FFF5F5F5")).setRadius(PhoneUtils.dip2px(mContext,3)).complete();
+                    textView.setPadding(PhoneUtils.dip2px(mContext,18),PhoneUtils.dip2px(mContext,6),PhoneUtils.dip2px(mContext,18),PhoneUtils.dip2px(mContext,6));
+                    textView.setOnClickListener(new MyOnClickListener() {
+                        @Override
+                        protected void onNoDoubleClick(View view) {
+                            goSearch(textView.getText().toString());
+                        }
+                    });
+                    fl_history_search.addView(textView);
+                }
+            }else{
+                break;
             }
         }
+        SPUtils.setPrefString(mContext, AppXml.searchContent,historyStr.toString());
     }
 
     private void searchGoods() {
@@ -118,6 +131,40 @@ public class GoodsSearchActivity extends BaseActivity {
     }
     @Override
     protected void initData() {
+        getData(1,false);
+    }
+
+    @Override
+    protected void getData(int page, boolean isLoad) {
+        super.getData(page, isLoad);
+        Map<String,String> map=new HashMap<String,String>();
+        map.put("rnd",getRnd());
+        map.put("sign",getSign(map));
+        ApiRequest.getHotSearch(map, new MyCallBack<List<String>>(mContext) {
+            @Override
+            public void onSuccess(List<String> list, int errorCode, String msg) {
+                fl_hot_search.removeAllViews();
+                if(notEmpty(list)){
+                    for (int i = 0; i < list.size(); i++) {
+                        final MyTextView textView=new MyTextView(mContext);
+                        FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        layoutParams.setMargins(0,0,PhoneUtils.dip2px(mContext,10),PhoneUtils.dip2px(mContext,10));
+                        textView.setLayoutParams(layoutParams);
+                        textView.setText(list.get(i));
+                        textView.setTextColor(ContextCompat.getColor(mContext,R.color.gray_66));
+                        textView.getViewHelper().setSolidColor(Color.parseColor("#FFF5F5F5")).setRadius(PhoneUtils.dip2px(mContext,3)).complete();
+                        textView.setPadding(PhoneUtils.dip2px(mContext,18),PhoneUtils.dip2px(mContext,6),PhoneUtils.dip2px(mContext,18),PhoneUtils.dip2px(mContext,6));
+                        textView.setOnClickListener(new MyOnClickListener() {
+                            @Override
+                            protected void onNoDoubleClick(View view) {
+                                goSearch(textView.getText().toString());
+                            }
+                        });
+                        fl_hot_search.addView(textView);
+                    }
+                }
+            }
+        });
 
     }
 
