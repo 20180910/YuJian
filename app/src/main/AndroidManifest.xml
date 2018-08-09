@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest package="com.zhizhong.yujian"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
@@ -20,6 +21,15 @@
     <!--允许程序改变网络连接状态 -->
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
 
+    <!--极光-->
+    <permission
+        android:name="com.zhizhong.yujian.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -29,6 +39,25 @@
         android:name=".MyApplication"
         android:resizeableActivity="true"
         android:theme="@style/AppTheme.NoActionBar">
+
+        <service android:name="cn.jpush.android.service.PushService"
+                 android:process=":multiprocess"
+                 tools:node="replace" >
+        </service>
+        <receiver
+            android:name=".broadcast.JpushReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_CLICK_ACTION" />
+                <action android:name="cn.jpush.android.intent.CONNECTION" />
+                <category android:name="${applicationId}" />
+            </intent-filter>
+        </receiver>
+
         <activity android:name=".module.home.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -82,7 +111,7 @@
         <activity android:name=".module.mall.activity.GoodsEvaluationActivity"/>
         <activity android:name=".module.mall.activity.SureOrderActivity"/>
         <activity android:name=".module.mall.activity.ScanActivity"/>
-        <activity android:name=".module.mall.activity.GoodsSearchActivity"/>
+        <activity android:name=".module.mall.activity.GoodsSearchActivity" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".module.mall.activity.SearchResultActivity"/>
         <activity android:name=".module.my.activity.AddAddressActivity"/>
         <activity android:name=".module.my.activity.AddressListActivity"/>

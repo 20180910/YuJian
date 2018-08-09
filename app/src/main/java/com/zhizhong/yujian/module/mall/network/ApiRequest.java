@@ -66,6 +66,10 @@ public class ApiRequest extends BaseApiRequest {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
         getGeneralClient(IRequest.class).getGoodsClassList(map).enqueue(callBack);
     }
+    public static void getGoodsForSearch(Map map, MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
+        getGeneralClient(IRequest.class).getGoodsForSearch(map).enqueue(callBack);
+    }
     public static void commitOrder(Map map, CommitOrderBody body, MyCallBack callBack) {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
         getGeneralClient(IRequest.class).commitOrder(map,body).enqueue(callBack);

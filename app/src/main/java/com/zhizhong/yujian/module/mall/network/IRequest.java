@@ -83,6 +83,11 @@ public interface IRequest {
     Call<ResponseObj<List<GoodsObj>>> getGoodsClassList(@QueryMap Map<String, String> map);
 
 
+    //商品搜索列表
+    @GET("api/GoodsClassiFication/GetSearchGoods")
+    Call<ResponseObj<List<GoodsObj>>> getGoodsForSearch(@QueryMap Map<String, String> map);
+
+
     //提交订单
     @POST("api/GoodsClassiFication/PostSubmitOrder")
     Call<ResponseObj<SureOrderObj>> commitOrder(@QueryMap Map<String, String> map, @Body CommitOrderBody body);

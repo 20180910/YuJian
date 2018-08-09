@@ -38,11 +38,13 @@ public class PaySuccessActivity extends BaseActivity {
                 intent= new Intent();
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 STActivity(intent,MyOrderActivity.class);
+                finish();
             break;
             case R.id.tv_pay_back:
                 intent = new Intent(IntentParam.selectHome);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 STActivity(intent,MainActivity.class);
+                finish();
             break;
         }
     }

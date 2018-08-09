@@ -105,6 +105,7 @@ public class MyFragment extends BaseFragment {
             @Override
             public void onSuccess(LoginObj obj, int errorCode, String msg) {
                 setLoginObj(obj);
+                setUserInfo();
             }
         });
 
@@ -149,13 +150,13 @@ public class MyFragment extends BaseFragment {
         if(vip==1){
             tv_my_vip.setText("VIP");
             tv_my_vip.setTextColor(Color.parseColor("#FFE0D28F"));
-            tv_my_vip.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.vip,0,0,0);
             tv_my_vip.getViewHelper().setBorderColor(Color.parseColor("#FFE0D28F")).complete();
+            tv_my_vip.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.vip,0,0,0);
         }else{
             tv_my_vip.setText("普通用户");
             tv_my_vip.setTextColor(Color.parseColor("#FF9A9A9A"));
-            tv_my_vip.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0,0,0);
             tv_my_vip.getViewHelper().setBorderColor(Color.parseColor("#FF9A9A9A")).complete();
+            tv_my_vip.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0,0,0);
         }
 
     }

@@ -176,6 +176,7 @@ public class GoodsSearchActivity extends BaseActivity {
         Intent intent = new Intent();
         intent.putExtra(IntentParam.searchStr,string);
         STActivityForResult(intent, SearchResultActivity.class,200);
+        Log("===111");
     }
     public String[] getSearchContent(){
         String history = SPUtils.getString(mContext, AppXml.searchContent, null);
@@ -388,6 +389,7 @@ public class GoodsSearchActivity extends BaseActivity {
                 Intent intent = new Intent();
                 intent.putExtra(IntentParam.searchStr, et_search_content.getText().toString());
                 STActivityForResult(intent, SearchResultActivity.class, 100);
+                Log("===2222");
             }
 
         }
