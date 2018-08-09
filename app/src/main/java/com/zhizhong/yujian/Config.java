@@ -26,6 +26,8 @@ public class Config {
     public static final String qq_id = "1106691681";//麦签
     public static final String qq_key = "aQjSLkf5P2pZQqpF";//麦签
 
+    public static final String xunfei_app_id = "5966f110";
+
     public static final Object KEY = "D98TZQWpTVlb1nqfkfO615U5ZEignoqW";
     //用户id
     public static final String user_id="userId";

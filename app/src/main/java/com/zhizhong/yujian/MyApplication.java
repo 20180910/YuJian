@@ -9,6 +9,7 @@ import com.aspsine.multithreaddownload.DownloadManager;
 import com.github.androidtools.SPUtils;
 import com.github.baseclass.view.Loading;
 import com.github.retrofitutil.NetWorkManager;
+import com.iflytek.cloud.SpeechUtility;
 import com.sdklibrary.base.ali.pay.MyAliPay;
 import com.sdklibrary.base.qq.share.MyQQShare;
 import com.sdklibrary.base.wx.pay.MyWXPay;
@@ -22,6 +23,7 @@ import com.sdklibrary.base.wx.share.MyWXShare;
 public class MyApplication extends Application {
     @Override
     public void onCreate() {
+        SpeechUtility.createUtility(this, "appid=" + Config.xunfei_app_id);
         super.onCreate();
         if(true&&BuildConfig.DEBUG){
             //测试
@@ -32,6 +34,7 @@ public class MyApplication extends Application {
         }
         initDownloader();
         Loading.setLoadView(R.layout.app_loading_view);
+
 
         MyWXShare.setAppId(Config.weixing_id,Config.weixing_AppSecret);
         MyQQShare.setAppId(Config.qq_id);
