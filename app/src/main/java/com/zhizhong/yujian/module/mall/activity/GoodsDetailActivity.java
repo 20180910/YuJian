@@ -515,6 +515,7 @@ public class GoodsDetailActivity extends BaseActivity {
                 STActivity(LingQuanZhongXinActivity.class);
                 break;
             case R.id.iv_goods_share:
+                showFenXiangDialog();
                 break;
         }
     }

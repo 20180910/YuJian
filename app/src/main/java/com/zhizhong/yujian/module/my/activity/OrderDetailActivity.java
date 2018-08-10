@@ -18,6 +18,7 @@ import com.zhizhong.yujian.base.BaseActivity;
 import com.zhizhong.yujian.base.GlideUtils;
 import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.event.MyOrderEvent;
+import com.zhizhong.yujian.module.my.event.RefreshMyOrderEvent;
 import com.zhizhong.yujian.module.my.fragment.MyOrderFragment;
 import com.zhizhong.yujian.module.my.network.ApiRequest;
 import com.zhizhong.yujian.module.my.network.response.OrderDetailObj;
@@ -228,7 +229,7 @@ public class OrderDetailActivity extends BaseActivity {
         tv_order_detail_pay.setOnClickListener(new MyOnClickListener() {
             @Override
             protected void onNoDoubleClick(View view) {
-                showPay();
+                showPay(bean.getOrder_no());
             }
         });
         tv_order_detail_sure.setOnClickListener(new MyOnClickListener() {
@@ -292,7 +293,19 @@ public class OrderDetailActivity extends BaseActivity {
     }
 
     private void sureOrder(String order_no) {
-
+        showLoading();
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("user_id",getUserId());
+        map.put("order_no",order_no);
+        map.put("sign",getSign(map));
+        ApiRequest.sureOrder(map, new MyCallBack<BaseObj>(mContext) {
+            @Override
+            public void onSuccess(BaseObj obj, int errorCode, String msg) {
+                showMsg(msg);
+                RxBus.getInstance().post(new RefreshMyOrderEvent());
+                getData(1,false);
+            }
+        });
     }
 
     private void cancelOrder(final String order_no) {

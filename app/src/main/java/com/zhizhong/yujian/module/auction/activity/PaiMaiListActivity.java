@@ -35,7 +35,7 @@ public class PaiMaiListActivity extends BaseActivity {
         List<Fragment> list=new ArrayList<>();
         List<String>titleList=new ArrayList<>();
         titleList.add("全部");
-        titleList.add("0元拍");
+        titleList.add("0元起拍");
         titleList.add("新手推荐");
         titleList.add("历史拍品");
         //类别(0全部 1零元拍 2新人推荐 3历史拍品)

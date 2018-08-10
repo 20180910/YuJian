@@ -299,6 +299,10 @@ public class AuctionFragment extends BaseFragment {
 
     @OnClick({R.id.app_right_iv})
     public void onViewClick(View v) {
+        switch (v.getId()){
+            case R.id.app_right_iv:
 
+            break;
+        }
     }
 }

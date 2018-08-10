@@ -473,6 +473,7 @@
                     app:radius="6dp"
                     app:solidColor="@color/red"
                     tools:text="99"
+                    android:visibility="gone"
                     />
             </FrameLayout>
             <ImageView

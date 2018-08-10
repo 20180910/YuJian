@@ -11,6 +11,7 @@ import android.support.design.widget.BottomSheetDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -22,24 +23,36 @@ import android.widget.TextView;
 import com.github.androidtools.ClickUtils;
 import com.github.androidtools.PhoneUtils;
 import com.github.androidtools.SPUtils;
+import com.github.androidtools.inter.MyOnClickListener;
 import com.github.rxbus.RxBus;
 import com.hyphenate.chat.ChatClient;
 import com.hyphenate.helpdesk.callback.Callback;
 import com.hyphenate.helpdesk.easeui.util.IntentBuilder;
 import com.library.base.MyBaseActivity;
 import com.library.base.view.MyWebViewClient;
+import com.sdklibrary.base.ShareParam;
 import com.sdklibrary.base.qq.share.MyQQActivityResult;
+import com.sdklibrary.base.qq.share.MyQQShare;
+import com.sdklibrary.base.qq.share.MyQQShareListener;
+import com.sdklibrary.base.qq.share.bean.MyQQWebHelper;
+import com.sdklibrary.base.wx.inter.MyWXCallback;
+import com.sdklibrary.base.wx.share.MyWXShare;
+import com.sdklibrary.base.wx.share.bean.MyWXWebHelper;
+import com.tencent.tauth.UiError;
 import com.zhizhong.yujian.AppXml;
 import com.zhizhong.yujian.Config;
 import com.zhizhong.yujian.Constant;
 import com.zhizhong.yujian.GetSign;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.event.JoinShoppingCartEvent;
+import com.zhizhong.yujian.network.NetApiRequest;
+import com.zhizhong.yujian.network.response.ShareObj;
 
 import org.reactivestreams.Subscription;
 
 import java.io.File;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
@@ -399,45 +412,41 @@ public abstract class BaseActivity extends MyBaseActivity {
 
     BottomSheetDialog fenXiangDialog;
 
-    /*public void showFenXiangDialog() {
+    public void showFenXiangDialog() {
+        showFenXiangDialog("0");
+    }
+    public void showFenXiangDialog(final String goodsId) {
         if (fenXiangDialog == null) {
-            View sexView = LayoutInflater.from(mContext).inflate(R.layout.popu_fen_xiang, null);
-            sexView.findViewById(R.id.iv_yaoqing_wx).setOnClickListener(new MyOnClickListener() {
+            View sexView = LayoutInflater.from(mContext).inflate(R.layout.goods_share_popu, null);
+            sexView.findViewById(R.id.ll_yaoqing_wx).setOnClickListener(new MyOnClickListener() {
                 @Override
                 protected void onNoDoubleClick(View view) {
-                    fenXiang(ShareParam.friend);
+                    fenXiang(goodsId,ShareParam.friend);
                     fenXiangDialog.dismiss();
                 }
             });
-            sexView.findViewById(R.id.iv_yaoqing_friend).setOnClickListener(new MyOnClickListener() {
+            sexView.findViewById(R.id.ll_yaoqing_friend).setOnClickListener(new MyOnClickListener() {
                 @Override
                 protected void onNoDoubleClick(View view) {
-                    fenXiang(ShareParam.friendCircle);
+                    fenXiang(goodsId,ShareParam.friendCircle);
                     fenXiangDialog.dismiss();
 
                 }
             });
-            sexView.findViewById(R.id.iv_yaoqing_qq).setOnClickListener(new MyOnClickListener() {
+            sexView.findViewById(R.id.ll_yaoqing_qq).setOnClickListener(new MyOnClickListener() {
                 @Override
                 protected void onNoDoubleClick(View view) {
-                    fenXiang(ShareParam.QQ);
+                    fenXiang(goodsId,ShareParam.QQ);
                     fenXiangDialog.dismiss();
                 }
             });
-            sexView.findViewById(R.id.iv_yaoqing_qzone).setOnClickListener(new MyOnClickListener() {
+            sexView.findViewById(R.id.ll_yaoqing_qzone).setOnClickListener(new MyOnClickListener() {
                 @Override
                 protected void onNoDoubleClick(View view) {
-                    fenXiang(ShareParam.QZONE);
+                    fenXiang(goodsId,ShareParam.QZONE);
                     fenXiangDialog.dismiss();
                 }
             });
-            *//*sexView.findViewById(R.id.iv_yaoqing_sina).setOnClickListener(new MyOnClickListener() {
-                @Override
-                protected void onNoDoubleClick(View view) {
-                    showMsg("正在开发中");
-                    fenXiangDialog.dismiss();
-                }
-            });*//*
             sexView.findViewById(R.id.tv_fenxiang_cancle).setOnClickListener(new MyOnClickListener() {
                 @Override
                 protected void onNoDoubleClick(View view) {
@@ -450,7 +459,7 @@ public abstract class BaseActivity extends MyBaseActivity {
             fenXiangDialog.setContentView(sexView);
         }
         fenXiangDialog.show();
-    }*/
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -458,10 +467,10 @@ public abstract class BaseActivity extends MyBaseActivity {
         MyQQActivityResult.onActivityResult(requestCode, resultCode, data);
     }
 
-    /*protected void fenXiang(@ShareParam.MyShareType int platform) {
+    protected void fenXiang(String goodId,final @ShareParam.MyShareType int platform) {
         showLoading();
         Map<String, String> map = new HashMap<String, String>();
-        map.put("rnd", getRnd());
+        map.put("goods_id",goodId);
         map.put("sign", GetSign.getSign(map));
         NetApiRequest.getShareInformation(map, new MyCallBack<ShareObj>(mContext, true) {
             @Override
@@ -478,13 +487,11 @@ public abstract class BaseActivity extends MyBaseActivity {
                             dismissLoading();
                             showMsg("分享成功");
                         }
-
                         @Override
                         public void doError(UiError uiError) {
                             dismissLoading();
                             showMsg("分享失败");
                         }
-
                         @Override
                         public void doCancel() {
                             dismissLoading();
@@ -503,13 +510,11 @@ public abstract class BaseActivity extends MyBaseActivity {
                             dismissLoading();
                             showMsg("分享成功");
                         }
-
                         @Override
                         public void onFail() {
                             dismissLoading();
                             showMsg("分享失败");
                         }
-
                         @Override
                         public void onCancel() {
                             dismissLoading();
@@ -520,7 +525,7 @@ public abstract class BaseActivity extends MyBaseActivity {
                 }
             }
         });
-    }*/
+    }
 
     public interface UploadImgCallback {
         void result(String imgUrl);
@@ -567,63 +572,6 @@ public abstract class BaseActivity extends MyBaseActivity {
         });
     }
 
-    *//********************************************咨询******************************************************//*
-    protected void getZiXunData(String guoJiaId, MyCallBack callBack) {
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("countrie_region_id", guoJiaId);
-        map.put("sign", getSign(map));
-        ApiRequest.getZiXunInfo(map, callBack);
-        *//* new MyCallBack<ZiXunObj>(mContext) {
-            @Override
-            public void onSuccess(ZiXunObj obj) {
-                ziXunObj = obj;
-                if(isShow){
-                    showZiXun();
-                }
-            }
-        }*//*
-    }
-
-    private void showZiXun() {
-        Dialog dialog = new Dialog(mContext, R.style.DialogStyle);
-        setDialogFullWidth(dialog);
-        View zixun_popu = getLayoutInflater().inflate(R.layout.kechengdetail_zixun_popu, null);
-        zixun_popu.findViewById(R.id.fl_zixun).setOnClickListener(new MyOnClickListener() {
-            @Override
-            protected void onNoDoubleClick(View view) {
-                dialog.dismiss();
-            }
-        });
-        View ll_zixun_tel = zixun_popu.findViewById(R.id.ll_zixun_tel);
-        ll_zixun_tel.setOnClickListener(new MyOnClickListener() {
-            @Override
-            protected void onNoDoubleClick(View view) {
-                dialog.dismiss();
-                requestPermission(Manifest.permission.CALL_PHONE, new PermissionCallback() {
-                    @Override
-                    public void onGranted() {
-                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + ziXunObj.getPhone()));
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onDenied(String s) {
-                        showMsg("无法获取拨打电话权限,请开启权限之后再试");
-                    }
-                });
-            }
-        });
-        View ll_zixun_wx = zixun_popu.findViewById(R.id.ll_zixun_wx);
-        ll_zixun_wx.setOnClickListener(new MyOnClickListener() {
-            @Override
-            protected void onNoDoubleClick(View view) {
-                dialog.dismiss();
-                showWX();
-            }
-        });
-        dialog.setContentView(zixun_popu);
-        dialog.show();
-    }
 */
     private void setDialogFullWidth(Dialog dialog) {
         Window win = dialog.getWindow();
@@ -794,6 +742,9 @@ public abstract class BaseActivity extends MyBaseActivity {
         });
     }*/
     public void showPay(){
+        showPay(null);
+    }
+    public void showPay(String orderNo){
 
     }
     public boolean fileIsExists(String strFile) {

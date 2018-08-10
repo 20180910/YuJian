@@ -22,6 +22,7 @@
             >
 
             <LinearLayout
+                android:id="@+id/ll_yaoqing_wx"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -32,10 +33,10 @@
 
                 <ImageView
                     android:id="@+id/iv_fenxiao_weixin"
-                    android:layout_width="40dp"
+                    android:layout_width="45dp"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/qq"
+                    android:src="@drawable/share_friend"
                     />
 
                 <TextView
@@ -47,6 +48,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_yaoqing_friend"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -57,10 +59,10 @@
 
                 <ImageView
                     android:id="@+id/iv_fenxiao_weixin_friend"
-                    android:layout_width="40dp"
+                    android:layout_width="45dp"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/qq"
+                    android:src="@drawable/share_circle"
                     />
 
                 <TextView
@@ -72,6 +74,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_yaoqing_qq"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -82,10 +85,10 @@
 
                 <ImageView
                     android:id="@+id/iv_fenxiao_qq"
-                    android:layout_width="40dp"
+                    android:layout_width="45dp"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/qq"
+                    android:src="@drawable/share_qq"
                     />
 
                 <TextView
@@ -97,6 +100,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_yaoqing_qzone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -106,10 +110,10 @@
 
                 <ImageView
                     android:id="@+id/iv_fenxiao_qq_space"
-                    android:layout_width="40dp"
+                    android:layout_width="45dp"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/qq"
+                    android:src="@drawable/share_qzone"
                     />
 
                 <TextView
@@ -127,7 +131,7 @@
     android:background="@color/divider_color"
     />
     <TextView
-        android:id="@+id/tv_fenxiao_cancle"
+        android:id="@+id/tv_fenxiang_cancle"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:gravity="center"

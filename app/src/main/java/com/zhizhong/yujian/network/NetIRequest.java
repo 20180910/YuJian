@@ -60,7 +60,7 @@ public interface NetIRequest {
     Call<ResponseObj<AppVersionObj>> getAppVersion(@QueryMap Map<String, String> map);
 
     //分享页面
-    @GET("api/MQLib/GetShareInformations")
+    @GET("api/Lib/GetShareInformation")
     Call<ResponseObj<ShareObj>> getShareInformation(@QueryMap Map<String, String> map);
 
     //购物车数量
