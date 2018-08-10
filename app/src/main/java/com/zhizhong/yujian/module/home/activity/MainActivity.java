@@ -1,5 +1,6 @@
 package com.zhizhong.yujian.module.home.activity;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -10,9 +11,12 @@ import android.widget.FrameLayout;
 
 import com.github.androidtools.SPUtils;
 import com.github.androidtools.inter.MyOnClickListener;
+import com.github.baseclass.permission.PermissionCallback;
 import com.github.fastshape.MyRadioButton;
 import com.github.mydialog.MyDialog;
 import com.github.rxbus.MyConsumer;
+import com.github.rxbus.rxjava.MyFlowableSubscriber;
+import com.github.rxbus.rxjava.Rx;
 import com.library.base.bean.AppVersionObj;
 import com.library.base.bean.PayObj;
 import com.zhizhong.yujian.AppXml;
@@ -22,6 +26,7 @@ import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.base.BaseActivity;
 import com.zhizhong.yujian.base.MyCallBack;
+import com.zhizhong.yujian.bean.AppInfo;
 import com.zhizhong.yujian.event.LoginSuccessEvent;
 import com.zhizhong.yujian.module.auction.fragment.AuctionFragment;
 import com.zhizhong.yujian.module.home.fragment.HomeFragment;
@@ -31,12 +36,15 @@ import com.zhizhong.yujian.module.my.activity.LoginActivity;
 import com.zhizhong.yujian.module.my.fragment.MyFragment;
 import com.zhizhong.yujian.network.NetApiRequest;
 import com.zhizhong.yujian.network.response.ImageObj;
+import com.zhizhong.yujian.service.MyAPPDownloadService;
+import com.zhizhong.yujian.tools.FileUtils;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
 import cn.jpush.android.api.JPushInterface;
+import io.reactivex.FlowableEmitter;
 
 /**
  * Created by Administrator on 2017/11/4.
@@ -161,6 +169,7 @@ public class MainActivity extends BaseActivity {
                 switch (index) {
                     case 1:
                         selectHome();
+//                        selectMall();
                         break;
                     case 2:
 //                        if (noLogin()) {
@@ -313,7 +322,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-//        updateApp();
+        updateApp();
         getPaymentURL(1);//获取支付宝回传地址
         getPaymentURL(2);//获取微信回传地址
     }
@@ -341,7 +350,7 @@ public class MainActivity extends BaseActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
 
-//                          downloadApp(obj);
+                          downloadApp(obj);
                         }
                     });
                     mDialog.create().show();
@@ -351,11 +360,11 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
-  /*  private void downloadApp(AppVersionObj obj) {
+    private void downloadApp(final AppVersionObj obj) {
         requestPermission(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, new PermissionCallback() {
             @Override
             public void onGranted() {
-                MyRx.start(new MyFlowableSubscriber<Boolean>() {
+                Rx.start(new MyFlowableSubscriber<Boolean>() {
                     @Override
                     public void subscribe(@io.reactivex.annotations.NonNull FlowableEmitter<Boolean> subscriber) {
                         boolean delete = FileUtils.delete(FileUtils.getDownloadDir());
@@ -379,7 +388,7 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-    }*/
+    }
 
     private void getPaymentURL(int type) {
         Map<String, String> map = new HashMap<String, String>();

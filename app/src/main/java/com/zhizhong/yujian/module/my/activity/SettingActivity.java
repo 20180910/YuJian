@@ -63,8 +63,8 @@ public class SettingActivity extends BaseActivity {
             }
         });
 
-        int appVersionCode = getAppVersionCode();
-        tv_setting_version.setText("V"+appVersionCode);
+        String versionName = getAppVersionName();
+        tv_setting_version.setText("V"+versionName);
 
         requestPermission(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, new PermissionCallback() {
             @Override

@@ -161,6 +161,7 @@ public class MallFragment extends BaseFragment {
             @Override
             public void onSuccess(MallGoodsObj obj, int errorCode, String msg) {
                 if(notEmpty(obj.getMall_shuffling_list())){
+                    bannerList.clear();
                     final List<MallGoodsObj.MallShufflingListBean> list = obj.getMall_shuffling_list();
                     for (int i = 0; i < list.size(); i++) {
                         bannerList.add(list.get(i).getImg_url());

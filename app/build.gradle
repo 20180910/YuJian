@@ -7,14 +7,22 @@ android {
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         manifestPlaceholders  = [
                 JPUSH_PKGNAME : "com.zhizhong.yujian",
-                JPUSH_APPKEY : "dfcb390d92a568e9eea94ac3", //JPush上注册的包名对应的appkey.
+                JPUSH_APPKEY : "4460aa9c79ccc06d4d2a49c2", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
         ]
+
+        multiDexEnabled true
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
     }
     signingConfigs {
         release {
@@ -32,9 +40,9 @@ android {
                     'proguard-rules.pro'
         }
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
     }
 
@@ -89,6 +97,9 @@ dependencies {
     implementation 'cn.yipianfengye.android:zxing-library:2.2'
     implementation files('libs/Msc.jar')
     implementation files('libs/Sunflower.jar')
+
+
+    implementation 'com.android.support:multidex:1.0.1'
 
 
     //极光推送

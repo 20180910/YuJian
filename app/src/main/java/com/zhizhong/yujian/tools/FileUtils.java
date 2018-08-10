@@ -29,7 +29,7 @@ import io.reactivex.FlowableEmitter;
  * Created by aspsine on 15-4-19.
  */
 public class FileUtils {
-    private static final String DOWNLOAD_DIR = "maiqiandownload";
+    private static final String DOWNLOAD_DIR = "xiangyudownload";
 
     public static final File getDownloadDir() {
         /*if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
@@ -131,7 +131,7 @@ public class FileUtils {
     private static void saveImageToGallery(Context context, Bitmap bmp) {
         // 首先保存图片
         File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsoluteFile();//注意小米手机必须这样获得public绝对路径
-        String fileName = "maiqian";
+        String fileName = "xiangyu";
         File appDir = new File(file ,fileName);
         if (!appDir.exists()) {
             appDir.mkdirs();

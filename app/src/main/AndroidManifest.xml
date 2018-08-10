@@ -124,6 +124,28 @@
         <activity android:name=".module.auction.activity.PaiMaiOrderDetailActivity"/>
         <activity android:name=".module.my.activity.VIPActivity"/>
         <activity android:name=".module.mall.activity.NewScanActivity"/>
+
+
+
+        <service android:name=".service.MyAPPDownloadService"/>
+        <receiver
+            android:name=".broadcast.DownloadBro"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="download" />
+            </intent-filter>
+        </receiver>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.zhizhong.yujian.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
     </application>
 
 </manifest>
