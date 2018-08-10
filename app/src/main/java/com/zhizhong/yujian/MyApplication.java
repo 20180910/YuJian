@@ -9,6 +9,8 @@ import com.aspsine.multithreaddownload.DownloadManager;
 import com.github.androidtools.SPUtils;
 import com.github.baseclass.view.Loading;
 import com.github.retrofitutil.NetWorkManager;
+import com.hyphenate.chat.ChatClient;
+import com.hyphenate.helpdesk.easeui.UIProvider;
 import com.iflytek.cloud.SpeechUtility;
 import com.sdklibrary.base.ali.pay.MyAliPay;
 import com.sdklibrary.base.qq.share.MyQQShare;
@@ -36,6 +38,7 @@ public class MyApplication extends Application {
         Loading.setLoadView(R.layout.app_loading_view);
 
 
+        huanXin();
         MyWXShare.setAppId(Config.weixing_id,Config.weixing_AppSecret);
         MyQQShare.setAppId(Config.qq_id);
         MyAliPay.setConfig(Config.zhifubao_app_id,Config.zhifubao_pid,Config.zhifubao_rsa2);
@@ -48,7 +51,23 @@ public class MyApplication extends Application {
         DownloadManager.getInstance().init(getApplicationContext(), configuration);
     }
 
-   //经度
+
+    private void huanXin() {
+        ChatClient.Options options = new ChatClient.Options();
+        options.setAppkey(Config.hx_appKey);//必填项，appkey获取地址：kefu.easemob.com，“管理员模式 > 渠道管理 > 手机APP”页面的关联的“AppKey”
+        options.setTenantId(Config.hx_tenantId);//必填项，tenantId获取地址：kefu.easemob.com，“管理员模式 > 设置 > 企业信息”页面的“租户ID”
+
+        // Kefu SDK 初始化
+        if (!ChatClient.getInstance().init(this, options)){
+            return;
+        }
+        // Kefu EaseUI的初始化
+        UIProvider.getInstance().init(this);
+        //后面可以设置其他属性
+    }
+
+
+    //经度
    public static double longitude;//=121.432986;
     //纬度
    public static double latitude;//=31.229504;

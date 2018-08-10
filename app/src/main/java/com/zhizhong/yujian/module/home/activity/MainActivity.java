@@ -17,10 +17,14 @@ import com.github.mydialog.MyDialog;
 import com.github.rxbus.MyConsumer;
 import com.github.rxbus.rxjava.MyFlowableSubscriber;
 import com.github.rxbus.rxjava.Rx;
+import com.hyphenate.chat.ChatClient;
+import com.hyphenate.helpdesk.callback.Callback;
+import com.hyphenate.helpdesk.util.Log;
 import com.library.base.bean.AppVersionObj;
 import com.library.base.bean.PayObj;
 import com.zhizhong.yujian.AppXml;
 import com.zhizhong.yujian.Config;
+import com.zhizhong.yujian.Constant;
 import com.zhizhong.yujian.GetSign;
 import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
@@ -89,6 +93,13 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        if (TextUtils.isEmpty(getUserId())) {
+            SPUtils.setPrefString(mContext, Constant.hxname,getDeviceId());
+        }else{
+            SPUtils.setPrefString(mContext,Constant.hxname,getUserId());
+        }
+        registerHuanXin();
+
         String registrationID = JPushInterface.getRegistrationID(mContext);
         android.util.Log.i("registrationID","registrationID====="+registrationID);
         if(!TextUtils.isEmpty(registrationID)){
@@ -218,6 +229,8 @@ public class MainActivity extends BaseActivity {
             public void onAccept(LoginSuccessEvent event) {
                 if (event.status == LoginSuccessEvent.status_1) {
                     selectMy();
+
+                    registerHuanXin();
                 } else if (event.status == LoginSuccessEvent.status_0) {
                     selectHome();
                 }
@@ -227,7 +240,35 @@ public class MainActivity extends BaseActivity {
 
 
     }
+    private void registerHuanXin() {
+        Rx.start(new MyFlowableSubscriber<String>() {
+            @Override
+            public void subscribe(FlowableEmitter<String> emitter) {
+                if(TextUtils.isEmpty(SPUtils.getString(mContext,Constant.hxname,null))){
+                    SPUtils.setPrefString(mContext,Constant.appsign,getDeviceId());
+                }
+                ChatClient.getInstance().createAccount(SPUtils.getString(mContext,Constant.hxname,null).toLowerCase(), "123456", new Callback(){
+                    @Override
+                    public void onSuccess() {
+                    }
+                    @Override
+                    public void onError(int i, String s) {
+                        Log.i("===",i+"=onError=="+s);
+                    }
+                    @Override
+                    public void onProgress(int i, String s) {
+                        Log.i("===",i+"=onProgress=="+s);
+                    }
+                });
+                emitter.onComplete();
+            }
 
+            @Override
+            public void onNext(String obj) {
+
+            }
+        });
+    }
     private void selectHome() {
         if (selectView == rb_home_tab1) {
             return;

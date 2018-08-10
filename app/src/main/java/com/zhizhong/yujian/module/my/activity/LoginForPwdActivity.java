@@ -7,6 +7,7 @@ import com.github.androidtools.SPUtils;
 import com.github.rxbus.RxBus;
 import com.library.base.tools.ZhengZeUtils;
 import com.zhizhong.yujian.AppXml;
+import com.zhizhong.yujian.Constant;
 import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.base.BaseActivity;
@@ -86,6 +87,8 @@ public class LoginForPwdActivity extends BaseActivity {
         ApiRequest.loginForPwd(map, new MyCallBack<LoginObj>(mContext) {
             @Override
             public void onSuccess(LoginObj obj, int errorCode, String msg) {
+
+                SPUtils.setPrefString(mContext, Constant.hxname,obj.getUser_id());
                 setLoginObj(obj);
             }
         });

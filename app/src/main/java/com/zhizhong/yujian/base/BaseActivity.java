@@ -23,10 +23,15 @@ import com.github.androidtools.ClickUtils;
 import com.github.androidtools.PhoneUtils;
 import com.github.androidtools.SPUtils;
 import com.github.rxbus.RxBus;
+import com.hyphenate.chat.ChatClient;
+import com.hyphenate.helpdesk.callback.Callback;
+import com.hyphenate.helpdesk.easeui.util.IntentBuilder;
 import com.library.base.MyBaseActivity;
 import com.library.base.view.MyWebViewClient;
 import com.sdklibrary.base.qq.share.MyQQActivityResult;
 import com.zhizhong.yujian.AppXml;
+import com.zhizhong.yujian.Config;
+import com.zhizhong.yujian.Constant;
 import com.zhizhong.yujian.GetSign;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.event.JoinShoppingCartEvent;
@@ -34,6 +39,7 @@ import com.zhizhong.yujian.event.JoinShoppingCartEvent;
 import org.reactivestreams.Subscription;
 
 import java.io.File;
+import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
@@ -168,7 +174,83 @@ public abstract class BaseActivity extends MyBaseActivity {
         webview.loadUrl(url);
         webview.setWebViewClient(new MyWebViewClient());
     }
+    public  String getDeviceId() {
+        String appSign = SPUtils.getString(mContext, Constant.appsign,null);
+        if(TextUtils.isEmpty(appSign)){
+            SPUtils.setPrefString(mContext, Constant.appsign,new Date().getTime()+"");
+        }
+        return SPUtils.getString(mContext, Constant.appsign,new Date().getTime()+"");
+/*
+        String id;
+        //android.telephony.TelephonyManager
+        TelephonyManager mTelephony = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        if (mTelephony.getDeviceId() != null) {
+            id = mTelephony.getDeviceId();
+        } else {
+            //android.provider.Settings;
+            id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        }
+        return id;*/
+    }
 
+    public void goHX(){
+        String hxName=SPUtils.getString(mContext,Constant.hxname,null);
+        if (TextUtils.isEmpty(getUserId())) {
+            SPUtils.setPrefString(mContext,Constant.hxname,getDeviceId());
+        }else{
+            SPUtils.setPrefString(mContext,Constant.hxname,getUserId());
+        }
+        if(hxName!=null&& ChatClient.getInstance().isLoggedInBefore()&&!TextUtils.isEmpty(hxName)&&hxName.equalsIgnoreCase(ChatClient.getInstance().getCurrentUserName())){
+            //已经登录，可以直接进入会话界面
+            OpenHuanXin();
+        }else{
+            showLoading();
+            if(ChatClient.getInstance().isLoggedInBefore()){
+                ChatClient.getInstance().logout(true, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        String name=SPUtils.getString(mContext,Constant.hxname,null);
+                        loginHXSuccess(name);
+                    }
+                    @Override
+                    public void onError(int i, String s) {
+                        dismissLoading();
+                    }
+                    @Override
+                    public void onProgress(int i, String s) {
+                    }
+                });
+            }else{
+                String name=SPUtils.getString(mContext,Constant.hxname,null);
+                loginHXSuccess(name);
+            }
+        }
+    }
+
+    private void loginHXSuccess(String hxName) {
+        //未登录，需要登录后，再进入会话界面
+        ChatClient.getInstance().login(hxName, "123456", new Callback() {
+            @Override
+            public void onSuccess() {
+                dismissLoading();
+                OpenHuanXin();
+            }
+            @Override
+            public void onError(int i, String s) {
+                dismissLoading();
+            }
+            @Override
+            public void onProgress(int i, String s) {
+            }
+        });
+    }
+
+    private void OpenHuanXin() {
+        Intent intent = new IntentBuilder(mContext)
+                .setServiceIMNumber(Config.hx_fwh) //获取地址：kefu.easemob.com，“管理员模式 > 渠道管理 > 手机APP”页面的关联的“IM服务号”
+                .build();
+        startActivity(intent);
+    }
     protected void initWebViewForUrl(final WebView webview, String url) {
         WebSettings webSettings = webview.getSettings();
         webSettings.setJavaScriptEnabled(true);

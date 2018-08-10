@@ -9,14 +9,16 @@ public class Constant {
     public static final String title="title";
     public static final String url="url";
     public static final String xianShiStatus="xianShiStatus";
-    public static final String timeStatus="timeStatus";
+    public static final String appsign="appsign";
     public static final int today=1;
     public static final String flag="flag";
     public static final String type="type";
     public static final String cardId="cardId";
     public static final int houTian=3;
     public static final String isEditAddress="isEditAddress";
-    public static final String orderBody1="麦签订单支付";
+    public static final String hxname="hxname";
+    public static final String orderSubject="相玉";
+    public static final String orderBody="相玉订单支付";
 
     public static class Bro{
         public static final String operation ="operation";

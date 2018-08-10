@@ -354,6 +354,7 @@ public class AuctionDetailActivity extends BaseActivity {
                 STActivity(intent,ChuJiaActivity.class);
                 break;
             case R.id.tv_paimai_goods_detail_kefu:
+                goHX();
                 break;
             case R.id.tv_paimai_goods_detail_collection:
                 if(noLogin()){

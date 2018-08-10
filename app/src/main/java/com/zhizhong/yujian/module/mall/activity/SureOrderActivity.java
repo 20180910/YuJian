@@ -14,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.github.androidtools.AndroidUtils;
+import com.github.androidtools.SPUtils;
 import com.github.androidtools.inter.MyOnClickListener;
 import com.github.baseclass.adapter.MyRecyclerViewHolder;
 import com.github.baseclass.view.Loading;
@@ -22,6 +23,12 @@ import com.github.rxbus.RxBus;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.library.base.BaseObj;
+import com.sdklibrary.base.ali.pay.MyAliOrderBean;
+import com.sdklibrary.base.ali.pay.MyAliPay;
+import com.sdklibrary.base.ali.pay.MyAliPayCallback;
+import com.sdklibrary.base.ali.pay.PayResult;
+import com.zhizhong.yujian.Config;
+import com.zhizhong.yujian.Constant;
 import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.adapter.MyAdapter;
@@ -36,6 +43,7 @@ import com.zhizhong.yujian.module.mall.network.response.ShoppingCartObj;
 import com.zhizhong.yujian.module.mall.network.response.SureOrderObj;
 import com.zhizhong.yujian.module.mall.network.response.YouHuiQuanObj;
 import com.zhizhong.yujian.module.my.activity.AddressListActivity;
+import com.zhizhong.yujian.module.my.activity.MyOrderActivity;
 import com.zhizhong.yujian.module.my.network.response.AddressObj;
 import com.zhizhong.yujian.network.NetApiRequest;
 
@@ -318,7 +326,14 @@ public class SureOrderActivity extends BaseActivity {
 
                     break;
                     case R.id.rb_pay_zhifubao:
-
+                        MyAliOrderBean bean=new MyAliOrderBean();
+                        bean.setOut_trade_no(obj.getOrder_no());
+                        bean.setTotal_amount(obj.getCombined());
+                        bean.setSubject(Constant.orderSubject);
+                        bean.setBody(Constant.orderBody);
+                        String url = SPUtils.getString(mContext, Config.payType_ZFB, null);
+                        bean.setNotifyUrl(url);
+                        aliPay(bean);
                     break;
                     case R.id.rb_pay_online:
                         yuePay(obj.getOrder_no(),obj.getCombined()+"");
@@ -327,6 +342,32 @@ public class SureOrderActivity extends BaseActivity {
             }
         });
 
+    }
+
+    private void aliPay(MyAliOrderBean bean) {
+        showLoading();
+        MyAliPay.newInstance(mContext).startPay(bean, new MyAliPayCallback() {
+            @Override
+            public void paySuccess(PayResult payResult) {
+                dismissLoading();
+                STActivity(PaySuccessActivity.class);
+                finish();
+            }
+            @Override
+            public void payFail() {
+                dismissLoading();
+                showMsg("支付失败");
+                STActivity(MyOrderActivity.class);
+                finish();
+            }
+            @Override
+            public void payCancel() {
+                dismissLoading();
+                showMsg("支付取消");
+                STActivity(MyOrderActivity.class);
+                finish();
+            }
+        });
     }
 
     public void showPay( final BigDecimal money){

@@ -469,6 +469,7 @@ public class GoodsDetailActivity extends BaseActivity {
                 hideFragment(goodsVideoFragment);
                 break;
             case R.id.tv_goods_detail_kefu:
+                goHX();
                 break;
             case R.id.tv_goods_detail_collection:
                 if(noLogin()){

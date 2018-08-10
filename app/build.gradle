@@ -68,6 +68,7 @@ dependencies {
     api 'com.android.support:design:27.+'
     implementation 'com.android.support:cardview-v7:27.+'
     implementation project(':baselibrary')
+    implementation project(':kefu-easeui')
     implementation(name: 'androidutils', ext: 'aar')
     implementation(name: 'androidbaseclass', ext: 'aar')
     implementation(name: 'download', ext: 'aar')
