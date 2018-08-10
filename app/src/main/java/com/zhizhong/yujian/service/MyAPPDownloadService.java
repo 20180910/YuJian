@@ -193,7 +193,7 @@ public class MyAPPDownloadService extends Service {
         @Override
         public void onStarted() {
             L.i(TAG, "onStart()");
-            mBuilder.setSmallIcon(R.mipmap.ic_launcher)
+            mBuilder.setSmallIcon(R.drawable.ic_launcher)
                     .setContentTitle(mAppInfo.getTitle())
                     .setContentText(mAppInfo.getTitle()+tag_InitDownload)
                     .setProgress(100, 0, true)
