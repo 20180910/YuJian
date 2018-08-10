@@ -22,6 +22,10 @@ public class NetApiRequest extends BaseApiRequest {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return; }
         getGeneralClient(NetIRequest.class).uploadImg(map,body).enqueue(callBack);
     }
+    public static void appLogin(Map map ,MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return; }
+        getGeneralClient(NetIRequest.class).appLogin(map).enqueue(callBack);
+    }
     public static void getAllArea(Map map  , MyCallBack callBack) {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return; }
         getGeneralClient(NetIRequest.class).getAllArea(map).enqueue(callBack);

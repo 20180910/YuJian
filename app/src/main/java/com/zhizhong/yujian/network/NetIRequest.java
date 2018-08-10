@@ -4,6 +4,7 @@ import com.library.base.BaseObj;
 import com.library.base.ResponseObj;
 import com.library.base.bean.AppVersionObj;
 import com.library.base.bean.PayObj;
+import com.zhizhong.yujian.module.my.network.response.LoginObj;
 import com.zhizhong.yujian.network.request.UploadImgBody;
 import com.zhizhong.yujian.network.response.CityObj;
 import com.zhizhong.yujian.network.response.CollectObj;
@@ -85,6 +86,10 @@ public interface NetIRequest {
     //扫一扫
     @GET("api/GoodsClassiFication/GetScan")
     Call<ResponseObj<List<GoodsObj>>> scan(@QueryMap Map<String, String> map);
+
+    //第三方登录
+    @GET("api/Lib/GetAddWXUser")
+    Call<ResponseObj<LoginObj>> appLogin(@QueryMap Map<String, String> map);
 
  /*   //第三方登录
     @GET("api/MQLib/GetAddWXUser")
