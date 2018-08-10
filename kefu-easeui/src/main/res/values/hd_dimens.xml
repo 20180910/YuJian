@@ -1,6 +1,6 @@
 <resources>
 
-     <dimen name="height_top_bar">56dp</dimen>
+     <dimen name="height_top_bar">45dp</dimen>
     <!--<dimen name="padding_search_bar">5dp</dimen>-->
     <!--<dimen name="height_row_weixin">59dp</dimen>-->
     <dimen name="size_avatar">48dp</dimen>
@@ -48,7 +48,7 @@
 
 	<dimen name="ticket_detail_text_size">16sp</dimen>
 
-	<dimen name="title_height">56dp</dimen>
+	<dimen name="title_height">45dp</dimen>
 	<dimen name="title_back_btn_size">16dp</dimen>
 	<dimen name="title_icon_btn_layout_width">49dp</dimen>
 	<dimen name="title_customer_icon_size">17dp</dimen>
