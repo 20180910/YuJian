@@ -2,6 +2,7 @@ package com.zhizhong.yujian.module.auction.network;
 
 import com.library.base.BaseObj;
 import com.library.base.ResponseObj;
+import com.zhizhong.yujian.bean.JiaoNaJinObj;
 import com.zhizhong.yujian.module.auction.network.response.BaoZhengJinObj;
 import com.zhizhong.yujian.module.auction.network.response.ChuJiaObj;
 import com.zhizhong.yujian.module.auction.network.response.PaiMaiBannerObj;
@@ -75,6 +76,11 @@ public interface IRequest {
     //拍卖订单设置地址
     @GET("api/Auction/GetSetAddress")
     Call<ResponseObj<BaseObj>> paiMaiSetAddress(@QueryMap Map<String, String> map);
+
+
+    //充值缴纳金
+    @GET("api/CashWithdrawal/GetCreateOrder")
+    Call<ResponseObj<JiaoNaJinObj>> chongZhi(@QueryMap Map<String, String> map);
 
 
 

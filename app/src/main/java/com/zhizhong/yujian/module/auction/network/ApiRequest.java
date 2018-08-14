@@ -65,5 +65,9 @@ public class ApiRequest extends BaseApiRequest {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
         getGeneralClient(IRequest.class).paiMaiSetAddress(map).enqueue(callBack);
     }
+    public static void chongZhi(Map map, MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return;  }
+        getGeneralClient(IRequest.class).chongZhi(map).enqueue(callBack);
+    }
 
 }

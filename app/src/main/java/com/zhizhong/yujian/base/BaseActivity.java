@@ -741,12 +741,7 @@ public abstract class BaseActivity extends MyBaseActivity {
             }
         });
     }*/
-    public void showPay(){
-        showPay(null);
-    }
-    public void showPay(String orderNo){
 
-    }
     public boolean fileIsExists(String strFile) {
         try {
             File f = new File(strFile);

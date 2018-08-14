@@ -419,9 +419,13 @@ public class AuctionDetailActivity extends BaseActivity {
             @Override
             protected void onNoDoubleClick(View view) {
                 dialog.dismiss();
-                Intent intent=new Intent();
-                intent.putExtra(IntentParam.baoZhengJin,cash_deposit.toString());
-                STActivityForResult(intent,JiaoNaJinActivity.class,1000);
+                if(noLogin()){
+                    STActivity(LoginActivity.class);
+                }else{
+                    Intent intent=new Intent();
+                    intent.putExtra(IntentParam.baoZhengJin,cash_deposit.toString());
+                    STActivityForResult(intent,JiaoNaJinActivity.class,1000);
+                }
             }
         });
     }

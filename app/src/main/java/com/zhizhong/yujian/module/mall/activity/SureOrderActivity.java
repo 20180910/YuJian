@@ -369,7 +369,23 @@ public class SureOrderActivity extends BaseActivity {
             }
         });
     }
-
+    public  void yuePay(String orderNo,String money) {
+        Loading.show(mContext);
+        Map<String,String> map=new HashMap<String,String>();
+        map.put("user_id",getUserId( ));
+        map.put("order_no",orderNo);
+        map.put("money",money);
+        map.put("sign",getSign(map));
+        NetApiRequest.yuePay(map, new MyCallBack<BaseObj>(mContext) {
+            @Override
+            public void onSuccess(BaseObj obj, int errorCode, String msg) {
+                RxBus.getInstance().post(new PayEvent());
+                Intent intent=new Intent(mContext,PaySuccessActivity.class);
+                mContext.startActivity(intent);
+                finish();
+            }
+        });
+    }
     public void showPay( final BigDecimal money){
         final MySimpleDialog dialog=new MySimpleDialog(mContext);
         View view = mContext.getLayoutInflater().inflate(R.layout.sure_order_popu, null);
@@ -398,22 +414,6 @@ public class SureOrderActivity extends BaseActivity {
         dialog.setGravity(Gravity.BOTTOM);
         dialog.show();
     }
-    public  void yuePay(String orderNo,String money) {
-        Loading.show(mContext);
-        Map<String,String> map=new HashMap<String,String>();
-        map.put("user_id",getUserId( ));
-        map.put("order_no",orderNo);
-        map.put("money",money);
-        map.put("sign",getSign(map));
-        NetApiRequest.yuePay(map, new MyCallBack<BaseObj>(mContext) {
-            @Override
-            public void onSuccess(BaseObj obj, int errorCode, String msg) {
-                RxBus.getInstance().post(new PayEvent());
-                Intent intent=new Intent(mContext,PaySuccessActivity.class);
-                mContext.startActivity(intent);
-                finish();
-            }
-        });
-    }
+
 
 }
