@@ -6,29 +6,17 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetDialog;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.RadioButton;
-import android.widget.TextView;
 
 import com.github.androidtools.SPUtils;
-import com.github.androidtools.inter.MyOnClickListener;
-import com.github.mydialog.MySimpleDialog;
-import com.github.rxbus.RxBus;
-import com.library.base.BaseObj;
 import com.library.base.MyBaseFragment;
 import com.zhizhong.yujian.AppXml;
 import com.zhizhong.yujian.Config;
 import com.zhizhong.yujian.GetSign;
-import com.zhizhong.yujian.R;
-import com.zhizhong.yujian.event.PayEvent;
-import com.zhizhong.yujian.module.mall.activity.PaySuccessActivity;
-import com.zhizhong.yujian.network.NetApiRequest;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -416,7 +404,7 @@ public abstract class BaseFragment extends MyBaseFragment {
             }
         });
     }*/
-   public void showPay(final String orderNo,final String money){
+  /* public void showPay(final String orderNo,final String money){
        final MySimpleDialog dialog=new MySimpleDialog(mContext);
        View view = getLayoutInflater().inflate(R.layout.sure_order_popu, null);
        view.findViewById(R.id.iv_pay_cancle).setOnClickListener(new MyOnClickListener() {
@@ -461,5 +449,5 @@ public abstract class BaseFragment extends MyBaseFragment {
             }
         });
 
-    }
+    }*/
 }

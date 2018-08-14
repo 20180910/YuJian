@@ -15,6 +15,11 @@ android {
                 JPUSH_APPKEY : "4460aa9c79ccc06d4d2a49c2", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
         ]
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a"
+            // 如果您使用的是商业版，只能使用 armeabi 架构，即：
+            // abiFilters "armeabi",
+        }
 
         multiDexEnabled true
     }
@@ -59,7 +64,10 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+//    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    configurations {
+        all*.exclude group: 'com.android.support', module: 'support-v13'
+    }
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     testImplementation 'junit:junit:4.12'
@@ -98,13 +106,16 @@ dependencies {
     implementation 'cn.yipianfengye.android:zxing-library:2.2'
     implementation files('libs/Msc.jar')
     implementation files('libs/Sunflower.jar')
-
-
     implementation 'com.android.support:multidex:1.0.1'
-
-
     //极光推送
     implementation 'cn.jiguang.sdk:jpush:3.0.3'
     // 此处以JPush 3.0.3 版本为例。
     implementation 'cn.jiguang.sdk:jcore:1.1.1'
+//    implementation files('libs/liteavsdk.jar')
+
+    implementation(name: 'LiteAVSDK_Smart_5.0.4981', ext: 'aar')
+
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
 }

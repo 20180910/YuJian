@@ -3,6 +3,7 @@ package com.zhizhong.yujian;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import com.aspsine.multithreaddownload.DownloadConfiguration;
 import com.aspsine.multithreaddownload.DownloadManager;
@@ -16,6 +17,7 @@ import com.sdklibrary.base.ali.pay.MyAliPay;
 import com.sdklibrary.base.qq.share.MyQQShare;
 import com.sdklibrary.base.wx.pay.MyWXPay;
 import com.sdklibrary.base.wx.share.MyWXShare;
+import com.tencent.rtmp.TXLiveBase;
 
 
 /**
@@ -43,6 +45,10 @@ public class MyApplication extends Application {
         MyQQShare.setAppId(Config.qq_id);
         MyAliPay.setConfig(Config.zhifubao_app_id,Config.zhifubao_pid,Config.zhifubao_rsa2);
         MyWXPay.setConfig(Config.weixing_id,Config.weixing_mch_id,Config.weixing_miyao);
+
+
+        String sdkver = TXLiveBase.getSDKVersionStr();
+        Log.d("liteavsdk", "===liteav sdk version is : " + sdkver);
     }
     private void initDownloader() {
         DownloadConfiguration configuration = new DownloadConfiguration();

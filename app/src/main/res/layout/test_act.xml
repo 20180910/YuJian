@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/bg_color"
+    >
+<include layout="@layout/app_title"/>
+   <com.zhizhong.yujian.view.MyEditText
+       android:id="@+id/et_address_url"
+       android:layout_width="match_parent"
+       android:layout_height="40dp"
+       android:gravity="center_vertical"
+       android:textSize="13sp"
+       app:solidColor="@color/white"
+       android:inputType="text"
+       android:imeOptions="actionNext"
+       />
+    <TextView
+        android:id="@+id/tv_start"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="开始"
+        android:gravity="center"
+        android:background="@color/c_press"
+        android:textSize="16sp"
+        />
+    <com.tencent.rtmp.ui.TXCloudVideoView
+        android:id="@+id/video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
+</LinearLayout>

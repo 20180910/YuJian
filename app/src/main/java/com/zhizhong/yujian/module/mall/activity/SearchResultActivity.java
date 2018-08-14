@@ -117,7 +117,7 @@ public class SearchResultActivity extends BaseActivity {
         super.getData(page, isLoad);
         Map<String, String> map = new HashMap<String, String>();
         map.put("user_id", getUserId());
-        map.put("search_term", searchContent);
+        map.put("search_term", searchContent==null?"":searchContent);
         map.put("min_price", minPrice);
         map.put("max_price", maxPrice);
         map.put("sales_volume_sort", salesVolumeSort);

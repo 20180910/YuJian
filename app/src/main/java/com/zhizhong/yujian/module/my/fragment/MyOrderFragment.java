@@ -193,7 +193,7 @@ public class MyOrderFragment extends BaseFragment {
                 tv_order_pay.setOnClickListener(new MyOnClickListener() {
                     @Override
                     protected void onNoDoubleClick(View view) {
-                        PayView.showPay(getActivity(),bean.getOrder_no(),bean.getCombined().toString());
+                        PayView.showPay(getActivity(),bean.getOrder_no(),bean.getCombined().doubleValue());
                     }
                 });
                 tv_order_sure.setOnClickListener(new MyOnClickListener() {

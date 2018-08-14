@@ -22,6 +22,7 @@ import com.zhizhong.yujian.module.my.event.RefreshMyOrderEvent;
 import com.zhizhong.yujian.module.my.fragment.MyOrderFragment;
 import com.zhizhong.yujian.module.my.network.ApiRequest;
 import com.zhizhong.yujian.module.my.network.response.OrderDetailObj;
+import com.zhizhong.yujian.tools.PayView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -97,6 +98,12 @@ public class OrderDetailActivity extends BaseActivity {
     protected void initData() {
         showProgress();
         getData(1, false);
+    }
+
+    @Override
+    protected void onMyReStart() {
+        super.onMyReStart();
+        getData(1,false);
     }
 
     @Override
@@ -229,7 +236,8 @@ public class OrderDetailActivity extends BaseActivity {
         tv_order_detail_pay.setOnClickListener(new MyOnClickListener() {
             @Override
             protected void onNoDoubleClick(View view) {
-                showPay(bean.getOrder_no());
+//                showPay(bean.getOrder_no());
+                PayView.showPay(mContext,bean.getOrder_no(),bean.getCombined().doubleValue());
             }
         });
         tv_order_detail_sure.setOnClickListener(new MyOnClickListener() {
@@ -285,11 +293,16 @@ public class OrderDetailActivity extends BaseActivity {
     }
 
     private void evaluationOrder(String order_no) {
-
+        Intent intent=new Intent();
+        intent.putExtra(IntentParam.orderNo,order_no);
+        STActivity(intent,FaBiaoEvaluationActivity.class);
     }
 
     private void tuikuanOrder(String order_no) {
-
+        Intent intent=new Intent();
+        intent.putExtra(IntentParam.orderNo,order_no);
+        STActivity(intent,TuiKuanActivity.class);
+        finish();
     }
 
     private void sureOrder(String order_no) {

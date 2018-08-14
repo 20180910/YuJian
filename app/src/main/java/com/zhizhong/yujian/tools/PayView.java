@@ -8,16 +8,23 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.github.androidtools.SPUtils;
+import com.github.androidtools.ToastUtils;
 import com.github.androidtools.inter.MyOnClickListener;
 import com.github.baseclass.view.Loading;
 import com.github.mydialog.MySimpleDialog;
 import com.github.rxbus.RxBus;
 import com.library.base.BaseObj;
+import com.sdklibrary.base.ali.pay.MyAliOrderBean;
+import com.sdklibrary.base.ali.pay.MyAliPay;
+import com.sdklibrary.base.ali.pay.MyAliPayCallback;
+import com.sdklibrary.base.ali.pay.PayResult;
 import com.zhizhong.yujian.Config;
+import com.zhizhong.yujian.Constant;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.event.PayEvent;
 import com.zhizhong.yujian.module.mall.activity.PaySuccessActivity;
+import com.zhizhong.yujian.module.my.event.RefreshMyOrderEvent;
 import com.zhizhong.yujian.network.NetApiRequest;
 
 import java.util.HashMap;
@@ -26,7 +33,7 @@ import java.util.Map;
 import static com.zhizhong.yujian.GetSign.getSign;
 
 public class PayView {
-    public static void showPay(final Activity mContext, final String orderNo, final String money){
+    public static void showPay(final Activity mContext, final String orderNo,final double money){
         final MySimpleDialog dialog=new MySimpleDialog(mContext);
         View view = mContext.getLayoutInflater().inflate(R.layout.sure_order_popu, null);
         view.findViewById(R.id.iv_pay_cancle).setOnClickListener(new MyOnClickListener() {
@@ -46,7 +53,11 @@ public class PayView {
             protected void onNoDoubleClick(View view) {
                 dialog.dismiss();
                 if(rb_pay_online.isChecked()){
-                    yuePay(mContext,orderNo,money);
+                    yuePay(mContext,orderNo,money+"");
+                }else if(rb_pay_zhifubao.isChecked()){
+                    aliPay(mContext,orderNo,money);
+                }else if(rb_pay_weixin.isChecked()){
+                    ToastUtils.showToast(mContext,"正在开发中");
                 }
             }
         });
@@ -55,6 +66,37 @@ public class PayView {
         dialog.setGravity(Gravity.BOTTOM);
         dialog.show();
     }
+
+    private static void aliPay(final Activity mContext, String orderNo, double price) {
+        MyAliOrderBean bean=new MyAliOrderBean();
+        bean.setOut_trade_no(orderNo);
+        bean.setTotal_amount(price);
+        bean.setSubject(Constant.orderSubject);
+        bean.setBody(Constant.orderBody);
+        String url = SPUtils.getString(mContext, Config.payType_ZFB, null);
+        bean.setNotifyUrl(url);
+
+        Loading.show(mContext);
+        MyAliPay.newInstance(mContext).startPay(bean, new MyAliPayCallback() {
+            @Override
+            public void paySuccess(PayResult payResult) {
+                Loading.dismissLoading();
+                mContext.startActivity(new Intent(mContext,PaySuccessActivity.class));
+                RxBus.getInstance().post(new RefreshMyOrderEvent());
+            }
+            @Override
+            public void payFail() {
+                Loading.dismissLoading();
+                ToastUtils.showToast(mContext,"支付失败");
+            }
+            @Override
+            public void payCancel() {
+                Loading.dismissLoading();
+                ToastUtils.showToast(mContext,"支付取消");
+            }
+        });
+    }
+
     public static void yuePay(final Activity mContext,String orderNo,String money) {
         Loading.show(mContext);
         Map<String,String> map=new HashMap<String,String>();

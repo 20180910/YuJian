@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -19,11 +20,12 @@
             >
             <!--your view-->
             <TextView
+                android:id="@+id/tv_zixundetail_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="翡翠原石的入门级常识"
+                tools:text="翡翠原石的入门级常识"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:textColor="@color/gray_33"
                 android:textSize="16sp"
                 />
@@ -36,18 +38,21 @@
                 android:paddingLeft="10dp"
                 >
                 <TextView
+                    android:id="@+id/tv_zixundetail_author"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="作者:张大鹏"
+                    tools:text="作者:张大鹏"
                     android:ems="6"
                     />
                 <TextView
+                    android:id="@+id/tv_zixundetail_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="时间：2018-09-08 12:00"
+                    tools:text="时间：2018-09-08 12:00"
                     />
             </LinearLayout>
             <com.library.base.view.richedit.TheEditor
+                android:id="@+id/te_zixundetail_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
