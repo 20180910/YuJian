@@ -56,7 +56,11 @@ public class VIPActivity extends BaseActivity {
         ApiRequest.VIP(map, new MyCallBack<VIPObj>(mContext,pl_load,pcfl) {
             @Override
             public void onSuccess(VIPObj obj, int errorCode, String msg) {
-                tv_vip_shuoming.setText("还需要消费"+obj.getHaixu()+"元,可升级至VIP会员");
+                if(obj.getHaixu()<=0){
+                    tv_vip_shuoming.setText("您已成为VIP会员");
+                }else{
+                    tv_vip_shuoming.setText("还需要消费"+obj.getHaixu()+"元,可升级至VIP会员");
+                }
                 tv_vip_putong_content.setText(obj.getRegular_member());
                 tv_vip_content.setText(obj.getVip_member());
                 sb_vip.setMax((int) obj.getZong());

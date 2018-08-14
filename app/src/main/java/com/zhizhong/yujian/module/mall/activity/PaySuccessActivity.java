@@ -6,6 +6,7 @@ import android.view.View;
 import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.base.BaseActivity;
+import com.zhizhong.yujian.module.auction.activity.PaiMaiOrderActivity;
 import com.zhizhong.yujian.module.home.activity.MainActivity;
 import com.zhizhong.yujian.module.my.activity.MyOrderActivity;
 
@@ -14,6 +15,7 @@ import butterknife.OnClick;
 public class PaySuccessActivity extends BaseActivity {
 
     private Intent intent;
+    private boolean isPaiMai;
 
     @Override
     protected int getContentView() {
@@ -23,7 +25,7 @@ public class PaySuccessActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        isPaiMai = getIntent().getBooleanExtra(IntentParam.isPaiMai, false);
     }
 
     @Override
@@ -37,7 +39,11 @@ public class PaySuccessActivity extends BaseActivity {
             case R.id.tv_pay_lookorder:
                 intent= new Intent();
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                STActivity(intent,MyOrderActivity.class);
+                if(isPaiMai){
+                    STActivity(intent,MyOrderActivity.class);
+                }else{
+                    STActivity(intent,PaiMaiOrderActivity.class);
+                }
                 finish();
             break;
             case R.id.tv_pay_back:

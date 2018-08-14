@@ -325,7 +325,7 @@ public class AuctionDetailActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.iv_paimai_goods_share:
-
+                showFenXiangDialog();
                 break;
             case R.id.tv_paimai_goods_detail_banner_video:
                 tv_paimai_goods_detail_banner_video.setTextColor(ContextCompat.getColor(mContext,R.color.white));

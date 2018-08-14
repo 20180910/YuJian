@@ -72,6 +72,11 @@ public interface IRequest {
     Call<ResponseObj<PaiMaiOrderDetailObj>> getPaiMaiOrderDetail(@QueryMap Map<String, String> map);
 
 
+    //拍卖订单设置地址
+    @GET("api/Auction/GetSetAddress")
+    Call<ResponseObj<BaseObj>> paiMaiSetAddress(@QueryMap Map<String, String> map);
+
+
 
 
 }

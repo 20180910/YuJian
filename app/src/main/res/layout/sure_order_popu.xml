@@ -36,6 +36,11 @@
         android:layout_height="2px"
         android:background="@color/divider_color"
         />
+    <include
+        android:id="@+id/il_select_address"
+        layout="@layout/sure_order_selectaddress_popu"
+        android:visibility="gone"
+        />
     <RadioGroup
         android:id="@+id/rg_select_pay"
         android:layout_width="match_parent"

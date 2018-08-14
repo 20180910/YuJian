@@ -14,8 +14,8 @@ public class Config {
     public static final String longitude = "longitude";
     public static final String latitude = "latitude";
 
-    public static final String weixing_id = "wx32725acca4dfcf9f";//麦签
-    public static final String weixing_AppSecret = "ed5a7e3ea4ce6540f58658884c34a439";//麦签
+    public static final String weixing_id = "wxaee1f6934896436a";// 相玉
+    public static final String weixing_AppSecret = "c746e122e9dae27574a288724aa37575";//相玉
     public static final String weixing_miyao = "maiqian2018425qwertyuiopasdfghjk";//麦签
     public static final String weixing_mch_id = "1502842581";//麦签
 
@@ -50,7 +50,6 @@ public class Config {
     public static final String birthday="birthday";
     public static final String message_sink="message_sink";//消息接收开关
     public static final String amount="amount";//余额
-    public static final String keeping_bean="keeping_bean";// 养生豆
     public static final String count_wsy="count_wsy";// 优惠券数量
     public static final String isFirstIntoApp="isFirstIntoApp";
     public static final String isUpdatePWD="isUpdatePWD";

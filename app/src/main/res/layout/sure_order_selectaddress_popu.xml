@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/white"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/sure_address"
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_sure_order_select_address"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            >
+            <TextView
+                android:id="@+id/tv_sure_order_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="添加收货地址"
+                android:textSize="14sp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_sure_order_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="收货人："
+                    android:textColor="@color/gray_33"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_sure_order_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    tools:text="智多星"
+                    android:textColor="@color/gray_33"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_sure_order_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="18655117604"
+                    android:textColor="@color/gray_33"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_sure_order_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                tools:text="收货地址：上海市长宁区长宁路1055号汇都大楼10层(2号线中山公园站8号口)"
+                android:textColor="@color/gray_33"
+                android:maxLines="3"
+                android:ellipsize="end"
+                />
+        </LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/jiantou_right"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/divider_color"
+        />
+</LinearLayout>
