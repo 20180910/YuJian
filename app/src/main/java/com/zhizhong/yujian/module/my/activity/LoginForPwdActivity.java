@@ -9,6 +9,9 @@ import com.library.base.tools.ZhengZeUtils;
 import com.sdklibrary.base.qq.share.MyQQLoginCallback;
 import com.sdklibrary.base.qq.share.MyQQShare;
 import com.sdklibrary.base.qq.share.bean.MyQQUserInfo;
+import com.sdklibrary.base.wx.share.MyWXLoginCallback;
+import com.sdklibrary.base.wx.share.MyWXShare;
+import com.sdklibrary.base.wx.share.MyWXUserInfo;
 import com.zhizhong.yujian.AppXml;
 import com.zhizhong.yujian.Constant;
 import com.zhizhong.yujian.IntentParam;
@@ -92,6 +95,24 @@ public class LoginForPwdActivity extends BaseActivity {
                 });
                 break;
             case R.id.iv_login_wx:
+                showLoading();
+                MyWXShare.newInstance(mContext).login(new MyWXLoginCallback() {
+                    @Override
+                    public void loginSuccess(MyWXUserInfo myWXUserInfo) {
+                        loginForApp("2",myWXUserInfo.getUnionid(),myWXUserInfo.getNickname(),myWXUserInfo.getHeadimgurl());
+                        showMsg("登录成功");
+                    }
+                    @Override
+                    public void loginFail() {
+                        dismissLoading();
+                        showMsg("登录失败");
+                    }
+                    @Override
+                    public void loginCancel() {
+                        dismissLoading();
+                        showMsg("取消登录");
+                    }
+                });
                 break;
             case R.id.app_right_tv:
                 finish();
