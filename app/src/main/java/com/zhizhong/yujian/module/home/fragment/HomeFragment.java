@@ -6,6 +6,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.github.androidtools.PhoneUtils;
 import com.github.androidtools.inter.MyOnClickListener;
@@ -21,8 +22,10 @@ import com.zhizhong.yujian.base.BaseFragment;
 import com.zhizhong.yujian.base.GlideUtils;
 import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.module.home.activity.AllTuiJianGoodsActivity;
+import com.zhizhong.yujian.module.home.activity.LiveRoomActivity;
 import com.zhizhong.yujian.module.home.activity.ZiXunDetailActivity;
 import com.zhizhong.yujian.module.home.network.ApiRequest;
+import com.zhizhong.yujian.module.home.network.response.LiveObj;
 import com.zhizhong.yujian.module.home.network.response.ZiXunObj;
 import com.zhizhong.yujian.network.response.GoodsObj;
 
@@ -38,14 +41,31 @@ import butterknife.OnClick;
  */
 
 public class HomeFragment extends BaseFragment {
-    @BindView(R.id.iv_home_live)
-    ImageView iv_home_live;
     @BindView(R.id.tv_home_live_flag)
     MyTextView tv_home_live_flag;
+    @BindView(R.id.iv_home_live)
+    ImageView iv_home_live;
     @BindView(R.id.iv_home_live2)
     ImageView iv_home_live2;
     @BindView(R.id.iv_home_live3)
     ImageView iv_home_live3;
+
+    @BindView(R.id.tv_home_live_name)
+    TextView tv_home_live_name;
+    @BindView(R.id.tv_home_live_name2)
+    TextView tv_home_live_name2;
+    @BindView(R.id.tv_home_live_name3)
+    TextView tv_home_live_name3;
+
+    @BindView(R.id.tv_home_live_peoplenum)
+    TextView tv_home_live_peoplenum;
+
+    @BindView(R.id.tv_home_live_flag2)
+    TextView tv_home_live_flag2;
+
+    @BindView(R.id.tv_home_live_flag3)
+    TextView tv_home_live_flag3;
+
     @BindView(R.id.rv_home_tuijian_goods)
     RecyclerView rv_home_tuijian_goods;
 
@@ -108,13 +128,165 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected void initData() {
         showProgress();
+        getLive();
         getTuiJian();
         getData(1,false);
     }
 
     @Override
+    protected void onMyReStart() {
+        super.onMyReStart();
+        getLive();
+    }
+    private void getLive() {
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("pagesize","3");
+        map.put("page","1");
+        map.put("status","1");
+        map.put("sign",getSign(map));
+        ApiRequest.getLiveList(map, new MyCallBack<List<LiveObj>>(mContext) {
+            @Override
+            public void onSuccess(final List<LiveObj> list, int errorCode, String msg) {
+                if(notEmpty(list)){
+                    if(list.size()>=3){
+                        tv_home_live_flag.setText("直播中");
+                        tv_home_live_flag2.setText("直播中");
+                        tv_home_live_flag3.setText("直播中");
+                        tv_home_live_name.setText(list.get(0).getChannel_name());
+                        tv_home_live_name2.setText(list.get(1).getChannel_name());
+                        tv_home_live_name3.setText(list.get(2).getChannel_name());
+                        getLiveImg(iv_home_live,list.get(0).getChannel_address());
+                        getLiveImg(iv_home_live2,list.get(1).getChannel_address());
+                        getLiveImg(iv_home_live3,list.get(2).getChannel_address());
+                        iv_home_live.setOnClickListener(new MyOnClickListener() {
+                            @Override
+                            protected void onNoDoubleClick(View view) {
+                                goLive(list.get(0).getChannel_name(),list.get(0).getChannel_address());
+                            }
+                        });
+                        iv_home_live2.setOnClickListener(new MyOnClickListener() {
+                            @Override
+                            protected void onNoDoubleClick(View view) {
+                                goLive(list.get(1).getChannel_name(),list.get(1).getChannel_address());
+                            }
+                        });
+                        iv_home_live3.setOnClickListener(new MyOnClickListener() {
+                            @Override
+                            protected void onNoDoubleClick(View view) {
+                                goLive(list.get(2).getChannel_name(),list.get(2).getChannel_address());
+                            }
+                        });
+
+                    }else if(list.size()>=2){
+                        tv_home_live_flag.setText("直播中");
+                        tv_home_live_flag2.setText("直播中");
+                        tv_home_live_flag3.setText("未开播");
+                        tv_home_live_name.setText(list.get(0).getChannel_name());
+                        tv_home_live_name2.setText(list.get(1).getChannel_name());
+                        tv_home_live_name3.setText("相玉直播间");
+                        getLiveImg(iv_home_live,list.get(0).getChannel_address());
+                        getLiveImg(iv_home_live2,list.get(1).getChannel_address());
+                        iv_home_live.setOnClickListener(new MyOnClickListener() {
+                            @Override
+                            protected void onNoDoubleClick(View view) {
+                                goLive(list.get(0).getChannel_name(),list.get(0).getChannel_address());
+                            }
+                        });
+                        iv_home_live2.setOnClickListener(new MyOnClickListener() {
+                            @Override
+                            protected void onNoDoubleClick(View view) {
+                                goLive(list.get(1).getChannel_name(),list.get(1).getChannel_address());
+                            }
+                        });
+                        iv_home_live3.setOnClickListener(new MyOnClickListener() {
+                            @Override
+                            protected void onNoDoubleClick(View view) {
+                                showMsg("该直播间未开播");
+                            }
+                        });
+                    }else{
+                        getLiveImg(iv_home_live,list.get(0).getChannel_address());
+                        iv_home_live.setOnClickListener(new MyOnClickListener() {
+                            @Override
+                            protected void onNoDoubleClick(View view) {
+                                goLive(list.get(0).getChannel_name(),list.get(0).getChannel_address());
+                            }
+                        });
+                        iv_home_live2.setOnClickListener(new MyOnClickListener() {
+                            @Override
+                            protected void onNoDoubleClick(View view) {
+                                showMsg("该直播间未开播");
+                            }
+                        });
+                        iv_home_live3.setOnClickListener(new MyOnClickListener() {
+                            @Override
+                            protected void onNoDoubleClick(View view) {
+                                showMsg("该直播间未开播");
+                            }
+                        });
+                        tv_home_live_flag.setText("直播中");
+                        tv_home_live_name.setText(list.get(0).getChannel_name());
+                        tv_home_live_name2.setText("相玉直播间");
+                        tv_home_live_name3.setText("相玉直播间");
+                        tv_home_live_flag2.setText("未开播");
+                        tv_home_live_flag3.setText("未开播");
+                    }
+                }else{
+                    tv_home_live_flag.setText("未开播");
+                    tv_home_live_flag2.setText("未开播");
+                    tv_home_live_flag3.setText("未开播");
+                    tv_home_live_name.setText("相玉直播间");
+                    tv_home_live_name2.setText("相玉直播间");
+                    tv_home_live_name3.setText("相玉直播间");
+
+                    iv_home_live.setOnClickListener(new MyOnClickListener() {
+                        @Override
+                        protected void onNoDoubleClick(View view) {
+                            showMsg("该直播间未开播");
+                        }
+                    });
+                    iv_home_live2.setOnClickListener(new MyOnClickListener() {
+                        @Override
+                        protected void onNoDoubleClick(View view) {
+                            showMsg("该直播间未开播");
+                        }
+                    });
+                    iv_home_live3.setOnClickListener(new MyOnClickListener() {
+                        @Override
+                        protected void onNoDoubleClick(View view) {
+                            showMsg("该直播间未开播");
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    private void getLiveImg(final ImageView iv_home_live, String liveAddress) {
+        //创建 player 对象
+        /*final TXLivePlayer mLivePlayer = new TXLivePlayer(getActivity());
+        //关键 player 对象与界面 view
+        mLivePlayer.startPlay(liveAddress, TXLivePlayer.PLAY_TYPE_LIVE_FLV); //推荐 FLV
+        mLivePlayer.snapshot(new TXLivePlayer.ITXSnapshotListener() {
+            @Override
+            public void onSnapshot(Bitmap bitmap) {
+                Glide.with(mContext).load(bitmap).asBitmap().encoder(new BitmapEncoder(Bitmap.CompressFormat.PNG,90)).error(R.drawable.live_bg).into(iv_home_live);
+                mLivePlayer.stopPlay(true); // true 代表清除最后一帧画面
+            }
+        });*/
+    }
+
+    private void goLive(String title,String channel_address) {
+        Intent intent = new Intent();
+        intent.putExtra(IntentParam.title,title);
+        intent.putExtra(IntentParam.liveAddress,channel_address);
+        STActivity(intent, LiveRoomActivity.class);
+    }
+
+    @Override
     protected void getOtherData() {
         super.getOtherData();
+        getLive();
         getTuiJian();
     }
     public void getTuiJian(){
@@ -158,7 +330,8 @@ public class HomeFragment extends BaseFragment {
                 STActivity(AllTuiJianGoodsActivity.class);
                 break;
             case R.id.ib_home_top:
-                nsv.scrollTo(0,0);
+//                nsv.scrollTo(0,0);
+                STActivity(TestAct.class);
                 break;
         }
     }

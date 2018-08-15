@@ -212,6 +212,7 @@
         </activity>
         <activity android:name=".module.home.fragment.TestAct"/>
         <activity android:name=".module.home.activity.AllTuiJianGoodsActivity"/>
+        <activity android:name=".module.home.activity.LiveRoomActivity"/>
 
 
     </application>

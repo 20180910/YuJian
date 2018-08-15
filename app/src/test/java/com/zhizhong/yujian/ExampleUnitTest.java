@@ -40,12 +40,13 @@ public class ExampleUnitTest {
         String bizId="29689";
         //直播码=bizid+"_"+随机数
         String zhiBoCode=bizId+"_"+getRnd();
+        System.out.println("直播码:"+zhiBoCode);
         Calendar calendar=Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY,calendar.get(Calendar.HOUR_OF_DAY)+24);
-
+        int shijiancuo=(int) (calendar.getTime().getTime()/1000);
+        System.out.println("时间戳:"+zhiBoCode);
         //16进制时间戳(秒)
-        String time = Integer.toHexString((int) (calendar.getTime().getTime() / 1000));
-
+        String time = Integer.toHexString(shijiancuo);
 
         String str=key+zhiBoCode+time;
 

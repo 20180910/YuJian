@@ -29,6 +29,7 @@ public class IntentParam {
     public static final String selectBank = "selectBank";
     public static final String isPaiMai = "isPaiMai";
     public static final String nickName = "nickName";
+    public static final String liveAddress = "liveAddress";
     public static final String useYouHuiQuan = "useYouHuiQuan";
     public static final String money = "money";
     public static final String alipayAccount = "alipayAccount";

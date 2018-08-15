@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -10,7 +11,13 @@
         android:id="@id/pl_load"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+        <in.srain.cube.views.ptr.PtrClassicFrameLayout
+            android:id="@id/pcfl_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:ptr_resistance="2.1"
+            app:ptr_ratio_of_header_height_to_refresh="1.2"
+            >
         <android.support.v4.widget.NestedScrollView
             android:id="@id/nsv"
             android:layout_width="match_parent"
@@ -40,7 +47,8 @@
                         android:id="@+id/iv_home_live"
                         android:layout_width="match_parent"
                         android:layout_height="180dp"
-                        android:src="@drawable/qq"
+                        android:src="@drawable/live_bg"
+                        android:scaleType="centerCrop"
                         />
                     <com.github.fastshape.MyTextView
                         android:id="@+id/tv_home_live_flag"
@@ -56,9 +64,10 @@
                         android:paddingRight="7dp"
                         />
                     <com.github.fastshape.MyTextView
+                        android:id="@+id/tv_home_live_peoplenum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="8人观看"
+                        tools:text="8人观看"
                         app:solidColor="#FF9A9A9A"
                         android:layout_marginTop="10dp"
                         android:textColor="@color/white"
@@ -71,9 +80,10 @@
                         app:bottomRightRadius="10dp"
                         />
                     <com.github.fastshape.MyTextView
+                        android:id="@+id/tv_home_live_name"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:text="石头你好"
+                        android:text="相玉直播间"
                         android:gravity="center_vertical"
                         android:paddingLeft="10dp"
                         app:solidColor="@color/white"
@@ -101,9 +111,11 @@
                             android:id="@+id/iv_home_live2"
                             android:layout_width="match_parent"
                             android:layout_height="90dp"
-                            android:src="@drawable/qq"
+                            android:src="@drawable/live_bg"
+                            android:scaleType="centerCrop"
                             />
                         <com.github.fastshape.MyTextView
+                            android:id="@+id/tv_home_live_flag2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="直播中"
@@ -118,9 +130,10 @@
                             app:radius="11dp"
                             />
                         <com.github.fastshape.MyTextView
+                            android:id="@+id/tv_home_live_name2"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
-                            android:text="石头你好"
+                            android:text="相玉直播间"
                             android:gravity="center_vertical"
                             android:paddingLeft="10dp"
                             app:solidColor="@color/white"
@@ -137,9 +150,11 @@
                             android:id="@+id/iv_home_live3"
                             android:layout_width="match_parent"
                             android:layout_height="90dp"
-                            android:src="@drawable/qq"
+                            android:src="@drawable/live_bg"
+                            android:scaleType="centerCrop"
                             />
                         <com.github.fastshape.MyTextView
+                            android:id="@+id/tv_home_live_flag3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="直播中"
@@ -154,9 +169,10 @@
                             android:textSize="11sp"
                             />
                         <com.github.fastshape.MyTextView
+                            android:id="@+id/tv_home_live_name3"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
-                            android:text="石头你好"
+                            android:text="相玉直播间"
                             android:gravity="center_vertical"
                             android:paddingLeft="10dp"
                             app:solidColor="@color/white"
@@ -239,6 +255,7 @@
                 </com.library.base.view.MyRecyclerView>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
+        </in.srain.cube.views.ptr.PtrClassicFrameLayout>
         <ImageButton
             android:id="@+id/ib_home_top"
             android:layout_width="50dp"

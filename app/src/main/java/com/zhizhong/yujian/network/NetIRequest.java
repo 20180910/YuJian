@@ -4,6 +4,7 @@ import com.library.base.BaseObj;
 import com.library.base.ResponseObj;
 import com.library.base.bean.AppVersionObj;
 import com.library.base.bean.PayObj;
+import com.zhizhong.yujian.module.home.network.response.LiveObj;
 import com.zhizhong.yujian.module.my.network.response.LoginObj;
 import com.zhizhong.yujian.network.request.UploadImgBody;
 import com.zhizhong.yujian.network.response.CityObj;
@@ -91,8 +92,8 @@ public interface NetIRequest {
     @GET("api/Lib/GetAddWXUser")
     Call<ResponseObj<LoginObj>> appLogin(@QueryMap Map<String, String> map);
 
- /*   //第三方登录
-    @GET("api/MQLib/GetAddWXUser")
-    Call<ResponseObj<LoginObj>> appLogin(@QueryMap Map<String, String> map);
-*/
+    //获取直播列表
+    @GET("api/Live/GetLiveList")
+    Call<ResponseObj<List<LiveObj>>> getLiveList(@QueryMap Map<String, String> map);
+
 }

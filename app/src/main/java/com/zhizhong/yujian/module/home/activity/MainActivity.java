@@ -39,7 +39,6 @@ import com.zhizhong.yujian.module.mall.fragment.MallFragment;
 import com.zhizhong.yujian.module.my.activity.LoginActivity;
 import com.zhizhong.yujian.module.my.fragment.MyFragment;
 import com.zhizhong.yujian.network.NetApiRequest;
-import com.zhizhong.yujian.network.response.ImageObj;
 import com.zhizhong.yujian.service.MyAPPDownloadService;
 import com.zhizhong.yujian.tools.FileUtils;
 
@@ -106,8 +105,6 @@ public class MainActivity extends BaseActivity {
             SPUtils.setPrefString(mContext,Config.jiguangRegistrationId,registrationID);
         }
 
-        getYouXueImg();
-        getLiuXueImg();
 
         if (SPUtils.getBoolean(mContext, AppXml.updatePWD, false)) {
             clearUserId();
@@ -137,29 +134,7 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private void getYouXueImg() {
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("type", "1");
-        map.put("sign", getSign(map));
-        NetApiRequest.getYouXueObj(map, new MyCallBack<ImageObj>(mContext) {
-            @Override
-            public void onSuccess(ImageObj obj, int errorCode, String msg) {
-                SPUtils.setPrefString(mContext, AppXml.youXueImg, obj.getImg_url());
-            }
-        });
-    }
 
-    private void getLiuXueImg() {
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("type", "2");
-        map.put("sign", getSign(map));
-        NetApiRequest.getYouXueObj(map, new MyCallBack<ImageObj>(mContext) {
-            @Override
-            public void onSuccess(ImageObj obj, int errorCode, String msg) {
-                SPUtils.setPrefString(mContext, AppXml.liuXueImg, obj.getImg_url());
-            }
-        });
-    }
 
     private void setTabClickListener() {
         selectView = rb_home_tab1;

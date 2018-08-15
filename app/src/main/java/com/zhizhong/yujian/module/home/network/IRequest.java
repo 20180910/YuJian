@@ -1,6 +1,7 @@
 package com.zhizhong.yujian.module.home.network;
 
 import com.library.base.ResponseObj;
+import com.zhizhong.yujian.module.home.network.response.LiveObj;
 import com.zhizhong.yujian.module.home.network.response.ZiXunDetailObj;
 import com.zhizhong.yujian.module.home.network.response.ZiXunObj;
 import com.zhizhong.yujian.network.response.GoodsObj;
@@ -28,5 +29,9 @@ public interface IRequest {
 
     @GET("api/HomePage/GetHomeRecommendMore")
     Call<ResponseObj<List<GoodsObj>>> getAllTuiJian(@QueryMap Map<String, String> map);
+
+    @GET("api/Live/GetLiveList")
+    Call<ResponseObj<List<LiveObj>>> getLiveList(@QueryMap Map<String, String> map);
+
 
 }

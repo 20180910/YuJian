@@ -20,7 +20,7 @@ public class LiveFragment extends BaseFragment {
 
     @Override
     protected int getContentView() {
-        return R.layout.my_frag;
+        return R.layout.live_frag;
     }
 
     public static LiveFragment newInstance() {
