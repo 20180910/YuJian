@@ -330,8 +330,8 @@ public class HomeFragment extends BaseFragment {
                 STActivity(AllTuiJianGoodsActivity.class);
                 break;
             case R.id.ib_home_top:
-//                nsv.scrollTo(0,0);
-                STActivity(TestAct.class);
+                nsv.scrollTo(0,0);
+//                STActivity(TestAct.class);
                 break;
         }
     }

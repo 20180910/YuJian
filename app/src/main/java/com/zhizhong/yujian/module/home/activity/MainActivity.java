@@ -34,7 +34,7 @@ import com.zhizhong.yujian.bean.AppInfo;
 import com.zhizhong.yujian.event.LoginSuccessEvent;
 import com.zhizhong.yujian.module.auction.fragment.AuctionFragment;
 import com.zhizhong.yujian.module.home.fragment.HomeFragment;
-import com.zhizhong.yujian.module.home.fragment.LiveFragment;
+import com.zhizhong.yujian.module.live.fragment.LiveFragment;
 import com.zhizhong.yujian.module.mall.fragment.MallFragment;
 import com.zhizhong.yujian.module.my.activity.LoginActivity;
 import com.zhizhong.yujian.module.my.fragment.MyFragment;

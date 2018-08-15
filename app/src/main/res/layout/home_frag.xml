@@ -42,6 +42,8 @@
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
                     app:clipRadius="6dp"
+                    app:clipBorderWidth="2px"
+                    app:clipBorderColor="@color/divider_color"
                     >
                     <ImageView
                         android:id="@+id/iv_home_live"
@@ -99,6 +101,8 @@
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+
                     >
                     <com.github.fastshape.MyRelativeLayout
                         android:layout_width="0dp"
@@ -106,6 +110,8 @@
                         android:layout_height="wrap_content"
                         app:clipRadius="6dp"
                         android:layout_marginRight="10dp"
+                        app:clipBorderWidth="2px"
+                        app:clipBorderColor="@color/divider_color"
                         >
                         <ImageView
                             android:id="@+id/iv_home_live2"
@@ -145,6 +151,8 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         app:clipRadius="6dp"
+                        app:clipBorderWidth="2px"
+                        app:clipBorderColor="@color/divider_color"
                         >
                         <ImageView
                             android:id="@+id/iv_home_live3"

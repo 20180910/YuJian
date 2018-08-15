@@ -27,8 +27,8 @@ public class Config {
 
     public static final String jiguangRegistrationId="jiguangRegistrationId";
 
-    public static final String qq_id = "1107592050";//香玉
-    public static final String qq_key = "WqPXDSOtmTW2L0MN";//香玉
+    public static final String qq_id = "1107592050";//相玉
+    public static final String qq_key = "WqPXDSOtmTW2L0MN";//相玉
 
     public static final String xunfei_app_id = "5966f110";
 
