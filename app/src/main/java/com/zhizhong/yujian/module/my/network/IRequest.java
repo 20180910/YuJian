@@ -52,6 +52,10 @@ public interface IRequest {
     @GET("api/UserBase/GetUserSMSCodeLogin")
     Call<ResponseObj<LoginObj>> loginForMsg(@QueryMap Map<String, String> map);
 
+    //第三方账户绑定
+    @GET("api/UserBase/GetBindingQQWechatWeiBo")
+    Call<ResponseObj<BaseObj>> bindForApp(@QueryMap Map<String, String> map);
+
     //密码登录
     @GET("api/UserBase/GetUserLogin")
     Call<ResponseObj<LoginObj>> loginForPwd(@QueryMap Map<String, String> map);

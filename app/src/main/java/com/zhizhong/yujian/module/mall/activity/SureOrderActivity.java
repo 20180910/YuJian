@@ -27,6 +27,9 @@ import com.sdklibrary.base.ali.pay.MyAliOrderBean;
 import com.sdklibrary.base.ali.pay.MyAliPay;
 import com.sdklibrary.base.ali.pay.MyAliPayCallback;
 import com.sdklibrary.base.ali.pay.PayResult;
+import com.sdklibrary.base.wx.inter.MyWXCallback;
+import com.sdklibrary.base.wx.pay.MyWXOrderBean;
+import com.sdklibrary.base.wx.pay.MyWXPay;
 import com.zhizhong.yujian.Config;
 import com.zhizhong.yujian.Constant;
 import com.zhizhong.yujian.IntentParam;
@@ -323,7 +326,13 @@ public class SureOrderActivity extends BaseActivity {
                 RxBus.getInstance().postReplay(new JoinShoppingCartEvent());
                 switch (rg_select_pay.getCheckedRadioButtonId()){
                     case R.id.rb_pay_weixin:
-
+                        MyWXOrderBean wxBean=new MyWXOrderBean();
+                        wxBean.setBody(Constant.orderBody);
+                        String wxUrl = SPUtils.getString(mContext, Config.payType_WX, null);
+                        wxBean.setNotifyUrl(wxUrl);
+                        wxBean.setOut_trade_no(obj.getOrder_no());
+                        wxBean.setTotalFee((int)(obj.getCombined()*100));
+                        wxPay(wxBean);
                     break;
                     case R.id.rb_pay_zhifubao:
                         MyAliOrderBean bean=new MyAliOrderBean();
@@ -342,6 +351,33 @@ public class SureOrderActivity extends BaseActivity {
             }
         });
 
+    }
+
+    private void wxPay(MyWXOrderBean bean) {
+        showLoading();
+        MyWXPay.newInstance(mContext).startPay(bean, new MyWXCallback() {
+            @Override
+            public void onSuccess() {
+                dismissLoading();
+                STActivity(PaySuccessActivity.class);
+                finish();
+            }
+            @Override
+            public void onFail() {
+                dismissLoading();
+                showMsg("支付失败");
+                STActivity(MyOrderActivity.class);
+                finish();
+            }
+
+            @Override
+            public void onCancel() {
+                dismissLoading();
+                showMsg("支付取消");
+                STActivity(MyOrderActivity.class);
+                finish();
+            }
+        });
     }
 
     private void aliPay(MyAliOrderBean bean) {
