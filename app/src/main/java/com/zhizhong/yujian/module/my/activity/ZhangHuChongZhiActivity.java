@@ -15,6 +15,9 @@ import com.sdklibrary.base.ali.pay.MyAliOrderBean;
 import com.sdklibrary.base.ali.pay.MyAliPay;
 import com.sdklibrary.base.ali.pay.MyAliPayCallback;
 import com.sdklibrary.base.ali.pay.PayResult;
+import com.sdklibrary.base.wx.inter.MyWXCallback;
+import com.sdklibrary.base.wx.pay.MyWXOrderBean;
+import com.sdklibrary.base.wx.pay.MyWXPay;
 import com.zhizhong.yujian.Config;
 import com.zhizhong.yujian.Constant;
 import com.zhizhong.yujian.R;
@@ -113,7 +116,13 @@ public class ZhangHuChongZhiActivity extends BaseActivity {
             public void onSuccess(JiaoNaJinObj obj, int errorCode, String msg) {
                 switch (rg_select_pay.getCheckedRadioButtonId()){
                     case R.id.rb_pay_weixin:
-
+                        MyWXOrderBean wxBean=new MyWXOrderBean();
+                        wxBean.setBody(Constant.orderBody);
+                        String wxUrl = SPUtils.getString(mContext, Config.payType_WX, null);
+                        wxBean.setNotifyUrl(wxUrl);
+                        wxBean.setOut_trade_no(obj.getOrder_no());
+                        wxBean.setTotalFee((int)(obj.getAmount()*100));
+                        wxPay(wxBean);
                         break;
                     case R.id.rb_pay_zhifubao:
                         MyAliOrderBean bean=new MyAliOrderBean();
@@ -130,7 +139,28 @@ public class ZhangHuChongZhiActivity extends BaseActivity {
         });
     }
 
+    private void wxPay(MyWXOrderBean bean) {
+        showLoading();
+        MyWXPay.newInstance(mContext).startPay(bean, new MyWXCallback() {
+            @Override
+            public void onSuccess() {
+                dismissLoading();
+                showMsg("充值成功");
+                finish();
+            }
+            @Override
+            public void onFail() {
+                dismissLoading();
+                showMsg("充值失败");
+            }
 
+            @Override
+            public void onCancel() {
+                dismissLoading();
+                showMsg("充值取消");
+            }
+        });
+    }
     private void aliPay(MyAliOrderBean bean) {
         showLoading();
         MyAliPay.newInstance(mContext).startPay(bean, new MyAliPayCallback() {

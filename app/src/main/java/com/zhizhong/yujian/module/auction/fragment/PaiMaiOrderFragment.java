@@ -29,6 +29,9 @@ import com.sdklibrary.base.ali.pay.MyAliOrderBean;
 import com.sdklibrary.base.ali.pay.MyAliPay;
 import com.sdklibrary.base.ali.pay.MyAliPayCallback;
 import com.sdklibrary.base.ali.pay.PayResult;
+import com.sdklibrary.base.wx.inter.MyWXCallback;
+import com.sdklibrary.base.wx.pay.MyWXOrderBean;
+import com.sdklibrary.base.wx.pay.MyWXPay;
 import com.zhizhong.yujian.Config;
 import com.zhizhong.yujian.Constant;
 import com.zhizhong.yujian.IntentParam;
@@ -298,7 +301,7 @@ public class PaiMaiOrderFragment extends BaseFragment {
                             }else if(rb_pay_zhifubao.isChecked()){
                                 aliPay(mContext,orderNo,money);
                             }else if(rb_pay_weixin.isChecked()){
-                                ToastUtils.showToast(mContext,"正在开发中");
+                                wxPay(mContext,orderNo,money);
                             }
                         }
                     });
@@ -313,7 +316,37 @@ public class PaiMaiOrderFragment extends BaseFragment {
         dialog.setGravity(Gravity.BOTTOM);
         dialog.show();
     }
+    private void wxPay(final Activity mContext, final String orderNo,final double money) {
+        MyWXOrderBean wxBean=new MyWXOrderBean();
+        wxBean.setBody(Constant.orderBody);
+        String wxUrl = SPUtils.getString(mContext, Config.payType_WX, null);
+        wxBean.setNotifyUrl(wxUrl);
+        wxBean.setOut_trade_no(orderNo);
+        wxBean.setTotalFee((int)(money*100));
+        showLoading();
+        MyWXPay.newInstance(mContext).startPay(wxBean, new MyWXCallback() {
+            @Override
+            public void onSuccess() {
+                Loading.dismissLoading();
+                Intent intent = new Intent(mContext, PaySuccessActivity.class);
+                intent.putExtra(IntentParam.isPaiMai,true);
+                mContext.startActivity(intent);
+                RxBus.getInstance().post(new PaiMaiOrderEvent(PaiMaiOrderFragment.type1));
+                RxBus.getInstance().post(new PaiMaiOrderEvent(PaiMaiOrderFragment.type2));
+            }
+            @Override
+            public void onFail() {
+                Loading.dismissLoading();
+                ToastUtils.showToast(mContext,"支付失败");
+            }
 
+            @Override
+            public void onCancel() {
+                Loading.dismissLoading();
+                ToastUtils.showToast(mContext,"支付取消");
+            }
+        });
+    }
     private void aliPay(final Activity mContext, String orderNo, double price) {
         MyAliOrderBean bean=new MyAliOrderBean();
         bean.setOut_trade_no(orderNo);
