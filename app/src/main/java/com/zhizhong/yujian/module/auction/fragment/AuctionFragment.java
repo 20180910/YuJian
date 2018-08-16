@@ -301,7 +301,7 @@ public class AuctionFragment extends BaseFragment {
     public void onViewClick(View v) {
         switch (v.getId()){
             case R.id.app_right_iv:
-
+                goHX();
             break;
         }
     }
