@@ -40,9 +40,9 @@ public class PaySuccessActivity extends BaseActivity {
                 intent= new Intent();
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 if(isPaiMai){
-                    STActivity(intent,MyOrderActivity.class);
-                }else{
                     STActivity(intent,PaiMaiOrderActivity.class);
+                }else{
+                    STActivity(intent,MyOrderActivity.class);
                 }
                 finish();
             break;
