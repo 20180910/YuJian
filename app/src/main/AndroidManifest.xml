@@ -67,7 +67,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".module.home.activity.MainActivity">
+        <activity android:name=".module.home.activity.MainActivity"/>
+        <activity android:name=".module.home.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

@@ -34,6 +34,7 @@ public class TestAct extends BaseActivity {
 
     @Override
     protected void initData() {
+
     }
 
     @OnClick({R.id.tv_start})

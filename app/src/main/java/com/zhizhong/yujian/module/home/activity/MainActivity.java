@@ -9,6 +9,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.github.androidtools.SPUtils;
 import com.github.androidtools.inter.MyOnClickListener;
 import com.github.baseclass.permission.PermissionCallback;
@@ -34,6 +37,8 @@ import com.zhizhong.yujian.bean.AppInfo;
 import com.zhizhong.yujian.event.LoginSuccessEvent;
 import com.zhizhong.yujian.module.auction.fragment.AuctionFragment;
 import com.zhizhong.yujian.module.home.fragment.HomeFragment;
+import com.zhizhong.yujian.module.home.network.ApiRequest;
+import com.zhizhong.yujian.module.home.network.response.SplashObj;
 import com.zhizhong.yujian.module.live.fragment.LiveFragment;
 import com.zhizhong.yujian.module.mall.fragment.MallFragment;
 import com.zhizhong.yujian.module.my.activity.LoginActivity;
@@ -42,6 +47,7 @@ import com.zhizhong.yujian.network.NetApiRequest;
 import com.zhizhong.yujian.service.MyAPPDownloadService;
 import com.zhizhong.yujian.tools.FileUtils;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -92,17 +98,18 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        getSplashImgUrl();
         if (TextUtils.isEmpty(getUserId())) {
-            SPUtils.setPrefString(mContext, Constant.hxname,getDeviceId());
-        }else{
-            SPUtils.setPrefString(mContext,Constant.hxname,getUserId());
+            SPUtils.setPrefString(mContext, Constant.hxname, getDeviceId());
+        } else {
+            SPUtils.setPrefString(mContext, Constant.hxname, getUserId());
         }
         registerHuanXin();
 
         String registrationID = JPushInterface.getRegistrationID(mContext);
-        android.util.Log.i("registrationID","registrationID====="+registrationID);
-        if(!TextUtils.isEmpty(registrationID)){
-            SPUtils.setPrefString(mContext,Config.jiguangRegistrationId,registrationID);
+        android.util.Log.i("registrationID", "registrationID=====" + registrationID);
+        if (!TextUtils.isEmpty(registrationID)) {
+            SPUtils.setPrefString(mContext, Config.jiguangRegistrationId, registrationID);
         }
 
 
@@ -120,20 +127,59 @@ public class MainActivity extends BaseActivity {
 //        STActivity(LoginActivity.class);
     }
 
+    private void getSplashImgUrl() {
+        requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, new PermissionCallback() {
+            @Override
+            public void onGranted() {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("rnd", getRnd());
+                map.put("sign", getSign(map));
+                ApiRequest.getSplash(map, new MyCallBack<SplashObj>(mContext) {
+                    @Override
+                    public void onSuccess(SplashObj obj, int errorCode, String msg) {
+                        Glide.with(mContext).load(obj.getImage_url()).downloadOnly(new SimpleTarget<File>() {
+                            @Override
+                            public void onResourceReady(final File resource, GlideAnimation<? super File> glideAnimation) {
+                                Rx.start(new MyFlowableSubscriber<String>() {
+                                    @Override
+                                    public void subscribe(FlowableEmitter<String> emitter) {
+                                        File cacheFile = resource;
+                                        String path = cacheFile.getAbsolutePath();
+                                        emitter.onNext(path);
+                                        emitter.onComplete();
+                                    }
+                                    @Override
+                                    public void onNext(String path) {
+                                        SPUtils.setPrefString(mContext,AppXml.splashUrl,path);
+                                    }
+                                });
+
+                            }
+                        });
+                    }
+                });
+            }
+            @Override
+            public void onDenied(String s) {
+
+            }
+        });
+
+    }
+
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
         String action = intent.getAction();
-        if(IntentParam.selectHome.equals(action)){
+        if (IntentParam.selectHome.equals(action)) {
             selectHome();
             selectView.setChecked(true);
-        }else if(IntentParam.mall.equals(action)){
+        } else if (IntentParam.mall.equals(action)) {
             selectMall();
             selectView.setChecked(true);
         }
     }
-
 
 
     private void setTabClickListener() {
@@ -162,7 +208,7 @@ public class MainActivity extends BaseActivity {
 //                            STActivity(LoginActivity.class);
 //                            selectView.setChecked(true);
 //                        } else {
-                            selectMall();
+                        selectMall();
 //                        }
                         break;
                     case 3:
@@ -183,8 +229,8 @@ public class MainActivity extends BaseActivity {
                         break;
                     case 5:
                         if (noLogin()) {
-                            Intent intent=new Intent(IntentParam.needSelectMy);
-                            STActivity(intent,LoginActivity.class);
+                            Intent intent = new Intent(IntentParam.needSelectMy);
+                            STActivity(intent, LoginActivity.class);
                             selectView.setChecked(true);
                         } else {
                             selectMy();
@@ -215,24 +261,27 @@ public class MainActivity extends BaseActivity {
 
 
     }
+
     private void registerHuanXin() {
         Rx.start(new MyFlowableSubscriber<String>() {
             @Override
             public void subscribe(FlowableEmitter<String> emitter) {
-                if(TextUtils.isEmpty(SPUtils.getString(mContext,Constant.hxname,null))){
-                    SPUtils.setPrefString(mContext,Constant.appsign,getDeviceId());
+                if (TextUtils.isEmpty(SPUtils.getString(mContext, Constant.hxname, null))) {
+                    SPUtils.setPrefString(mContext, Constant.appsign, getDeviceId());
                 }
-                ChatClient.getInstance().createAccount(SPUtils.getString(mContext,Constant.hxname,null).toLowerCase(), "123456", new Callback(){
+                ChatClient.getInstance().createAccount(SPUtils.getString(mContext, Constant.hxname, null).toLowerCase(), "123456", new Callback() {
                     @Override
                     public void onSuccess() {
                     }
+
                     @Override
                     public void onError(int i, String s) {
-                        Log.i("===",i+"=onError=="+s);
+                        Log.i("===", i + "=onError==" + s);
                     }
+
                     @Override
                     public void onProgress(int i, String s) {
-                        Log.i("===",i+"=onProgress=="+s);
+                        Log.i("===", i + "=onProgress==" + s);
                     }
                 });
                 emitter.onComplete();
@@ -244,6 +293,7 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
     private void selectHome() {
         if (selectView == rb_home_tab1) {
             return;
@@ -282,9 +332,9 @@ public class MainActivity extends BaseActivity {
 
 
     private void selectLive() {
-        if(selectView!=null){
+        if (selectView != null) {
             selectView.setChecked(false);
-            selectView=null;
+            selectView = null;
         }
         if (touGaoFragment == null) {
             touGaoFragment = new LiveFragment();
@@ -366,7 +416,7 @@ public class MainActivity extends BaseActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
 
-                          downloadApp(obj);
+                            downloadApp(obj);
                         }
                     });
                     mDialog.create().show();
@@ -376,8 +426,9 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
     private void downloadApp(final AppVersionObj obj) {
-        requestPermission(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, new PermissionCallback() {
+        requestPermission(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, new PermissionCallback() {
             @Override
             public void onGranted() {
                 Rx.start(new MyFlowableSubscriber<Boolean>() {
@@ -387,6 +438,7 @@ public class MainActivity extends BaseActivity {
                         subscriber.onNext(delete);
                         subscriber.onComplete();
                     }
+
                     @Override
                     public void onNext(Boolean aBoolean) {
                         AppInfo info = new AppInfo();
@@ -398,6 +450,7 @@ public class MainActivity extends BaseActivity {
                     }
                 });
             }
+
             @Override
             public void onDenied(String s) {
                 showMsg("获取权限失败,无法正常更新,请在设置中打开相关权限");

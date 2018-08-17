@@ -20,7 +20,7 @@ public class AppXml {
     public static final String birthday = "birthday";
     public static final String amount = "amount";
     public static final String signature = "signature";
-    public static final String province = "province";
+    public static final String splashUrl = "splashUrl";
     public static final String area = "area";
     public static final String city = "city";
     public static final String rongshu_leaf = "rongshu_leaf";
