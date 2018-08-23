@@ -29,6 +29,7 @@ public class IntentParam {
     public static final String selectBank = "selectBank";
     public static final String isPaiMai = "isPaiMai";
     public static final String nickName = "nickName";
+    public static final String userSig = "userSig";
     public static final String liveAddress = "liveAddress";
     public static final String useYouHuiQuan = "useYouHuiQuan";
     public static final String money = "money";
@@ -48,6 +49,8 @@ public class IntentParam {
     public static final String tuiHuanHuo="tuiHuanHuo";
     public static final String goodsTypeId="goodsTypeId";
     public static final String title="title";
+    public static final String liveId="liveId";
+    public static final String groupId="groupId";
     public static final String visaId="visaId";
     public static final String qianZhengObj="qianZhengObj";
     public static final String selectAddress="selectAddress";

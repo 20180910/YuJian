@@ -16,6 +16,15 @@ public class LiveObj {
     private String channel_address;
     private String pushStr;
     private String create_time;
+    private String live_user_id;
+
+    public String getLive_user_id() {
+        return live_user_id;
+    }
+
+    public void setLive_user_id(String live_user_id) {
+        this.live_user_id = live_user_id;
+    }
 
     public String getChannel_id() {
         return channel_id;

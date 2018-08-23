@@ -2,6 +2,7 @@ package com.zhizhong.yujian;
 
 
 import android.content.Context;
+import android.os.Environment;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
@@ -18,7 +19,21 @@ import com.sdklibrary.base.ali.pay.MyAliPay;
 import com.sdklibrary.base.qq.share.MyQQShare;
 import com.sdklibrary.base.wx.pay.MyWXPay;
 import com.sdklibrary.base.wx.share.MyWXShare;
+import com.tencent.imsdk.TIMCallBack;
+import com.tencent.imsdk.TIMElem;
+import com.tencent.imsdk.TIMElemType;
+import com.tencent.imsdk.TIMGroupManager;
+import com.tencent.imsdk.TIMLogLevel;
+import com.tencent.imsdk.TIMManager;
+import com.tencent.imsdk.TIMMessage;
+import com.tencent.imsdk.TIMMessageListener;
+import com.tencent.imsdk.TIMSdkConfig;
+import com.tencent.imsdk.TIMTextElem;
 import com.tencent.rtmp.TXLiveBase;
+
+import java.util.List;
+
+import static com.hyphenate.chat.adapter.EMACallRtcImpl.TAG;
 
 
 /**
@@ -55,6 +70,85 @@ public class MyApplication extends MultiDexApplication {
 
         String sdkver = TXLiveBase.getSDKVersionStr();
         Log.d("liteavsdk", "===liteav sdk version is : " + sdkver);
+        //初始化 SDK 基本配置
+        TIMSdkConfig config = new TIMSdkConfig(Config.IM_APPID)
+                .enableCrashReport(false)
+                .enableLogPrint(true)
+                .setLogLevel(TIMLogLevel.DEBUG)
+                .setLogPath(Environment.getExternalStorageDirectory().getPath() + "/justfortest/");
+
+        //初始化 SDK
+        TIMManager.getInstance().init(getApplicationContext(), config);
+
+//        a();
+    }
+
+    public void Log(String msg) {
+        Log.i(TAG + "@@@===", msg);
+    }
+    private void a() {
+        String name="88885502";
+        String uisg="eJxlj0FPgzAAhe-8CsLZSClU0cSTwEI6wjaYZl4Ig0KqW8G2IM3if9exJTbxXb8v7*WdDNM0rXyZ3ZZV1Q1MFlL1xDIfTQtYN3*w72ldlLJwef0PkqmnnBRlIwmfoYMQggDoDq0Jk7ShV8P-DUIAaoaoP4p55lLhAeDAOwiQrtB2hkm4fY7XwSGOErwQ9v0geBAisXnPgtx*Xb2MZLnAbZhWe5xiRg5iHbfZBOTwGewi2EXY3vhcqkxMKmfjTjbHvQpSRZOv7dtKJE-apKRHcv3ker774ENPoyPhgnZsFiBwkANdcI5lfBs-tfReZA__";
+        TIMManager.getInstance().login(name,uisg, new TIMCallBack() {
+            //                TIMManager.getInstance().login(getHXName(),userSig, new TIMCallBack() {
+            @Override
+            public void onError(int code, String desc) {
+                //错误码 code 和错误描述 desc，可用于定位请求失败原因
+                //错误码 code 列表请参见错误码表
+                Log("==="+"login failed. code: " + code + " errmsg: " + desc);
+            }
+            @Override
+            public void onSuccess() {
+                Log("==="+"login succ");
+                TIMGroupManager.getInstance().applyJoinGroup("29689_8423628", "申请加群", new TIMCallBack() {
+                    public void onError(int code, String desc) {
+                        //接口返回了错误码 code 和错误描述 desc，可用于原因
+                        //错误码 code 列表请参见错误码表
+                        Log("disconnected");
+                    }
+                    public void onSuccess() {
+                        Log("join group");
+                    }
+                });
+            }
+        });
+
+        TIMManager.getInstance().addMessageListener(new TIMMessageListener() {//消息监听器
+            @Override
+            public boolean onNewMessages(List<TIMMessage> msgs) {//收到新消息
+                //消息的内容解析请参考消息收发文档中的消息解析说明
+                for (int k = 0; k < msgs.size(); k++) {
+                    TIMMessage timMessage = msgs.get(k);
+                    for(int i = 0; i < timMessage.getElementCount(); ++i) {
+                        TIMElem elem = timMessage.getElement(i);
+                        //获取当前元素的类型
+                        TIMElemType elemType = elem.getType();
+
+                        TIMElem nextElement = timMessage.getElement(i);
+                        if (elemType == TIMElemType.Text) {
+                            TIMTextElem textElem = (TIMTextElem) nextElement;
+                            String text = textElem.getText();
+                            Log("==="+text);
+                            //处理文本消息
+                        } else if (elemType == TIMElemType.Image) {
+                            //处理图片消息
+                        }//...处理更多消息
+                    }
+                }
+                return false; //返回true将终止回调链，不再调用下一个新消息监听器
+            }
+        });
+
+    }
+
+    private static class CommonJson<T> {
+        String cmd;
+        T      data;
+    }
+
+    private static final class UserInfo {
+        String nickName;
+        String headPic;
     }
     private void initDownloader() {
         DownloadConfiguration configuration = new DownloadConfiguration();

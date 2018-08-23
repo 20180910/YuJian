@@ -18,6 +18,14 @@ public class NetApiRequest extends BaseApiRequest {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return; }
         getGeneralClient(NetIRequest.class).getMsgCode(map).enqueue(callBack);
     }
+    public static void setLiveRoomPeopleNum(Map map , MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return; }
+        getGeneralClient(NetIRequest.class).setLiveRoomPeopleNum(map).enqueue(callBack);
+    }
+    public static void getLiveRoomPeopleNum(Map map , MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return; }
+        getGeneralClient(NetIRequest.class).getLiveRoomPeopleNum(map).enqueue(callBack);
+    }
     public static void uploadImg(Map map , UploadImgBody body, MyCallBack callBack) {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return; }
         getGeneralClient(NetIRequest.class).uploadImg(map,body).enqueue(callBack);
@@ -25,6 +33,10 @@ public class NetApiRequest extends BaseApiRequest {
     public static void appLogin(Map map ,MyCallBack callBack) {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return; }
         getGeneralClient(NetIRequest.class).appLogin(map).enqueue(callBack);
+    }
+    public static void getUserSig(Map map ,MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return; }
+        getGeneralClient(NetIRequest.class).getUserSig(map).enqueue(callBack);
     }
     public static void getAllArea(Map map  , MyCallBack callBack) {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return; }

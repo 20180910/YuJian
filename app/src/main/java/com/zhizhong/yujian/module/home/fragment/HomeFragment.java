@@ -161,19 +161,19 @@ public class HomeFragment extends BaseFragment {
                         iv_home_live.setOnClickListener(new MyOnClickListener() {
                             @Override
                             protected void onNoDoubleClick(View view) {
-                                goLive(list.get(0).getChannel_name(),list.get(0).getChannel_address());
+                                goLive(list.get(0).getChannel_name(),list.get(0).getChannel_address(),list.get(0).getLive_user_id(),list.get(0).getChannel_id());
                             }
                         });
                         iv_home_live2.setOnClickListener(new MyOnClickListener() {
                             @Override
                             protected void onNoDoubleClick(View view) {
-                                goLive(list.get(1).getChannel_name(),list.get(1).getChannel_address());
+                                goLive(list.get(1).getChannel_name(),list.get(1).getChannel_address(),list.get(1).getLive_user_id(),list.get(1).getChannel_id());
                             }
                         });
                         iv_home_live3.setOnClickListener(new MyOnClickListener() {
                             @Override
                             protected void onNoDoubleClick(View view) {
-                                goLive(list.get(2).getChannel_name(),list.get(2).getChannel_address());
+                                goLive(list.get(2).getChannel_name(),list.get(2).getChannel_address(),list.get(2).getLive_user_id(),list.get(2).getChannel_id());
                             }
                         });
 
@@ -189,13 +189,13 @@ public class HomeFragment extends BaseFragment {
                         iv_home_live.setOnClickListener(new MyOnClickListener() {
                             @Override
                             protected void onNoDoubleClick(View view) {
-                                goLive(list.get(0).getChannel_name(),list.get(0).getChannel_address());
+                                goLive(list.get(0).getChannel_name(),list.get(0).getChannel_address(),list.get(0).getLive_user_id(),list.get(0).getChannel_id());
                             }
                         });
                         iv_home_live2.setOnClickListener(new MyOnClickListener() {
                             @Override
                             protected void onNoDoubleClick(View view) {
-                                goLive(list.get(1).getChannel_name(),list.get(1).getChannel_address());
+                                goLive(list.get(1).getChannel_name(),list.get(1).getChannel_address(),list.get(1).getLive_user_id(),list.get(1).getChannel_id());
                             }
                         });
                         iv_home_live3.setOnClickListener(new MyOnClickListener() {
@@ -209,7 +209,7 @@ public class HomeFragment extends BaseFragment {
                         iv_home_live.setOnClickListener(new MyOnClickListener() {
                             @Override
                             protected void onNoDoubleClick(View view) {
-                                goLive(list.get(0).getChannel_name(),list.get(0).getChannel_address());
+                                goLive(list.get(0).getChannel_name(),list.get(0).getChannel_address(),list.get(0).getLive_user_id(),list.get(0).getChannel_id());
                             }
                         });
                         iv_home_live2.setOnClickListener(new MyOnClickListener() {
@@ -276,9 +276,12 @@ public class HomeFragment extends BaseFragment {
         });*/
     }
 
-    private void goLive(String title,String channel_address) {
+    private void goLive(String title,String channel_address,String live_user_id,String groupId) {
+        setLiveRoomPeopleNum(groupId);
         Intent intent = new Intent();
         intent.putExtra(IntentParam.title,title);
+        intent.putExtra(IntentParam.liveId,live_user_id);
+        intent.putExtra(IntentParam.groupId,groupId);
         intent.putExtra(IntentParam.liveAddress,channel_address);
         STActivity(intent, LiveRoomActivity.class);
     }

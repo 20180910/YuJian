@@ -7,22 +7,39 @@
               android:background="@color/bg_color"
     >
 <include layout="@layout/app_title"/>
-    <com.library.base.ProgressLayout
-        android:id="@id/pl_load"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
+
+        <com.library.base.ProgressLayout
+            android:id="@id/pl_load"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/bg_color"
-            >
-            <!--your view-->
-            <com.tencent.rtmp.ui.TXCloudVideoView
-                android:id="@+id/video_view"
+            android:layout_height="match_parent">
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="match_parent">
+                <!--your view-->
+                <com.tencent.rtmp.ui.TXCloudVideoView
+                    android:id="@+id/video_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_live_room_chat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="300dp"
+                    android:layout_gravity="bottom|left"
+                    android:layout_marginBottom="70dp"
+                    android:layout_marginLeft="20dp"
+                    >
+                </android.support.v7.widget.RecyclerView>
+            </FrameLayout>
+            <Button
+                android:id="@+id/bt_live_room_send"
+                android:layout_gravity="center"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/icon_message"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
                 />
-        </LinearLayout>
-    </com.library.base.ProgressLayout>
+        </com.library.base.ProgressLayout>
 </LinearLayout>

@@ -11,6 +11,8 @@ public class Config {
     public static final String hx_fwh = "kefuchannelimid_401362";
 
 
+    public static final int IM_APPID = 1400126205;
+
     public static final String longitude = "longitude";
     public static final String latitude = "latitude";
 

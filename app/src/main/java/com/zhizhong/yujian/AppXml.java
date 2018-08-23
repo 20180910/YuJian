@@ -7,7 +7,7 @@ package com.zhizhong.yujian;
 public class AppXml {
     public static final String firstShowFlag = "firstShowFlag";
     public static final String liuXueImg = "liuXueImg";
-    public static final String youXueImg = "youXueImg";
+    public static final String hxname = "hxname";
     public static final String userId = "userId";
     public static final String mobile = "mobile";
     public static final String sex = "sex";
@@ -39,7 +39,7 @@ public class AppXml {
     public static final String bg_img = "bg_img";
     public static final String vip_levle = "vip_levle";
 
-    public static final String jifen = "jifen";
+    public static final String userSig = "userSig";
     public static final String commission = "commission";
     public static final String message_sink = "message_sink";
     public static final String is_validation = "is_validation";

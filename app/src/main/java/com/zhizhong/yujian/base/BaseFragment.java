@@ -17,13 +17,16 @@ import com.github.androidtools.SPUtils;
 import com.hyphenate.chat.ChatClient;
 import com.hyphenate.helpdesk.callback.Callback;
 import com.hyphenate.helpdesk.easeui.util.IntentBuilder;
+import com.library.base.BaseObj;
 import com.library.base.MyBaseFragment;
 import com.zhizhong.yujian.AppXml;
 import com.zhizhong.yujian.Config;
 import com.zhizhong.yujian.Constant;
 import com.zhizhong.yujian.GetSign;
+import com.zhizhong.yujian.network.NetApiRequest;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -49,13 +52,48 @@ public abstract class BaseFragment extends MyBaseFragment {
             return false;
         }
     }
+    public void setLiveRoomPeopleNum() {
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("user_id",getHXName());
+        map.put("type","2");//进入1 退出2
+        map.put("channel_id","");
+        map.put("sign",getSign(map));
+        NetApiRequest.setLiveRoomPeopleNum(map, new MyCallBack<BaseObj>(mContext) {
+            @Override
+            public void onSuccess(BaseObj obj, int errorCode, String msg) {
+            }
+        });
+    }
+    public void setLiveRoomPeopleNum(String liveId) {
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("user_id",getHXName());
+        map.put("type","1");//进入1 退出2
+        map.put("channel_id",liveId);
+        map.put("sign",getSign(map));
+        NetApiRequest.setLiveRoomPeopleNum(map, new MyCallBack<BaseObj>(mContext) {
+            @Override
+            public void onSuccess(BaseObj obj, int errorCode, String msg) {
+
+            }
+        });
+    }
     protected String getSign(Map map) {
         return GetSign.getSign(map);
     }
     public void Log(String msg){
         Log.i(TAG+"===",msg);
     }
-
+    public String  getHXName(){
+        String hxName=SPUtils.getString(mContext,Constant.hxname,getDeviceId());
+        if (noLogin()||"0".equals(hxName)) {
+            hxName=SPUtils.getString(mContext,Constant.hxname,getDeviceId());
+            Log("22==="+hxName);
+        }else{
+            hxName=SPUtils.getString(mContext,Constant.hxname,getUserId());
+            Log("33==="+hxName);
+        }
+        return hxName;
+    }
     protected String getSign(String key, String value) {
         return GetSign.getSign(key, value);
     }
@@ -94,7 +132,7 @@ public abstract class BaseFragment extends MyBaseFragment {
     }
     public  String getDeviceId() {
         String appSign = SPUtils.getString(mContext, Constant.appsign,null);
-        if(TextUtils.isEmpty(appSign)){
+        if(TextUtils.isEmpty(appSign)||"0".equals(appSign)){
             SPUtils.setPrefString(mContext, Constant.appsign,new Date().getTime()+"");
         }
         return SPUtils.getString(mContext, Constant.appsign,new Date().getTime()+"");
@@ -113,7 +151,7 @@ public abstract class BaseFragment extends MyBaseFragment {
 
     public void goHX(){
         String hxName=SPUtils.getString(mContext, Constant.hxname,null);
-        if (TextUtils.isEmpty(getUserId())) {
+        if (noLogin()) {
             SPUtils.setPrefString(mContext,Constant.hxname,getDeviceId());
         }else{
             SPUtils.setPrefString(mContext,Constant.hxname,getUserId());

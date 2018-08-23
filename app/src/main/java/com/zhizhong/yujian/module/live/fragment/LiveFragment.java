@@ -12,6 +12,7 @@ import com.github.androidtools.PhoneUtils;
 import com.github.androidtools.inter.MyOnClickListener;
 import com.github.baseclass.adapter.MyRecyclerViewHolder;
 import com.github.fastshape.MyTextView;
+import com.library.base.BaseObj;
 import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.adapter.MyAdapter;
@@ -21,6 +22,7 @@ import com.zhizhong.yujian.base.SpaceItemDecoration;
 import com.zhizhong.yujian.module.home.activity.LiveRoomActivity;
 import com.zhizhong.yujian.module.home.network.response.LiveObj;
 import com.zhizhong.yujian.module.live.network.ApiRequest;
+import com.zhizhong.yujian.network.NetApiRequest;
 
 import java.util.HashMap;
 import java.util.List;
@@ -85,7 +87,7 @@ public class LiveFragment extends BaseFragment {
                     iv_live_room.setOnClickListener(new MyOnClickListener() {
                         @Override
                         protected void onNoDoubleClick(View view) {
-                            goLive(bean.getChannel_name(),bean.getChannel_address());
+                            goLive(bean.getChannel_name(),bean.getChannel_address(),bean.getLive_user_id(),bean.getChannel_id());
                         }
                     });
                     tv_live_room_flag.setText("直播中");
@@ -93,6 +95,7 @@ public class LiveFragment extends BaseFragment {
                 }
             }
         };
+
 
         rv_live_room.setNestedScrollingEnabled(false);
         rv_live_room.setLayoutManager(new GridLayoutManager(mContext, 2));
@@ -120,7 +123,7 @@ public class LiveFragment extends BaseFragment {
                     iv_live_room.setOnClickListener(new MyOnClickListener() {
                         @Override
                         protected void onNoDoubleClick(View view) {
-                            goLive(bean.getChannel_name(),bean.getChannel_address());
+                            goLive(bean.getChannel_name(),bean.getChannel_address(),bean.getLive_user_id(),bean.getChannel_id());
                         }
                     });
                     tv_live_room_flag.setText("直播中");
@@ -166,7 +169,7 @@ public class LiveFragment extends BaseFragment {
                     iv_home_live.setOnClickListener(new MyOnClickListener() {
                         @Override
                         protected void onNoDoubleClick(View view) {
-                            goLive(list.get(0).getChannel_name(),list.get(0).getChannel_address());
+                            goLive(list.get(0).getChannel_name(),list.get(0).getChannel_address(),list.get(0).getLive_user_id(),list.get(0).getChannel_id());
                         }
                     });
                     if(list.size()<=5){
@@ -184,7 +187,7 @@ public class LiveFragment extends BaseFragment {
                         iv_live_room2.setOnClickListener(new MyOnClickListener() {
                             @Override
                             protected void onNoDoubleClick(View view) {
-                                goLive(list.get(0).getChannel_name(),list.get(0).getChannel_address());
+                                goLive(list.get(5).getChannel_name(),list.get(5).getChannel_address(),list.get(5).getLive_user_id(),list.get(5).getChannel_id());
                             }
                         });
                     }
@@ -216,9 +219,25 @@ public class LiveFragment extends BaseFragment {
             }
         });
     }
-    private void goLive(String title,String channel_address) {
+    public void setLiveRoomPeopleNum(String liveId) {
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("user_id",getHXName());
+        map.put("type","1");
+        map.put("channel_id",liveId);
+        map.put("sign",getSign(map));
+        NetApiRequest.setLiveRoomPeopleNum(map, new MyCallBack<BaseObj>(mContext) {
+            @Override
+            public void onSuccess(BaseObj obj, int errorCode, String msg) {
+
+            }
+        });
+    }
+    private void goLive(String title,String channel_address,String liveId,String groupId) {
+        setLiveRoomPeopleNum(groupId);
         Intent intent = new Intent();
         intent.putExtra(IntentParam.title,title);
+        intent.putExtra(IntentParam.liveId,liveId);
+        intent.putExtra(IntentParam.groupId,groupId);
         intent.putExtra(IntentParam.liveAddress,channel_address);
         STActivity(intent, LiveRoomActivity.class);
     }

@@ -98,6 +98,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        setLiveRoomPeopleNum();
         getSplashImgUrl();
         if (TextUtils.isEmpty(getUserId())) {
             SPUtils.setPrefString(mContext, Constant.hxname, getDeviceId());
@@ -126,6 +127,8 @@ public class MainActivity extends BaseActivity {
         setBroadcast();
 //        STActivity(LoginActivity.class);
     }
+
+
 
     private void getSplashImgUrl() {
         requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, new PermissionCallback() {

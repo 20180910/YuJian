@@ -11,6 +11,7 @@ import com.zhizhong.yujian.network.response.CityObj;
 import com.zhizhong.yujian.network.response.CollectObj;
 import com.zhizhong.yujian.network.response.GoodsObj;
 import com.zhizhong.yujian.network.response.ImageObj;
+import com.zhizhong.yujian.network.response.LiveRoomPeopleNumObj;
 import com.zhizhong.yujian.network.response.ShareObj;
 
 import java.util.List;
@@ -29,6 +30,14 @@ import retrofit2.http.QueryMap;
 public interface NetIRequest {
     @GET("api/Lib/GetSMSCode")
     Call<ResponseObj<BaseObj>> getMsgCode(@QueryMap Map<String, String> map);
+
+    //修改直播人数
+    @GET("api/Live/GetLiveAddDelNum")
+    Call<ResponseObj<BaseObj>> setLiveRoomPeopleNum(@QueryMap Map<String, String> map);
+
+    //获取直播人数
+    @GET("api/Live/GetLiveNum")
+    Call<ResponseObj<LiveRoomPeopleNumObj>> getLiveRoomPeopleNum(@QueryMap Map<String, String> map);
 
     //base64文件上传
     @POST("api/Lib/PostUploadFileBase64")
@@ -95,5 +104,9 @@ public interface NetIRequest {
     //获取直播列表
     @GET("api/Live/GetLiveList")
     Call<ResponseObj<List<LiveObj>>> getLiveList(@QueryMap Map<String, String> map);
+
+    //生成userSig
+    @GET("api/Live/GetSig")
+    Call<ResponseObj<String>> getUserSig(@QueryMap Map<String, String> map);
 
 }

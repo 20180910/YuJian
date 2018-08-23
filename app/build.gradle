@@ -64,7 +64,7 @@ android {
 }
 
 dependencies {
-//    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //    implementation fileTree(include: ['*.jar'], dir: 'libs')
     configurations {
         all*.exclude group: 'com.android.support', module: 'support-v13'
     }
@@ -111,11 +111,17 @@ dependencies {
     implementation 'cn.jiguang.sdk:jpush:3.0.3'
     // 此处以JPush 3.0.3 版本为例。
     implementation 'cn.jiguang.sdk:jcore:1.1.1'
-//    implementation files('libs/liteavsdk.jar')
-
+    //    implementation files('libs/liteavsdk.jar')
     implementation(name: 'LiteAVSDK_Smart_5.0.4981', ext: 'aar')
-
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    implementation files('libs/imsdk.jar')
+    implementation files('libs/imsdk_group_ext.jar')
+    implementation files('libs/imsdk_msg_ext.jar')
+    implementation files('libs/imsdk_sns_ext.jar')
+    implementation files('libs/tls_sdk.jar')
+    implementation files('libs/qalsdk.jar')
+    implementation files('libs/mobilepb.jar')
+    implementation files('libs/wup-1.0.0-SNAPSHOT.jar')
 }

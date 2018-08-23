@@ -28,6 +28,7 @@ import com.github.rxbus.RxBus;
 import com.hyphenate.chat.ChatClient;
 import com.hyphenate.helpdesk.callback.Callback;
 import com.hyphenate.helpdesk.easeui.util.IntentBuilder;
+import com.library.base.BaseObj;
 import com.library.base.MyBaseActivity;
 import com.library.base.view.MyWebViewClient;
 import com.sdklibrary.base.ShareParam;
@@ -84,6 +85,7 @@ public abstract class BaseActivity extends MyBaseActivity {
 
     protected void clearUserId() {
         SPUtils.removeKey(mContext, AppXml.userId);
+        SPUtils.removeKey(mContext, AppXml.hxname);
     }
 
     public boolean noLogin() {
@@ -95,7 +97,7 @@ public abstract class BaseActivity extends MyBaseActivity {
     }
 
     public void Log(String msg) {
-        Log.i(TAG + "===", msg);
+        Log.i(TAG + "@@@===", msg);
     }
 
     @Override
@@ -189,7 +191,7 @@ public abstract class BaseActivity extends MyBaseActivity {
     }
     public  String getDeviceId() {
         String appSign = SPUtils.getString(mContext, Constant.appsign,null);
-        if(TextUtils.isEmpty(appSign)){
+        if(TextUtils.isEmpty(appSign)||"0".equals(appSign)){
             SPUtils.setPrefString(mContext, Constant.appsign,new Date().getTime()+"");
         }
         return SPUtils.getString(mContext, Constant.appsign,new Date().getTime()+"");
@@ -205,10 +207,49 @@ public abstract class BaseActivity extends MyBaseActivity {
         }
         return id;*/
     }
+    public void setLiveRoomPeopleNum() {
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("user_id",getHXName());
+        map.put("type","2");
+        map.put("channel_id","");
+        map.put("sign",getSign(map));
+        NetApiRequest.setLiveRoomPeopleNum(map, new MyCallBack<BaseObj>(mContext) {
+            @Override
+            public void onSuccess(BaseObj obj, int errorCode, String msg) {
+            }
+            @Override
+            public void onError(Throwable e, boolean hiddenMsg) {
+                super.onError(e,true);
+            }
+        });
+    }
+    public void setLiveRoomPeopleNum(String liveId) {
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("user_id",getHXName());
+        map.put("type","1");
+        map.put("channel_id",liveId);
+        map.put("sign",getSign(map));
+        NetApiRequest.setLiveRoomPeopleNum(map, new MyCallBack<BaseObj>(mContext) {
+            @Override
+            public void onSuccess(BaseObj obj, int errorCode, String msg) {
 
+            }
+        });
+    }
+    public String  getHXName(){
+        String hxName=SPUtils.getString(mContext,Constant.hxname,getDeviceId());
+        if (noLogin()||"0".equals(hxName)) {
+            hxName=SPUtils.getString(mContext,Constant.hxname,getDeviceId());
+            Log("22==="+hxName);
+        }else{
+            hxName=SPUtils.getString(mContext,Constant.hxname,getUserId());
+            Log("33==="+hxName);
+        }
+        return hxName;
+    }
     public void goHX(){
         String hxName=SPUtils.getString(mContext,Constant.hxname,null);
-        if (TextUtils.isEmpty(getUserId())) {
+        if (noLogin()) {
             SPUtils.setPrefString(mContext,Constant.hxname,getDeviceId());
         }else{
             SPUtils.setPrefString(mContext,Constant.hxname,getUserId());
