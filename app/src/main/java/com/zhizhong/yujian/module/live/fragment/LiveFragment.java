@@ -23,6 +23,7 @@ import com.zhizhong.yujian.module.home.activity.LiveRoomActivity;
 import com.zhizhong.yujian.module.home.network.response.LiveObj;
 import com.zhizhong.yujian.module.live.network.ApiRequest;
 import com.zhizhong.yujian.network.NetApiRequest;
+import com.zhizhong.yujian.network.response.LiveStatusObj;
 
 import java.util.HashMap;
 import java.util.List;
@@ -238,14 +239,42 @@ public class LiveFragment extends BaseFragment {
             }
         });
     }
-    private void goLive(String title,String channel_address,String liveId,String groupId) {
-        setLiveRoomPeopleNum(groupId);
-        Intent intent = new Intent();
-        intent.putExtra(IntentParam.title,title);
-        intent.putExtra(IntentParam.liveId,liveId);
-        intent.putExtra(IntentParam.groupId,groupId);
-        intent.putExtra(IntentParam.liveAddress,channel_address);
-        STActivity(intent, LiveRoomActivity.class);
+    private void goLive(final String title,final String channel_address,final String liveId,final String groupId) {
+        showLoading();
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("channel_id",groupId);
+        map.put("sign",getSign(map));
+        NetApiRequest.getLiveStatus(map, new MyCallBack<List<LiveStatusObj>>(mContext) {
+            @Override
+            public void onSuccess(List<LiveStatusObj> list, int errorCode, String msg) {
+                if(notEmpty(list)){
+                    LiveStatusObj liveObj = list.get(0);
+                    if(liveObj.getStatus()==1){
+                        setLiveRoomPeopleNum(groupId);
+                        Intent intent = new Intent();
+                        intent.putExtra(IntentParam.title,title);
+                        intent.putExtra(IntentParam.liveId,liveId);//主播id
+                        intent.putExtra(IntentParam.groupId,groupId);//直播码，群组id
+                        intent.putExtra(IntentParam.liveAddress,channel_address);
+                        STActivity(intent, LiveRoomActivity.class);
+                    }else{
+                        showMsg("直播已关闭");
+                        getData(1,false);
+                    }
+
+                }else{
+                    showMsg("该直播不存在");
+                    getData(1,false);
+                }
+            }
+            @Override
+            public void onError(Throwable e, boolean hiddenMsg) {
+                super.onError(e, true);
+                showMsg("直播已关闭");
+                getData(1,false);
+            }
+        });
+
     }
     @Override
     protected void onViewClick(View v) {

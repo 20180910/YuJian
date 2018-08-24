@@ -29,7 +29,9 @@ import com.zhizhong.yujian.module.home.activity.ZiXunDetailActivity;
 import com.zhizhong.yujian.module.home.network.ApiRequest;
 import com.zhizhong.yujian.module.home.network.response.LiveObj;
 import com.zhizhong.yujian.module.home.network.response.ZiXunObj;
+import com.zhizhong.yujian.network.NetApiRequest;
 import com.zhizhong.yujian.network.response.GoodsObj;
+import com.zhizhong.yujian.network.response.LiveStatusObj;
 
 import java.util.HashMap;
 import java.util.List;
@@ -304,14 +306,43 @@ public class HomeFragment extends BaseFragment {
         });*/
     }
 
-    private void goLive(String title,String channel_address,String live_user_id,String groupId) {
-        setLiveRoomPeopleNum(groupId);
-        Intent intent = new Intent();
-        intent.putExtra(IntentParam.title,title);
-        intent.putExtra(IntentParam.liveId,live_user_id);
-        intent.putExtra(IntentParam.groupId,groupId);
-        intent.putExtra(IntentParam.liveAddress,channel_address);
-        STActivity(intent, LiveRoomActivity.class);
+    private void goLive(final String title,final String channel_address,final String liveId,final String groupId) {
+        showLoading();
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("channel_id",groupId);
+        map.put("sign",getSign(map));
+        NetApiRequest.getLiveStatus(map, new MyCallBack<List<LiveStatusObj>>(mContext) {
+            @Override
+            public void onSuccess(List<LiveStatusObj> list, int errorCode, String msg) {
+                if(notEmpty(list)){
+                    LiveStatusObj liveObj = list.get(0);
+                    if(liveObj.getStatus()==1){
+                        setLiveRoomPeopleNum(groupId);
+                        Intent intent = new Intent();
+                        intent.putExtra(IntentParam.title,title);
+                        intent.putExtra(IntentParam.liveId,liveId);//主播id
+                        intent.putExtra(IntentParam.groupId,groupId);//直播码，群组id
+                        intent.putExtra(IntentParam.liveAddress,channel_address);
+                        STActivity(intent, LiveRoomActivity.class);
+                    }else{
+                        showMsg("直播已关闭");
+                        getLive();
+                    }
+
+                }else{
+                    showMsg("该直播不存在");
+                    getLive();
+                }
+            }
+            @Override
+            public void onError(Throwable e, boolean hiddenMsg) {
+                super.onError(e, true);
+                showMsg("该直播不存在");
+                getLive();
+            }
+        });
+
+
     }
 
     @Override

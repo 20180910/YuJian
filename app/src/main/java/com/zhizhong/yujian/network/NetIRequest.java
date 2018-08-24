@@ -12,6 +12,7 @@ import com.zhizhong.yujian.network.response.CollectObj;
 import com.zhizhong.yujian.network.response.GoodsObj;
 import com.zhizhong.yujian.network.response.ImageObj;
 import com.zhizhong.yujian.network.response.LiveRoomPeopleNumObj;
+import com.zhizhong.yujian.network.response.LiveStatusObj;
 import com.zhizhong.yujian.network.response.ShareObj;
 
 import java.util.List;
@@ -30,6 +31,10 @@ import retrofit2.http.QueryMap;
 public interface NetIRequest {
     @GET("api/Lib/GetSMSCode")
     Call<ResponseObj<BaseObj>> getMsgCode(@QueryMap Map<String, String> map);
+
+    //查询直播状态
+    @GET("api/Live/GetLiveStatus")
+    Call<ResponseObj<List<LiveStatusObj>>> getLiveStatus(@QueryMap Map<String, String> map);
 
     //修改直播人数
     @GET("api/Live/GetLiveAddDelNum")
