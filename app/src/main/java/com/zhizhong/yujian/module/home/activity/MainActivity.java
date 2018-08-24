@@ -100,7 +100,7 @@ public class MainActivity extends BaseActivity {
     protected void initView() {
         setLiveRoomPeopleNum();
         getSplashImgUrl();
-        if (TextUtils.isEmpty(getUserId())) {
+        if (noLogin()) {
             SPUtils.setPrefString(mContext, Constant.hxname, getDeviceId());
         } else {
             SPUtils.setPrefString(mContext, Constant.hxname, getUserId());

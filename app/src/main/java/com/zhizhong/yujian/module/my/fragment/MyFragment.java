@@ -157,6 +157,7 @@ public class MyFragment extends BaseFragment {
             tv_my_vip.setTextColor(Color.parseColor("#FF9A9A9A"));
             tv_my_vip.getViewHelper().setBorderColor(Color.parseColor("#FF9A9A9A")).complete();
             tv_my_vip.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0,0,0);
+            tv_my_vip.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
         }
 
     }

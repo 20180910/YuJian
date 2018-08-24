@@ -1,19 +1,29 @@
 package com.zhizhong.yujian.module.home.activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.github.androidtools.PhoneUtils;
 import com.github.androidtools.SPUtils;
 import com.github.androidtools.inter.MyOnClickListener;
 import com.github.baseclass.adapter.MyRecyclerViewHolder;
+import com.github.fastshape.FlowLayout;
+import com.github.fastshape.MyTextView;
+import com.github.mydialog.MyDialog;
+import com.github.mydialog.MySimpleDialog;
 import com.google.gson.Gson;
+import com.library.base.BaseObj;
 import com.tencent.imsdk.TIMCallBack;
 import com.tencent.imsdk.TIMConversation;
 import com.tencent.imsdk.TIMConversationType;
@@ -37,16 +47,27 @@ import com.zhizhong.yujian.adapter.MyAdapter;
 import com.zhizhong.yujian.base.BaseActivity;
 import com.zhizhong.yujian.base.MyCallBack;
 import com.zhizhong.yujian.module.home.bean.ChatBean;
+import com.zhizhong.yujian.module.my.activity.LoginActivity;
 import com.zhizhong.yujian.network.NetApiRequest;
+import com.zhizhong.yujian.network.response.LiveRoomPeopleNumObj;
 import com.zhizhong.yujian.view.TextMsgInputDialog;
+
+import org.reactivestreams.Subscription;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import io.reactivex.Flowable;
+import io.reactivex.FlowableSubscriber;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.schedulers.Schedulers;
 
 public class LiveRoomActivity extends BaseActivity {
     @BindView(R.id.video_view)
@@ -63,14 +84,21 @@ public class LiveRoomActivity extends BaseActivity {
     @BindView(R.id.bt_live_room_send)
     Button bt_live_room_send;
 
+    @BindView(R.id.tv_live_room_people_num)
+    TextView tv_live_room_people_num;
+
+    List<Double>priceList=new ArrayList<>();
+
     MyAdapter adapter;
 
     private String liveAddress;
-    private String liveId;
-    private String groupId;
+    private String liveId;//主播id
+    private String groupId;//直播码id，群组id
     private TXLivePlayer mLivePlayer;
     private boolean loginResult;
     private TIMConversation conversation;
+    private String title;
+    private MySimpleDialog dialog;
     //    private String nickName;
 
     @Override
@@ -84,7 +112,7 @@ public class LiveRoomActivity extends BaseActivity {
         liveId = getIntent().getStringExtra(IntentParam.liveId);
         groupId = getIntent().getStringExtra(IntentParam.groupId);
         liveAddress = getIntent().getStringExtra(IntentParam.liveAddress);
-        String title = getIntent().getStringExtra(IntentParam.title);
+        title = getIntent().getStringExtra(IntentParam.title);
         setAppTitle(title);
         if(TextUtils.isEmpty(liveAddress)){
             showMsg("该地址无法观看直播");
@@ -94,11 +122,21 @@ public class LiveRoomActivity extends BaseActivity {
 
         loginIM();
 
+
         adapter=new MyAdapter<ChatBean>(mContext,R.layout.live_room_chat_item,pageSize) {
             @Override
             public void bindData(MyRecyclerViewHolder holder, int position, ChatBean bean) {
-                holder.setText(R.id.tv_live_room_chat_name,bean.name);
-                holder.setText(R.id.tv_live_room_chat_content,bean.content);
+                TextView tv_live_room_chat_name = holder.getTextView(R.id.tv_live_room_chat_name);
+                TextView tv_live_room_chat_content = holder.getTextView(R.id.tv_live_room_chat_content);
+                if(TextUtils.isEmpty(bean.daShang)){
+                    tv_live_room_chat_name.setText(bean.name);
+                    tv_live_room_chat_content.setText(bean.content);
+                    tv_live_room_chat_content.setVisibility(View.VISIBLE);
+                }else{
+                    tv_live_room_chat_name.setText(bean.name+"  "+bean.daShang);
+                    tv_live_room_chat_content.setText("");
+                    tv_live_room_chat_content.setVisibility(View.GONE);
+                }
             }
         };
         List<ChatBean>list=new ArrayList<>();
@@ -113,6 +151,45 @@ public class LiveRoomActivity extends BaseActivity {
                 showInputMsgDialog();
             }
         });
+
+        intervalRequest();
+    }
+    Subscription subscription;
+    private void intervalRequest() {
+        Flowable.interval(30, TimeUnit.SECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new FlowableSubscriber<Long>() {
+                    @Override
+                    public void onSubscribe(@NonNull Subscription s) {
+                        subscription = s;
+                        s.request(Long.MAX_VALUE);
+                    }
+                    @Override
+                    public void onNext(Long aLong) {
+                        getPeopleNum();
+                    }
+                    @Override
+                    public void onError(Throwable t) {
+                    }
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+        addSubscription(subscription);
+    }
+
+    public void getPeopleNum(){
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("channel_id",groupId);
+        map.put("sign",getSign(map));
+        NetApiRequest.getLiveRoomPeopleNum(map, new MyCallBack<LiveRoomPeopleNumObj>(mContext) {
+            @Override
+            public void onSuccess(LiveRoomPeopleNumObj obj, int errorCode, String msg) {
+                tv_live_room_people_num.setText(obj.getNum()+"人观看");
+            }
+        });
+
     }
 
     private TextMsgInputDialog mTextMsgInputDialog;
@@ -158,6 +235,11 @@ public class LiveRoomActivity extends BaseActivity {
                 }else if(event == TXLiveConstants.PLAY_EVT_PLAY_END){
                     showMsg("直播结束");
                     finish();
+                }else if(event == TXLiveConstants.PLAY_EVT_CONNECT_SUCC){
+                    Log("===PLAY_EVT_CONNECT_SUCC"+event);
+                    setLiveRoomPeopleNum(groupId);
+                    showContent();
+                    getPeopleNum();
                 }
             }
             @Override
@@ -165,20 +247,103 @@ public class LiveRoomActivity extends BaseActivity {
             }
         });
 
-        showContent();
+//        showContent();
     }
-
+    @OnClick({R.id.tv_live_room_shang})
     protected void onViewClick(View v) {
         switch (v.getId()){
-                /*if(TextUtils.isEmpty(getSStr(et_live_room_content))){
-                    showMsg("请输入文字内容");
-                    return;
-                }
-                send(getSStr(et_live_room_content));*/
+               case R.id.tv_live_room_shang:
+                   if(noLogin()){
+                       STActivity(LoginActivity.class);
+                   }else{
+                       priceList.clear();
+                       priceList.add(500.0);
+                       priceList.add(200.0);
+                       priceList.add(100.0);
+                       priceList.add(50.0);
+                       priceList.add(20.0);
+                       priceList.add(10.0);
+                       priceList.add(5.0);
+                       priceList.add(2.0);
+                       priceList.add(1.0);
+                       priceList.add(0.5);
+                       priceList.add(0.2);
+                       priceList.add(0.1);
+                       showDialog();
+                   }
+                   break;
         }
     }
 
+    private void showDialog() {
+        dialog = new MySimpleDialog(mContext);
+        View dialogView = getLayoutInflater().inflate(R.layout.live_room_popu, null);
+        FlowLayout fl_live_room=dialogView.findViewById(R.id.fl_live_room);
+        fl_live_room.removeAllViews();
+        for (int i = 0; i < priceList.size(); i++) {
+            final MyTextView myTextView=new MyTextView(mContext);
+            myTextView.setText("¥"+priceList.get(i));
+            FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            layoutParams.height=PhoneUtils.dip2px(mContext,30);
+            layoutParams.setMargins(0,0,PhoneUtils.dip2px(mContext,10),PhoneUtils.dip2px(mContext,10));
+            myTextView.setLayoutParams(layoutParams);
+            myTextView.setPadding(PhoneUtils.dip2px(mContext,15),0,PhoneUtils.dip2px(mContext,15),0);
+            myTextView.getViewHelper().setSolidColor(ContextCompat.getColor(mContext,R.color.c_press)).setRadius(PhoneUtils.dip2px(mContext,15));
+            myTextView.setGravity(Gravity.CENTER);
+            myTextView.setTextColor(ContextCompat.getColor(mContext,R.color.green));
+            myTextView.complete();
+            myTextView.setTag(priceList.get(i));
+            myTextView.setOnClickListener(new MyOnClickListener() {
+                @Override
+                protected void onNoDoubleClick(View view) {
+                    MyDialog.Builder mDialog=new MyDialog.Builder(mContext);
+                    mDialog.setMessage("确认打赏"+myTextView.getTag()+"元?");
+                    mDialog.setNegativeButton(new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    mDialog.setPositiveButton(new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            daShang((double)myTextView.getTag());
+                        }
+                    });
+                    mDialog.create().show();
+                }
+            });
+            fl_live_room.addView(myTextView);
+        }
+        dialog.setFullWidth();
+        dialog.setGravity(Gravity.BOTTOM);
+        dialog.setContentView(dialogView);
+        dialog.show();
+    }
+    private void daShang(final double price) {
+        showLoading();
+        Map<String,String>map=new HashMap<String,String>();
+        map.put("user_id",getUserId());
+        map.put("live_user_id",liveId);
+        map.put("amount",price+"");
+        map.put("sign",getSign(map));
+        NetApiRequest.liveRoomDaShang(map, new MyCallBack<BaseObj>(mContext) {
+            @Override
+            public void onSuccess(BaseObj obj, int errorCode, String msg) {
+                if(dialog!=null){
+                    dialog.dismiss();
+                }
+                send("打赏¥"+price+"元",true);
+            }
+        });
+
+    }
+
     private void send(String content) {
+        send(content,false);
+    }
+    private void send(String content,boolean isDaShang) {
         if(conversation==null){
             //获取群聊会话
             //会话类型：群组
@@ -193,7 +358,12 @@ public class LiveRoomActivity extends BaseActivity {
 //添加文本内容
         TIMTextElem elem = new TIMTextElem();
         final ChatBean chatBean=new ChatBean();
-        chatBean.content=content;
+        chatBean.groupId=groupId;
+        if(isDaShang){
+            chatBean.daShang=content;
+        }else{
+            chatBean.content=content;
+        }
         Calendar instance = Calendar.getInstance();
         chatBean.name=getNickName() +"  "+ instance.get(Calendar.HOUR_OF_DAY)+":"+instance.get(Calendar.MINUTE);
         String json = new Gson().toJson(chatBean);
@@ -231,7 +401,6 @@ public class LiveRoomActivity extends BaseActivity {
         super.onDestroy();
         mLivePlayer.stopPlay(true); // true 代表清除最后一帧画面
         mView.onDestroy();
-        mView.performLongClick();
     }
     public String  getNickName(){
         String nickName;
@@ -345,10 +514,13 @@ public class LiveRoomActivity extends BaseActivity {
                                 Calendar instance = Calendar.getInstance();
                                 chatBean.name="系统消息"+"  "+ instance.get(Calendar.HOUR_OF_DAY)+":"+instance.get(Calendar.MINUTE);;
                                 chatBean.content=text;
+                                chatBean.groupId=groupId;
                             }
-                            adapter.getList().add(chatBean);
-                            adapter.notifyDataSetChanged();
-                            rv_live_room_chat.scrollToPosition(adapter.getItemCount()-1);
+                            if(groupId.equals(chatBean.groupId)){
+                                adapter.getList().add(chatBean);
+                                adapter.notifyDataSetChanged();
+                                rv_live_room_chat.scrollToPosition(adapter.getItemCount()-1);
+                            }
                             Log("==="+chatBean.content);
                             //处理文本消息
                         } else if (elemType == TIMElemType.Image) {

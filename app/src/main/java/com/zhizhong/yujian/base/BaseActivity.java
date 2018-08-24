@@ -46,6 +46,7 @@ import com.zhizhong.yujian.Constant;
 import com.zhizhong.yujian.GetSign;
 import com.zhizhong.yujian.R;
 import com.zhizhong.yujian.event.JoinShoppingCartEvent;
+import com.zhizhong.yujian.event.RefreshLivePeopleEvent;
 import com.zhizhong.yujian.network.NetApiRequest;
 import com.zhizhong.yujian.network.response.ShareObj;
 
@@ -216,6 +217,7 @@ public abstract class BaseActivity extends MyBaseActivity {
         NetApiRequest.setLiveRoomPeopleNum(map, new MyCallBack<BaseObj>(mContext) {
             @Override
             public void onSuccess(BaseObj obj, int errorCode, String msg) {
+                RxBus.getInstance().post(new RefreshLivePeopleEvent());
             }
             @Override
             public void onError(Throwable e, boolean hiddenMsg) {
@@ -223,11 +225,11 @@ public abstract class BaseActivity extends MyBaseActivity {
             }
         });
     }
-    public void setLiveRoomPeopleNum(String liveId) {
+    public void setLiveRoomPeopleNum(String groupId) {
         Map<String,String>map=new HashMap<String,String>();
         map.put("user_id",getHXName());
         map.put("type","1");
-        map.put("channel_id",liveId);
+        map.put("channel_id",groupId);
         map.put("sign",getSign(map));
         NetApiRequest.setLiveRoomPeopleNum(map, new MyCallBack<BaseObj>(mContext) {
             @Override

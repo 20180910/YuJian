@@ -35,6 +35,10 @@ public interface NetIRequest {
     @GET("api/Live/GetLiveAddDelNum")
     Call<ResponseObj<BaseObj>> setLiveRoomPeopleNum(@QueryMap Map<String, String> map);
 
+    //打赏
+    @GET("api/Live/GetGiveReward")
+    Call<ResponseObj<BaseObj>> liveRoomDaShang(@QueryMap Map<String, String> map);
+
     //获取直播人数
     @GET("api/Live/GetLiveNum")
     Call<ResponseObj<LiveRoomPeopleNumObj>> getLiveRoomPeopleNum(@QueryMap Map<String, String> map);

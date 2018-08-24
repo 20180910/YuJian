@@ -21,6 +21,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     />
+                <TextView
+                    android:id="@+id/tv_live_room_people_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0人观看"
+                    android:textColor="#eeeeee"
+                    android:layout_gravity="bottom|left"
+                    android:layout_marginBottom="380dp"
+                    android:layout_marginLeft="20dp"
+                    />
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_live_room_chat"
                     android:layout_width="wrap_content"
@@ -30,6 +40,7 @@
                     android:layout_marginLeft="20dp"
                     >
                 </android.support.v7.widget.RecyclerView>
+
             </FrameLayout>
             <Button
                 android:id="@+id/bt_live_room_send"
@@ -40,6 +51,22 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginBottom="20dp"
+                />
+            <com.github.fastshape.MyTextView
+                android:id="@+id/tv_live_room_shang"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:text="打赏"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                app:solidColor="#eeeeee"
+                android:textColor="@color/green"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                app:radius="16dp"
                 />
         </com.library.base.ProgressLayout>
 </LinearLayout>

@@ -22,6 +22,10 @@ public class NetApiRequest extends BaseApiRequest {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return; }
         getGeneralClient(NetIRequest.class).setLiveRoomPeopleNum(map).enqueue(callBack);
     }
+    public static void liveRoomDaShang(Map map , MyCallBack callBack) {
+        if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return; }
+        getGeneralClient(NetIRequest.class).liveRoomDaShang(map).enqueue(callBack);
+    }
     public static void getLiveRoomPeopleNum(Map map , MyCallBack callBack) {
         if (notNetWork(callBack.getContext())) { callBack.onFailure(null, new NoNetworkException(Config.noNetWork)); return; }
         getGeneralClient(NetIRequest.class).getLiveRoomPeopleNum(map).enqueue(callBack);

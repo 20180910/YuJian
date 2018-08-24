@@ -17,6 +17,15 @@ public class LiveObj {
     private String pushStr;
     private String create_time;
     private String live_user_id;
+    private String live_num;
+
+    public String getLive_num() {
+        return live_num;
+    }
+
+    public void setLive_num(String live_num) {
+        this.live_num = live_num;
+    }
 
     public String getLive_user_id() {
         return live_user_id;

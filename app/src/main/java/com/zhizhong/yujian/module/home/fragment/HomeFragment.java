@@ -13,6 +13,7 @@ import com.github.androidtools.inter.MyOnClickListener;
 import com.github.baseclass.BaseDividerGridItem;
 import com.github.baseclass.adapter.MyRecyclerViewHolder;
 import com.github.fastshape.MyTextView;
+import com.github.rxbus.MyConsumer;
 import com.library.base.view.MyRecyclerView;
 import com.zhizhong.yujian.IntentParam;
 import com.zhizhong.yujian.R;
@@ -21,6 +22,7 @@ import com.zhizhong.yujian.adapter.MyAdapter;
 import com.zhizhong.yujian.base.BaseFragment;
 import com.zhizhong.yujian.base.GlideUtils;
 import com.zhizhong.yujian.base.MyCallBack;
+import com.zhizhong.yujian.event.RefreshLivePeopleEvent;
 import com.zhizhong.yujian.module.home.activity.AllTuiJianGoodsActivity;
 import com.zhizhong.yujian.module.home.activity.LiveRoomActivity;
 import com.zhizhong.yujian.module.home.activity.ZiXunDetailActivity;
@@ -59,6 +61,10 @@ public class HomeFragment extends BaseFragment {
 
     @BindView(R.id.tv_home_live_peoplenum)
     TextView tv_home_live_peoplenum;
+    @BindView(R.id.tv_home_live_peoplenum2)
+    TextView tv_home_live_peoplenum2;
+    @BindView(R.id.tv_home_live_peoplenum3)
+    TextView tv_home_live_peoplenum3;
 
     @BindView(R.id.tv_home_live_flag2)
     TextView tv_home_live_flag2;
@@ -134,10 +140,16 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Override
-    protected void onMyReStart() {
-        super.onMyReStart();
-        getLive();
+    protected void initRxBus() {
+        super.initRxBus();
+        getEvent(RefreshLivePeopleEvent.class, new MyConsumer<RefreshLivePeopleEvent>() {
+            @Override
+            public void onAccept(RefreshLivePeopleEvent event) {
+                getLive();
+            }
+        });
     }
+
     private void getLive() {
         Map<String,String>map=new HashMap<String,String>();
         map.put("pagesize","3");
@@ -150,8 +162,13 @@ public class HomeFragment extends BaseFragment {
                 if(notEmpty(list)){
                     if(list.size()>=3){
                         tv_home_live_flag.setText("直播中");
+                        tv_home_live_peoplenum.setText(list.get(0).getLive_num()+"人观看");
                         tv_home_live_flag2.setText("直播中");
+                        tv_home_live_peoplenum2.setText(list.get(1).getLive_num()+"人观看");
+
                         tv_home_live_flag3.setText("直播中");
+                        tv_home_live_peoplenum3.setText(list.get(2).getLive_num()+"人观看");
+
                         tv_home_live_name.setText(list.get(0).getChannel_name());
                         tv_home_live_name2.setText(list.get(1).getChannel_name());
                         tv_home_live_name3.setText(list.get(2).getChannel_name());
@@ -179,8 +196,11 @@ public class HomeFragment extends BaseFragment {
 
                     }else if(list.size()>=2){
                         tv_home_live_flag.setText("直播中");
+                        tv_home_live_peoplenum.setText(list.get(0).getLive_num()+"人观看");
                         tv_home_live_flag2.setText("直播中");
+                        tv_home_live_peoplenum2.setText(list.get(1).getLive_num()+"人观看");
                         tv_home_live_flag3.setText("未开播");
+                        tv_home_live_peoplenum3.setText("0人观看");
                         tv_home_live_name.setText(list.get(0).getChannel_name());
                         tv_home_live_name2.setText(list.get(1).getChannel_name());
                         tv_home_live_name3.setText("相玉直播间");
@@ -225,11 +245,15 @@ public class HomeFragment extends BaseFragment {
                             }
                         });
                         tv_home_live_flag.setText("直播中");
+                        tv_home_live_peoplenum.setText(list.get(0).getLive_num()+"人观看");
                         tv_home_live_name.setText(list.get(0).getChannel_name());
                         tv_home_live_name2.setText("相玉直播间");
                         tv_home_live_name3.setText("相玉直播间");
                         tv_home_live_flag2.setText("未开播");
+                        tv_home_live_peoplenum2.setText("0人观看");
+
                         tv_home_live_flag3.setText("未开播");
+                        tv_home_live_peoplenum3.setText("0人观看");
                     }
                 }else{
                     tv_home_live_flag.setText("未开播");
@@ -238,6 +262,10 @@ public class HomeFragment extends BaseFragment {
                     tv_home_live_name.setText("相玉直播间");
                     tv_home_live_name2.setText("相玉直播间");
                     tv_home_live_name3.setText("相玉直播间");
+
+                    tv_home_live_peoplenum.setText("0人观看");
+                    tv_home_live_peoplenum2.setText("0人观看");
+                    tv_home_live_peoplenum3.setText("0人观看");
 
                     iv_home_live.setOnClickListener(new MyOnClickListener() {
                         @Override

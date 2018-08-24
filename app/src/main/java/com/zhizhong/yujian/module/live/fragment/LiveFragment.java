@@ -73,6 +73,7 @@ public class LiveFragment extends BaseFragment {
                 ImageView iv_live_room=holder.getImageView(R.id.iv_live_room);
                 TextView tv_live_room_flag=holder.getTextView(R.id.tv_live_room_flag);
                 TextView tv_live_room_name=holder.getTextView(R.id.tv_live_room_name);
+                TextView tv_home_live_peoplenum=holder.getTextView(R.id.tv_home_live_peoplenum);
 
                 if(TextUtils.isEmpty(bean.getChannel_name())){
                     iv_live_room.setOnClickListener(new MyOnClickListener() {
@@ -83,6 +84,7 @@ public class LiveFragment extends BaseFragment {
                     });
                     tv_live_room_flag.setText("未开播");
                     tv_live_room_name.setText("相玉直播间");
+                    tv_home_live_peoplenum.setText("0人观看");
                 }else{
                     iv_live_room.setOnClickListener(new MyOnClickListener() {
                         @Override
@@ -91,6 +93,7 @@ public class LiveFragment extends BaseFragment {
                         }
                     });
                     tv_live_room_flag.setText("直播中");
+                    tv_home_live_peoplenum.setText(bean.getLive_num()+"人观看");
                     tv_live_room_name.setText(bean.getChannel_name());
                 }
             }
@@ -109,6 +112,7 @@ public class LiveFragment extends BaseFragment {
                 ImageView iv_live_room=holder.getImageView(R.id.iv_live_room);
                 TextView tv_live_room_flag=holder.getTextView(R.id.tv_live_room_flag);
                 TextView tv_live_room_name=holder.getTextView(R.id.tv_live_room_name);
+                TextView tv_home_live_peoplenum=holder.getTextView(R.id.tv_home_live_peoplenum);
 
                 if(TextUtils.isEmpty(bean.getChannel_name())){
                     iv_live_room.setOnClickListener(new MyOnClickListener() {
@@ -119,6 +123,7 @@ public class LiveFragment extends BaseFragment {
                     });
                     tv_live_room_flag.setText("未开播");
                     tv_live_room_name.setText("相玉直播间");
+                    tv_home_live_peoplenum.setText("0人观看");
                 }else{
                     iv_live_room.setOnClickListener(new MyOnClickListener() {
                         @Override
@@ -128,6 +133,7 @@ public class LiveFragment extends BaseFragment {
                     });
                     tv_live_room_flag.setText("直播中");
                     tv_live_room_name.setText(bean.getChannel_name());
+                    tv_home_live_peoplenum.setText(bean.getLive_num()+"人观看");
                 }
             }
         };
