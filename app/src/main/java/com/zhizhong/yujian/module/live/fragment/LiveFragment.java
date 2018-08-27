@@ -171,7 +171,7 @@ public class LiveFragment extends BaseFragment {
             public void onSuccess(final List<LiveObj> list, int errorCode, String msg) {
                 if(notEmpty(list)){
                     tv_live_room_flag.setText("直播中");
-//                    tv_live_room_peoplenum.setText(list.get(0).getChannel_name());
+                    tv_live_room_peoplenum.setText(list.get(0).getLive_num()+"人观看");
                     tv_live_room_name.setText(list.get(0).getChannel_name());
                     iv_home_live.setOnClickListener(new MyOnClickListener() {
                         @Override
@@ -181,6 +181,7 @@ public class LiveFragment extends BaseFragment {
                     });
                     if(list.size()<=5){
                         tv_live_room_flag2.setText("未开播");
+                        tv_live_room_peoplenum2.setText("0人观看");
                         tv_live_room_name2.setText("相玉直播间");
                         iv_live_room2.setOnClickListener(new MyOnClickListener() {
                             @Override
@@ -190,6 +191,7 @@ public class LiveFragment extends BaseFragment {
                         });
                     }else{
                         tv_live_room_flag2.setText("直播中");
+                        tv_live_room_peoplenum2.setText(list.get(5).getLive_num()+"人观看");
                         tv_live_room_name2.setText(list.get(5).getChannel_name());
                         iv_live_room2.setOnClickListener(new MyOnClickListener() {
                             @Override
@@ -200,6 +202,7 @@ public class LiveFragment extends BaseFragment {
                     }
                 }else {
                     tv_live_room_flag.setText("未开播");
+                    tv_live_room_peoplenum.setText("0人观看");
                     tv_live_room_name.setText("相玉直播间");
                     iv_home_live.setOnClickListener(new MyOnClickListener() {
                         @Override
@@ -208,6 +211,7 @@ public class LiveFragment extends BaseFragment {
                         }
                     });
                     tv_live_room_flag2.setText("未开播");
+                    tv_live_room_peoplenum2.setText("0人观看");
                     tv_live_room_name2.setText("相玉直播间");
                     iv_live_room2.setOnClickListener(new MyOnClickListener() {
                         @Override

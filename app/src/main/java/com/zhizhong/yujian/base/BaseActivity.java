@@ -81,7 +81,7 @@ public abstract class BaseActivity extends MyBaseActivity {
     }
 
     protected String getUserId() {
-        return SPUtils.getString(mContext, AppXml.userId, noLoginCode);
+        return SPUtils.getString(this, AppXml.userId, noLoginCode);
     }
 
     protected void clearUserId() {

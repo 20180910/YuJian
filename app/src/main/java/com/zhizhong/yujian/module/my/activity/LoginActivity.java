@@ -135,7 +135,8 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-    private void loginForApp(String platform,String openId,String nickname,String avatar) {
+
+    private void loginForApp(String platform, String openId, String nickname, String avatar) {
         Map<String,String>map=new HashMap<String,String>();
         map.put("platform",platform);
         map.put("open",openId);

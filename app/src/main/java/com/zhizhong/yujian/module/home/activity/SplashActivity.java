@@ -32,10 +32,14 @@ public class SplashActivity extends BaseActivity {
     @BindView(R.id.tv_splash)
     MyTextView tv_splash;
     private Subscription subscription;
-
+    boolean isClick=false;
     @Override
     protected int getContentView() {
         return R.layout.splash_act;
+    }
+
+    synchronized public void setClick(boolean click) {
+        isClick = click;
     }
 
     @Override
@@ -64,7 +68,8 @@ public class SplashActivity extends BaseActivity {
                     @Override
                     public void onNext(Long aLong) {
                         tv_splash.setText("跳过 " + aLong + "s");
-                        if(aLong==0){
+                        if(aLong==0&&isClick==false){
+                            setClick(true);
                             STActivity(MainActivity.class);
                             finish();
                         }
@@ -88,6 +93,7 @@ public class SplashActivity extends BaseActivity {
     public void onViewClick(View v) {
         switch (v.getId()){
             case R.id.tv_splash:
+                setClick(true);
                 STActivity(MainActivity.class);
                 finish();
             break;

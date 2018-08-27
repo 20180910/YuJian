@@ -81,7 +81,7 @@ dependencies {
     implementation(name: 'androidbaseclass', ext: 'aar')
     implementation(name: 'download', ext: 'aar')
     implementation(name: 'myrefresh', ext: 'aar')
-    implementation(name: 'sdklibrary', ext: 'aar')
+    implementation(name: 'sdk_library', ext: 'aar')
     implementation(name: 'Dialog', ext: 'aar')
     implementation(name: 'shape', ext: 'aar')
     //    implementation(name: 'MyProgress', ext: 'aar')
